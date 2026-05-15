@@ -1,7 +1,6 @@
 # Tanda 2 — Reporte de schemas CMS
 
 **Fecha:** 2026-05-12  
-**Ejecutor:** Claude Code (claude-sonnet-4-6)
 
 ---
 

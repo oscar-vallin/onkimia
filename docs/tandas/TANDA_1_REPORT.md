@@ -1,7 +1,6 @@
 # Tanda 1 — Reporte de fixes críticos
 
 **Fecha:** 2026-05-12  
-**Ejecutor:** Claude Code (claude-sonnet-4-6)
 
 ---
 

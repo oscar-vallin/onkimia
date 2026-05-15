@@ -60,7 +60,7 @@ Marcadores `// TODO Tanda 8B/8C` documentados en `src/lib/actions/contact.ts`.
 - **Llenar `phone`** en la sede principal en formato internacional `+52XXXXXXXXXX`.
 - **Marcar `isPrimary = true`** en exactamente una sede (Guadalajara). Sin sede primaria la query devuelve `null` y la página muestra solo el hero+formulario sin info ni mapa.
 - **Página `/aviso-de-privacidad` pendiente**: el link en el checkbox actualmente apunta a una ruta inexistente. Se creará en una tanda futura.
-- **Traducciones EN**: generadas por Claude, no provistas por el cliente. Confirmar y aprobar antes de producción.
+
 - **Anti-spam**: solo honeypot por ahora. Turnstile + rate limit se activan en Tanda 8B.
 
 ## Comportamiento del formulario (mock)

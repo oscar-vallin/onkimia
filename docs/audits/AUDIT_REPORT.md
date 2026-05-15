@@ -1,7 +1,6 @@
 # Onkimia — Audit Report
 
 **Fecha:** 2026-05-12  
-**Auditor:** Claude Code (claude-sonnet-4-6)  
 **Rama auditada:** directorio local (no git)  
 **Build:** ✓ exitoso (con 1 deprecation warning)
 
@@ -92,7 +91,7 @@ No existen los headers contractualmente requeridos:
 
 Un sitio médico sin estos headers incumple buenas prácticas de seguridad y potencialmente la LFPDPPP.
 
-**Fix sugerido:** Agregar `async headers()` a `nextConfig` según el patrón del CLAUDE.md.
+**Fix sugerido:** Agregar `async headers()` a `nextConfig` 
 
 ---
 

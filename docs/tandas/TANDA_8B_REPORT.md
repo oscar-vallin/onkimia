@@ -66,7 +66,7 @@ Todos los valores del usuario pasan por `escapeHtml()` antes de insertarse en el
 - `pnpm build`: ✓ exit 0
 - Diff JSON keys es/en: ✓ sin diferencias
 
-## Pruebas manuales recomendadas (no ejecutables por Claude Code)
+## Pruebas manuales recomendadas
 - [ ] Widget Turnstile carga visualmente en /contacto (checkbox o cuadro azul)
 - [ ] Submit válido → email llega a RESEND_TO_EMAIL con template formateado
 - [ ] Email tiene reply-to con la dirección del usuario

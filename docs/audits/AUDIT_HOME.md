@@ -1,7 +1,6 @@
 # Auditoría — Página de Inicio (/)
 
 **Fecha:** 2026-05-12  
-**Auditor:** Claude Code (claude-sonnet-4-6)  
 **Archivo auditado:** `src/app/[locale]/page.tsx`
 
 ---

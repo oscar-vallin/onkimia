@@ -45,6 +45,12 @@ export function Header({ settings, clinics }: HeaderProps) {
   const { clinic, setClinic } = useClinic();
 
   const currentClinic = clinics.find((c) => c.slug === clinic) || null;
+
+  const activeClinicSlug = pathname.includes('guadalajara') 
+    ? 'guadalajara' 
+    : pathname.includes('colima') 
+      ? 'colima' 
+      : null;
   
   const navLinks = [
     { href: '/', label: tNav('home') },
@@ -182,23 +188,26 @@ export function Header({ settings, clinics }: HeaderProps) {
               </button>
               {clinicMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-neutral-200 rounded-md shadow-lg overflow-hidden">
-                  {clinics.map((c) => (
+                  {clinics.map((c) => {
+                    const isSelected = activeClinicSlug === c.slug;
+                    return (
                     <button
                       key={c._id}
                       type="button"
                       onClick={() => {
                         setClinic(c.slug as 'guadalajara' | 'colima');
                         setClinicMenuOpen(false);
+                        router.push(`/${c.slug}`);
                       }}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-neutral-50 transition-colors ${
-                        clinic === c.slug
+                      className={`w-full text-left cursor-pointer px-4 py-2 text-sm hover:bg-neutral-50 transition-colors ${
+                        isSelected
                           ? 'bg-accent-50 text-accent-700 font-medium'
                           : 'text-neutral-900' // Keep dark for dropdown
                       }`}
                     >
                       {getLocalized(c.name, locale)}
                     </button>
-                  ))}
+                  )})}
                 </div>
               )}
             </div>
@@ -296,22 +305,26 @@ export function Header({ settings, clinics }: HeaderProps) {
                 <p className="text-neutral-400 uppercase tracking-widest text-xs mb-4 text-white">
                   {tClinic('selectClinic')}
                 </p>
-                <div className="flex justify-center gap-4">
-                  {clinics.map((c) => (
+                <div className="flex justify-center gap-4 ">
+                  {clinics.map((c) => {
+
+                    const isSelected = activeClinicSlug === c.slug;
+                    return (
                     <button
                       key={c._id}
                       type="button"
                       onClick={() => {
                         setClinic(c.slug as 'guadalajara' | 'colima');
                         toggleMobileMenu(); // Close menu after selection
+                        router.push(`/${c.slug}`);
                       }}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        clinic === c.slug ? 'bg-accent-500 text-white shadow-md border-transparent' : 'bg-white/10 text-white/70 border border-white/20 hover:bg-white/20'
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors  ${
+                        isSelected ? 'bg-accent-500 text-white shadow-md border-transparent' : 'bg-white/10 text-white/70 border border-white/20 hover:bg-white/20'
                       }`}
                     >
                       {getLocalized(c.name, locale)}
                     </button>
-                  ))}
+                  )})}
                 </div>
               </div>
 
