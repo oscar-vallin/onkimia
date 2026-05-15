@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useTransition, useEffect } from 'react';
+import { useState, useTransition, useEffect, useRef } from 'react';
 import Script from 'next/script';
 import { useTranslations, useLocale } from 'next-intl';
 import { Loader2, CheckCircle2, AlertCircle, X, Upload, FileText } from 'lucide-react';
 import { submitJobApplication } from '@/lib/actions/jobApplication';
 import { getLocalized } from '@/sanity/lib/localization';
-import { MAX_FILE_SIZE_BYTES } from '@/lib/schemas/jobApplication';
+import { MAX_FILE_SIZE_BYTES, jobApplicationFormSchema, validateCvFile } from '@/lib/schemas/jobApplication';
 import type { JobApplicationFormState } from '@/lib/schemas/jobApplication';
 import type { JobPosting } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
@@ -47,8 +47,9 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
   const [showModal, setShowModal] = useState(false);
   const [selectedVacancyId, setSelectedVacancyId] = useState('spontaneous');
   const [cvFile, setCvFile] = useState<File | null>(null);
-  const [cvError, setCvError] = useState<string | null>(null);
+  const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
   const [turnstileReady, setTurnstileReady] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const isSpontaneous = selectedVacancyId === 'spontaneous';
   const selectedVacancy = vacancies.find((v) => v._id === selectedVacancyId);
@@ -73,30 +74,120 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
     };
   }, [turnstileReady]);
 
+  // Validate a single field inline by running the full schema and extracting the relevant error
+  function validateField(name: string, value: unknown) {
+    // Build a minimal object with only this field to validate
+    const partial = jobApplicationFormSchema.safeParse({ [name]: value });
+    const fieldError = partial.success
+      ? undefined
+      : partial.error.issues.find((i) => i.path[0] === name);
+
+    if (fieldError) {
+      let msg: string;
+      try {
+        msg = tErrors(fieldError.message as Parameters<typeof tErrors>[0]);
+      } catch {
+        msg = fieldError.message;
+      }
+      setInlineErrors((prev) => ({ ...prev, [name]: msg }));
+    } else {
+      setInlineErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  }
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
     if (!file) {
       setCvFile(null);
-      setCvError(null);
+      setInlineErrors((prev) => { const n = { ...prev }; delete n.cv; return n; });
       return;
     }
     if (file.size > MAX_FILE_SIZE_BYTES) {
-      setCvError(tErrors('cv.tooLarge'));
+      setInlineErrors((prev) => ({ ...prev, cv: tErrors('cv.tooLarge') }));
       setCvFile(null);
       e.target.value = '';
       return;
     }
     if (file.type !== 'application/pdf') {
-      setCvError(tErrors('cv.invalidType'));
+      setInlineErrors((prev) => ({ ...prev, cv: tErrors('cv.invalidType') }));
       setCvFile(null);
       e.target.value = '';
       return;
     }
-    setCvError(null);
+    setInlineErrors((prev) => { const n = { ...prev }; delete n.cv; return n; });
     setCvFile(file);
   };
 
+  // Merge server errors with inline errors (inline takes priority)
+  const getFieldError = (field: string): string | undefined => {
+    if (inlineErrors[field]) return inlineErrors[field];
+    if (!state?.errors) return undefined;
+    const errorKey = state.errors[field as keyof typeof state.errors];
+    if (!errorKey) return undefined;
+    return tErrors(errorKey as Parameters<typeof tErrors>[0]);
+  };
+
   const handleSubmit = (formData: FormData) => {
+    // Client-side pre-submit validation
+    const cvErrorKey = validateCvFile(cvFile);
+    const rawData = {
+      vacancyId: formData.get('vacancyId') as string,
+      customJobDescription: (formData.get('customJobDescription') as string) || undefined,
+      city: formData.get('city') as string,
+      area: formData.get('area') as string,
+      firstName: formData.get('firstName') as string,
+      lastName: formData.get('lastName') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      birthDate: formData.get('birthDate') as string,
+      aboutYou: formData.get('aboutYou') as string,
+      acceptPrivacy: formData.get('acceptPrivacy') === 'on',
+    };
+
+    const result = jobApplicationFormSchema.omit({ _honeypot: true }).safeParse(rawData);
+    const newErrors: Record<string, string> = {};
+
+    if (!result.success) {
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        if (!newErrors[field]) {
+          let msg: string;
+          try {
+            msg = tErrors(issue.message as Parameters<typeof tErrors>[0]);
+          } catch {
+            msg = issue.message;
+          }
+          newErrors[field] = msg;
+        }
+      });
+    }
+
+    if (cvErrorKey) {
+      newErrors.cv = tErrors(cvErrorKey as Parameters<typeof tErrors>[0]);
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setInlineErrors(newErrors);
+
+      // Auto-scroll to first error
+      const firstField = Object.keys(newErrors)[0];
+      if (firstField && formRef.current) {
+        const el = formRef.current.querySelector(
+          `[name="${firstField}"], [id="${firstField}-trigger"]`
+        ) as HTMLElement | null;
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.focus();
+        }
+      }
+      return;
+    }
+
+    setInlineErrors({});
     startTransition(async () => {
       const result = await submitJobApplication(state, formData);
       setState(result);
@@ -110,24 +201,38 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
     });
   };
 
-  const getFieldError = (field: string): string | undefined => {
-    if (!state?.errors) return undefined;
-    const errorKey = state.errors[field as keyof typeof state.errors];
-    if (!errorKey) return undefined;
-    return tErrors(errorKey);
-  };
+  const fieldClass = (name: string) =>
+    `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:bg-neutral-50 disabled:cursor-not-allowed ${
+      getFieldError(name)
+        ? 'border-red-400 focus:border-red-400 focus:ring-red-100'
+        : 'border-neutral-300 focus:border-accent-500 focus:ring-accent-100'
+    }`;
 
-  const inputClass =
-    'w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent disabled:bg-neutral-50 disabled:cursor-not-allowed';
+  const errorMsg = (name: string, id: string) => {
+    const err = getFieldError(name);
+    if (!err) return null;
+    return (
+      <p id={id} role="alert" className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+        <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+        {err}
+      </p>
+    );
+  };
 
   return (
     <>
       <form
         id="job-application-form"
+        ref={formRef}
         action={handleSubmit}
         className="space-y-6"
         noValidate
       >
+        {/* Nota de campos requeridos */}
+        <p className="text-sm text-neutral-500">
+          <span className="text-red-500">*</span> {t('requiredFieldsNote')}
+        </p>
+
         {/* Honeypot */}
         <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }}>
           <label htmlFor="_honeypot_jobs">Leave empty</label>
@@ -144,15 +249,18 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         <div>
           <label htmlFor="vacancyId" className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('vacancy.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
           <select
             id="vacancyId"
             name="vacancyId"
             value={selectedVacancyId}
-            onChange={(e) => setSelectedVacancyId(e.target.value)}
+            onChange={(e) => {
+              setSelectedVacancyId(e.target.value);
+              validateField('vacancyId', e.target.value);
+            }}
             disabled={isPending}
-            className={inputClass}
+            className={fieldClass('vacancyId')}
           >
             <option value="spontaneous">{t('vacancy.spontaneous')}</option>
             {vacancies.length > 0 && (
@@ -179,7 +287,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
               rows={3}
               maxLength={2000}
               disabled={isPending}
-              className={inputClass}
+              className={fieldClass('customJobDescription')}
               placeholder={t('jobDescription.placeholder')}
             />
           </div>
@@ -190,36 +298,40 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
           <div>
             <label htmlFor="city" className="block text-sm font-medium text-neutral-800 mb-1.5">
               {t('city.label')}
-              <span className="text-accent-500" aria-hidden="true"> *</span>
+              <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
             <select
               id="city"
               name="city"
               required
               disabled={isPending || (!isSpontaneous && !!selectedVacancy)}
-              className={inputClass}
+              aria-invalid={!!getFieldError('city')}
+              aria-describedby={getFieldError('city') ? 'city-error' : undefined}
+              onChange={(e) => validateField('city', e.target.value)}
+              className={fieldClass('city')}
               defaultValue=""
             >
               <option value="" disabled>{t('city.placeholder')}</option>
               <option value="guadalajara">Guadalajara</option>
               <option value="colima">Colima</option>
             </select>
-            {getFieldError('city') && (
-              <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('city')}</p>
-            )}
+            {errorMsg('city', 'city-error')}
           </div>
 
           <div>
             <label htmlFor="area" className="block text-sm font-medium text-neutral-800 mb-1.5">
               {t('area.label')}
-              <span className="text-accent-500" aria-hidden="true"> *</span>
+              <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
             <select
               id="area"
               name="area"
               required
               disabled={isPending || (!isSpontaneous && !!selectedVacancy)}
-              className={inputClass}
+              aria-invalid={!!getFieldError('area')}
+              aria-describedby={getFieldError('area') ? 'area-error' : undefined}
+              onChange={(e) => validateField('area', e.target.value)}
+              className={fieldClass('area')}
               defaultValue=""
             >
               <option value="" disabled>{t('area.placeholder')}</option>
@@ -229,9 +341,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
                 </option>
               ))}
             </select>
-            {getFieldError('area') && (
-              <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('area')}</p>
-            )}
+            {errorMsg('area', 'area-error')}
           </div>
         </div>
 
@@ -240,30 +350,42 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
           <div>
             <label htmlFor="firstName" className="block text-sm font-medium text-neutral-800 mb-1.5">
               {t('firstName.label')}
-              <span className="text-accent-500" aria-hidden="true"> *</span>
+              <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
             <input
-              type="text" id="firstName" name="firstName" required maxLength={50}
-              disabled={isPending} placeholder={t('firstName.placeholder')}
-              className={inputClass}
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+              maxLength={50}
+              disabled={isPending}
+              placeholder={t('firstName.placeholder')}
+              aria-invalid={!!getFieldError('firstName')}
+              aria-describedby={getFieldError('firstName') ? 'firstName-error' : undefined}
+              onBlur={(e) => validateField('firstName', e.target.value)}
+              className={fieldClass('firstName')}
             />
-            {getFieldError('firstName') && (
-              <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('firstName')}</p>
-            )}
+            {errorMsg('firstName', 'firstName-error')}
           </div>
           <div>
             <label htmlFor="lastName" className="block text-sm font-medium text-neutral-800 mb-1.5">
               {t('lastName.label')}
-              <span className="text-accent-500" aria-hidden="true"> *</span>
+              <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
             <input
-              type="text" id="lastName" name="lastName" required maxLength={80}
-              disabled={isPending} placeholder={t('lastName.placeholder')}
-              className={inputClass}
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+              maxLength={80}
+              disabled={isPending}
+              placeholder={t('lastName.placeholder')}
+              aria-invalid={!!getFieldError('lastName')}
+              aria-describedby={getFieldError('lastName') ? 'lastName-error' : undefined}
+              onBlur={(e) => validateField('lastName', e.target.value)}
+              className={fieldClass('lastName')}
             />
-            {getFieldError('lastName') && (
-              <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('lastName')}</p>
-            )}
+            {errorMsg('lastName', 'lastName-error')}
           </div>
         </div>
 
@@ -272,30 +394,44 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-neutral-800 mb-1.5">
               {t('email.label')}
-              <span className="text-accent-500" aria-hidden="true"> *</span>
+              <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
             <input
-              type="email" id="email" name="email" required maxLength={150}
-              disabled={isPending} autoComplete="email" placeholder={t('email.placeholder')}
-              className={inputClass}
+              type="email"
+              id="email"
+              name="email"
+              required
+              maxLength={150}
+              disabled={isPending}
+              autoComplete="email"
+              placeholder={t('email.placeholder')}
+              aria-invalid={!!getFieldError('email')}
+              aria-describedby={getFieldError('email') ? 'email-error' : undefined}
+              onBlur={(e) => validateField('email', e.target.value)}
+              className={fieldClass('email')}
             />
-            {getFieldError('email') && (
-              <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('email')}</p>
-            )}
+            {errorMsg('email', 'email-error')}
           </div>
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-neutral-800 mb-1.5">
               {t('phone.label')}
-              <span className="text-accent-500" aria-hidden="true"> *</span>
+              <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
             <input
-              type="tel" id="phone" name="phone" required maxLength={20}
-              disabled={isPending} autoComplete="tel" placeholder={t('phone.placeholder')}
-              className={inputClass}
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              maxLength={20}
+              disabled={isPending}
+              autoComplete="tel"
+              placeholder={t('phone.placeholder')}
+              aria-invalid={!!getFieldError('phone')}
+              aria-describedby={getFieldError('phone') ? 'phone-error' : undefined}
+              onBlur={(e) => validateField('phone', e.target.value)}
+              className={fieldClass('phone')}
             />
-            {getFieldError('phone') && (
-              <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('phone')}</p>
-            )}
+            {errorMsg('phone', 'phone-error')}
           </div>
         </div>
 
@@ -303,43 +439,66 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         <div>
           <label htmlFor="birthDate" className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('birthDate.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
           <input
-            type="date" id="birthDate" name="birthDate" required
-            disabled={isPending} className={inputClass}
+            type="date"
+            id="birthDate"
+            name="birthDate"
+            required
+            disabled={isPending}
+            aria-invalid={!!getFieldError('birthDate')}
+            aria-describedby={getFieldError('birthDate') ? 'birthDate-error' : undefined}
+            onBlur={(e) => validateField('birthDate', e.target.value)}
+            className={fieldClass('birthDate')}
           />
-          {getFieldError('birthDate') && (
-            <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('birthDate')}</p>
-          )}
+          {errorMsg('birthDate', 'birthDate-error')}
         </div>
 
         {/* ─── Cuéntanos sobre ti ─── */}
         <div>
           <label htmlFor="aboutYou" className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('aboutYou.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
           <textarea
-            id="aboutYou" name="aboutYou" required rows={5} maxLength={3000}
-            disabled={isPending} placeholder={t('aboutYou.placeholder')}
-            className={inputClass}
+            id="aboutYou"
+            name="aboutYou"
+            required
+            rows={5}
+            maxLength={3000}
+            disabled={isPending}
+            placeholder={t('aboutYou.placeholder')}
+            aria-invalid={!!getFieldError('aboutYou')}
+            aria-describedby={getFieldError('aboutYou') ? 'aboutYou-error' : undefined}
+            onBlur={(e) => validateField('aboutYou', e.target.value)}
+            className={fieldClass('aboutYou') + ' resize-y'}
           />
-          {getFieldError('aboutYou') && (
-            <p role="alert" className="mt-1.5 text-sm text-red-600">{getFieldError('aboutYou')}</p>
-          )}
+          {errorMsg('aboutYou', 'aboutYou-error')}
         </div>
 
         {/* ─── Upload CV ─── */}
         <div>
           <label className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('cv.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
-          <div className="border-2 border-dashed border-neutral-300 rounded-lg p-6 hover:border-accent-500 transition-colors">
+          <div
+            className={`border-2 border-dashed rounded-lg p-6 transition-colors ${
+              getFieldError('cv')
+                ? 'border-red-400 bg-red-50'
+                : 'border-neutral-300 hover:border-accent-500'
+            }`}
+          >
             <input
-              type="file" id="cv" name="cv" accept="application/pdf" required
-              disabled={isPending} onChange={handleFileChange} className="hidden"
+              type="file"
+              id="cv"
+              name="cv"
+              accept="application/pdf"
+              required
+              disabled={isPending}
+              onChange={handleFileChange}
+              className="hidden"
             />
             <label htmlFor="cv" className="cursor-pointer flex flex-col items-center gap-2">
               {cvFile ? (
@@ -359,9 +518,10 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
               )}
             </label>
           </div>
-          {(cvError ?? getFieldError('cv')) && (
-            <p role="alert" className="mt-1.5 text-sm text-red-600">
-              {cvError ?? getFieldError('cv')}
+          {getFieldError('cv') && (
+            <p role="alert" className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+              <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+              {getFieldError('cv')}
             </p>
           )}
         </div>
@@ -369,8 +529,14 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         {/* ─── Aviso de privacidad ─── */}
         <div className="flex items-start gap-3">
           <input
-            type="checkbox" id="acceptPrivacy" name="acceptPrivacy" required
+            type="checkbox"
+            id="acceptPrivacy"
+            name="acceptPrivacy"
+            required
             disabled={isPending}
+            aria-invalid={!!getFieldError('acceptPrivacy')}
+            aria-describedby={getFieldError('acceptPrivacy') ? 'privacy-jobs-error' : undefined}
+            onChange={(e) => validateField('acceptPrivacy', e.target.checked)}
             className="mt-1 w-4 h-4 text-accent-500 border-neutral-300 rounded focus:ring-accent-500 focus:ring-2"
           />
           <label htmlFor="acceptPrivacy" className="text-sm text-neutral-700">
@@ -383,11 +549,14 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
             >
               {t('privacy.linkText')}
             </a>
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
         </div>
         {getFieldError('acceptPrivacy') && (
-          <p role="alert" className="text-sm text-red-600 -mt-3">{getFieldError('acceptPrivacy')}</p>
+          <p id="privacy-jobs-error" role="alert" className="text-sm text-red-600 -mt-3 flex items-center gap-1">
+            <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+            {getFieldError('acceptPrivacy')}
+          </p>
         )}
 
         {/* ─── Turnstile ─── */}
