@@ -154,17 +154,59 @@
     },
     "wellness": {
       "title": "Bienestar integral, en un solo lugar",
-      "description": "Más que un centro médico, somos un espacio de contención, equilibrio y calidad de vida."
+      "subtitle": "Más que un centro médico, somos un espacio de contención, equilibrio y calidad de vida.",
+      "relaxation": {
+        "title": "Técnica de relajación",
+        "description": "Terapia energética que reduce el estrés y promueve el equilibrio emocional durante el tratamiento."
+      },
+      "physiotherapy": {
+        "title": "Fisioterapia",
+        "description": "Mejora la movilidad y fortalece el cuerpo antes, durante y después del tratamiento oncológico."
+      },
+      "psychology": {
+        "title": "Terapia Psicológica",
+        "description": "Acompañamiento emocional especializado para enfrentar el proceso oncológico con apoyo profesional."
+      },
+      "boutique": {
+        "title": "Boutique Oncológica",
+        "description": "Productos seleccionados para tu cuidado y bienestar durante cada etapa del tratamiento."
+      },
+      "nutrition": {
+        "title": "Nutrición Clínica",
+        "description": "Planes alimenticios personalizados y suplementos para fortalecer tu cuerpo y recuperación."
+      },
+      "genomics": {
+        "title": "Pruebas Genómicas",
+        "description": "Contamos con paneles genéticos que nos permiten prevenir, detectar distintos tipos de cáncer."
+      }
     },
     "appointment": {
       "title": "Agenda tu cita",
       "description": "Tres simples pasos para comenzar tu tratamiento",
       "step1": "Elige lo que necesitas",
       "step2": "Selecciona a tu especialista",
-      "step3": "Agenda tu cita en Onkimia"
+      "step3": "Agenda tu cita en Onkimia",
+      "cta": "Agenda tu cita"
     },
     "insurances": {
       "title": "Convenios"
+    },
+    "priorityCare": {
+      "title": "Cuidarte es nuestra prioridad",
+      "subtitle": "Cada persona es única, por eso diseñamos tratamientos integrales que te acompañan antes, durante y después de cualquier proceso oncológico.",
+      "card1": {
+        "title": "Atención médica especializada",
+        "description": "Equipo multidisciplinario en oncología médica, quirúrgica y cuidados paliativos."
+      },
+      "card2": {
+        "title": "Detección temprana",
+        "description": "Diagnóstico avanzado y pruebas especializadas para identificar el cáncer en etapas iniciales."
+      },
+      "card3": {
+        "title": "Acompañamiento integral",
+        "description": "Apoyo humano y profesional antes, durante y después de tu tratamiento."
+      },
+      "additionalServices": "Nuestros servicios incluyen: quimioterapia, cirugía oncológica, cuidados paliativos y servicios complementarios personalizados."
     }
   },
   "about": {

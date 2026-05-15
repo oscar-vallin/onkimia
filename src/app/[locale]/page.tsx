@@ -10,6 +10,20 @@ import type { SiteSettings, Doctor } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { buildMetadata } from '@/lib/seo/metadata';
+import {
+  Stethoscope,
+  Microscope,
+  HeartHandshake,
+  Heart,
+  Activity,
+  Brain,
+  ShoppingBag,
+  Apple,
+  Dna,
+  ClipboardCheck,
+  UserSearch,
+  CalendarCheck,
+} from 'lucide-react';
 
 export async function generateMetadata({
   params,
@@ -67,32 +81,57 @@ export default async function HomePage({
       {/* ─── CUIDARTE ES NUESTRA PRIORIDAD ─── */}
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 text-center mb-6">
-            {t('care.title')}
-          </h2>
-          <p className="text-lg text-neutral-700 text-center mb-12 max-w-4xl mx-auto">
-            {t('care.description')}
-          </p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-4">
+              {t('priorityCare.title')}
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+              {t('priorityCare.subtitle')}
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* TODO Tanda 4: reemplazar por query MAIN_SERVICES_QUERY */}
-            {[
-              { title: locale === 'es' ? 'Quimioterapia' : 'Chemotherapy' },
-              { title: locale === 'es' ? 'Cirugía oncológica' : 'Oncological surgery' },
-              { title: locale === 'es' ? 'Cuidados paliativos' : 'Palliative care' },
-              { title: locale === 'es' ? 'Detección temprana' : 'Early detection' },
-              { title: locale === 'es' ? 'Atención médica especializada' : 'Specialized medical care' },
-              { title: locale === 'es' ? 'Servicios complementarios personalizados' : 'Personalized complementary services' },
-              { title: locale === 'es' ? 'Acompañamiento humano y profesional' : 'Human and professional support' },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 p-4 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-accent-500 transition-colors"
-              >
-                <div className="w-2 h-2 bg-accent-500 rounded-full flex-shrink-0" />
-                <span className="text-neutral-800">{item.title}</span>
+          {/* 3 cards principales */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+                <Stethoscope className="w-7 h-7" aria-hidden="true" />
               </div>
-            ))}
+              <h3 className="text-xl font-medium text-brand-900 mb-2">
+                {t('priorityCare.card1.title')}
+              </h3>
+              <p className="text-neutral-600 text-sm leading-relaxed">
+                {t('priorityCare.card1.description')}
+              </p>
+            </div>
+
+            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+                <Microscope className="w-7 h-7" aria-hidden="true" />
+              </div>
+              <h3 className="text-xl font-medium text-brand-900 mb-2">
+                {t('priorityCare.card2.title')}
+              </h3>
+              <p className="text-neutral-600 text-sm leading-relaxed">
+                {t('priorityCare.card2.description')}
+              </p>
+            </div>
+
+            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+                <HeartHandshake className="w-7 h-7" aria-hidden="true" />
+              </div>
+              <h3 className="text-xl font-medium text-brand-900 mb-2">
+                {t('priorityCare.card3.title')}
+              </h3>
+              <p className="text-neutral-600 text-sm leading-relaxed">
+                {t('priorityCare.card3.description')}
+              </p>
+            </div>
+          </div>
+
+          {/* Servicios adicionales */}
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-neutral-600 text-sm">{t('priorityCare.additionalServices')}</p>
           </div>
         </div>
       </section>
@@ -128,9 +167,7 @@ export default async function HomePage({
                     )}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-medium text-brand-900 mb-1">
-                      {doctor.fullName}
-                    </h3>
+                    <h3 className="font-medium text-brand-900 mb-1">{doctor.fullName}</h3>
                     <p className="text-sm text-neutral-600">
                       {getLocalized(doctor.specialty, locale)}
                     </p>
@@ -150,59 +187,33 @@ export default async function HomePage({
               {t('wellness.title')}
             </h2>
             <p className="text-lg text-neutral-700 max-w-3xl mx-auto">
-              {t('wellness.description')}
+              {t('wellness.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* TODO Tanda 4: reemplazar por query WELLNESS_SERVICES_QUERY */}
-            {[
-              {
-                title: locale === 'es' ? 'Técnica de relajación' : 'Relaxation technique',
-                description: locale === 'es'
-                  ? 'Terapia energética que reduce el estrés y promueve el equilibrio emocional durante el tratamiento.'
-                  : 'Energy therapy that reduces stress and promotes emotional balance during treatment.',
-              },
-              {
-                title: locale === 'es' ? 'Fisioterapia' : 'Physiotherapy',
-                description: locale === 'es'
-                  ? 'Mejora la movilidad y fortalece el cuerpo antes, durante y después del tratamiento oncológico.'
-                  : 'Improves mobility and strengthens the body before, during, and after oncological treatment.',
-              },
-              {
-                title: locale === 'es' ? 'Terapia Psicológica' : 'Psychological Therapy',
-                description: locale === 'es'
-                  ? 'Acompañamiento emocional especializado para enfrentar el proceso oncológico con apoyo profesional.'
-                  : 'Specialized emotional support to face the oncological process with professional support.',
-              },
-              {
-                title: locale === 'es' ? 'Boutique Oncológica' : 'Oncology Boutique',
-                description: locale === 'es'
-                  ? 'Productos seleccionados para tu cuidado y bienestar durante cada etapa del tratamiento.'
-                  : 'Selected products for your care and well-being during each stage of treatment.',
-              },
-              {
-                title: locale === 'es' ? 'Nutrición Clínica' : 'Clinical Nutrition',
-                description: locale === 'es'
-                  ? 'Planes alimenticios personalizados y suplementos para fortalecer tu cuerpo y recuperación.'
-                  : 'Personalized meal plans and supplements to strengthen your body and recovery.',
-              },
-              {
-                title: locale === 'es' ? 'Pruebas Genómicas' : 'Genomic Testing',
-                description: locale === 'es'
-                  ? 'Contamos con paneles genéticos que nos permiten prevenir, detectar distintos tipos de cáncer.'
-                  : 'We have genetic panels that allow us to prevent and detect different types of cancer.',
-              },
-            ].map((item, index) => (
+            {(
+              [
+                { key: 'relaxation', Icon: Heart },
+                { key: 'physiotherapy', Icon: Activity },
+                { key: 'psychology', Icon: Brain },
+                { key: 'boutique', Icon: ShoppingBag },
+                { key: 'nutrition', Icon: Apple },
+                { key: 'genomics', Icon: Dna },
+              ] as const
+            ).map(({ key, Icon }) => (
               <div
-                key={index}
-                className="bg-neutral-50 p-6 rounded-xl border border-neutral-200 hover:border-accent-500 transition-colors"
+                key={key}
+                className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow"
               >
-                <h3 className="text-xl font-medium text-brand-900 mb-3">
-                  {item.title}
+                <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-3">
+                  <Icon className="w-6 h-6" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg font-medium text-brand-900 mb-2">
+                  {t(`wellness.${key}.title`)}
                 </h3>
-                <p className="text-neutral-700 text-sm leading-relaxed">
-                  {item.description}
+                <p className="text-sm text-neutral-600 leading-relaxed">
+                  {t(`wellness.${key}.description`)}
                 </p>
               </div>
             ))}
@@ -217,42 +228,37 @@ export default async function HomePage({
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-6">
               {t('appointment.title')}
             </h2>
-            <p className="text-lg text-neutral-700 mb-8">
+            <p className="text-lg text-neutral-700 mb-12">
               {t('appointment.description')}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-accent-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  1
+              {(
+                [
+                  { Icon: ClipboardCheck, step: 'step1' },
+                  { Icon: UserSearch, step: 'step2' },
+                  { Icon: CalendarCheck, step: 'step3' },
+                ] as const
+              ).map(({ Icon, step }, index) => (
+                <div key={step} className="text-center">
+                  <div className="relative w-20 h-20 mx-auto mb-4">
+                    <div className="absolute inset-0 rounded-full bg-accent-500 flex items-center justify-center">
+                      <Icon className="w-10 h-10 text-white" aria-hidden="true" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-brand-900 text-white text-sm font-bold flex items-center justify-center">
+                      {index + 1}
+                    </div>
+                  </div>
+                  <h3 className="font-medium text-brand-900">{t(`appointment.${step}`)}</h3>
                 </div>
-                <h3 className="font-medium text-brand-900 mb-2">
-                  {t('appointment.step1')}
-                </h3>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-accent-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  2
-                </div>
-                <h3 className="font-medium text-brand-900 mb-2">
-                  {t('appointment.step2')}
-                </h3>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-accent-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  3
-                </div>
-                <h3 className="font-medium text-brand-900 mb-2">
-                  {t('appointment.step3')}
-                </h3>
-              </div>
+              ))}
             </div>
 
             <Link
               href="/contacto"
               className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg"
             >
-              {t('appointment.title')}
+              {t('appointment.cta')}
             </Link>
           </div>
         </div>
@@ -265,21 +271,19 @@ export default async function HomePage({
             {t('insurances.title')}
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
             {/* TODO Tanda 4: reemplazar por query INSURANCES_QUERY */}
             {[
               'AXA', 'GNP', 'MAPFRE', 'VUMI',
               'INBURSA', 'BANORTE', 'BESTDOCTORS', 'MD ABROAD',
               'CIGNA', 'SURA', 'BX+', 'ZURICH',
               'SCOTIABANK', 'HEALTHCASE', 'ATLAS', 'AXA ASSISTANCE',
-            ].map((insurance, index) => (
+            ].map((insurance) => (
               <div
-                key={index}
+                key={insurance}
                 className="flex items-center justify-center p-6 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-accent-500 transition-colors min-h-[100px]"
               >
-                <span className="text-neutral-600 font-medium text-center">
-                  {insurance}
-                </span>
+                <span className="text-neutral-600 font-medium text-center">{insurance}</span>
               </div>
             ))}
           </div>

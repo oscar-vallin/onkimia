@@ -153,18 +153,60 @@
       "description": "Be part of the Onkimia family. Our multidisciplinary team is made up of highly trained doctors committed to your well-being."
     },
     "wellness": {
-      "title": "Comprehensive wellness, in one place",
-      "description": "More than a medical center, we are a space of containment, balance, and quality of life."
+      "title": "Comprehensive wellness, all in one place",
+      "subtitle": "More than a medical center, we are a space of support, balance, and quality of life.",
+      "relaxation": {
+        "title": "Relaxation techniques",
+        "description": "Energetic therapy that reduces stress and promotes emotional balance during treatment."
+      },
+      "physiotherapy": {
+        "title": "Physical therapy",
+        "description": "Improves mobility and strengthens the body before, during, and after oncological treatment."
+      },
+      "psychology": {
+        "title": "Psychological therapy",
+        "description": "Specialized emotional support to face the oncological process with professional guidance."
+      },
+      "boutique": {
+        "title": "Oncology Boutique",
+        "description": "Curated products for your care and wellbeing during every stage of treatment."
+      },
+      "nutrition": {
+        "title": "Clinical Nutrition",
+        "description": "Personalized meal plans and supplements to strengthen your body and recovery."
+      },
+      "genomics": {
+        "title": "Genomic Testing",
+        "description": "Genetic panels that allow us to prevent and detect various types of cancer."
+      }
     },
     "appointment": {
       "title": "Schedule your appointment",
       "description": "Three simple steps to start your treatment",
       "step1": "Choose what you need",
       "step2": "Select your specialist",
-      "step3": "Schedule your appointment at Onkimia"
+      "step3": "Schedule your visit at Onkimia",
+      "cta": "Schedule appointment"
     },
     "insurances": {
       "title": "Insurance Partners"
+    },
+    "priorityCare": {
+      "title": "Caring for you is our priority",
+      "subtitle": "Every person is unique. We design integrated treatments to accompany you before, during, and after any oncological process.",
+      "card1": {
+        "title": "Specialized medical care",
+        "description": "Multidisciplinary team in medical, surgical, and palliative oncology."
+      },
+      "card2": {
+        "title": "Early detection",
+        "description": "Advanced diagnosis and specialized testing to identify cancer in early stages."
+      },
+      "card3": {
+        "title": "Comprehensive support",
+        "description": "Human and professional support before, during, and after your treatment."
+      },
+      "additionalServices": "Our services include: chemotherapy, oncological surgery, palliative care, and personalized complementary services."
     }
   },
   "about": {
