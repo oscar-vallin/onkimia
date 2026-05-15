@@ -802,5 +802,15 @@
   "privacy": {
     "lastUpdated": "Última actualización: {date}",
     "intro": "En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), ponemos a su disposición el presente Aviso de Privacidad."
+  },
+  "welcomeModal": {
+    "title": "¡Bienvenido a Onkimia!",
+    "subtitle": "Personaliza tu experiencia eligiendo tu clínica e idioma",
+    "clinicLabel": "Selecciona tu clínica",
+    "clinicPrimary": "Sede principal",
+    "clinicSecondary": "Sede especializada",
+    "languageLabel": "Selecciona tu idioma",
+    "confirm": "Continuar",
+    "close": "Cerrar"
   }
 }

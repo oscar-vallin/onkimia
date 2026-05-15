@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { CLINIC_COOKIE_NAME, type ClinicSlug } from './clinic-context';
 
+
 /**
  * Lee la cookie de clínica desde server components.
  */

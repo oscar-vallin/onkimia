@@ -13,7 +13,9 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
 import { MedicalOrganizationJsonLd } from '@/components/seo/JsonLd';
+import { WelcomeModalProvider } from '@/components/providers/WelcomeModalProvider';
 import type { Clinic, SiteSettings } from '@/sanity/types';
+import type { Locale } from '@/i18n/routing';
 import './globals.css';
 
 const orbitron = Orbitron({
@@ -103,6 +105,7 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
             <Footer settings={settings} clinics={clinics} locale={locale as 'es' | 'en'} />
             <WhatsAppButton settings={settings} clinics={clinics} />
+            <WelcomeModalProvider locale={locale as Locale} />
           </ClinicProvider>
         </NextIntlClientProvider>
       </body>

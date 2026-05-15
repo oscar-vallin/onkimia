@@ -802,5 +802,15 @@
   "privacy": {
     "lastUpdated": "Last updated: {date}",
     "intro": "In compliance with the Federal Law on Protection of Personal Data Held by Private Parties (LFPDPPP), we make this Privacy Notice available to you."
+  },
+  "welcomeModal": {
+    "title": "Welcome to Onkimia!",
+    "subtitle": "Customize your experience by choosing your clinic and language",
+    "clinicLabel": "Select your clinic",
+    "clinicPrimary": "Main location",
+    "clinicSecondary": "Specialized location",
+    "languageLabel": "Select your language",
+    "confirm": "Continue",
+    "close": "Close"
   }
 }
