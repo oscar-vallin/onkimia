@@ -1,0 +1,746 @@
+{
+  "common": {
+    "siteName": "Onkimia",
+    "tagline": "La evolución oncológica que te acompaña",
+    "scheduleAppointment": "Agendar cita",
+    "scheduleAppointmentWhatsApp": "Agendar mi cita por WhatsApp",
+    "learnMore": "Conocer más",
+    "contactUs": "Contáctanos"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "services": "Servicios",
+    "endos": "Endos",
+    "cuidare": "Cuidare",
+    "doctors": "Onkimia Doctors",
+    "contact": "Contacto",
+    "jobs": "Bolsa de trabajo"
+  },
+  "clinics": {
+    "guadalajara": "Guadalajara",
+    "colima": "Colima",
+    "selectClinic": "Selecciona tu clínica",
+    "selectLanguage": "Selecciona tu idioma",
+    "principal": "Principal",
+    "currentLocation": "Sede seleccionada:",
+    "discoverClinic": "Conocer sede",
+    "noImage": "Sin imagen"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "Lo sentimos, la página que buscas no existe o ha sido movida.",
+    "goHome": "Ir al inicio",
+    "goBack": "Volver atrás",
+    "helpfulLinks": "Enlaces útiles:",
+    "about": "Nosotros",
+    "services": "Servicios",
+    "contact": "Contacto"
+  },
+  "metadata": {
+    "defaultTitle": "Onkimia — Clínica Oncológica Especializada",
+    "defaultDescription": "Centro oncológico especializado en Guadalajara y Colima. Diagnóstico, tratamiento y cuidado integral del cáncer con enfoque humano.",
+    "aboutTitle": "Nosotros",
+    "aboutDescription": "Más que medicina, un compromiso con tu vida. Conoce nuestra filosofía y enfoque integral en Onkimia.",
+    "servicesTitle": "Servicios",
+    "servicesDescription": "Atención oncológica especializada con enfoque médico integral y humano.",
+    "servicesPageTitle": "Atención Oncológica Especializada",
+    "servicesPageDescription": "Abordamos cada caso desde un enfoque médico integral y humano.",
+    "endosTitle": "Endos",
+    "endosDescription": "Unidad de procedimientos ambulatorios no quirúrgicos con calidad y eficiencia.",
+    "cuidareTitle": "Cuidare",
+    "cuidareDescription": "Calidad hospitalaria sin hospitalización. Procedimientos médicos ambulatorios.",
+    "doctorsTitle": "Onkimia Doctors",
+    "doctorsDescription": "Sé parte de la red médica Onkimia. Un modelo de colaboración diseñado para médicos.",
+    "contactTitle": "Contacto",
+    "contactDescription": "Agenda tu consulta y conoce nuestras instalaciones.",
+    "jobsTitle": "Bolsa de trabajo",
+    "jobsDescription": "Únete al equipo Onkimia. Consulta nuestras vacantes disponibles."
+  },
+  "services": {
+    "hero": {
+      "title": "Atención Oncológica Especializada",
+      "description": "Abordamos cada caso desde un enfoque médico integral y humano."
+    },
+    "main": {
+      "title": "Atención Oncológica Especializada",
+      "description": "Abordamos cada caso desde un enfoque médico integral y humano.",
+      "feature1": "Unidades médico-quirúrgicas por tipo de cáncer",
+      "feature2": "Servicios complementarios únicos",
+      "feature3": "Tecnología avanzada",
+      "prevention": "Prevenir también es parte del tratamiento. Ofrecemos programas de detección oportuna y estudios de secuenciación genética para tratamientos más eficaces y personalizados."
+    },
+    "clinics": {
+      "title": "Clínicas de Atención Oncológica",
+      "description": "En Onkimia, brindamos una gama de servicios especializados a través de nuestras clínicas médico-quirúrgicas y unidades funcionales, tales como:",
+      "breast": "Mama",
+      "lung": "Pulmón",
+      "prostate": "Próstata",
+      "cns": "Sistema nervioso central",
+      "headNeck": "Cabeza y cuello",
+      "thoracic": "Torácicas",
+      "hepatic": "Hepática",
+      "renal": "Renal",
+      "gastric": "Gástrica",
+      "gynecological": "Ginecológica",
+      "urinary": "Urinaria",
+      "digestive": "Digestiva",
+      "skin": "Piel",
+      "gastrointestinal": "Tumores gastrointestinales"
+    },
+    "complementary": {
+      "title": "Servicios Complementarios",
+      "description": "Como extensión de nuestra misión por siempre proporcionar atención integral y personalizada. Contamos con servicios complementarios como:",
+      "endos": {
+        "name": "Endos",
+        "description": "Especialistas en endoscopía diagnóstica y terapéutica, con tecnología de punta y atención profesional."
+      },
+      "cuidare": {
+        "name": "Cuidare",
+        "description": "Expertos en cuidados paliativos, enfocados en brindar calidad de vida, confort y acompañamiento profesional."
+      },
+      "haranna": {
+        "name": "Haranna",
+        "description": "Boutique oncológica con productos seleccionados para tu bienestar físico y emocional durante cada etapa del tratamiento."
+      },
+      "kalika": {
+        "name": "Kalika",
+        "description": "Estética con Causa, un espacio para reconectar contigo. Cuidado personal con productos amigables para ti y para el medio ambiente."
+      },
+      "moreInfo": "Más información"
+    },
+    "partners": {
+      "title": "Socios Comerciales",
+      "sanvite": {
+        "name": "Sanvite",
+        "description": "Especialistas en nutrición clínica y funcional. Promueven estilos de vida saludables y personalizados con suplementos de alta calidad."
+      },
+      "aster": {
+        "name": "Aster Clinic",
+        "description": "Clínica especializada en dermatología médica y estética. Ofrece atención integral para el cuidado de la piel, cabello en todas las etapas de la vida."
+      },
+      "sedi": {
+        "name": "Sedi",
+        "description": "Laboratorio clínico confiable y ágil. Estudios diagnósticos para cada etapa del tratamiento."
+      },
+      "breeze": {
+        "name": "Breeze & Blue",
+        "description": "Restaurante de comida saludable con opciones nutritivas y deliciosas pensadas para pacientes, familiares y personal médico."
+      },
+      "vocalia": {
+        "name": "Vocalia",
+        "description": "Centro de Alta Especialidad en Laringología. Diagnóstico y tratamiento avanzado para problemas de la voz y la vía aérea."
+      },
+      "visitWebsite": "Visitar sitio web"
+    },
+    "cta": {
+      "title": "¿Listo para comenzar tu tratamiento?",
+      "description": "Agenda tu cita con nuestros especialistas y recibe atención personalizada.",
+      "button": "Agendar Cita"
+    }
+  },
+  "home": {
+    "hero": {
+      "welcome": "Bienvenidos a",
+      "description": "En Onkimia fusionamos innovación médica, experiencia clínica y un enfoque profundamente humano para brindarte atención personalizada en cada etapa de tu camino."
+    },
+    "care": {
+      "title": "Cuidarte es nuestra prioridad",
+      "description": "Cada persona es única, por eso diseñamos tratamientos integrales que te acompañan antes, durante y después de cualquier proceso oncológico."
+    },
+    "doctors": {
+      "title": "Conoce a nuestros especialistas",
+      "description": "Forma parte de la familia Onkimia. Nuestro equipo multidisciplinario está conformado por médicos altamente capacitados y comprometidos con tu bienestar."
+    },
+    "wellness": {
+      "title": "Bienestar integral, en un solo lugar",
+      "description": "Más que un centro médico, somos un espacio de contención, equilibrio y calidad de vida."
+    },
+    "appointment": {
+      "title": "Agenda tu cita",
+      "description": "Tres simples pasos para comenzar tu tratamiento",
+      "step1": "Elige lo que necesitas",
+      "step2": "Selecciona a tu especialista",
+      "step3": "Agenda tu cita en Onkimia"
+    },
+    "insurances": {
+      "title": "Convenios"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Bienvenidos a Onkimia",
+      "description": "En Onkimia fusionamos innovación médica, experiencia clínica y un enfoque profundamente humano para brindarte atención personalizada en cada etapa de tu camino."
+    },
+    "moreThanMedicine": {
+      "headingLine1": "Más que medicina,",
+      "headingUnderlined": "un comprom",
+      "headingSuffix": "iso con tu vida",
+      "description": "En Onkimia nuestro eje eres tú. Nuestra filosofía combina tratamientos innovadores, atención de calidad y los mejores especialistas."
+    },
+    "bodyMind": {
+      "headingPrefix": "Cuerpo, mente y",
+      "headingUnderlined": "ambiente",
+      "headingSuffix": "",
+      "description": "Creemos en un enfoque 360° del cuidado oncológico, donde cada detalle importa. Nos adaptamos a tu historia, para que recibas la atención que realmente necesitas."
+    },
+    "supportGroup": {
+      "title": "Grupo de apoyo",
+      "description": "Forma parte de nuestra comunidad compartiendo experiencias y creando lazos que te brindarán herramientas en cada paso."
+    },
+    "aware": {
+      "description": "Es una iniciativa integral diseñada para promover la prevención y detección oportuna del cáncer, combinando los servicios médicos especializados con actividades culturales y deportivas que impulsan el cuidado del cuerpo y la mente."
+    },
+    "testimonials": {
+      "title": "Testimonios",
+      "subtitle": "Historias reales de personas que confiaron en nosotros"
+    },
+    "doubts": {
+      "headingUnderlined": "¿Tienes",
+      "headingSuffix": "dudas?",
+      "description": "Conoce nuestras instalaciones y al equipo que hará la diferencia en tu vida."
+    },
+    "faq": {
+      "headingUnderlined": "Pregu",
+      "headingSuffix": "ntas frecuentes",
+      "empty": "Próximamente agregaremos preguntas frecuentes."
+    },
+    "downloadHere": "descárgala aquí"
+  },
+  "footer": {
+    "menu": "Menú",
+    "followUs": "Síguenos",
+    "viewPositions": "Ver vacantes",
+    "locations": "Nuestras sedes",
+    "locationGuadalajara": "Guadalajara",
+    "locationColima": "Colima",
+    "privacyPolicy": "Aviso de Privacidad"
+  },
+  "doctors": {
+    "metadata": {
+      "title": "Onkimia Doctors — Sé parte de nuestra red médica",
+      "description": "Modelo de colaboración para médicos especialistas. Infraestructura, procesos y unidades complementarias para elevar la práctica clínica."
+    },
+    "hero": {
+      "eyebrow": "Onkimia Doctors",
+      "headline": "Sé parte de la red médica Onkimia",
+      "description": "Un modelo de colaboración diseñado para que el médico se enfoque en lo más importante: el paciente."
+    },
+    "about": {
+      "title": "¿Qué es Onkimia Doctors?",
+      "description": "Onkimia es un ecosistema oncológico que integra a médicos especialistas externos para brindar atención integral, continua y de alta calidad al paciente, respaldando la práctica médica con infraestructura, procesos y unidades complementarias que elevan la experiencia clínica."
+    },
+    "improvements": {
+      "title": "Mejoras para tu paciente",
+      "subtitle": "Cuando el médico cuenta con un ecosistema que lo respalda, el paciente recibe una atención más humana, más eficiente y segura.",
+      "items": {
+        "waitTime": "Reducción de tiempos de espera",
+        "fragmentation": "Menor fragmentación del tratamiento",
+        "coordinated": "Atención coordinada entre especialidades",
+        "adherence": "Mayor adherencia al tratamiento",
+        "emotional": "Experiencia emocionalmente contenida"
+      }
+    },
+    "units": {
+      "title": "Unidades de negocio que fortalecen tu práctica",
+      "scheduleTour": "Agenda Recorrido",
+      "endos": {
+        "name": "Endos",
+        "items": {
+          "diagnosis": "Diagnóstico oportuno",
+          "ambulatory": "Procedimientos ambulatorios",
+          "lessFriction": "Menos fricción para el paciente"
+        },
+        "tourMessage": "Hola, quisiera agendar un recorrido por las instalaciones de Endos."
+      },
+      "cuidare": {
+        "name": "Cuidare",
+        "items": {
+          "painManagement": "Manejo del dolor",
+          "dayClinic": "Clínica de día",
+          "palliativeCare": "Cuidados paliativos integrados al tratamiento"
+        },
+        "tourMessage": "Hola, quisiera agendar un recorrido por las instalaciones de Cuidare."
+      },
+      "wellness": {
+        "name": "Bienestar integral",
+        "items": {
+          "psychology": "Psicología",
+          "nutrition": "Nutrición clínica",
+          "physiotherapy": "Fisioterapia",
+          "boutique": "Boutique oncológica"
+        },
+        "tourMessage": "Hola, quisiera agendar un recorrido por la unidad de Bienestar Integral."
+      }
+    },
+    "benefits": {
+      "title": "Beneficios para el médico",
+      "categories": {
+        "clinicalFocus": {
+          "title": "Enfoque total en la práctica clínica",
+          "items": {
+            "lessBurden": "Menos carga operativa",
+            "structuredProcesses": "Procesos clínicos estructurados",
+            "readyInfrastructure": "Infraestructura lista para atender al paciente"
+          }
+        },
+        "multidisciplinary": {
+          "title": "Atención multidisciplinaria real",
+          "items": {
+            "interaction": "Interacción con especialistas de distintas áreas",
+            "integralCases": "Casos discutidos con enfoque integral",
+            "continuity": "Continuidad del tratamiento en un solo ecosistema"
+          }
+        },
+        "premiumExperience": {
+          "title": "Experiencia premium para el paciente",
+          "items": {
+            "privateBooths": "Cabinas privadas",
+            "specializedUnits": "Unidades especializadas sin hospitalización innecesaria",
+            "humanSupport": "Acompañamiento emocional y humano"
+          }
+        },
+        "institutionalBacking": {
+          "title": "Respaldo institucional",
+          "items": {
+            "solidBrand": "Marca médica sólida",
+            "standardized": "Procesos estandarizados",
+            "compliance": "Cumplimiento normativo y calidad clínica"
+          }
+        }
+      }
+    },
+    "cta": {
+      "title": "Únete a Onkimia Doctors",
+      "description": "Forma parte de una red médica que potencia tu práctica y eleva la experiencia de tus pacientes.",
+      "button": "Únete ahora",
+      "message": "Hola, estoy interesado en unirme a Onkimia Doctors."
+    }
+  },
+  "cuidare": {
+    "metadata": {
+      "title": "Cuidare — Unidad de procedimientos ambulatorios",
+      "description": "Unidad especializada en procedimientos médicos ambulatorios. Calidad hospitalaria, sin hospitalización."
+    },
+    "hero": {
+      "eyebrow": "Cuidare",
+      "headline": "Calidad hospitalaria, sin hospitalización",
+      "description": "Cuidare es una unidad especializada en procedimientos médicos ambulatorios diseñados para mejorar tu salud y calidad de vida, sin necesidad de internarte. Nuestro enfoque combina seguridad, tecnología y atención personalizada para cuidar de ti en cada detalle."
+    },
+    "availability": {
+      "banner": "La unidad Cuidare está disponible únicamente en nuestra sede de Guadalajara."
+    },
+    "benefits": {
+      "title": "Tratamientos seguros, accesibles y con enfoque humano.",
+      "items": {
+        "skilledStaff": "Personal médico altamente capacitado",
+        "advancedTech": "Tecnología avanzada e innovadora",
+        "internationalProtocols": "Protocolos de seguridad con estándares internacionales",
+        "fasterRecovery": "Menor tiempo de recuperación",
+        "costReduction": "Reducción de costos frente a hospitalizaciones prolongadas",
+        "empatheticCare": "Atención empática, centrada en tu bienestar"
+      }
+    },
+    "treatments": {
+      "title": "Tratamientos ambulatorios",
+      "items": {
+        "antibioticInfusion": {
+          "title": "Infusión de antibióticos ambulatoria",
+          "description": "Administración de antibióticos intravenosos a pacientes que requieren tratamiento continuo, pero no hospitalización. Ideal para infecciones como celulitis, neumonía, infecciones urinarias complicadas, osteomielitis, etc."
+        },
+        "hydration": {
+          "title": "Hidrataciones y correcciones electrolíticas",
+          "description": "Administración intravenosa de soluciones para corregir deshidratación, desequilibrios de sodio, potasio, calcio, magnesio, etc. Común en pacientes posquirúrgicos, adultos mayores, pacientes oncológicos, personas con gastroenteritis severa o enfermedades crónicas."
+        },
+        "neuromodulator": {
+          "title": "Terapia por Neuromodulador",
+          "description": "Tratamiento no invasivo basado en la Estimulación Magnética Transcraneal (TMS) y por corriente directa (tDCS) para modular la actividad cerebral, indicado principalmente para trastornos neuropsiquiátricos y neurológicos."
+        },
+        "painManagement": {
+          "title": "Manejo del dolor",
+          "description": "Atención integral a pacientes con dolor agudo, crónico o postoperatorio, mediante terapias farmacológicas, intervenciones mínimamente invasivas, y técnicas complementarias."
+        },
+        "oncologicalToxicity": {
+          "title": "Manejo de Toxicidad Oncológica",
+          "description": "Atención médica y de enfermería para pacientes que experimentan efectos adversos por quimioterapia, radioterapia o inmunoterapia, sin necesidad de hospitalización."
+        },
+        "drugAdministration": {
+          "title": "Administración de fármacos (no oncológicos)",
+          "description": "Aplicación ambulatoria de medicamentos de uso crónico, intravenosos o subcutáneos, que requieren vigilancia médica o de enfermería, sin necesidad de hospitalización."
+        }
+      }
+    },
+    "radiology": {
+      "title": "Procedimientos de radiología intervencionista con ultrasonido",
+      "items": {
+        "abscessDrainage": "Drenaje de abscesos superficiales o profundos guiado por ultrasonido",
+        "biopsies": "Biopsias percutáneas guiadas",
+        "venousCatheter": "Colocación de catéter venoso profundo guiado por ultrasonido",
+        "evacuatingPuncture": "Punción evacuadora de derrames pleurales o ascíticos",
+        "infiltrations": "Infiltraciones terapéuticas (articulares, musculares, nerviosas)"
+      }
+    },
+    "palliative": {
+      "title": "Cuidados paliativos",
+      "description": "Nuestra unidad ha sido elegida por médicos y pacientes que buscan atención de excelencia sin sacrificar comodidad ni seguridad. Los resultados positivos y los testimonios lo confirman."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes"
+    },
+    "cta": {
+      "title": "Una solución integral, sin complicaciones",
+      "description": "En Cuidare, hacemos más eficientes tus tratamientos, reducimos tiempos de espera y eliminamos la necesidad de hospitalización innecesaria. Porque tu recuperación también merece ser más ligera."
+    }
+  },
+  "endos": {
+    "metadata": {
+      "title": "Endos — Unidad de procedimientos ambulatorios",
+      "description": "Unidad de procedimientos ambulatorios no quirúrgicos de Onkimia. Diagnósticos y tratamientos especializados con calidad hospitalaria, sin internamiento."
+    },
+    "hero": {
+      "eyebrow": "Endos",
+      "headline": "Tu salud, con calidad y eficiencia",
+      "description": "Endos es la unidad de procedimientos ambulatorios no quirúrgicos de Onkimia, diseñada para ofrecer diagnósticos y tratamientos especializados con la más alta calidad médica, sin necesidad de hospitalización."
+    },
+    "availability": {
+      "banner": "La unidad Endos está disponible únicamente en nuestra sede de Guadalajara."
+    },
+    "procedures": {
+      "title": "¿Qué hacemos en Endos?",
+      "intro": "Realizamos procedimientos clave para tu diagnóstico y tratamiento, con tecnología avanzada y en un entorno accesible y seguro.",
+      "items": {
+        "endoscopy": {
+          "name": "Endoscopías",
+          "description": "Diagnóstico del tracto digestivo superior"
+        },
+        "colonoscopy": {
+          "name": "Colonoscopías",
+          "description": "Diagnóstico del colon"
+        },
+        "bronchoscopy": {
+          "name": "Broncoscopías",
+          "description": "Diagnóstico de vías respiratorias"
+        },
+        "biopsy": {
+          "name": "Biopsias",
+          "description": "Toma de muestra para análisis"
+        },
+        "ultrasoundGuided": {
+          "name": "Procedimientos guiados por ultrasonido",
+          "description": "Guiado por imagen de alta precisión"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Calidad hospitalaria sin hospitalización",
+      "items": {
+        "specializedTeam": "Equipo médico altamente especializado",
+        "latestTechnology": "Tecnología de última generación",
+        "agileProcedures": "Procedimientos ágiles y sin internamiento",
+        "timeAndCostSavings": "Ahorro de tiempo y costos",
+        "empatheticCare": "Atención empática, centrada en ti"
+      }
+    },
+    "safety": {
+      "title": "Seguridad y confianza",
+      "description": "Sabemos que la salud no admite improvisaciones. En Endos, cada procedimiento es realizado por especialistas con amplia experiencia, en espacios diseñados para cuidar cada detalle de tu bienestar."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes"
+    },
+    "cta": {
+      "title": "Agiliza tu proceso. Mejora tu experiencia.",
+      "description": "Ya sea por indicación médica o por iniciativa propia, Endos es tu mejor opción para realizar procedimientos sin hospitalización prolongada, con toda la calidad, comodidad y eficiencia que mereces."
+    }
+  },
+  "contact": {
+    "metadata": {
+      "title": "Contacto — Onkimia",
+      "description": "Ponte en contacto con Onkimia. Agenda tu consulta o resuelve tus dudas. Atención personalizada para cada paciente."
+    },
+    "hero": {
+      "title": "Contacto",
+      "description": "Estamos aquí para acompañarte. Comparte tu consulta y nuestro equipo te responderá a la brevedad."
+    },
+    "info": {
+      "title": "Información de contacto",
+      "addressLabel": "Ubicación",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Email",
+      "hoursLabel": "Horario"
+    },
+    "form": {
+      "title": "Agenda tu consulta",
+      "subtitle": "Completa el formulario y te contactaremos pronto.",
+      "name": {
+        "label": "Nombre completo",
+        "placeholder": "Ej: María González"
+      },
+      "email": {
+        "label": "Correo electrónico",
+        "placeholder": "tu@correo.com"
+      },
+      "phone": {
+        "label": "Teléfono",
+        "placeholder": "(33) 1234 5678"
+      },
+      "comment": {
+        "label": "Comentario",
+        "placeholder": "Cuéntanos cómo podemos ayudarte"
+      },
+      "privacy": {
+        "label": "He leído y acepto el",
+        "linkText": "aviso de privacidad"
+      },
+      "submit": {
+        "label": "Enviar mensaje",
+        "sending": "Enviando..."
+      }
+    },
+    "errors": {
+      "name": {
+        "tooShort": "El nombre debe tener al menos 2 caracteres",
+        "tooLong": "El nombre es demasiado largo"
+      },
+      "email": {
+        "invalid": "Ingresa un correo electrónico válido",
+        "tooLong": "El correo es demasiado largo"
+      },
+      "phone": {
+        "tooShort": "El teléfono debe tener al menos 8 dígitos",
+        "tooLong": "El teléfono es demasiado largo",
+        "invalid": "Ingresa un teléfono válido"
+      },
+      "comment": {
+        "tooShort": "El comentario debe tener al menos 10 caracteres",
+        "tooLong": "El comentario es demasiado largo"
+      },
+      "privacy": {
+        "required": "Debes aceptar el aviso de privacidad para continuar"
+      },
+      "spam": {
+        "detected": "Detección de spam"
+      },
+      "validation": {
+        "failed": "Por favor revisa los campos marcados"
+      },
+      "error": {
+        "unexpected": "Ocurrió un error inesperado. Intenta de nuevo.",
+        "rateLimit": "Has enviado demasiados mensajes. Intenta de nuevo en una hora.",
+        "turnstile": "No pudimos verificar que eres humano. Recarga la página e intenta de nuevo.",
+        "email": "No pudimos enviar el mensaje. Intenta de nuevo en unos momentos."
+      },
+      "success": {
+        "sent": "Mensaje enviado correctamente"
+      }
+    },
+    "modal": {
+      "success": {
+        "title": "¡Mensaje enviado!",
+        "description": "Hemos recibido tu mensaje. Nuestro equipo te contactará a la brevedad."
+      },
+      "error": {
+        "title": "No pudimos enviar tu mensaje",
+        "description": "Algo salió mal. Por favor intenta de nuevo en unos momentos."
+      },
+      "close": "Cerrar"
+    },
+    "map": {
+      "title": "Ubicación de Onkimia"
+    }
+  },
+  "jobBoard": {
+    "metadata": {
+      "title": "Bolsa de Trabajo — Onkimia",
+      "description": "Únete al equipo Onkimia. Postúlate a nuestras vacantes activas o envía tu aplicación espontánea."
+    },
+    "hero": {
+      "title": "Bolsa de trabajo",
+      "description": "Sé parte del equipo Onkimia. Buscamos talento comprometido con la excelencia médica y el cuidado humano."
+    },
+    "form": {
+      "title": "Envía tu aplicación",
+      "subtitle": "Completa el formulario y adjunta tu CV. Te contactaremos pronto.",
+      "vacancy": {
+        "label": "Vacante",
+        "spontaneous": "Aplicación espontánea",
+        "activeGroup": "Vacantes activas"
+      },
+      "jobDescription": {
+        "label": "Descripción del puesto que te interesa",
+        "placeholder": "Cuéntanos qué tipo de puesto buscas"
+      },
+      "city": {
+        "label": "Ciudad",
+        "placeholder": "Selecciona una ciudad"
+      },
+      "area": {
+        "label": "Área",
+        "placeholder": "Selecciona un área"
+      },
+      "firstName": {
+        "label": "Nombre",
+        "placeholder": "Ej: María"
+      },
+      "lastName": {
+        "label": "Apellidos",
+        "placeholder": "Ej: González López"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "tu@correo.com"
+      },
+      "phone": {
+        "label": "Teléfono",
+        "placeholder": "(33) 1234 5678"
+      },
+      "birthDate": {
+        "label": "Fecha de nacimiento"
+      },
+      "aboutYou": {
+        "label": "Cuéntanos sobre ti",
+        "placeholder": "Experiencia, conocimientos, habilidades, programas que dominas"
+      },
+      "cv": {
+        "label": "Sube tu currículum",
+        "placeholder": "Click para subir tu CV",
+        "hint": "PDF máximo 5MB"
+      },
+      "privacy": {
+        "label": "He leído y acepto el",
+        "linkText": "aviso de privacidad"
+      },
+      "submit": {
+        "label": "Enviar registro",
+        "sending": "Enviando..."
+      }
+    },
+    "areas": {
+      "cuentas-por-pagar": "Cuentas por pagar",
+      "facturacion": "Facturación",
+      "tesoreria": "Tesorería",
+      "boutique": "Boutique",
+      "cobranza": "Cobranza",
+      "cotizaciones": "Cotizaciones",
+      "desarrollo-organizacional": "Desarrollo Organizacional",
+      "servicios-generales": "Servicios Generales",
+      "mercadotecnia": "Mercadotecnia",
+      "tecnologias-de-la-informacion": "Tecnologías de la Información",
+      "enlace-con-aseguradoras": "Enlace con Aseguradoras",
+      "direccion-operativa": "Dirección Operativa",
+      "atencion-al-paciente": "Atención al Paciente",
+      "atencion-medica": "Atención Médica",
+      "enfermeria": "Enfermería",
+      "administracion": "Administración",
+      "sanidad-y-regulacion": "Sanidad y Regulación"
+    },
+    "errors": {
+      "vacancy": {
+        "required": "Selecciona una vacante o aplicación espontánea"
+      },
+      "city": {
+        "required": "Selecciona una ciudad"
+      },
+      "area": {
+        "required": "Selecciona un área"
+      },
+      "firstName": {
+        "tooShort": "Ingresa tu nombre completo"
+      },
+      "lastName": {
+        "tooShort": "Ingresa tus apellidos"
+      },
+      "email": {
+        "invalid": "Ingresa un correo válido"
+      },
+      "phone": {
+        "tooShort": "Teléfono inválido",
+        "invalid": "Teléfono inválido"
+      },
+      "birthDate": {
+        "invalid": "Debes tener entre 18 y 70 años"
+      },
+      "aboutYou": {
+        "tooShort": "Cuéntanos más sobre ti (mín 20 caracteres)"
+      },
+      "cv": {
+        "required": "Adjunta tu CV en PDF",
+        "tooLarge": "El archivo excede 5MB",
+        "invalidType": "Solo se acepta formato PDF"
+      },
+      "privacy": {
+        "required": "Debes aceptar el aviso de privacidad"
+      },
+      "validation": {
+        "failed": "Revisa los campos marcados"
+      },
+      "error": {
+        "rateLimit": "Has enviado demasiadas aplicaciones. Intenta mañana.",
+        "turnstile": "No pudimos verificar que eres humano. Recarga la página.",
+        "email": "No pudimos enviar tu aplicación. Intenta de nuevo.",
+        "unexpected": "Ocurrió un error inesperado. Intenta de nuevo."
+      }
+    },
+    "modal": {
+      "success": {
+        "title": "¡Aplicación enviada!",
+        "description": "Hemos recibido tu CV. Nuestro equipo de RRHH lo revisará y te contactará si tu perfil coincide."
+      },
+      "error": {
+        "title": "No pudimos procesar tu aplicación",
+        "description": "Algo salió mal. Intenta de nuevo en unos momentos."
+      },
+      "close": "Cerrar"
+    }
+  },
+  "clinicPage": {
+    "metadata": {
+      "guadalajara": {
+        "title": "Sede Guadalajara — Onkimia",
+        "description": "Centro oncológico Onkimia en Guadalajara, Jalisco. Atención especializada, tratamientos personalizados y acompañamiento integral en oncología."
+      },
+      "colima": {
+        "title": "Sede Colima — Onkimia",
+        "description": "Centro oncológico Onkimia en Colima. Atención oncológica de calidad, tratamientos especializados y cuidado humano."
+      }
+    },
+    "hero": {
+      "primaryTagline": "Sede principal",
+      "secondaryTagline": "Sede especializada"
+    },
+    "info": {
+      "addressLabel": "Dirección",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Email",
+      "morePhones": "líneas adicionales"
+    },
+    "map": {
+      "title": "Ubicación de Onkimia {clinic}"
+    },
+    "services": {
+      "title": "Servicios disponibles",
+      "subtitle": "Tratamientos y procedimientos que ofrecemos en Onkimia {clinic}"
+    },
+    "doctors": {
+      "title": "Nuestro equipo médico",
+      "subtitle": "Médicos especialistas que atienden en Onkimia {clinic}"
+    },
+    "hours": {
+      "title": "Horarios de atención"
+    },
+    "cta": {
+      "title": "Agenda tu consulta",
+      "subtitle": "Comunícate con nosotros para agendar una cita en Onkimia {clinic}",
+      "whatsapp": "WhatsApp",
+      "call": "Llamar",
+      "contactForm": "Formulario de contacto"
+    },
+    "whatsapp": {
+      "defaultMessage": "Hola, me gustaría agendar una cita en Onkimia {clinic}"
+    }
+  },
+  "privacy": {
+    "lastUpdated": "Última actualización: {date}",
+    "intro": "En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), ponemos a su disposición el presente Aviso de Privacidad."
+  }
+}
