@@ -537,7 +537,15 @@
       "submit": {
         "label": "Send message",
         "sending": "Sending..."
-      }
+      },
+      "validation": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email",
+        "invalidPhone": "Invalid phone number",
+        "tooShort": "Text is too short",
+        "privacyRequired": "You must accept the privacy notice"
+      },
+      "requiredFieldsNote": "Fields marked with * are required"
     },
     "errors": {
       "name": {
@@ -655,7 +663,17 @@
       "submit": {
         "label": "Send application",
         "sending": "Sending..."
-      }
+      },
+      "validation": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email",
+        "invalidPhone": "Invalid phone number",
+        "cvRequired": "Please upload your CV in PDF format",
+        "cvSize": "File must be less than 5MB",
+        "cvFormat": "Only PDF files accepted",
+        "privacyRequired": "You must accept the privacy notice"
+      },
+      "requiredFieldsNote": "Fields marked with * are required"
     },
     "areas": {
       "cuentas-por-pagar": "Accounts Payable",

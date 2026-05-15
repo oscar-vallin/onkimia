@@ -537,7 +537,15 @@
       "submit": {
         "label": "Enviar mensaje",
         "sending": "Enviando..."
-      }
+      },
+      "validation": {
+        "required": "Este campo es requerido",
+        "invalidEmail": "Email no válido",
+        "invalidPhone": "Teléfono no válido",
+        "tooShort": "Texto muy corto",
+        "privacyRequired": "Debes aceptar el aviso de privacidad"
+      },
+      "requiredFieldsNote": "Los campos marcados con * son obligatorios"
     },
     "errors": {
       "name": {
@@ -655,7 +663,17 @@
       "submit": {
         "label": "Enviar registro",
         "sending": "Enviando..."
-      }
+      },
+      "validation": {
+        "required": "Este campo es requerido",
+        "invalidEmail": "Email no válido",
+        "invalidPhone": "Teléfono no válido",
+        "cvRequired": "Por favor sube tu CV en formato PDF",
+        "cvSize": "El archivo debe pesar menos de 5MB",
+        "cvFormat": "Solo aceptamos archivos PDF",
+        "privacyRequired": "Debes aceptar el aviso de privacidad"
+      },
+      "requiredFieldsNote": "Los campos marcados con * son obligatorios"
     },
     "areas": {
       "cuentas-por-pagar": "Cuentas por pagar",

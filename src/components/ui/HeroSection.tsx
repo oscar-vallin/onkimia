@@ -23,10 +23,10 @@ export function HeroSection({
   overlay = 'medium',
 }: HeroSectionProps) {
   // Estandarización de altura: todas las variantes de 'height' ahora usan la misma altura mínima
-  const heightClasses = { 
-    sm: 'min-h-[550px]', // Altura estandarizada
-    md: 'min-h-[550px]', // Altura estandarizada
-    lg: 'min-h-[550px]', // Altura estandarizada
+  const heightClasses = {
+    sm: 'min-h-[380px] md:min-h-[480px]',
+    md: 'min-h-[420px] md:min-h-[520px]',
+    lg: 'min-h-[440px] md:min-h-[550px]',
   };
 
   const overlayClasses = {
@@ -67,9 +67,9 @@ export function HeroSection({
       <DecorativeBubbles variant="sides" opacity={0.6} />
 
       {/* Content */}
-       <div className={`relative h-full container-onkimia flex flex-col justify-start ${alignClasses[align]} text-white pt-25 md:pt-30 lg:pt-30 px-4`}>
+       <div className={`relative h-full container-onkimia flex flex-col justify-start ${alignClasses[align]} text-white pt-20 md:pt-28 lg:pt-30 px-4`}>
         <h1
-          className="text-4xl md:text-5xl lg:text-6xl font-normal mb-6 font-sans max-w-4xl"
+          className="text-3xl md:text-5xl lg:text-6xl font-normal mb-4 md:mb-6 font-sans max-w-4xl text-balance"
           style={{ color: '#ffffff' }}
         >
           {title}

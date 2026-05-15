@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useTransition, useEffect } from 'react';
+import { useState, useTransition, useEffect, useRef } from 'react';
 import Script from 'next/script';
 import { useTranslations } from 'next-intl';
 import { submitContactForm } from '@/lib/actions/contact';
+import { contactFormSchema } from '@/lib/schemas/contact';
 import type { ContactFormState } from '@/lib/schemas/contact';
 import { Loader2, CheckCircle2, AlertCircle, X } from 'lucide-react';
 
@@ -15,15 +16,15 @@ export function ContactForm() {
   const [isPending, startTransition] = useTransition();
   const [showModal, setShowModal] = useState(false);
   const [turnstileReady, setTurnstileReady] = useState(false);
+  const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (!turnstileReady || !window.turnstile) return;
 
     const widgetId = window.turnstile.render('#turnstile-widget', {
       sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '',
-      callback: () => {
-        // Token se inserta automáticamente en el form via input hidden por el widget
-      },
+      callback: () => {},
       'error-callback': () => {
         console.error('[Turnstile] Widget error');
       },
@@ -40,7 +41,80 @@ export function ContactForm() {
     };
   }, [turnstileReady]);
 
+  // Validate a single field on blur and set inline error
+  function validateField(name: keyof typeof contactFormSchema.shape, value: string | boolean) {
+    const singleField = contactFormSchema.pick({ [name]: true } as Record<typeof name, true>);
+    const result = singleField.safeParse({ [name]: value });
+    if (!result.success) {
+      const issue = result.error.issues[0];
+      const msgKey = issue.message as string;
+      let msg: string;
+      try {
+        // Try to resolve translation key (e.g. "name.tooShort")
+        msg = tErrors(msgKey as Parameters<typeof tErrors>[0]);
+      } catch {
+        msg = msgKey;
+      }
+      setInlineErrors((prev) => ({ ...prev, [name]: msg }));
+    } else {
+      setInlineErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  }
+
+  // Server-state errors (after submit)
+  const getFieldError = (field: string): string | undefined => {
+    // Inline error takes priority while typing; after submit show server error
+    if (inlineErrors[field]) return inlineErrors[field];
+    if (!state?.errors) return undefined;
+    const errorKey = state.errors[field as keyof typeof state.errors];
+    if (!errorKey) return undefined;
+    return tErrors(errorKey as Parameters<typeof tErrors>[0]);
+  };
+
   const handleSubmit = (formData: FormData) => {
+    // Run full local validation before submitting to catch any untouched fields
+    const rawData = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      comment: formData.get('comment') as string,
+      acceptPrivacy: formData.get('acceptPrivacy') === 'on',
+    };
+
+    const result = contactFormSchema.omit({ _honeypot: true }).safeParse(rawData);
+    if (!result.success) {
+      const newErrors: Record<string, string> = {};
+      result.error.issues.forEach((issue) => {
+        const fieldName = issue.path[0] as string;
+        if (!newErrors[fieldName]) {
+          let msg: string;
+          try {
+            msg = tErrors(issue.message as Parameters<typeof tErrors>[0]);
+          } catch {
+            msg = issue.message;
+          }
+          newErrors[fieldName] = msg;
+        }
+      });
+      setInlineErrors(newErrors);
+
+      // Auto-scroll to first error
+      const firstField = Object.keys(newErrors)[0];
+      if (firstField && formRef.current) {
+        const el = formRef.current.querySelector(`[name="${firstField}"]`) as HTMLElement | null;
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.focus();
+        }
+      }
+      return;
+    }
+
+    setInlineErrors({});
     startTransition(async () => {
       const result = await submitContactForm(state, formData);
       setState(result);
@@ -53,22 +127,23 @@ export function ContactForm() {
     });
   };
 
-  const getFieldError = (field: string): string | undefined => {
-    if (!state?.errors) return undefined;
-    const errorKey = state.errors[field as keyof typeof state.errors];
-    if (!errorKey) return undefined;
-    return tErrors(errorKey);
-  };
+  const fieldClass = (name: string) =>
+    `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:bg-neutral-50 disabled:cursor-not-allowed ${
+      getFieldError(name)
+        ? 'border-red-400 focus:border-red-400 focus:ring-red-100'
+        : 'border-neutral-300 focus:border-accent-500 focus:ring-accent-100'
+    }`;
 
   return (
     <>
       <form
         id="contact-form"
+        ref={formRef}
         action={handleSubmit}
         className="space-y-5"
         noValidate
       >
-        {/* Honeypot oculto — los bots lo llenan, humanos no */}
+        {/* Honeypot oculto */}
         <div
           aria-hidden="true"
           className="absolute opacity-0 pointer-events-none"
@@ -87,7 +162,7 @@ export function ContactForm() {
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('name.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
           <input
             type="text"
@@ -98,11 +173,13 @@ export function ContactForm() {
             disabled={isPending}
             aria-invalid={!!getFieldError('name')}
             aria-describedby={getFieldError('name') ? 'name-error' : undefined}
-            className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent disabled:bg-neutral-50 disabled:cursor-not-allowed"
+            onBlur={(e) => validateField('name', e.target.value)}
+            className={fieldClass('name')}
             placeholder={t('name.placeholder')}
           />
           {getFieldError('name') && (
-            <p id="name-error" role="alert" className="mt-1.5 text-sm text-red-600">
+            <p id="name-error" role="alert" className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+              <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
               {getFieldError('name')}
             </p>
           )}
@@ -111,7 +188,7 @@ export function ContactForm() {
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('email.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
           <input
             type="email"
@@ -122,12 +199,14 @@ export function ContactForm() {
             disabled={isPending}
             aria-invalid={!!getFieldError('email')}
             aria-describedby={getFieldError('email') ? 'email-error' : undefined}
-            className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent disabled:bg-neutral-50 disabled:cursor-not-allowed"
+            onBlur={(e) => validateField('email', e.target.value)}
+            className={fieldClass('email')}
             placeholder={t('email.placeholder')}
             autoComplete="email"
           />
           {getFieldError('email') && (
-            <p id="email-error" role="alert" className="mt-1.5 text-sm text-red-600">
+            <p id="email-error" role="alert" className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+              <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
               {getFieldError('email')}
             </p>
           )}
@@ -136,7 +215,7 @@ export function ContactForm() {
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('phone.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
           <input
             type="tel"
@@ -147,12 +226,14 @@ export function ContactForm() {
             disabled={isPending}
             aria-invalid={!!getFieldError('phone')}
             aria-describedby={getFieldError('phone') ? 'phone-error' : undefined}
-            className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent disabled:bg-neutral-50 disabled:cursor-not-allowed"
+            onBlur={(e) => validateField('phone', e.target.value)}
+            className={fieldClass('phone')}
             placeholder={t('phone.placeholder')}
             autoComplete="tel"
           />
           {getFieldError('phone') && (
-            <p id="phone-error" role="alert" className="mt-1.5 text-sm text-red-600">
+            <p id="phone-error" role="alert" className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+              <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
               {getFieldError('phone')}
             </p>
           )}
@@ -161,7 +242,7 @@ export function ContactForm() {
         <div>
           <label htmlFor="comment" className="block text-sm font-medium text-neutral-800 mb-1.5">
             {t('comment.label')}
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
           <textarea
             id="comment"
@@ -172,11 +253,13 @@ export function ContactForm() {
             disabled={isPending}
             aria-invalid={!!getFieldError('comment')}
             aria-describedby={getFieldError('comment') ? 'comment-error' : undefined}
-            className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent resize-y disabled:bg-neutral-50 disabled:cursor-not-allowed"
+            onBlur={(e) => validateField('comment', e.target.value)}
+            className={fieldClass('comment') + ' resize-y'}
             placeholder={t('comment.placeholder')}
           />
           {getFieldError('comment') && (
-            <p id="comment-error" role="alert" className="mt-1.5 text-sm text-red-600">
+            <p id="comment-error" role="alert" className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+              <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
               {getFieldError('comment')}
             </p>
           )}
@@ -192,6 +275,7 @@ export function ContactForm() {
             disabled={isPending}
             aria-invalid={!!getFieldError('acceptPrivacy')}
             aria-describedby={getFieldError('acceptPrivacy') ? 'privacy-error' : undefined}
+            onChange={(e) => validateField('acceptPrivacy', e.target.checked)}
             className="mt-1 w-4 h-4 text-accent-500 border-neutral-300 rounded focus:ring-accent-500 focus:ring-2"
           />
           <label htmlFor="acceptPrivacy" className="text-sm text-neutral-700">
@@ -204,11 +288,12 @@ export function ContactForm() {
             >
               {t('privacy.linkText')}
             </a>
-            <span className="text-accent-500" aria-hidden="true"> *</span>
+            <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
         </div>
         {getFieldError('acceptPrivacy') && (
-          <p id="privacy-error" role="alert" className="text-sm text-red-600 -mt-3">
+          <p id="privacy-error" role="alert" className="text-sm text-red-600 -mt-3 flex items-center gap-1">
+            <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
             {getFieldError('acceptPrivacy')}
           </p>
         )}

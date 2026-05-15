@@ -126,7 +126,7 @@ export default async function ServicesPage({
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-2 text-neutral-950">
+            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
               {locale === 'es' ? (
                 <>
                   <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
@@ -191,7 +191,7 @@ export default async function ServicesPage({
           <div className="max-w-6xl mx-auto">
             {/* Title with underline decoration */}
             <div className="mb-12">
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-2 text-neutral-950">
+              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
                 {locale === 'es' ? (
                   <>
                     Clínicas de Atención Oncológi
@@ -234,7 +234,7 @@ export default async function ServicesPage({
         <div className="max-w-6xl mx-auto">
           {/* Title with underline decoration */}
           <div className="mb-12">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-2 text-neutral-950">
+            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
               {locale === 'es' ? (
                 <>
                   <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
@@ -291,7 +291,7 @@ export default async function ServicesPage({
           <div className="max-w-6xl mx-auto">
             {/* Title with underline decoration */}
             <div className="mb-12">
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-2 text-neutral-950">
+              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
                 {locale === 'es' ? (
                   <>
                     <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
@@ -350,7 +350,7 @@ export default async function ServicesPage({
               {t('cta.description')}
             </p>
             <Link
-              href="/contacto"
+              href="/contacto#contact-form"
               className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg"
             >
               {t('cta.button')}

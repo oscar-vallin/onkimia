@@ -274,15 +274,15 @@ export function Header({ settings, clinics }: HeaderProps) {
             </div>
 
             {/* Main Navigation Links */}
-            <ul className="flex flex-col items-center justify-center flex-grow space-y-6 py-8">
+            <ul className="flex flex-col items-center justify-center flex-grow space-y-1 py-4">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    onClick={toggleMobileMenu} // Close menu on link click
-                    className={`relative block text-2xl font-inter font-medium transition-colors py-2 text-white ${
+                    onClick={toggleMobileMenu}
+                    className={`relative block text-xl font-inter font-medium transition-colors py-2 text-white ${
                       isActive(link.href)
-                        ? 'text-accent-500' // Active link color
+                        ? 'text-accent-500'
                         : 'hover:text-accent-400'
                     }`}
                   >

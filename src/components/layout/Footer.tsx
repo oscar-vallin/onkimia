@@ -143,27 +143,45 @@ export async function Footer({ settings, clinics }: FooterProps) {
               {tNav('contact')}
             </h3>
             {primaryClinic && (
-              <div className="text-sm text-neutral-300 space-y-1">
+              <div className="text-sm text-neutral-300 space-y-2">
                 {primaryClinic.phone && (
-                  <p>{primaryClinic.phone}</p>
+                  <a
+                    href={`tel:${primaryClinic.phone.replace(/\s/g, '')}`}
+                    className="block hover:text-accent-400 transition-colors"
+                  >
+                    {primaryClinic.phone}
+                  </a>
                 )}
-                {primaryClinic.address && (
-                  <>
-                    <p className="mt-2">
-                      C. {primaryClinic.address.street},
-                    </p>
-                    {primaryClinic.address.neighborhood && (
+                {primaryClinic.address && (() => {
+                  const parts = [
+                    `C. ${primaryClinic.address.street}`,
+                    primaryClinic.address.neighborhood,
+                    primaryClinic.address.postalCode,
+                    primaryClinic.address.city,
+                    primaryClinic.address.state,
+                    'México',
+                  ].filter(Boolean).join(', ');
+                  return (
+                    <a
+                      href={`https://maps.google.com/?q=${encodeURIComponent(parts)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-2 hover:text-accent-400 transition-colors"
+                    >
+                      <p>C. {primaryClinic.address.street},</p>
+                      {primaryClinic.address.neighborhood && (
+                        <p>
+                          {primaryClinic.address.neighborhood},{' '}
+                          {primaryClinic.address.postalCode}
+                        </p>
+                      )}
                       <p>
-                        {primaryClinic.address.neighborhood},{' '}
-                        {primaryClinic.address.postalCode}
+                        {primaryClinic.address.city},{' '}
+                        {primaryClinic.address.state}.
                       </p>
-                    )}
-                    <p>
-                      {primaryClinic.address.city},{' '}
-                      {primaryClinic.address.state}.
-                    </p>
-                  </>
-                )}
+                    </a>
+                  );
+                })()}
               </div>
             )}
           </div>

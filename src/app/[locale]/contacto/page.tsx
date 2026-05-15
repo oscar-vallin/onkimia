@@ -82,66 +82,77 @@ export default async function ContactPage({
               <p className="text-neutral-600 mb-8">{clinicName}</p>
             </div>
 
-            {clinic?.address && (
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center">
-                  <MapPin className="w-5 h-5" aria-hidden="true" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">
-                    {t('info.addressLabel')}
-                  </h3>
-                  <p className="text-neutral-800">
-                    {clinic.address.street}
-                    {clinic.address.neighborhood ? `, ${clinic.address.neighborhood}` : ''}
-                    <br />
-                    {clinic.address.city}, {clinic.address.state}
-                    {clinic.address.postalCode ? `, ${clinic.address.postalCode}` : ''}
-                  </p>
-                </div>
-              </div>
-            )}
+            {clinic?.address && (() => {
+              const mapsQuery = [
+                clinic.address.street,
+                clinic.address.neighborhood,
+                clinic.address.postalCode,
+                clinic.address.city,
+                clinic.address.state,
+                'México',
+              ].filter(Boolean).join(', ');
+              return (
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(mapsQuery)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-neutral-50 transition-colors"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center group-hover:bg-accent-100 transition-colors">
+                    <MapPin className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">
+                      {t('info.addressLabel')}
+                    </h3>
+                    <p className="text-neutral-800 group-hover:text-accent-700 transition-colors">
+                      {clinic.address.street}
+                      {clinic.address.neighborhood ? `, ${clinic.address.neighborhood}` : ''}
+                      <br />
+                      {clinic.address.city}, {clinic.address.state}
+                      {clinic.address.postalCode ? `, ${clinic.address.postalCode}` : ''}
+                    </p>
+                  </div>
+                </a>
+              );
+            })()}
 
             {clinic?.phone && (
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center">
+              <a
+                href={`tel:${clinic.phone.replace(/\s/g, '')}`}
+                className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-neutral-50 transition-colors"
+              >
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center group-hover:bg-accent-100 transition-colors">
                   <Phone className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">
                     {t('info.phoneLabel')}
                   </h3>
-                  <p className="text-neutral-800">
-                    <a
-                      href={`tel:${clinic.phone.replace(/\s/g, '')}`}
-                      className="hover:text-accent-600 transition-colors"
-                    >
-                      {clinic.phone}
-                    </a>
+                  <p className="text-neutral-800 group-hover:text-accent-700 transition-colors">
+                    {clinic.phone}
                   </p>
                 </div>
-              </div>
+              </a>
             )}
 
             {clinic?.email && (
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center">
+              <a
+                href={`mailto:${clinic.email}`}
+                className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-neutral-50 transition-colors"
+              >
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center group-hover:bg-accent-100 transition-colors">
                   <Mail className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">
                     {t('info.emailLabel')}
                   </h3>
-                  <p className="text-neutral-800">
-                    <a
-                      href={`mailto:${clinic.email}`}
-                      className="hover:text-accent-600 transition-colors"
-                    >
-                      {clinic.email}
-                    </a>
+                  <p className="text-neutral-800 group-hover:text-accent-700 transition-colors break-all">
+                    {clinic.email}
                   </p>
                 </div>
-              </div>
+              </a>
             )}
           </div>
 

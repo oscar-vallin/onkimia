@@ -281,7 +281,7 @@ export function ClinicPageContent({
                 </a>
               )}
               <Link
-                href="/contacto"
+                href="/contacto#contact-form"
                 className="border-2 border-white/30 hover:border-white/60 text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center"
               >
                 {t('cta.contactForm')}

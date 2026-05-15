@@ -202,7 +202,7 @@ export default async function AboutPage({
             {t('doubts.description')}
           </p>
           <Link
-            href="/contacto"
+            href="/contacto#contact-form"
             className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-medium px-8 py-3 rounded-lg transition-colors"
           >
             {tCommon('contactUs')}
