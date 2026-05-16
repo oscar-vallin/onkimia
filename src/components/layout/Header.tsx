@@ -10,7 +10,7 @@ import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, Clinic } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { LazyMotion, domAnimation, m, AnimatePresence, type Variants } from 'framer-motion';
 
 interface HeaderProps {
   settings: SiteSettings;
@@ -238,9 +238,10 @@ export function Header({ settings, clinics }: HeaderProps) {
       </header>
 
       {/* ─── Full-Screen Mobile Menu (outside main header flow for z-index) ─── */}
+      <LazyMotion features={domAnimation}>
       <AnimatePresence>
         {mobileOpen && (
-          <motion.nav
+          <m.nav
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -343,9 +344,10 @@ export function Header({ settings, clinics }: HeaderProps) {
               </button>
             </div>
             </div>
-          </motion.nav>
+          </m.nav>
         )}
       </AnimatePresence>
+      </LazyMotion>
     </>
   );
 }
