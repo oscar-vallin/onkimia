@@ -141,8 +141,9 @@
   },
   "home": {
     "hero": {
-      "welcome": "Welcome to",
-      "description": "Medical innovation and deeply human care at every stage of your treatment."
+      "welcome": "Personalized Cancer Care",
+      "description": "Medical innovation and deeply human care at every stage of your treatment.",
+      "cta": "Meet our specialists"
     },
     "care": {
       "title": "Your care is our priority",

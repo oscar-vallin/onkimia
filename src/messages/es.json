@@ -141,8 +141,9 @@
   },
   "home": {
     "hero": {
-      "welcome": "Bienvenidos a",
-      "description": "Innovación médica y atención profundamente humana en cada etapa de tu tratamiento."
+      "welcome": "Atención Oncológica Personalizada",
+      "description": "Innovación médica y atención profundamente humana en cada etapa de tu tratamiento.",
+      "cta": "Conoce a nuestros especialistas"
     },
     "care": {
       "title": "Cuidarte es nuestra prioridad",

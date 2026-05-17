@@ -53,7 +53,7 @@ export default async function AboutPage({
       tags: ['faq'],
     }),
   ]);
-
+  console.log("Site settings fetched:", settings);
   return (
     <>
       {/* ─── HERO ─── */}

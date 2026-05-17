@@ -60,22 +60,25 @@ export default async function HomePage({
       tags: ['doctor'],
     }),
   ]);
-
+  
   const heroDescription = settings.homeHeroDescription
     ? getLocalized(settings.homeHeroDescription, locale)
     : t('hero.description');
-
+  console.log("hero description:", settings.homeHeroDescription);
   return (
     <>
       {/* ─── HERO ─── */}
       <HeroSection
         image={settings.homeHeroImage}
-        title={`${t('hero.welcome')} ${settings.title}`}
+        title={`${t('hero.welcome')}`}
         subtitle={getLocalized(settings.tagline, locale)}
         description={heroDescription}
-        align="center"
         height="lg"
         overlay="medium"
+        primaryCta={{
+          label: t('hero.cta'),
+          href: '#especialistas',
+        }}
       />
 
       {/* ─── CUIDARTE ES NUESTRA PRIORIDAD ─── */}
@@ -138,7 +141,7 @@ export default async function HomePage({
 
       {/* ─── CONOCE A NUESTROS ESPECIALISTAS ─── */}
       {doctors.length > 0 && (
-        <section className="bg-neutral-50 py-16 md:py-24">
+        <section id="especialistas" className="bg-neutral-50 py-16 md:py-24 scroll-mt-20">
           <div className="container-onkimia">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-4">
