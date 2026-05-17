@@ -1,5 +1,4 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { SITE_SETTINGS_QUERY, MAIN_SERVICES_QUERY } from '@/sanity/queries';
@@ -127,19 +126,7 @@ export default async function ServicesPage({
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
-              {locale === 'es' ? (
-                <>
-                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-                    Atención On
-                  </span>cológica Especializada
-                </>
-              ) : (
-                <>
-                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-                    Specialized On
-                  </span>cology Care
-                </>
-              )}
+              {t('clinics.title')}
             </h2>
           </div>
 

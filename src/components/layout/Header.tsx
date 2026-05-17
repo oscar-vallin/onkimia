@@ -247,9 +247,9 @@ export function Header({ settings, clinics }: HeaderProps) {
             exit="exit"
             variants={mobileMenuVariants}
             layout // Enable Framer Motion layout animations
-            className="fixed inset-0 lg:hidden bg-brand-900/40 backdrop-blur-2xl z-60 flex flex-col will-change-transform-opacity" // Added will-change
+            className="fixed inset-0 lg:hidden bg-brand-900/40 backdrop-blur-2xl z-60 flex flex-col overflow-y-auto will-change-transform-opacity"
           >
-            <div className="container-onkimia flex flex-col h-full">
+            <div className="container-onkimia flex flex-col min-h-full">
               {/* Logo and Close Button */}
               <div className="flex justify-between items-center py-4">
                 {/* Logo */}
@@ -275,13 +275,13 @@ export function Header({ settings, clinics }: HeaderProps) {
             </div>
 
             {/* Main Navigation Links */}
-            <ul className="flex flex-col items-center justify-center flex-grow space-y-1 py-4">
+            <ul className="flex flex-col items-center justify-center flex-grow space-y-0.5 py-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={toggleMobileMenu}
-                    className={`relative block text-xl font-inter font-medium transition-colors py-2 text-white ${
+                    className={`relative block text-lg font-inter font-medium transition-colors py-2 text-white ${
                       isActive(link.href)
                         ? 'text-accent-500'
                         : 'hover:text-accent-400'
@@ -300,7 +300,7 @@ export function Header({ settings, clinics }: HeaderProps) {
             </ul>
 
             {/* Configuration Panel (Bottom Section) */}
-            <div className="mt-auto py-8 text-center space-y-6">
+            <div className="mt-auto py-5 text-center space-y-4">
               {/* Clinic Selector */}
               <div className="flex flex-col items-center text-white">
                 <p className="text-neutral-400 uppercase tracking-widest text-xs mb-4 text-white">

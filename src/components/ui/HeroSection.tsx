@@ -67,9 +67,9 @@ export function HeroSection({
       <DecorativeBubbles variant="sides" opacity={0.6} />
 
       {/* Content */}
-       <div className={`relative h-full container-onkimia flex flex-col justify-start ${alignClasses[align]} text-white pt-20 md:pt-28 lg:pt-30 px-4`}>
+       <div className={`relative h-full container-onkimia flex flex-col justify-center ${alignClasses[align]} text-white pt-20 md:pt-28 px-4`}>
         <h1
-          className="text-3xl md:text-5xl lg:text-6xl font-normal mb-4 md:mb-6 font-sans max-w-4xl text-balance"
+          className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-normal mb-3 md:mb-6 font-sans max-w-4xl text-balance"
           style={{ color: '#ffffff' }}
         >
           {title}
@@ -77,15 +77,15 @@ export function HeroSection({
 
         {subtitle && (
           <span
-            className="text-xl md:text-2xl max-w-3xl font-serif italic font-normal mb-4"
+            className="text-lg md:text-2xl max-w-3xl font-serif italic font-normal mb-3 md:mb-4"
             style={{ color: '#ffffff' }}
           >
             {subtitle}
           </span>
         )}
-        
+
         {description && (
-         <p className="text-base md:text-lg text-white max-w-2xl leading-relaxed mt-24">
+         <p className="text-sm md:text-lg text-white max-w-2xl leading-relaxed mt-4 md:mt-6">
             {description}
           </p>
         )}

@@ -107,7 +107,7 @@ export default async function OnkimiaDoctorsPage({
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative w-full h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden -mt-16 md:-mt-20">
+      <section className="relative w-full min-h-[480px] md:min-h-[600px] max-h-[800px] overflow-hidden -mt-16 md:-mt-20">
         {heroImage && (
           <Image
             src={urlFor(heroImage).width(2400).quality(82).format('webp').url()}
@@ -126,7 +126,7 @@ export default async function OnkimiaDoctorsPage({
           }}
           aria-hidden="true"
         />
-        <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-16 md:pt-20">
+        <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">
           <p
             className="text-sm md:text-base uppercase tracking-widest mb-4"
             style={{ color: 'rgba(255,255,255,0.85)' }}
@@ -134,13 +134,13 @@ export default async function OnkimiaDoctorsPage({
             {t('hero.eyebrow')}
           </p>
           <h1
-            className="text-4xl md:text-6xl lg:text-7xl mb-6 text-balance"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6 text-balance"
             style={{ color: '#ffffff' }}
           >
             {t('hero.headline')}
           </h1>
           <p
-            className="text-lg md:text-xl max-w-3xl text-pretty mb-8"
+            className="text-sm md:text-xl max-w-3xl text-pretty mb-6 md:mb-8"
             style={{ color: 'rgba(255,255,255,0.92)' }}
           >
             {t('hero.description')}
