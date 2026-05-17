@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { urlFor } from '@/sanity/image';
-import { sanityImageLoader } from '@/sanity/image-loader';
 import type { Image as SanityImage } from 'sanity';
 import { DecorativeBubbles } from './DecorativeBubbles';
 
@@ -46,13 +45,15 @@ export function HeroSection({
       {/* Background Image */}
       {image ? (
         <Image
-          src={urlFor(image).url()}
+          src={urlFor(image)
+            .width(2400)
+            .quality(85)
+            .format('webp')
+            .url()}
           alt={title}
           fill
           sizes="100vw"
           priority
-          loader={sanityImageLoader}
-          quality={80}
           className="object-cover"
         />
       ) : (
