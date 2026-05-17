@@ -90,11 +90,7 @@ export default async function EndosPage({
           />
         )}
         <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.40) 50%, rgba(0,0,0,0.55) 100%)',
-          }}
+          className="absolute inset-0 bg-gradient-to-r from-brand-900/80 via-brand-900/60 to-transparent"
           aria-hidden="true"
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">

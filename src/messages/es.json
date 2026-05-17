@@ -3,7 +3,7 @@
     "siteName": "Onkimia",
     "tagline": "La evolución oncológica que te acompaña",
     "scheduleAppointment": "Agendar cita",
-    "scheduleAppointmentWhatsApp": "Agendar mi cita por WhatsApp",
+    "scheduleAppointmentWhatsApp": "Agendar por WhatsApp",
     "learnMore": "Conocer más",
     "contactUs": "Contáctanos"
   },
@@ -142,7 +142,7 @@
   "home": {
     "hero": {
       "welcome": "Bienvenidos a",
-      "description": "En Onkimia fusionamos innovación médica, experiencia clínica y un enfoque profundamente humano para brindarte atención personalizada en cada etapa de tu camino."
+      "description": "Innovación médica y atención profundamente humana en cada etapa de tu tratamiento."
     },
     "care": {
       "title": "Cuidarte es nuestra prioridad",
@@ -212,7 +212,7 @@
   "about": {
     "hero": {
       "title": "Bienvenidos a Onkimia",
-      "description": "En Onkimia fusionamos innovación médica, experiencia clínica y un enfoque profundamente humano para brindarte atención personalizada en cada etapa de tu camino."
+      "description": "Innovación médica y atención profundamente humana en cada etapa de tu tratamiento."
     },
     "moreThanMedicine": {
       "headingLine1": "Más que medicina,",
@@ -367,7 +367,7 @@
     "hero": {
       "eyebrow": "Cuidare",
       "headline": "Calidad hospitalaria, sin hospitalización",
-      "description": "Cuidare es una unidad especializada en procedimientos médicos ambulatorios diseñados para mejorar tu salud y calidad de vida, sin necesidad de internarte. Nuestro enfoque combina seguridad, tecnología y atención personalizada para cuidar de ti en cada detalle."
+      "description": "Procedimientos médicos ambulatorios seguros y personalizados, para cuidar tu salud sin necesidad de internamiento."
     },
     "availability": {
       "banner": "La unidad Cuidare está disponible únicamente en nuestra sede de Guadalajara."
@@ -442,7 +442,7 @@
     "hero": {
       "eyebrow": "Endos",
       "headline": "Tu salud, con calidad y eficiencia",
-      "description": "Endos es la unidad de procedimientos ambulatorios no quirúrgicos de Onkimia, diseñada para ofrecer diagnósticos y tratamientos especializados con la más alta calidad médica, sin necesidad de hospitalización."
+      "description": "Procedimientos ambulatorios no quirúrgicos: diagnósticos y tratamientos especializados, sin hospitalización."
     },
     "availability": {
       "banner": "La unidad Endos está disponible únicamente en nuestra sede de Guadalajara."

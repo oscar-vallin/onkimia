@@ -3,7 +3,7 @@
     "siteName": "Onkimia",
     "tagline": "The oncology evolution that walks with you",
     "scheduleAppointment": "Schedule appointment",
-    "scheduleAppointmentWhatsApp": "Schedule my appointment via WhatsApp",
+    "scheduleAppointmentWhatsApp": "Book via WhatsApp",
     "learnMore": "Learn more",
     "contactUs": "Contact us"
   },
@@ -142,7 +142,7 @@
   "home": {
     "hero": {
       "welcome": "Welcome to",
-      "description": "At Onkimia we merge medical innovation, clinical experience, and a deeply human approach to provide personalized care at every stage of your journey."
+      "description": "Medical innovation and deeply human care at every stage of your treatment."
     },
     "care": {
       "title": "Your care is our priority",
@@ -212,7 +212,7 @@
   "about": {
     "hero": {
       "title": "Welcome to Onkimia",
-      "description": "At Onkimia we merge medical innovation, clinical experience, and a deeply human approach to provide personalized care at every stage of your journey."
+      "description": "Medical innovation and deeply human care at every stage of your treatment."
     },
     "moreThanMedicine": {
       "headingLine1": "More than medicine,",
@@ -367,7 +367,7 @@
     "hero": {
       "eyebrow": "Cuidare",
       "headline": "Hospital quality, without hospitalization",
-      "description": "Cuidare is a specialized unit for ambulatory medical procedures designed to improve your health and quality of life, without the need for admission. Our approach combines safety, technology, and personalized care to look after every detail of your well-being."
+      "description": "Safe, personalized ambulatory medical procedures to care for your health without hospital admission."
     },
     "availability": {
       "banner": "The Cuidare unit is available only at our Guadalajara location."
@@ -442,7 +442,7 @@
     "hero": {
       "eyebrow": "Endos",
       "headline": "Your health, with quality and efficiency",
-      "description": "Endos is Onkimia's unit for non-surgical ambulatory procedures, designed to offer specialized diagnostics and treatments with the highest medical quality, without the need for hospitalization."
+      "description": "Non-surgical ambulatory procedures: specialized diagnostics and treatments, without hospitalization."
     },
     "availability": {
       "banner": "The Endos unit is available only at our Guadalajara location."

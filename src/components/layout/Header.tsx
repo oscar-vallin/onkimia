@@ -46,12 +46,6 @@ export function Header({ settings, clinics }: HeaderProps) {
 
   const currentClinic = clinics.find((c) => c.slug === clinic) || null;
 
-  const activeClinicSlug = pathname.includes('guadalajara') 
-    ? 'guadalajara' 
-    : pathname.includes('colima') 
-      ? 'colima' 
-      : null;
-  
   const navLinks = [
     { href: '/', label: tNav('home') },
     { href: '/nosotros', label: tNav('about') },
@@ -189,7 +183,7 @@ export function Header({ settings, clinics }: HeaderProps) {
               {clinicMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-neutral-200 rounded-md shadow-lg overflow-hidden">
                   {clinics.map((c) => {
-                    const isSelected = activeClinicSlug === c.slug;
+                    const isSelected = clinic === c.slug;
                     return (
                     <button
                       key={c._id}
@@ -309,7 +303,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                 <div className="flex justify-center gap-4 ">
                   {clinics.map((c) => {
 
-                    const isSelected = activeClinicSlug === c.slug;
+                    const isSelected = clinic === c.slug;
                     return (
                     <button
                       key={c._id}
