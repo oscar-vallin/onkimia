@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { urlFor } from '@/sanity/image';
+import { sanityImageLoader } from '@/sanity/image-loader';
 import type { Image as SanityImage } from 'sanity';
 import { DecorativeBubbles } from './DecorativeBubbles';
 
@@ -45,15 +46,13 @@ export function HeroSection({
       {/* Background Image */}
       {image ? (
         <Image
-          src={urlFor(image)
-            .width(2400)
-            .quality(85)
-            .format('webp')
-            .url()}
+          src={urlFor(image).url()}
           alt={title}
           fill
           sizes="100vw"
-          priority // M-07: Removed duplicate quality prop, as it's already applied in urlFor.
+          priority
+          loader={sanityImageLoader}
+          quality={80}
           className="object-cover"
         />
       ) : (
