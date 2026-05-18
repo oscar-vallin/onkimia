@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { X, MapPin, Globe, ArrowRight } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
@@ -70,16 +70,9 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
 
     close(() => {
       if (selectedLanguage !== currentLocale) {
-        // Calcular ruta sin prefijo de locale
-        const pathWithoutLocale =
-          currentLocale === 'en' ? pathname.replace(/^\/en/, '') || '/' : pathname;
-
-        const newPath =
-          selectedLanguage === 'en'
-            ? `/en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
-            : pathWithoutLocale || '/';
-
-        router.push(newPath);
+        // next-intl maneja el prefijo de locale automáticamente.
+        // pathname (de next-intl) ya viene SIN prefijo de locale.
+        router.replace(pathname, { locale: selectedLanguage });
       } else {
         router.refresh();
       }
