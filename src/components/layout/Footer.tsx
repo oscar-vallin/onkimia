@@ -139,6 +139,45 @@ export async function Footer({ settings, clinics }: FooterProps) {
               )}
             </div>
 
+            {/* ─── App Onkimia ─── */}
+            <div className="mb-8">
+              <h3 className="text-base font-semibold text-white mb-4">
+                {tFooter('downloadApp')}
+              </h3>
+              <div className="flex flex-col gap-3">
+                <a
+                  href="https://play.google.com/store/apps/details?id=mx.com.center_onkimia&pcampaignid=web_share"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Onkimia en Google Play"
+                  className="inline-block"
+                >
+                  <Image
+                    src="/badges/google-play.png"
+                    alt="Disponible en Google Play"
+                    width={160}
+                    height={48}
+                    className="h-10 w-auto"
+                  />
+                </a>
+                <a
+                  href="https://apps.apple.com/mx/app/onkimia/id6446001299"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Onkimia en App Store"
+                  className="inline-block"
+                >
+                  <Image
+                    src="/badges/app-store.png"
+                    alt="Descargar en App Store"
+                    width={160}
+                    height={48}
+                    className="h-10 w-auto"
+                  />
+                </a>
+              </div>
+            </div>
+
             <h3 className="text-base font-semibold text-white mb-4">
               {tNav('contact')}
             </h3>

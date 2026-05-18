@@ -109,14 +109,8 @@ export default async function CuidarePage({
           aria-hidden="true"
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">
-          <p
-            className="text-sm md:text-base uppercase tracking-widest mb-4"
-            style={{ color: 'rgba(255,255,255,0.85)' }}
-          >
-            {t('hero.eyebrow')}
-          </p>
           <h1
-            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6 text-balance"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6 text-balance my-12"
             style={{ color: '#ffffff' }}
           >
             {t('hero.headline')}
