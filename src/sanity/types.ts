@@ -204,3 +204,40 @@ export interface PrivacyPolicy {
   introduction?: { es: string; en: string };
   content: PrivacyPolicySection[];
 }
+
+
+// ============================================
+// ABOUT PAGE
+// ============================================
+
+export interface DifferentialService {
+  title?: LocalizedString;
+  link?: string;
+  linkText?: LocalizedString;
+}
+
+export interface AboutPage {
+  _id: string;
+  heroTitle?: LocalizedString;
+  heroDescription?: LocalizedString;
+  moreTitleLine1?: LocalizedString;
+  moreTitleUnderlined?: LocalizedString;
+  moreTitleSuffix?: LocalizedString;
+  moreDescription?: LocalizedString;
+  differentialServices?: DifferentialService[];
+  bodyMindTitlePrefix?: LocalizedString;
+  bodyMindTitleUnderlined?: LocalizedString;
+  bodyMindTitleSuffix?: LocalizedString;
+  bodyMindDescription?: LocalizedString;
+  supportGroupTitle?: LocalizedString;
+  supportGroupDescription?: LocalizedString;
+  awareTitle?: LocalizedString;
+  awareDescription?: LocalizedString;
+  testimonialsTitle?: LocalizedString;
+  testimonialsSubtitle?: LocalizedString;
+  doubtsTitleUnderlined?: LocalizedString;
+  doubtsTitleSuffix?: LocalizedString;
+  doubtsDescription?: LocalizedString;
+  faqTitleUnderlined?: LocalizedString;
+  faqTitleSuffix?: LocalizedString;
+}

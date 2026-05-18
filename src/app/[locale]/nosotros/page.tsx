@@ -1,14 +1,14 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { TESTIMONIALS_QUERY, FAQS_BY_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
+import { TESTIMONIALS_QUERY, FAQS_BY_PAGE_QUERY, SITE_SETTINGS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
 import { HeroSection } from '@/components/ui/HeroSection';
 import { TestimonialCarousel } from '@/components/ui/TestimonialCarousel';
 import { FAQCarousel } from '@/components/ui/FAQCarousel';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
-import type { Testimonial, FAQ, SiteSettings } from '@/sanity/types';
+import type { Testimonial, FAQ, SiteSettings, AboutPage } from '@/sanity/types';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -38,7 +38,7 @@ export default async function AboutPage({
   const t = await getTranslations('about');
   const tCommon = await getTranslations('common');
 
-  const [settings, testimonials, faqs] = await Promise.all([
+  const [settings, testimonials, faqs, aboutPage] = await Promise.all([
     sanityFetch<SiteSettings>({
       query: SITE_SETTINGS_QUERY,
       tags: ['siteSettings'],
@@ -52,16 +52,20 @@ export default async function AboutPage({
       params: { page: 'about' },
       tags: ['faq'],
     }),
+    sanityFetch<AboutPage | null>({
+      query: ABOUT_PAGE_QUERY,
+      tags: ['aboutPage'],
+    }),
   ]);
-  console.log("Site settings fetched:", settings);
+
   return (
     <>
       {/* ─── HERO ─── */}
       <HeroSection
         image={settings.homeHeroImage}
-        title={t('hero.title')}
+        title={getLocalized(aboutPage?.heroTitle, locale) || t('hero.title')}
         subtitle={getLocalized(settings.tagline, locale)}
-        description={t('hero.description')}
+        description={getLocalized(aboutPage?.heroDescription, locale) || t('hero.description')}
         align="left"
         height="md"
         overlay="medium"
@@ -70,51 +74,35 @@ export default async function AboutPage({
       {/* ─── MÁS QUE MEDICINA ─── */}
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
-          {/* Title with underline decoration */}
           <div className="mb-12">
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-2 text-neutral-950">
-              {t('moreThanMedicine.headingLine1')}<br />
+              {getLocalized(aboutPage?.moreTitleLine1, locale) || t('moreThanMedicine.headingLine1')}<br />
               <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-                {t('moreThanMedicine.headingUnderlined')}
-              </span>{t('moreThanMedicine.headingSuffix')}
+                {getLocalized(aboutPage?.moreTitleUnderlined, locale) || t('moreThanMedicine.headingUnderlined')}
+              </span>{getLocalized(aboutPage?.moreTitleSuffix, locale) || t('moreThanMedicine.headingSuffix')}
             </h2>
           </div>
 
           <p className="text-lg text-neutral-700 leading-relaxed mb-12 max-w-4xl">
-            {t('moreThanMedicine.description')}
+            {getLocalized(aboutPage?.moreDescription, locale) || t('moreThanMedicine.description')}
           </p>
 
-          {/* Lista de servicios */}
+          {/* Lista de servicios diferenciales */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {/* TODO Tanda 4: reemplazar por query CLINIC_FEATURES_QUERY */}
-            {[
-              { title: locale === 'es' ? 'Consulta de oncología' : 'Oncology consultation' },
-              { title: locale === 'es' ? 'Concierge de seguros' : 'Insurance concierge' },
-              { title: locale === 'es' ? 'Valet parking' : 'Valet parking' },
-              { title: 'Hospitality' },
-              { title: locale === 'es' ? 'Cabinas de infusión privadas' : 'Private infusion cabins' },
-              { title: locale === 'es' ? 'Cirugía' : 'Surgery' },
-              { title: locale === 'es' ? 'Hematología' : 'Hematology' },
-              { title: locale === 'es' ? 'Reumatología' : 'Rheumatology' },
-              {
-                title: 'App Onkimia',
-                link: '#', // TODO: Add actual app download link
-                linkText: t('downloadHere'),
-              },
-            ].map((item, index) => (
+            {(aboutPage?.differentialServices ?? []).map((item, index) => (
               <div
                 key={index}
                 className="flex items-start gap-3 p-4 bg-neutral-50 rounded-lg border border-neutral-200"
               >
                 <div className="w-2 h-2 bg-accent-500 rounded-full flex-shrink-0 mt-2" />
                 <div>
-                  <span className="text-neutral-800">{item.title}</span>
+                  <span className="text-neutral-800">{getLocalized(item.title, locale)}</span>
                   {item.link && (
                     <a
                       href={item.link}
                       className="text-accent-600 hover:text-accent-700 text-sm ml-2 underline"
                     >
-                      ({item.linkText})
+                      ({getLocalized(item.linkText, locale) || t('downloadHere')})
                     </a>
                   )}
                 </div>
@@ -128,19 +116,18 @@ export default async function AboutPage({
       <section className="bg-neutral-50 py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-6xl mx-auto">
-            {/* Title with underline decoration */}
             <div className="mb-12">
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none">
-                {t('bodyMind.headingPrefix')}{' '}
+                {getLocalized(aboutPage?.bodyMindTitlePrefix, locale) || t('bodyMind.headingPrefix')}{' '}
                 <span className="relative inline-block pb-6">
-                  {t('bodyMind.headingUnderlined')}
+                  {getLocalized(aboutPage?.bodyMindTitleUnderlined, locale) || t('bodyMind.headingUnderlined')}
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-500" />
-                </span>{t('bodyMind.headingSuffix')}
+                </span>{getLocalized(aboutPage?.bodyMindTitleSuffix, locale) || t('bodyMind.headingSuffix')}
               </h2>
             </div>
 
             <p className="text-lg text-neutral-700 mb-12 max-w-3xl">
-              {t('bodyMind.description')}
+              {getLocalized(aboutPage?.bodyMindDescription, locale) || t('bodyMind.description')}
             </p>
 
             {/* Large image placeholder */}
@@ -154,19 +141,19 @@ export default async function AboutPage({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-white p-8 rounded-xl border border-neutral-200">
                 <h3 className="text-2xl font-medium text-brand-900 mb-4">
-                  {t('supportGroup.title')}
+                  {getLocalized(aboutPage?.supportGroupTitle, locale) || t('supportGroup.title')}
                 </h3>
                 <p className="text-neutral-700">
-                  {t('supportGroup.description')}
+                  {getLocalized(aboutPage?.supportGroupDescription, locale) || t('supportGroup.description')}
                 </p>
               </div>
 
               <div className="bg-white p-8 rounded-xl border border-neutral-200">
                 <h3 className="text-2xl font-medium text-brand-900 mb-4">
-                  Onkimia Aware
+                  {getLocalized(aboutPage?.awareTitle, locale) || 'Onkimia Aware'}
                 </h3>
                 <p className="text-neutral-700">
-                  {t('aware.description')}
+                  {getLocalized(aboutPage?.awareDescription, locale) || t('aware.description')}
                 </p>
               </div>
             </div>
@@ -179,10 +166,10 @@ export default async function AboutPage({
         <section className="container-onkimia py-16 md:py-24">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-medium text-brand-900 mb-4">
-              {t('testimonials.title')}
+              {getLocalized(aboutPage?.testimonialsTitle, locale) || t('testimonials.title')}
             </h2>
             <p className="text-lg text-neutral-700">
-              {t('testimonials.subtitle')}
+              {getLocalized(aboutPage?.testimonialsSubtitle, locale) || t('testimonials.subtitle')}
             </p>
           </div>
           <TestimonialCarousel testimonials={testimonials} locale={locale} />
@@ -194,12 +181,12 @@ export default async function AboutPage({
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-6 text-neutral-950">
             <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-              {t('doubts.headingUnderlined')}
+              {getLocalized(aboutPage?.doubtsTitleUnderlined, locale) || t('doubts.headingUnderlined')}
             </span>{' '}
-            {t('doubts.headingSuffix')}
+            {getLocalized(aboutPage?.doubtsTitleSuffix, locale) || t('doubts.headingSuffix')}
           </h2>
           <p className="text-lg text-neutral-700 mb-6">
-            {t('doubts.description')}
+            {getLocalized(aboutPage?.doubtsDescription, locale) || t('doubts.description')}
           </p>
           <Link
             href="/contacto#contact-form"
@@ -216,8 +203,8 @@ export default async function AboutPage({
           <div className="mb-12 max-w-6xl mx-auto">
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none text-neutral-950">
               <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-                {t('faq.headingUnderlined')}
-              </span>{t('faq.headingSuffix')}
+                {getLocalized(aboutPage?.faqTitleUnderlined, locale) || t('faq.headingUnderlined')}
+              </span>{getLocalized(aboutPage?.faqTitleSuffix, locale) || t('faq.headingSuffix')}
             </h2>
           </div>
           {faqs.length > 0 ? (

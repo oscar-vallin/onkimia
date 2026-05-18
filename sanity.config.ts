@@ -63,6 +63,15 @@ export default defineConfig({
                   .schemaType('privacyPolicy')
                   .documentId('privacyPolicy')
               ),
+            // Singleton: Página Nosotros
+            S.listItem()
+              .title('Página Nosotros')
+              .id('aboutPage')
+              .child(
+                S.document()
+                  .schemaType('aboutPage')
+                  .documentId('aboutPage')
+              ),
           ]),
     }),
     // Vision: probador de queries GROQ en dev

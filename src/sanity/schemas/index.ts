@@ -8,11 +8,13 @@ import { service } from './service';
 import { insurance } from './insurance';
 import { jobPosting } from './jobPosting';
 import { privacyPolicy } from './privacyPolicy';
+import { aboutPage } from './aboutPage';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Singletons
   siteSettings,
   privacyPolicy,
+  aboutPage,
   // Document types
   clinic,
   doctor,

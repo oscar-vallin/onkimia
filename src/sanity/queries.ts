@@ -255,6 +255,39 @@ export const INSURANCES_QUERY = groq`
     isActive
   }
 `;
+/** Singleton página Nosotros. */
+export const ABOUT_PAGE_QUERY = groq`
+  *[_type == "aboutPage" && _id == "aboutPage"][0] {
+    _id,
+    heroTitle,
+    heroDescription,
+    moreTitleLine1,
+    moreTitleUnderlined,
+    moreTitleSuffix,
+    moreDescription,
+    differentialServices[] {
+      title,
+      link,
+      linkText,
+    },
+    bodyMindTitlePrefix,
+    bodyMindTitleUnderlined,
+    bodyMindTitleSuffix,
+    bodyMindDescription,
+    supportGroupTitle,
+    supportGroupDescription,
+    awareTitle,
+    awareDescription,
+    testimonialsTitle,
+    testimonialsSubtitle,
+    doubtsTitleUnderlined,
+    doubtsTitleSuffix,
+    doubtsDescription,
+    faqTitleUnderlined,
+    faqTitleSuffix,
+  }
+`;
+
 /** Singleton aviso de privacidad. */
 export const PRIVACY_POLICY_QUERY = groq`
   *[_type == "privacyPolicy" && _id == "privacyPolicy"][0] {
