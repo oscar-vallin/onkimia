@@ -116,7 +116,7 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
           ref={closeBtnRef}
           type="button"
           onClick={dismiss}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center transition-colors"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center transition-colors cursor-pointer"
           aria-label={t('close')}
         >
           <X className="w-4 h-4" aria-hidden="true" />
@@ -143,7 +143,7 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
                 type="button"
                 onClick={() => setSelectedClinic(slug)}
                 aria-pressed={selectedClinic === slug}
-                className={`p-4 rounded-lg border-2 transition-all text-left ${
+                className={`p-4 rounded-lg border-2 transition-all text-left cursor-pointer ${
                   selectedClinic === slug
                     ? 'border-accent-500 bg-accent-50'
                     : 'border-neutral-200 hover:border-neutral-300'
@@ -174,7 +174,7 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
                 type="button"
                 onClick={() => setSelectedLanguage(value)}
                 aria-pressed={selectedLanguage === value}
-                className={`p-3 rounded-lg border-2 transition-all font-medium ${
+                className={`p-3 rounded-lg border-2 transition-all font-medium cursor-pointer ${
                   selectedLanguage === value
                     ? 'border-accent-500 bg-accent-50 text-neutral-900'
                     : 'border-neutral-200 hover:border-neutral-300 text-neutral-700'
@@ -191,7 +191,7 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
           <button
             type="button"
             onClick={handleConfirm}
-            className="w-full bg-accent-500 hover:bg-accent-600 text-white font-medium px-6 py-3.5 rounded-lg transition-colors inline-flex items-center justify-center gap-2 group"
+            className="w-full bg-accent-500 hover:bg-accent-600 text-white font-medium px-6 py-3.5 rounded-lg transition-colors inline-flex items-center justify-center gap-2 group cursor-pointer"
           >
             {t('confirm')}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
