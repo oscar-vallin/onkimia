@@ -89,7 +89,7 @@ export const SERVICES_BY_CLINIC_QUERY = groq`
   *[
     _type == "service"
     && isActive == true
-    && (!defined(availableAt) || count(availableAt) == 0 || $clinicId in availableAt[]._ref)
+    && (!defined(availableAt) || count(availableAt) == 0 || references($clinicId))
   ] | order(order asc, name.es asc) {
     _id,
     _type,
@@ -98,7 +98,13 @@ export const SERVICES_BY_CLINIC_QUERY = groq`
     icon,
     category,
     order,
-    isActive
+    isActive,
+    heroImage,
+    clinicsSectionImage,
+    "availableAt": availableAt[]->{
+      _id,
+      "slug": slug.current
+    }
   }
 `;
 
@@ -181,8 +187,8 @@ export const FAQS_BY_PAGE_QUERY = groq`
 
 /** Servicios principales activos. Usado en Home sección "Cuidarte es nuestra prioridad". */
 export const MAIN_SERVICES_QUERY = groq`
-  *[_type == "service" && category == "main"][0]
-    | order(order asc) {
+  *[_type == "service" && category == "main"]
+    | order(order asc) [0] {
     _id,
     _type,
     name,
@@ -190,7 +196,9 @@ export const MAIN_SERVICES_QUERY = groq`
     icon,
     category,
     order,
-    isActive
+    isActive,
+    heroImage,
+    clinicsSectionImage
   }
 `;
 

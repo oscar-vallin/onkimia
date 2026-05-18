@@ -113,6 +113,7 @@ export interface Service {
   order?: number;
   isActive: boolean;
   heroImage?: Image;
+  clinicsSectionImage?: Image;
   availableAt?: Array<{ _id: string; slug: string }>;
 }
 

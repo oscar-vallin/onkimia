@@ -122,32 +122,44 @@ export default async function ServicesPage({
         height="md"
         overlay="medium"
       />
+      {/* ─── SECCIÓN 1 — Atención Oncológica Especializada ─── */}
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
-              {t('clinics.title')}
+              {locale === 'es' ? (
+                <>
+                  Atención Oncológica{' '}
+                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                    Especializada
+                  </span>
+                </>
+              ) : (
+                <>
+                  Specialized{' '}
+                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                    Oncology Care
+                  </span>
+                </>
+              )}
             </h2>
           </div>
 
           <p className="text-lg text-neutral-700 leading-relaxed mb-12 max-w-4xl">
             {t('main.description')}
           </p>
-          <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden mb-8 shadow-xl">
-          {services?.heroImage && <Image
-            src={urlFor(services.heroImage)
-            .width(2400)
-            .quality(85)
-            .format('webp')
-            .url()}
-            alt={t('hero.title')}
-            fill
-            priority
-            className="object-cover transition-transform duration-700 hover:scale-105"
-            sizes="(max-width: 1280px) 100vw, 1200px"
-          />}
+          <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden mb-8 shadow-xl bg-brand-900">
+            {services?.heroImage && (
+              <Image
+                src={urlFor(services.heroImage).width(2400).quality(85).format('webp').url()}
+                alt={t('hero.title')}
+                fill
+                priority
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 1280px) 100vw, 1200px"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-r from-brand-900/70 to-brand-900/40 z-10" />
-            <div className="absolute inset-0 bg-neutral-300" />
             <div className="absolute inset-0 z-20 flex items-center justify-center px-8">
               <div className="text-white max-w-2xl">
                 <ul className="space-y-3 text-lg md:text-xl">
@@ -173,24 +185,25 @@ export default async function ServicesPage({
           </p>
         </div>
       </section>
+
+      {/* ─── SECCIÓN 2 — Clínicas de Atención Oncológica ─── */}
       <section className="bg-neutral-50 py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-6xl mx-auto">
-            {/* Title with underline decoration */}
             <div className="mb-12">
               <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
                 {locale === 'es' ? (
                   <>
-                    Clínicas de Atención Oncológi
+                    Clínicas de Atención{' '}
                     <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-                      ca
+                      Oncológica
                     </span>
                   </>
                 ) : (
                   <>
-                    Oncology Care Clini
+                    Oncology Care{' '}
                     <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-                      cs
+                      Clinics
                     </span>
                   </>
                 )}
@@ -200,10 +213,18 @@ export default async function ServicesPage({
             <p className="text-lg text-neutral-700 leading-relaxed mb-12 max-w-4xl">
               {t('clinics.description')}
             </p>
-            <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden">
+            <div className="relative w-full min-h-[420px] md:aspect-[16/9] md:h-auto rounded-3xl overflow-hidden bg-gradient-to-br from-brand-900 to-brand-700">
+              {services?.clinicsSectionImage && (
+                <Image
+                  src={urlFor(services.clinicsSectionImage).width(2400).quality(85).format('webp').url()}
+                  alt={t('clinics.title')}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1280px) 100vw, 1200px"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-r from-brand-900/60 to-transparent z-10" />
-              <div className="absolute inset-0 bg-neutral-300" />
-              <div className="absolute inset-0 z-20 flex items-center px-8 md:px-16">
+              <div className="relative z-20 flex items-center px-8 md:px-16 py-10 md:absolute md:inset-0 md:py-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-white max-w-3xl">
                   {clinics.map((clinic, index) => (
                     <div key={index} className="flex items-start gap-3">
