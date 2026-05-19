@@ -47,11 +47,20 @@ export async function BookingButton({
   const url = buildWhatsAppUrl(number, customMessage);
   const label = customLabel || t('scheduleAppointmentWhatsApp');
 
+  const sectionColorMap: Record<string, string> = {
+    endos: 'bg-endos-teal-700 hover:bg-endos-teal-900',
+    cuidare: 'bg-cuidare-blue-700 hover:bg-cuidare-blue-900',
+    'onkimia-doctors': 'bg-doctors-blue hover:bg-doctors-ink',
+  };
+
+  const primaryColorClasses =
+    sectionColorMap[section] ?? 'bg-accent-500 hover:bg-accent-600';
+
   const baseClasses =
     'inline-flex items-center justify-center gap-2 font-medium px-6 py-3 rounded-md transition-colors';
   const variantClasses =
     variant === 'primary'
-      ? 'bg-accent-500 hover:bg-accent-600 text-white shadow-sm hover:shadow-md'
+      ? `${primaryColorClasses} text-white shadow-sm hover:shadow-md`
       : 'border border-white text-white hover:bg-white/10';
 
   return (

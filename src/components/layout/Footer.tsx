@@ -1,5 +1,8 @@
+'use client';
+
+import { usePathname } from '@/i18n/navigation';
 import { Link } from '@/i18n/navigation';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import { urlFor } from '@/sanity/image';
 import { InstagramIcon, FacebookIcon, XIcon } from '@/components/icons/SocialIcons';
 import type { SiteSettings, Clinic } from '@/sanity/types';
@@ -12,21 +15,34 @@ interface FooterProps {
   locale: Locale;
 }
 
-export async function Footer({ settings, clinics }: FooterProps) {
-  const tNav = await getTranslations('navigation');
-  const tFooter = await getTranslations('footer');
+export function Footer({ settings, clinics }: FooterProps) {
+  const tNav = useTranslations('navigation');
+  const tFooter = useTranslations('footer');
+  const pathname = usePathname();
+
+  const isDoctorsRoute = pathname.startsWith('/onkimia-doctors');
 
   // Sede principal para datos de contacto (Beethoven 287 del Figma)
   const primaryClinic =
     clinics.find((c) => c.isPrimary) || clinics[0] || null;
 
   return (
-    <footer className="bg-brand-900 text-neutral-100 mt-section">
+    <footer className={`${isDoctorsRoute ? 'bg-doctors-ink' : 'bg-brand-900'} text-neutral-100 mt-section`}>
       <div className="container-onkimia py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
           {/* ─── Logo (col-span-2) ─── */}
           <div className="md:col-span-2 flex md:items-center">
-            {settings.logo ? (
+            {isDoctorsRoute ? (
+              <div className="relative h-24 w-80">
+                <Image
+                  src="/logo-OD.svg"
+                  alt="Onkimia Doctors"
+                  fill
+                  sizes="320px"
+                  className="object-contain object-left"
+                />
+              </div>
+            ) : settings.logo ? (
               <div className="relative h-24 w-80">
                 <Image
                   src={urlFor(settings.logo).height(192).url()}

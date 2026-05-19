@@ -54,10 +54,9 @@ const UNITS = [
     items: ['painManagement', 'dayClinic', 'palliativeCare'],
   },
   {
-    // TODO Cliente: confirmar destino real del botón para Bienestar (actualmente fallback a Endos)
     key: 'wellness',
     icon: Flower2,
-    section: 'endos',
+    section: 'onkimia-doctors',
     items: ['psychology', 'nutrition', 'physiotherapy', 'boutique'],
   },
 ] as const;

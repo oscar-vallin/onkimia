@@ -22,7 +22,7 @@ Fecha: 2026-05-13
 
 ## TODOs documentados
 1. **Bienestar — destino del botón:** el botón "Agenda Recorrido" de la unidad Bienestar integral usa `section="endos"` como fallback (mismo WhatsApp que Endos). Confirmar con cliente si debe ir a un número distinto.
-2. **Traducciones EN:** generadas por Claude, no provistas por el cliente. Confirmar y aprobar antes de producción.
+
 
 ## Validación final
 - `pnpm tsc --noEmit`: ✓ sin errores (error preexistente en `servicios/page.tsx` fuera de alcance)
