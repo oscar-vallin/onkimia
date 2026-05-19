@@ -33,7 +33,7 @@ export function Footer({ settings, clinics }: FooterProps) {
           {/* ─── Logo (col-span-2) ─── */}
           <div className="md:col-span-2 flex md:items-center">
             {isDoctorsRoute ? (
-              <div className="relative h-24 w-80">
+              <div className="relative h-24 w-40">
                 <Image
                   src="/logo-OD.svg"
                   alt="Onkimia Doctors"

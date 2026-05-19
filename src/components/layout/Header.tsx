@@ -180,7 +180,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                 {link.label}
                 {isActive(link.href) && (
                   <span
-                    className="absolute left-0 right-0 bottom-1 h-0.5 bg-accent-500 rounded-full"
+                    className={`absolute left-0 right-0 bottom-1 h-0.5 rounded-full ${isDoctorsRoute ? 'bg-doctors-blue' : 'bg-accent-500'}`}
                     aria-hidden="true"
                   />
                 )}
@@ -333,7 +333,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                     {link.label}
                     {isActive(link.href) && (
                       <span
-                        className="absolute left-0 right-0 -bottom-1 h-0.5 bg-accent-500 rounded-full"
+                        className={`absolute left-0 right-0 -bottom-1 h-0.5 rounded-full ${isDoctorsRoute ? 'bg-doctors-blue' : 'bg-accent-500'}`}
                         aria-hidden="true"
                       />
                     )}
