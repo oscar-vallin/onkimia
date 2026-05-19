@@ -90,7 +90,7 @@ export default async function EndosPage({
           />
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-brand-900/80 via-brand-900/60 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-endos-teal-900/85 via-endos-teal-900/60 to-transparent"
           aria-hidden="true"
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">
@@ -137,9 +137,9 @@ export default async function EndosPage({
           {PROCEDURE_KEYS.map(({ key, icon: Icon }) => (
             <article
               key={key}
-              className="bg-neutral-50 border border-neutral-200 rounded-xl p-6 hover:border-accent-500 transition-colors"
+              className="bg-neutral-50 border border-neutral-200 rounded-xl p-6 hover:border-endos-mint-500 transition-colors"
             >
-              <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-lg bg-endos-tint-50 text-endos-teal-700 flex items-center justify-center mb-4">
                 <Icon className="w-6 h-6" aria-hidden="true" />
               </div>
               <h3 className="text-xl mb-2">
@@ -172,7 +172,7 @@ export default async function EndosPage({
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
               <li key={key} className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-brand-900 text-white flex items-center justify-center mb-3">
+                <div className="w-14 h-14 rounded-full bg-endos-teal-900 text-white flex items-center justify-center mb-3">
                   <Icon className="w-7 h-7" aria-hidden="true" />
                 </div>
                 <p className="text-sm font-medium text-neutral-800">
@@ -222,7 +222,7 @@ export default async function EndosPage({
       {/* ─── FAQs ─── */}
       {faqs.length > 0 && (
         <section
-          className="bg-brand-50 py-16 md:py-24"
+          className="bg-endos-tint-50 py-16 md:py-24"
           aria-labelledby="endos-faq-title"
         >
           <div className="container-onkimia">

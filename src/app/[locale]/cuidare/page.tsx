@@ -105,7 +105,7 @@ export default async function CuidarePage({
           />
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-brand-900/80 via-brand-900/60 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-cuidare-blue-900/85 via-cuidare-blue-900/60 to-transparent"
           aria-hidden="true"
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">
@@ -149,7 +149,7 @@ export default async function CuidarePage({
                 key={key}
                 className="flex items-start gap-3 bg-white p-4 rounded-lg border border-neutral-200"
               >
-                <div className="w-10 h-10 flex-shrink-0 rounded-full bg-accent-50 text-accent-600 flex items-center justify-center">
+                <div className="w-10 h-10 flex-shrink-0 rounded-full bg-cuidare-blue-100 text-cuidare-blue-700 flex items-center justify-center">
                   <Icon className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <p className="text-sm text-neutral-800 leading-snug pt-2">
@@ -187,7 +187,7 @@ export default async function CuidarePage({
 
       {/* ─── RADIOLOGÍA INTERVENCIONISTA ─── */}
       <section
-        className="bg-brand-50 py-16 md:py-24"
+        className="bg-cuidare-blue-100/40 py-16 md:py-24"
         aria-labelledby="cuidare-radiology-title"
       >
         <div className="container-onkimia max-w-4xl">
@@ -204,7 +204,7 @@ export default async function CuidarePage({
                 className="flex items-start gap-3 bg-white p-4 rounded-lg"
               >
                 <Check
-                  className="w-5 h-5 text-accent-500 flex-shrink-0 mt-0.5"
+                  className="w-5 h-5 text-cuidare-blue-700 flex-shrink-0 mt-0.5"
                   aria-hidden="true"
                 />
                 <span className="text-neutral-800">
@@ -224,9 +224,9 @@ export default async function CuidarePage({
         className="container-onkimia py-16 md:py-24"
         aria-labelledby="cuidare-palliative-title"
       >
-        <div className="max-w-3xl mx-auto bg-brand-900 text-white rounded-2xl p-8 md:p-12 relative">
+        <div className="max-w-3xl mx-auto bg-cuidare-blue-900 text-white rounded-2xl p-8 md:p-12 relative">
           <span
-            className="absolute top-4 left-6 text-6xl font-serif text-accent-500 opacity-50"
+            className="absolute top-4 left-6 text-6xl font-serif text-cuidare-blue-300 opacity-50"
             aria-hidden="true"
           >
             &ldquo;

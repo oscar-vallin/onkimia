@@ -46,6 +46,8 @@ export function Header({ settings, clinics }: HeaderProps) {
   const tCommon = useTranslations('common');
   const { clinic, setClinic } = useClinic();
 
+  const isDoctorsRoute = pathname.startsWith('/onkimia-doctors');
+
   const currentClinic = clinics.find((c) => c.slug === clinic) || null;
 
   const whatsappNumber = getWhatsAppNumber({
@@ -107,12 +109,45 @@ export function Header({ settings, clinics }: HeaderProps) {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${mobileOpen ? 'bg-transparent' : scrolled ? 'bg-brand-900/80 backdrop-blur-md' : 'bg-transparent'}`}>
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          mobileOpen
+            ? 'bg-transparent'
+            : isDoctorsRoute
+            ? 'bg-doctors-ink'
+            : scrolled
+            ? 'bg-brand-900/80 backdrop-blur-md'
+            : 'bg-transparent'
+        }`}
+      >
       <div className="container-onkimia">
         <div className="flex items-center justify-between py-2">
           {/* ─── Logo ─── */}
           <Link href="/" className="relative flex items-center gap-2">
-            {settings.logo ? (
+            {isDoctorsRoute ? (
+              <>
+                <span className="relative hidden md:block w-[150px] h-[80px] lg:w-[180px] lg:h-[96px]">
+                  <Image
+                    src="/logo-OD.svg"
+                    alt="Onkimia Doctors"
+                    fill
+                    sizes="(max-width: 1024px) 150px, 180px"
+                    priority
+                    className="object-contain object-left"
+                  />
+                </span>
+                <span className="relative block md:hidden w-[48px] h-[48px]">
+                  <Image
+                    src="/simbolo-OD.svg"
+                    alt="Onkimia Doctors"
+                    fill
+                    sizes="48px"
+                    priority
+                    className="object-contain object-left"
+                  />
+                </span>
+              </>
+            ) : settings.logo ? (
               <span className="relative block w-[150px] h-[80px] md:w-[180px] md:h-[96px] lg:w-[180px] lg:h-[96px]">
                 <Image
                   src={urlFor(settings.logo).height(96).url()}
@@ -251,17 +286,27 @@ export function Header({ settings, clinics }: HeaderProps) {
               {/* Logo and Close Button */}
               <div className="flex justify-between items-center py-2">
                 {/* Logo */}
-              {settings.logo && (
+              {isDoctorsRoute ? (
+                <Link href="/" onClick={() => setMobileOpen(false)} className="relative block w-[64px] h-[64px]">
+                  <Image
+                    src="/simbolo-OD.svg"
+                    alt="Onkimia Doctors"
+                    fill
+                    sizes="64px"
+                    className="object-contain object-left"
+                  />
+                </Link>
+              ) : settings.logo ? (
                 <Link href="/" onClick={() => setMobileOpen(false)} className="relative block w-[120px] h-[64px]">
                   <Image
                     src={urlFor(settings.logo).height(64).url()}
                     alt={settings.title}
                     fill
                     sizes="120px"
-                    className="object-contain object-left filter invert(1)" // Invert for dark background
+                    className="object-contain object-left filter invert(1)"
                   />
                 </Link>
-              )}
+              ) : null}
               <button
                 type="button"
                 onClick={toggleMobileMenu}

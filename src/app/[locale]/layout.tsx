@@ -3,7 +3,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
-import { Orbitron, Montserrat, Source_Code_Pro } from 'next/font/google';
+import localFont from 'next/font/local';
+import { Montserrat, Source_Code_Pro } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { CLINICS_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
@@ -18,9 +19,28 @@ import type { Clinic, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import './globals.css';
 
-const orbitron = Orbitron({
-  subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
+const hostGrotesk = localFont({
+  src: [
+    { path: '../fonts/host-grotesk/HostGrotesk-Regular.woff2',  weight: '400', style: 'normal' },
+    { path: '../fonts/host-grotesk/HostGrotesk-Medium.woff2',   weight: '500', style: 'normal' },
+    { path: '../fonts/host-grotesk/HostGrotesk-SemiBold.woff2', weight: '600', style: 'normal' },
+    { path: '../fonts/host-grotesk/HostGrotesk-Bold.woff2',     weight: '700', style: 'normal' },
+  ],
+  variable: '--font-host-grotesk',
+  display: 'swap',
+});
+
+const googleSansFlex = localFont({
+  src: [
+    { path: '../fonts/GoogleSansFlex120pt-Thin.woff2',     weight: '100', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-ExtraLight.woff2', weight: '200', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-Light.woff2',      weight: '300', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-Regular.woff2',    weight: '400', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-Medium.woff2',     weight: '500', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-SemiBold.woff2',   weight: '600', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-Bold.woff2',       weight: '700', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-Black.woff2',      weight: '900', style: 'normal' },
+  ],
   variable: '--font-display',
   display: 'swap',
 });
@@ -92,7 +112,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${orbitron.variable} ${montserrat.variable} ${sourceCodePro.variable}`}
+      className={`${googleSansFlex.variable} ${montserrat.variable} ${sourceCodePro.variable} ${hostGrotesk.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>

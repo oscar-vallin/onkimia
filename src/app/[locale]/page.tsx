@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, DOCTORS_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY, DOCTORS_QUERY, INSURANCES_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
 import { HeroSection } from '@/components/ui/HeroSection';
-import type { SiteSettings, Doctor } from '@/sanity/types';
+import type { SiteSettings, Doctor, Insurance } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -50,7 +50,7 @@ export default async function HomePage({
 
   const t = await getTranslations('home');
 
-  const [settings, doctors] = await Promise.all([
+  const [settings, doctors, insurances] = await Promise.all([
     sanityFetch<SiteSettings>({
       query: SITE_SETTINGS_QUERY,
       tags: ['siteSettings'],
@@ -59,12 +59,15 @@ export default async function HomePage({
       query: DOCTORS_QUERY,
       tags: ['doctor'],
     }),
+    sanityFetch<Insurance[]>({
+      query: INSURANCES_QUERY,
+      tags: ['insurance'],
+    }),
   ]);
   
   const heroDescription = settings.homeHeroDescription
     ? getLocalized(settings.homeHeroDescription, locale)
     : t('hero.description');
-  console.log("hero description:", settings.homeHeroDescription);
   return (
     <>
       {/* ─── HERO ─── */}
@@ -274,22 +277,43 @@ export default async function HomePage({
             {t('insurances.title')}
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-            {/* TODO Tanda 4: reemplazar por query INSURANCES_QUERY */}
-            {[
-              'AXA', 'GNP', 'MAPFRE', 'VUMI',
-              'INBURSA', 'BANORTE', 'BESTDOCTORS', 'MD ABROAD',
-              'CIGNA', 'SURA', 'BX+', 'ZURICH',
-              'SCOTIABANK', 'HEALTHCASE', 'ATLAS', 'AXA ASSISTANCE',
-            ].map((insurance) => (
-              <div
-                key={insurance}
-                className="flex items-center justify-center p-6 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-accent-500 transition-colors min-h-[100px]"
-              >
-                <span className="text-neutral-600 font-medium text-center">{insurance}</span>
-              </div>
-            ))}
-          </div>
+          {insurances.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+              {insurances.map((insurance) => {
+                const logoEl = (
+                  <div className="flex items-center justify-center p-6 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-accent-500 transition-colors min-h-[100px]">
+                    {insurance.logo ? (
+                      <Image
+                        src={urlFor(insurance.logo).width(200).url()}
+                        alt={insurance.name}
+                        width={140}
+                        height={60}
+                        className="object-contain max-h-[60px] w-auto"
+                      />
+                    ) : (
+                      <span className="text-neutral-600 font-medium text-center">
+                        {insurance.name}
+                      </span>
+                    )}
+                  </div>
+                );
+
+                return insurance.website ? (
+                  <a
+                    key={insurance._id}
+                    href={insurance.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={insurance.name}
+                  >
+                    {logoEl}
+                  </a>
+                ) : (
+                  <div key={insurance._id}>{logoEl}</div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
     </>

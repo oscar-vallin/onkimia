@@ -105,7 +105,7 @@ export default async function OnkimiaDoctorsPage({
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onkimia.com';
 
   return (
-    <>
+    <div className="font-[family-name:var(--font-host-grotesk)]">
       {/* ─── HERO ─── */}
       <section className="relative w-full min-h-[480px] md:min-h-[600px] max-h-[800px] overflow-hidden -mt-16 md:-mt-20">
         {heroImage && (
@@ -128,7 +128,7 @@ export default async function OnkimiaDoctorsPage({
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">
           <h1
-            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6 text-balance my-12"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6 text-balance my-20"
             style={{ color: '#ffffff' }}
           >
             {t('hero.headline')}
@@ -168,7 +168,7 @@ export default async function OnkimiaDoctorsPage({
 
       {/* ─── MEJORAS PARA TU PACIENTE ─── */}
       <section
-        className="relative bg-brand-900 py-16 md:py-24 overflow-hidden"
+        className="relative bg-doctors-ink py-16 md:py-24 overflow-hidden"
         aria-labelledby="doctors-improvements-title"
       >
         <DecorativeBubbles variant="scattered" opacity={0.5} />
@@ -184,11 +184,12 @@ export default async function OnkimiaDoctorsPage({
             {IMPROVEMENT_KEYS.map((key, index) => (
               <li
                 key={key}
-                className="flex flex-col items-center text-center bg-brand-800 rounded-xl p-6"
+                className="flex flex-col items-center text-center rounded-xl p-6"
+                style={{ backgroundColor: 'rgba(93,129,240,0.10)' }}
               >
                 <span
                   className="text-5xl font-serif mb-3"
-                  style={{ color: '#F39313' }}
+                  style={{ color: '#5d81f0' }}
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
@@ -228,7 +229,7 @@ export default async function OnkimiaDoctorsPage({
               key={key}
               className="bg-neutral-50 border border-neutral-200 rounded-xl p-6 flex flex-col"
             >
-              <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg bg-doctors-surface text-doctors-blue flex items-center justify-center mb-4">
                 <Icon className="w-7 h-7" aria-hidden="true" />
               </div>
               <h3 className="text-2xl mb-4">{t(`units.${key}.name`)}</h3>
@@ -236,7 +237,7 @@ export default async function OnkimiaDoctorsPage({
                 {items.map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <Check
-                      className="w-4 h-4 text-accent-500 flex-shrink-0 mt-1"
+                      className="w-4 h-4 text-doctors-blue flex-shrink-0 mt-1"
                       aria-hidden="true"
                     />
                     <span className="text-sm text-neutral-700">
@@ -259,7 +260,7 @@ export default async function OnkimiaDoctorsPage({
 
       {/* ─── BENEFICIOS PARA EL MÉDICO ─── */}
       <section
-        className="bg-neutral-50 py-16 md:py-24"
+        className="bg-doctors-surface py-16 md:py-24"
         aria-labelledby="doctors-benefits-title"
       >
         <div className="container-onkimia">
@@ -276,7 +277,7 @@ export default async function OnkimiaDoctorsPage({
                 className="bg-white border border-neutral-200 rounded-xl p-6"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-brand-900 text-white flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-lg bg-doctors-blue text-white flex items-center justify-center">
                     <Icon className="w-6 h-6" aria-hidden="true" />
                   </div>
                   <h3 className="text-xl">
@@ -287,7 +288,7 @@ export default async function OnkimiaDoctorsPage({
                   {items.map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <Check
-                        className="w-4 h-4 text-accent-500 flex-shrink-0 mt-1"
+                        className="w-4 h-4 text-doctors-blue flex-shrink-0 mt-1"
                         aria-hidden="true"
                       />
                       <span className="text-sm text-neutral-700">
@@ -307,7 +308,7 @@ export default async function OnkimiaDoctorsPage({
         className="container-onkimia py-16 md:py-24"
         aria-labelledby="doctors-cta-title"
       >
-        <div className="max-w-3xl mx-auto text-center bg-brand-900 rounded-2xl p-12">
+        <div className="max-w-3xl mx-auto text-center bg-doctors-ink rounded-2xl p-12">
           <h2
             id="doctors-cta-title"
             className="text-3xl md:text-4xl mb-6"
@@ -336,6 +337,6 @@ export default async function OnkimiaDoctorsPage({
         description={t('about.description')}
         url={`${siteUrl}/${locale === 'es' ? '' : 'en/'}onkimia-doctors`}
       />
-    </>
+    </div>
   );
 }
