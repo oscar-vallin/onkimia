@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { urlFor } from '@/sanity/image';
-import type { Image as SanityImage } from 'sanity';
+import type { SanityImageWithLQIP as SanityImage } from '@/sanity/types';
 import { DecorativeBubbles } from './DecorativeBubbles';
 
 interface HeroSectionProps {
@@ -52,6 +52,8 @@ export function HeroSection({
           sizes="100vw"
           priority
           quality={75}
+          placeholder={image.asset?.metadata?.lqip ? 'blur' : 'empty'}
+          blurDataURL={image.asset?.metadata?.lqip}
           className="object-cover"
         />
       ) : (

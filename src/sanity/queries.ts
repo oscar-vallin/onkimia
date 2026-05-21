@@ -8,7 +8,15 @@ export const SITE_SETTINGS_QUERY = groq`
     tagline,
     logo,
     logoDark,
-    homeHeroImage,
+    homeHeroImage {
+      ...,
+      asset-> {
+        ...,
+        metadata {
+          lqip
+        }
+      }
+    },
     homeHeroDescription,
     doctorsHeroImage,
     cuidareHeroImage,
@@ -114,7 +122,15 @@ export const DOCTORS_QUERY = groq`
     _type,
     fullName,
     slug,
-    photo,
+    photo {
+      ...,
+      asset-> {
+        ...,
+        metadata {
+          lqip
+        }
+      }
+    },
     specialty,
     medicalSpecialties,
     bio,

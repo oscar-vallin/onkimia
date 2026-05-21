@@ -1,6 +1,14 @@
 import type { Image } from 'sanity';
 import type { LocalizedString, LocalizedText } from './lib/localization';
 
+export interface SanityImageWithLQIP extends Image {
+  asset?: Image['asset'] & {
+    metadata?: {
+      lqip?: string;
+    };
+  };
+}
+
 
 export interface SiteSettings {
   _id: string;
@@ -14,7 +22,7 @@ export interface SiteSettings {
   cuidareHeroImage?: Image;
   endosHeroImage?: Image;
   endosSafetyImage?: Image;
-  homeHeroImage?: Image;
+  homeHeroImage?: SanityImageWithLQIP;
   homeHeroDescription: LocalizedString;
   socialMedia?: {
     instagram?: string;
@@ -76,7 +84,7 @@ export interface Doctor {
   _type: 'doctor';
   fullName: string;
   slug: DoctorSlug;
-  photo: Image;
+  photo: SanityImageWithLQIP;
   specialty: LocalizedString;
   medicalSpecialties?: string[];
   bio?: LocalizedString;

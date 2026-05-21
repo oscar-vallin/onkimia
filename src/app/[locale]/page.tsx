@@ -99,7 +99,7 @@ export default async function HomePage({
 
           {/* 3 cards principales */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
+            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
                 <Stethoscope className="w-7 h-7" aria-hidden="true" />
               </div>
@@ -111,7 +111,7 @@ export default async function HomePage({
               </p>
             </div>
 
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
+            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
                 <Microscope className="w-7 h-7" aria-hidden="true" />
               </div>
@@ -123,7 +123,7 @@ export default async function HomePage({
               </p>
             </div>
 
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
+            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
                 <HeartHandshake className="w-7 h-7" aria-hidden="true" />
               </div>
@@ -160,7 +160,7 @@ export default async function HomePage({
               {doctors.slice(0, 8).map((doctor) => (
                 <article
                   key={doctor._id}
-                  className="bg-white rounded-xl overflow-hidden border border-neutral-200 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl overflow-hidden border border-neutral-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out"
                 >
                   <div className="relative aspect-[3/4] bg-brand-100">
                     {doctor.photo && (
@@ -169,6 +169,8 @@ export default async function HomePage({
                         alt={doctor.fullName}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
+                        placeholder={doctor.photo.asset?.metadata?.lqip ? 'blur' : 'empty'}
+                        blurDataURL={doctor.photo.asset?.metadata?.lqip}
                         className="object-cover"
                       />
                     )}
@@ -211,7 +213,7 @@ export default async function HomePage({
             ).map(({ key, Icon }) => (
               <div
                 key={key}
-                className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow"
+                className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out"
               >
                 <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6" aria-hidden="true" />
