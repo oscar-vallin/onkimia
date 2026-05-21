@@ -10,6 +10,7 @@ import type { SiteSettings, Doctor, Insurance } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { InsuranceCarousel } from '@/components/ui/InsuranceCarousel';
 import {
   Stethoscope,
   Microscope,
@@ -278,41 +279,7 @@ export default async function HomePage({
           </h2>
 
           {insurances.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-              {insurances.map((insurance) => {
-                const logoEl = (
-                  <div className="flex items-center justify-center p-6 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-accent-500 transition-colors min-h-[100px]">
-                    {insurance.logo ? (
-                      <Image
-                        src={urlFor(insurance.logo).width(200).url()}
-                        alt={insurance.name}
-                        width={140}
-                        height={60}
-                        className="object-contain max-h-[60px] w-auto"
-                      />
-                    ) : (
-                      <span className="text-neutral-600 font-medium text-center">
-                        {insurance.name}
-                      </span>
-                    )}
-                  </div>
-                );
-
-                return insurance.website ? (
-                  <a
-                    key={insurance._id}
-                    href={insurance.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={insurance.name}
-                  >
-                    {logoEl}
-                  </a>
-                ) : (
-                  <div key={insurance._id}>{logoEl}</div>
-                );
-              })}
-            </div>
+            <InsuranceCarousel insurances={insurances} />
           )}
         </div>
       </section>
