@@ -42,6 +42,8 @@ export default async function ServicesPage({
 
   const t = await getTranslations({ locale, namespace: 'services' });
 
+  console.log(services)
+
   const clinics = [
     { name: t('clinics.breast') },
     { name: t('clinics.lung') },
@@ -149,7 +151,7 @@ export default async function ServicesPage({
             {t('main.description')}
           </p>
           <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden mb-8 shadow-xl bg-brand-900">
-            {services?.heroImage && (
+            {services?.heroImage?.asset && (
               <Image
                 src={urlFor(services?.heroImage).width(2400).quality(85).format('webp').url()}
                 alt={t('hero.title')}
@@ -214,9 +216,9 @@ export default async function ServicesPage({
               {t('clinics.description')}
             </p>
             <div className="relative w-full min-h-[420px] md:aspect-[16/9] md:h-auto rounded-3xl overflow-hidden bg-gradient-to-br from-brand-900 to-brand-700">
-              {services?.clinicsSectionImage && (
+              {services?.clinicsSectionImage?.asset && (
                 <Image
-                  src={urlFor(services.clinicsSectionImage).width(2400).quality(85).format('webp').url()}
+                  src={urlFor(services?.clinicsSectionImage).width(2400).quality(85).format('webp').url()}
                   alt={t('clinics.title')}
                   fill
                   className="object-cover"
