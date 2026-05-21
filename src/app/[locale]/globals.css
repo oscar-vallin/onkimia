@@ -117,7 +117,7 @@
      Montserrat para body (oficial del manual de marca)
      Source Code Pro para tagline/mono (equivalente a Source Code Variable)
      next/font inyecta --font-display, --font-body y --font-mono en runtime */
-  --font-display: var(--font-display), 'Google Sans Flex 120pt', system-ui, sans-serif;
+  --font-display: var(--next-font-google-sans-flex), system-ui, sans-serif;
   --font-serif:   var(--font-display), 'Google Sans Flex 120pt', system-ui, sans-serif;
   --font-sans:    var(--font-body), 'Montserrat', system-ui, -apple-system, sans-serif;
   --font-mono:    var(--font-mono), 'Source Code Pro', Consolas, monospace;

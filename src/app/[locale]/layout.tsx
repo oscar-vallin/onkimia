@@ -28,11 +28,12 @@ const hostGrotesk = localFont({
   ],
   variable: '--font-host-grotesk',
   display: 'swap',
+  preload: false,
 });
 
 const googleSansFlex = localFont({
   src: [
-    { path: '../fonts/GoogleSansFlex120pt-Thin.woff2',     weight: '100', style: 'normal' },
+    { path: '../fonts/GoogleSansFlex120pt-Thin.woff2',       weight: '100', style: 'normal' },
     { path: '../fonts/GoogleSansFlex120pt-ExtraLight.woff2', weight: '200', style: 'normal' },
     { path: '../fonts/GoogleSansFlex120pt-Light.woff2',      weight: '300', style: 'normal' },
     { path: '../fonts/GoogleSansFlex120pt-Regular.woff2',    weight: '400', style: 'normal' },
@@ -41,8 +42,9 @@ const googleSansFlex = localFont({
     { path: '../fonts/GoogleSansFlex120pt-Bold.woff2',       weight: '700', style: 'normal' },
     { path: '../fonts/GoogleSansFlex120pt-Black.woff2',      weight: '900', style: 'normal' },
   ],
-  variable: '--font-display',
+  variable: '--next-font-google-sans-flex',
   display: 'swap',
+  preload: false,
 });
 
 const montserrat = Montserrat({

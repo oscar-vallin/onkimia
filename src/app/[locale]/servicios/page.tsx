@@ -151,7 +151,7 @@ export default async function ServicesPage({
           <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden mb-8 shadow-xl bg-brand-900">
             {services?.heroImage && (
               <Image
-                src={urlFor(services.heroImage).width(2400).quality(85).format('webp').url()}
+                src={urlFor(services?.heroImage).width(2400).quality(85).format('webp').url()}
                 alt={t('hero.title')}
                 fill
                 priority
