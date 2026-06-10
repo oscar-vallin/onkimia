@@ -50,6 +50,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
   const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
   const [turnstileReady, setTurnstileReady] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
 
   const isSpontaneous = selectedVacancyId === 'spontaneous';
   const selectedVacancy = vacancies.find((v) => v._id === selectedVacancyId);
@@ -69,8 +70,9 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
       sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '',
       theme: 'light',
     });
+    turnstileWidgetId.current = widgetId;
     return () => {
-      if (window.turnstile && widgetId) window.turnstile.reset(widgetId);
+      if (window.turnstile && widgetId) window.turnstile.remove(widgetId);
     };
   }, [turnstileReady]);
 
@@ -192,6 +194,13 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
       const result = await submitJobApplication(state, formData);
       setState(result);
       setShowModal(true);
+
+      // Reset Turnstile on every submit — success or failure — because the
+      // token is consumed by Cloudflare on the first verification attempt.
+      if (window.turnstile && turnstileWidgetId.current) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
+
       if (result.ok) {
         const form = document.getElementById('job-application-form') as HTMLFormElement | null;
         form?.reset();
@@ -581,7 +590,11 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
       </form>
 
       {showModal && state && (
-        <JobResultModal ok={state.ok} onClose={() => setShowModal(false)} />
+        <JobResultModal
+          ok={state.ok}
+          errorMessage={state.message}
+          onClose={() => setShowModal(false)}
+        />
       )}
 
       <Script
@@ -593,8 +606,29 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
   );
 }
 
-function JobResultModal({ ok, onClose }: { ok: boolean; onClose: () => void }) {
+const KNOWN_JOB_ERROR_KEYS = ['turnstile', 'rateLimit', 'email', 'unexpected'] as const;
+type KnownJobErrorKey = typeof KNOWN_JOB_ERROR_KEYS[number];
+
+function JobResultModal({
+  ok,
+  errorMessage,
+  onClose,
+}: {
+  ok: boolean;
+  errorMessage?: string;
+  onClose: () => void;
+}) {
   const t = useTranslations('jobBoard.modal');
+  const tErrors = useTranslations('jobBoard.errors');
+
+  function getErrorDescription(): string {
+    if (!errorMessage) return t('error.description');
+    const key = errorMessage.startsWith('error.') ? errorMessage.slice('error.'.length) : errorMessage;
+    if ((KNOWN_JOB_ERROR_KEYS as readonly string[]).includes(key)) {
+      return tErrors(key as KnownJobErrorKey);
+    }
+    return t('error.description');
+  }
 
   return (
     <div
@@ -626,7 +660,7 @@ function JobResultModal({ ok, onClose }: { ok: boolean; onClose: () => void }) {
             {ok ? t('success.title') : t('error.title')}
           </h2>
           <p className="text-neutral-600 mb-6">
-            {ok ? t('success.description') : t('error.description')}
+            {ok ? t('success.description') : getErrorDescription()}
           </p>
           <button
             type="button"

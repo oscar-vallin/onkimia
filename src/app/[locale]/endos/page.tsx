@@ -90,7 +90,7 @@ export default async function EndosPage({
           />
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-endos-teal-900/85 via-endos-teal-900/60 to-transparent"
+          className=""
           aria-hidden="true"
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">

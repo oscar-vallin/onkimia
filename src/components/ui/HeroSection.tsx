@@ -61,7 +61,7 @@ export function HeroSection({
       )}
 
       {/* Overlay responsive */}
-      <div className={`absolute inset-0 ${overlayClasses[overlay]}`} aria-hidden="true" />
+      <div  />
 
       {/* Burbujas decorativas */}
       <DecorativeBubbles variant="sides" opacity={0.6} />

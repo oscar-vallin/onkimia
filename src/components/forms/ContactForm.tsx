@@ -18,6 +18,7 @@ export function ContactForm() {
   const [turnstileReady, setTurnstileReady] = useState(false);
   const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
   const formRef = useRef<HTMLFormElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
 
   useEffect(() => {
     if (!turnstileReady || !window.turnstile) return;
@@ -34,9 +35,11 @@ export function ContactForm() {
       theme: 'light',
     });
 
+    turnstileWidgetId.current = widgetId;
+
     return () => {
       if (window.turnstile && widgetId) {
-        window.turnstile.reset(widgetId);
+        window.turnstile.remove(widgetId);
       }
     };
   }, [turnstileReady]);
@@ -119,6 +122,12 @@ export function ContactForm() {
       const result = await submitContactForm(state, formData);
       setState(result);
       setShowModal(true);
+
+      // Reset Turnstile on every submit — success or failure — because the
+      // token is consumed by Cloudflare on the first verification attempt.
+      if (window.turnstile && turnstileWidgetId.current) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
 
       if (result.ok) {
         const form = document.getElementById('contact-form') as HTMLFormElement | null;
@@ -322,6 +331,7 @@ export function ContactForm() {
       {showModal && state && (
         <ResultModal
           ok={state.ok}
+          errorMessage={state.message}
           onClose={() => setShowModal(false)}
         />
       )}
@@ -337,11 +347,25 @@ export function ContactForm() {
 
 interface ResultModalProps {
   ok: boolean;
+  errorMessage?: string;
   onClose: () => void;
 }
 
-function ResultModal({ ok, onClose }: ResultModalProps) {
+const KNOWN_ERROR_KEYS = ['turnstile', 'rateLimit', 'email', 'unexpected'] as const;
+type KnownErrorKey = typeof KNOWN_ERROR_KEYS[number];
+
+function ResultModal({ ok, errorMessage, onClose }: ResultModalProps) {
   const t = useTranslations('contact.modal');
+  const tErrors = useTranslations('contact.errors');
+
+  function getErrorDescription(): string {
+    if (!errorMessage) return t('error.description');
+    const key = errorMessage.startsWith('error.') ? errorMessage.slice('error.'.length) : errorMessage;
+    if ((KNOWN_ERROR_KEYS as readonly string[]).includes(key)) {
+      return tErrors(key as KnownErrorKey);
+    }
+    return t('error.description');
+  }
 
   return (
     <div
@@ -376,7 +400,7 @@ function ResultModal({ ok, onClose }: ResultModalProps) {
           </h2>
 
           <p className="text-neutral-600 mb-6">
-            {ok ? t('success.description') : t('error.description')}
+            {ok ? t('success.description') : getErrorDescription()}
           </p>
 
           <button

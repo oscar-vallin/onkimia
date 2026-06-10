@@ -105,7 +105,7 @@ export default async function CuidarePage({
           />
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-cuidare-blue-900/85 via-cuidare-blue-900/60 to-transparent"
+          className=""
           aria-hidden="true"
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">

@@ -121,7 +121,7 @@ export function Header({ settings, clinics }: HeaderProps) {
         }`}
       >
       <div className="container-onkimia">
-        <div className="flex items-center justify-between py-2">
+        <div className="flex items-center justify-between ">
           {/* ─── Logo ─── */}
           <Link href="/" className="relative flex items-center gap-2">
             {isDoctorsRoute ? (
