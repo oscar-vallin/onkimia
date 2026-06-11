@@ -128,18 +128,18 @@ export default async function ServicesPage({
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-ink text-balance">
               {locale === 'es' ? (
                 <>
                   Atención Oncológica{' '}
-                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                  <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                     Especializada
                   </span>
                 </>
               ) : (
                 <>
                   Specialized{' '}
-                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                  <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                     Oncology Care
                   </span>
                 </>
@@ -147,10 +147,10 @@ export default async function ServicesPage({
             </h2>
           </div>
 
-          <p className="text-lg text-neutral-700 leading-relaxed mb-12 max-w-4xl">
+          <p className="text-lg text-gray-warm leading-relaxed mb-12 max-w-4xl">
             {t('main.description')}
           </p>
-          <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden mb-8 shadow-xl bg-brand-900">
+          <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden mb-8 shadow-xl bg-ink">
             {services?.heroImage?.asset && (
               <Image
                 src={urlFor(services?.heroImage).width(2400).quality(85).format('webp').url()}
@@ -161,20 +161,20 @@ export default async function ServicesPage({
                 sizes="(max-width: 1280px) 100vw, 1200px"
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-900/70 to-brand-900/40 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-ink/70 to-ink/40 z-10" />
             <div className="absolute inset-0 z-20 flex items-center justify-center px-8">
               <div className="text-white max-w-2xl">
                 <ul className="space-y-3 text-lg md:text-xl">
                   <li className="flex items-start gap-3">
-                    <span className="text-accent-400 mt-1">●</span>
+                    <span className="text-teal-soft mt-1">●</span>
                     <span>{t('main.feature1')}</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-accent-400 mt-1">●</span>
+                    <span className="text-teal-soft mt-1">●</span>
                     <span>{t('main.feature2')}</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-accent-400 mt-1">●</span>
+                    <span className="text-teal-soft mt-1">●</span>
                     <span>{t('main.feature3')}</span>
                   </li>
                 </ul>
@@ -182,29 +182,29 @@ export default async function ServicesPage({
             </div>
           </div>
 
-          <p className="text-center text-lg text-neutral-700 max-w-3xl mx-auto">
+          <p className="text-center text-lg text-gray-warm leading-relaxed max-w-3xl mx-auto">
             {t('main.prevention')}
           </p>
         </div>
       </section>
 
       {/* ─── SECCIÓN 2 — Clínicas de Atención Oncológica ─── */}
-      <section className="bg-neutral-50 py-16 md:py-24">
+      <section className="bg-cream py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-6xl mx-auto">
             <div className="mb-12">
-              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
+              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-ink text-balance">
                 {locale === 'es' ? (
                   <>
                     Clínicas de Atención{' '}
-                    <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                    <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                       Oncológica
                     </span>
                   </>
                 ) : (
                   <>
                     Oncology Care{' '}
-                    <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                    <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                       Clinics
                     </span>
                   </>
@@ -212,10 +212,10 @@ export default async function ServicesPage({
               </h2>
             </div>
 
-            <p className="text-lg text-neutral-700 leading-relaxed mb-12 max-w-4xl">
+            <p className="text-lg text-gray-warm leading-relaxed mb-12 max-w-4xl">
               {t('clinics.description')}
             </p>
-            <div className="relative w-full min-h-[420px] md:aspect-[16/9] md:h-auto rounded-3xl overflow-hidden bg-gradient-to-br from-brand-900 to-brand-700">
+            <div className="relative w-full min-h-[420px] md:aspect-[16/9] md:h-auto rounded-3xl overflow-hidden bg-gradient-to-br from-ink to-ink-2">
               {services?.clinicsSectionImage?.asset && (
                 <Image
                   src={urlFor(services?.clinicsSectionImage).width(2400).quality(85).format('webp').url()}
@@ -225,12 +225,12 @@ export default async function ServicesPage({
                   sizes="(max-width: 1280px) 100vw, 1200px"
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-900/60 to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-ink/60 to-transparent z-10" />
               <div className="relative z-20 flex items-center px-8 md:px-16 py-10 md:absolute md:inset-0 md:py-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-white max-w-3xl">
                   {clinics.map((clinic, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <span className="text-accent-400 mt-1">●</span>
+                      <span className="text-teal-soft mt-1">●</span>
                       <span className="text-base md:text-lg">{clinic.name}</span>
                     </div>
                   ))}
@@ -244,16 +244,16 @@ export default async function ServicesPage({
         <div className="max-w-6xl mx-auto">
           {/* Title with underline decoration */}
           <div className="mb-12">
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-ink text-balance">
               {locale === 'es' ? (
                 <>
-                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                  <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                     Servi
                   </span>cios Complementarios
                 </>
               ) : (
                 <>
-                  <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                  <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                     Comple
                   </span>mentary Services
                 </>
@@ -261,17 +261,17 @@ export default async function ServicesPage({
             </h2>
           </div>
 
-          <p className="text-lg text-neutral-700 leading-relaxed mb-12 max-w-4xl">
+          <p className="text-lg text-gray-warm leading-relaxed mb-12 max-w-4xl">
             {t('complementary.description')}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {complementaryUnits.map((unit, index) => (
               <div
                 key={index}
-                className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-accent-500 to-accent-600 p-8 text-white min-h-[280px] flex flex-col justify-between"
+                className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-teal to-teal-soft p-8 text-white min-h-[280px] flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="text-2xl md:text-3xl font-medium mb-4">
+                  <h3 className="font-serif text-2xl md:text-3xl mb-4">
                     {unit.name}
                   </h3>
                   <p className="text-white/90 leading-relaxed">
@@ -296,21 +296,21 @@ export default async function ServicesPage({
           </div>
         </div>
       </section>
-      <section className="bg-neutral-50 py-16 md:py-24">
+      <section className="bg-cream py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-6xl mx-auto">
             {/* Title with underline decoration */}
             <div className="mb-12">
-              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-neutral-950 text-balance">
+              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-2 text-ink text-balance">
                 {locale === 'es' ? (
                   <>
-                    <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                    <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                       Socios Come
                     </span>rciales
                   </>
                 ) : (
                   <>
-                    <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+                    <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                       Commercial Pa
                     </span>rtners
                   </>
@@ -321,14 +321,14 @@ export default async function ServicesPage({
               {commercialPartners.map((partner, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl p-6 border border-neutral-200 hover:border-accent-500 hover:shadow-lg transition-all"
+                  className="bg-white rounded-2xl p-6 border border-line hover:border-teal hover:shadow-lg transition-all transition-shadow"
                 >
                   <div className="flex items-center justify-center h-16 mb-4">
-                    <h3 className="text-xl font-semibold text-brand-900">
+                    <h3 className="font-serif text-xl text-ink">
                       {partner.name}
                     </h3>
                   </div>
-                  <p className="text-neutral-700 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-warm text-sm leading-relaxed mb-4">
                     {partner.description}
                   </p>
                   {partner.link && (
@@ -336,7 +336,7 @@ export default async function ServicesPage({
                       href={partner.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-accent-600 hover:text-accent-700 transition-colors text-sm font-medium"
+                      className="inline-flex items-center gap-2 text-teal hover:text-teal-soft transition-colors text-sm font-medium"
                     >
                       <span>{t('partners.visitWebsite')}</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -350,18 +350,18 @@ export default async function ServicesPage({
           </div>
         </div>
       </section>
-      <section className="bg-accent-50 py-16 md:py-24">
+      <section className="bg-ink py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6">
               {t('cta.title')}
             </h2>
-            <p className="text-lg text-neutral-700 mb-8">
+            <p className="text-lg text-white/70 leading-relaxed mb-8">
               {t('cta.description')}
             </p>
             <Link
               href="/contacto#contact-form"
-              className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg"
+              className="inline-block bg-teal hover:bg-teal-soft text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg"
             >
               {t('cta.button')}
             </Link>

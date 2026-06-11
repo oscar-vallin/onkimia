@@ -2,10 +2,9 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, DOCTORS_QUERY, INSURANCES_QUERY } from '@/sanity/queries';
-import { getLocalized } from '@/sanity/lib/localization';
-import { HeroSection } from '@/components/ui/HeroSection';
-import type { SiteSettings, Doctor, Insurance } from '@/sanity/types';
+import { DOCTORS_QUERY, INSURANCES_QUERY } from '@/sanity/queries';
+import { HeroHome } from '@/components/sections/HeroHome';
+import type { Doctor, Insurance } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { ConveniosEditorial } from '@/components/sections/ConveniosEditorial';
@@ -54,11 +53,7 @@ export default async function HomePage({
 
   const t = await getTranslations('home');
 
-  const [settings, doctors, insurances] = await Promise.all([
-    sanityFetch<SiteSettings>({
-      query: SITE_SETTINGS_QUERY,
-      tags: ['siteSettings'],
-    }),
+  const [doctors, insurances] = await Promise.all([
     sanityFetch<Doctor[]>({
       query: DOCTORS_QUERY,
       tags: ['doctor'],
@@ -69,23 +64,20 @@ export default async function HomePage({
     }),
   ]);
   
-  const heroDescription = settings.homeHeroDescription
-    ? getLocalized(settings.homeHeroDescription, locale)
-    : t('hero.description');
   return (
     <>
       {/* ─── HERO ─── */}
-      <HeroSection
-        image={settings.homeHeroImage}
-        title={`${t('hero.welcome')}`}
-        subtitle={getLocalized(settings.tagline, locale)}
-        description={heroDescription}
-        height="lg"
-        overlay="medium"
-        primaryCta={{
-          label: t('hero.cta'),
-          href: '#especialistas',
-        }}
+      <HeroHome
+        eyebrow={t('homeHero.eyebrow')}
+        title={t('homeHero.title')}
+        description={t('homeHero.description')}
+        primaryCta={{ label: t('homeHero.cta.primary.label'), href: t('homeHero.cta.primary.href') }}
+        secondaryCta={{ label: t('homeHero.cta.secondary.label'), href: t('homeHero.cta.secondary.href') }}
+        features={[
+          { icon: 'pulse', title: t('homeHero.features.diagnostic.title'), description: t('homeHero.features.diagnostic.description') },
+          { icon: 'heart', title: t('homeHero.features.human.title'), description: t('homeHero.features.human.description') },
+          { icon: 'shield', title: t('homeHero.features.support.title'), description: t('homeHero.features.support.description') },
+        ]}
       />
 
       <ProcedureCarousel

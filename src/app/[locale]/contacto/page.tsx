@@ -78,8 +78,8 @@ export default async function ContactPage({
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 max-w-6xl mx-auto">
           <div className="lg:col-span-2 space-y-8">
             <div>
-              <h2 className="text-2xl md:text-3xl mb-6">{t('info.title')}</h2>
-              <p className="text-neutral-600 mb-8">{clinicName}</p>
+              <h2 className="font-serif text-3xl md:text-4xl mb-6">{t('info.title')}</h2>
+              <p className="text-gray-warm mb-8">{clinicName}</p>
             </div>
 
             {clinic?.address && (() => {
@@ -96,16 +96,16 @@ export default async function ContactPage({
                   href={`https://maps.google.com/?q=${encodeURIComponent(mapsQuery)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-neutral-50 transition-colors"
+                  className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-cream transition-colors"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center group-hover:bg-accent-100 transition-colors">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center group-hover:bg-teal/20 transition-colors">
                     <MapPin className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">
+                    <h3 className="text-sm font-medium text-gray-soft uppercase tracking-wider mb-1">
                       {t('info.addressLabel')}
                     </h3>
-                    <p className="text-neutral-800 group-hover:text-accent-700 transition-colors">
+                    <p className="text-ink group-hover:text-teal transition-colors">
                       {clinic.address.street}
                       {clinic.address.neighborhood ? `, ${clinic.address.neighborhood}` : ''}
                       <br />
@@ -120,16 +120,16 @@ export default async function ContactPage({
             {clinic?.phone && (
               <a
                 href={`tel:${clinic.phone.replace(/\s/g, '')}`}
-                className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-neutral-50 transition-colors"
+                className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-cream transition-colors"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center group-hover:bg-accent-100 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center group-hover:bg-teal/20 transition-colors">
                   <Phone className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">
+                  <h3 className="text-sm font-medium text-gray-soft uppercase tracking-wider mb-1">
                     {t('info.phoneLabel')}
                   </h3>
-                  <p className="text-neutral-800 group-hover:text-accent-700 transition-colors">
+                  <p className="text-ink group-hover:text-teal transition-colors">
                     {clinic.phone}
                   </p>
                 </div>
@@ -139,16 +139,16 @@ export default async function ContactPage({
             {clinic?.email && (
               <a
                 href={`mailto:${clinic.email}`}
-                className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-neutral-50 transition-colors"
+                className="flex gap-4 group rounded-xl p-3 -m-3 hover:bg-cream transition-colors"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center group-hover:bg-accent-100 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center group-hover:bg-teal/20 transition-colors">
                   <Mail className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">
+                  <h3 className="text-sm font-medium text-gray-soft uppercase tracking-wider mb-1">
                     {t('info.emailLabel')}
                   </h3>
-                  <p className="text-neutral-800 group-hover:text-accent-700 transition-colors break-all">
+                  <p className="text-ink group-hover:text-teal transition-colors break-all">
                     {clinic.email}
                   </p>
                 </div>
@@ -156,9 +156,9 @@ export default async function ContactPage({
             )}
           </div>
 
-          <div className="lg:col-span-3 bg-white border border-neutral-200 rounded-2xl p-6 md:p-8 shadow-sm">
-            <h2 className="text-2xl md:text-3xl mb-2">{t('form.title')}</h2>
-            <p className="text-neutral-600 mb-8">{t('form.subtitle')}</p>
+          <div className="lg:col-span-3 bg-white border border-line rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 className="font-serif text-3xl md:text-4xl mb-2">{t('form.title')}</h2>
+            <p className="text-gray-warm mb-8">{t('form.subtitle')}</p>
             <ContactForm />
           </div>
         </div>

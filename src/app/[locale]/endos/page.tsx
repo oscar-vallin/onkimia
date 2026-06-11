@@ -82,16 +82,10 @@ export default async function EndosPage({
           aria-hidden="true"
         />
         <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">
-          <h1
-            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6 text-balance mt-12"
-            style={{ color: '#ffffff' }}
-          >
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 md:mb-6 text-balance mt-12">
             {t('hero.headline')}
           </h1>
-          <p
-            className="text-sm md:text-xl max-w-3xl text-pretty mb-6 md:mb-8"
-            style={{ color: 'rgba(255,255,255,0.92)' }}
-          >
+          <p className="text-sm md:text-xl text-white/90 max-w-3xl text-pretty mb-6 md:mb-8">
             {t('hero.description')}
           </p>
           <BookingButton section="endos" variant="primary" />
@@ -112,11 +106,11 @@ export default async function EndosPage({
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2
             id="endos-procedures-title"
-            className="text-3xl md:text-4xl mb-4"
+            className="font-serif text-4xl md:text-5xl mb-4"
           >
             {t('procedures.title')}
           </h2>
-          <p className="text-lg text-neutral-600 text-pretty">
+          <p className="text-lg text-gray-warm leading-relaxed text-pretty">
             {t('procedures.intro')}
           </p>
         </div>
@@ -125,15 +119,15 @@ export default async function EndosPage({
           {PROCEDURE_KEYS.map(({ key, icon: Icon }) => (
             <article
               key={key}
-              className="bg-neutral-50 border border-neutral-200 rounded-xl p-6 hover:border-endos-mint-500 transition-colors"
+              className="bg-cream border border-line rounded-2xl p-6 hover:border-teal-soft transition-colors transition-shadow"
             >
-              <div className="w-12 h-12 rounded-lg bg-endos-tint-50 text-endos-teal-700 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-lg bg-[var(--color-teal-soft)]/15 text-teal flex items-center justify-center mb-4">
                 <Icon className="w-6 h-6" aria-hidden="true" />
               </div>
-              <h3 className="text-xl mb-2">
+              <h3 className="font-serif text-xl mb-2">
                 {t(`procedures.items.${key}.name`)}
               </h3>
-              <p className="text-neutral-600 text-sm">
+              <p className="text-gray-warm text-sm leading-relaxed">
                 {t(`procedures.items.${key}.description`)}
               </p>
               <MedicalProcedureLd
@@ -147,23 +141,23 @@ export default async function EndosPage({
 
       {/* ─── BENEFICIOS ─── */}
       <section
-        className="bg-neutral-50 py-16 md:py-24"
+        className="bg-cream py-16 md:py-24"
         aria-labelledby="endos-benefits-title"
       >
         <div className="container-onkimia">
           <h2
             id="endos-benefits-title"
-            className="text-3xl md:text-4xl text-center mb-12"
+            className="font-serif text-4xl md:text-5xl text-center mb-12"
           >
             {t('benefits.title')}
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
               <li key={key} className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 rounded-full bg-endos-teal-900 text-white flex items-center justify-center mb-3">
+                <div className="w-14 h-14 rounded-full bg-teal text-white flex items-center justify-center mb-3">
                   <Icon className="w-7 h-7" aria-hidden="true" />
                 </div>
-                <p className="text-sm font-medium text-neutral-800">
+                <p className="text-sm text-gray-warm">
                   {t(`benefits.items.${key}`)}
                 </p>
               </li>
@@ -181,16 +175,16 @@ export default async function EndosPage({
           <div>
             <h2
               id="endos-safety-title"
-              className="text-3xl md:text-4xl mb-6"
+              className="font-serif text-4xl md:text-5xl mb-6"
             >
               {t('safety.title')}
             </h2>
-            <p className="text-lg text-neutral-700 text-pretty leading-relaxed">
+            <p className="text-lg text-gray-warm text-pretty leading-relaxed">
               {t('safety.description')}
             </p>
           </div>
           {settings.endosSafetyImage && (
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
                 src={urlFor(settings.endosSafetyImage)
                   .width(800)
@@ -210,13 +204,13 @@ export default async function EndosPage({
       {/* ─── FAQs ─── */}
       {faqs.length > 0 && (
         <section
-          className="bg-endos-tint-50 py-16 md:py-24"
+          className="bg-cream py-16 md:py-24"
           aria-labelledby="endos-faq-title"
         >
           <div className="container-onkimia">
             <h2
               id="endos-faq-title"
-              className="text-3xl md:text-4xl text-center mb-12"
+              className="font-serif text-4xl md:text-5xl text-center mb-12"
             >
               {t('faq.title')}
             </h2>
@@ -233,17 +227,19 @@ export default async function EndosPage({
 
       {/* ─── CTA FINAL ─── */}
       <section
-        className="container-onkimia py-16 md:py-24"
+        className="bg-ink py-16 md:py-24"
         aria-labelledby="endos-cta-title"
       >
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 id="endos-cta-title" className="text-3xl md:text-4xl mb-6">
-            {t('cta.title')}
-          </h2>
-          <p className="text-lg text-neutral-700 mb-8 text-pretty">
-            {t('cta.description')}
-          </p>
-          <BookingButton section="endos" variant="primary" />
+        <div className="container-onkimia">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 id="endos-cta-title" className="font-serif text-4xl md:text-5xl text-white mb-6">
+              {t('cta.title')}
+            </h2>
+            <p className="text-lg text-white/70 leading-relaxed mb-8 text-pretty">
+              {t('cta.description')}
+            </p>
+            <BookingButton section="endos" variant="primary" />
+          </div>
         </div>
       </section>
     </>

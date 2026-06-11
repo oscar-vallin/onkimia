@@ -75,15 +75,15 @@ export default async function AboutPage({
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-2 text-neutral-950">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-2 text-ink">
               {getLocalized(aboutPage?.moreTitleLine1, locale) || t('moreThanMedicine.headingLine1')}<br />
-              <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+              <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                 {getLocalized(aboutPage?.moreTitleUnderlined, locale) || t('moreThanMedicine.headingUnderlined')}
               </span>{getLocalized(aboutPage?.moreTitleSuffix, locale) || t('moreThanMedicine.headingSuffix')}
             </h2>
           </div>
 
-          <p className="text-lg text-neutral-700 leading-relaxed mb-12 max-w-4xl">
+          <p className="text-lg text-gray-warm leading-relaxed mb-12 max-w-4xl">
             {getLocalized(aboutPage?.moreDescription, locale) || t('moreThanMedicine.description')}
           </p>
 
@@ -92,15 +92,15 @@ export default async function AboutPage({
             {(aboutPage?.differentialServices ?? []).map((item, index) => (
               <div
                 key={index}
-                className="flex items-start gap-3 p-4 bg-neutral-50 rounded-lg border border-neutral-200"
+                className="flex items-start gap-3 p-4 bg-cream rounded-lg border border-line"
               >
-                <div className="w-2 h-2 bg-accent-500 rounded-full flex-shrink-0 mt-2" />
+                <div className="w-2 h-2 bg-teal rounded-full flex-shrink-0 mt-2" />
                 <div>
-                  <span className="text-neutral-800">{getLocalized(item.title, locale)}</span>
+                  <span className="text-ink">{getLocalized(item.title, locale)}</span>
                   {item.link && (
                     <a
                       href={item.link}
-                      className="text-accent-600 hover:text-accent-700 text-sm ml-2 underline"
+                      className="text-teal hover:text-teal-soft text-sm ml-2 underline"
                     >
                       ({getLocalized(item.linkText, locale) || t('downloadHere')})
                     </a>
@@ -113,46 +113,46 @@ export default async function AboutPage({
       </section>
 
       {/* ─── CUERPO, MENTE Y AMBIENTE ─── */}
-      <section className="bg-neutral-50 py-16 md:py-24">
+      <section className="bg-cream py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-6xl mx-auto">
             <div className="mb-12">
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none">
+              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-none text-ink">
                 {getLocalized(aboutPage?.bodyMindTitlePrefix, locale) || t('bodyMind.headingPrefix')}{' '}
                 <span className="relative inline-block pb-6">
                   {getLocalized(aboutPage?.bodyMindTitleUnderlined, locale) || t('bodyMind.headingUnderlined')}
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-500" />
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-teal" />
                 </span>{getLocalized(aboutPage?.bodyMindTitleSuffix, locale) || t('bodyMind.headingSuffix')}
               </h2>
             </div>
 
-            <p className="text-lg text-neutral-700 mb-12 max-w-3xl">
+            <p className="text-lg text-gray-warm leading-relaxed mb-12 max-w-3xl">
               {getLocalized(aboutPage?.bodyMindDescription, locale) || t('bodyMind.description')}
             </p>
 
             {/* Large image placeholder */}
-            <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden bg-neutral-200 mb-12">
-              <div className="absolute inset-0 flex items-center justify-center text-neutral-400">
+            <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden bg-cream-2 mb-12">
+              <div className="absolute inset-0 flex items-center justify-center text-gray-soft">
                 {/* Placeholder for therapy/treatment image */}
               </div>
             </div>
 
             {/* Two info cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white p-8 rounded-xl border border-neutral-200">
-                <h3 className="text-2xl font-medium text-brand-900 mb-4">
+              <div className="bg-white p-8 rounded-2xl border border-line">
+                <h3 className="font-serif text-2xl text-ink mb-4">
                   {getLocalized(aboutPage?.supportGroupTitle, locale) || t('supportGroup.title')}
                 </h3>
-                <p className="text-neutral-700">
+                <p className="text-gray-warm leading-relaxed">
                   {getLocalized(aboutPage?.supportGroupDescription, locale) || t('supportGroup.description')}
                 </p>
               </div>
 
-              <div className="bg-white p-8 rounded-xl border border-neutral-200">
-                <h3 className="text-2xl font-medium text-brand-900 mb-4">
+              <div className="bg-white p-8 rounded-2xl border border-line">
+                <h3 className="font-serif text-2xl text-ink mb-4">
                   {getLocalized(aboutPage?.awareTitle, locale) || 'Onkimia Aware'}
                 </h3>
-                <p className="text-neutral-700">
+                <p className="text-gray-warm leading-relaxed">
                   {getLocalized(aboutPage?.awareDescription, locale) || t('aware.description')}
                 </p>
               </div>
@@ -165,10 +165,10 @@ export default async function AboutPage({
       {testimonials.length > 0 && (
         <section className="container-onkimia py-16 md:py-24">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-medium text-brand-900 mb-4">
+            <h2 className="font-serif text-4xl md:text-5xl text-ink mb-4">
               {getLocalized(aboutPage?.testimonialsTitle, locale) || t('testimonials.title')}
             </h2>
-            <p className="text-lg text-neutral-700">
+            <p className="text-lg text-gray-warm leading-relaxed">
               {getLocalized(aboutPage?.testimonialsSubtitle, locale) || t('testimonials.subtitle')}
             </p>
           </div>
@@ -177,23 +177,25 @@ export default async function AboutPage({
       )}
 
       {/* ─── ¿TIENES DUDAS? ─── */}
-      <section className="container-onkimia py-16 md:py-24">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-6 text-neutral-950">
-            <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
-              {getLocalized(aboutPage?.doubtsTitleUnderlined, locale) || t('doubts.headingUnderlined')}
-            </span>{' '}
-            {getLocalized(aboutPage?.doubtsTitleSuffix, locale) || t('doubts.headingSuffix')}
-          </h2>
-          <p className="text-lg text-neutral-700 mb-6">
-            {getLocalized(aboutPage?.doubtsDescription, locale) || t('doubts.description')}
-          </p>
-          <Link
-            href="/contacto#contact-form"
-            className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-medium px-8 py-3 rounded-lg transition-colors"
-          >
-            {tCommon('contactUs')}
-          </Link>
+      <section className="bg-ink py-16 md:py-24">
+        <div className="container-onkimia">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-none mb-6 text-white">
+              <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
+                {getLocalized(aboutPage?.doubtsTitleUnderlined, locale) || t('doubts.headingUnderlined')}
+              </span>{' '}
+              {getLocalized(aboutPage?.doubtsTitleSuffix, locale) || t('doubts.headingSuffix')}
+            </h2>
+            <p className="text-lg text-white/70 leading-relaxed mb-6">
+              {getLocalized(aboutPage?.doubtsDescription, locale) || t('doubts.description')}
+            </p>
+            <Link
+              href="/contacto#contact-form"
+              className="inline-block bg-teal hover:bg-teal-soft text-white font-medium px-8 py-3 rounded-lg transition-colors"
+            >
+              {tCommon('contactUs')}
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -201,8 +203,8 @@ export default async function AboutPage({
       <section className="bg-white py-16 md:py-24">
         <div className="container-onkimia">
           <div className="mb-12 max-w-6xl mx-auto">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-none text-neutral-950">
-              <span className="inline-block border-b-2 md:border-b-4 border-accent-500 pb-1">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-none text-ink">
+              <span className="inline-block border-b-2 md:border-b-4 border-teal pb-1">
                 {getLocalized(aboutPage?.faqTitleUnderlined, locale) || t('faq.headingUnderlined')}
               </span>{getLocalized(aboutPage?.faqTitleSuffix, locale) || t('faq.headingSuffix')}
             </h2>
@@ -211,7 +213,7 @@ export default async function AboutPage({
             <FAQCarousel faqs={faqs} locale={locale} />
           ) : (
             <div className="text-center py-12">
-              <p className="text-neutral-600">
+              <p className="text-gray-warm">
                 {t('faq.empty')}
               </p>
             </div>

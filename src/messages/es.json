@@ -265,6 +265,35 @@
           "description": "Porque no eres un expediente ni un protocolo. Cada plan se diseña alrededor de ti, tu historia y tu proyecto de vida."
         }
       }
+    },
+    "homeHero": {
+      "eyebrow": "Oncología integral · Guadalajara",
+      "title": "Ver más allá. Cuidar *profundamente*.",
+      "description": "En Onkimia combinamos tecnología de diagnóstico de vanguardia con un acompañamiento profundamente humano. Porque detrás de cada estudio, hay una persona.",
+      "cta": {
+        "primary": {
+          "label": "Agendar una cita",
+          "href": "/contacto"
+        },
+        "secondary": {
+          "label": "Conocer servicios",
+          "href": "#servicios"
+        }
+      },
+      "features": {
+        "diagnostic": {
+          "title": "Diagnóstico preciso",
+          "description": "Estudios y procedimientos con tecnología de última generación."
+        },
+        "human": {
+          "title": "Cuidado humano",
+          "description": "Acompañamiento emocional en cada etapa del tratamiento."
+        },
+        "support": {
+          "title": "Respaldo integral",
+          "description": "Convenios con las principales aseguradoras del país."
+        }
+      }
     }
   },
   "about": {

@@ -44,24 +44,24 @@ export function GoogleMapsEmbed({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full aspect-[4/3] md:aspect-[16/9] rounded-xl overflow-hidden border border-neutral-200 bg-neutral-100 ${className}`}
+      className={`relative w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden border border-line bg-cream ${className}`}
     >
       {/* Placeholder antes de entrar al viewport */}
       {!shouldLoad && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <MapPin className="w-10 h-10 text-neutral-300 mx-auto mb-2" aria-hidden="true" />
-            <p className="text-sm text-neutral-400">Mapa</p>
+            <MapPin className="w-10 h-10 text-gray-soft mx-auto mb-2" aria-hidden="true" />
+            <p className="text-sm text-gray-soft">Mapa</p>
           </div>
         </div>
       )}
 
       {/* Skeleton mientras el iframe carga */}
       {shouldLoad && !isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center animate-pulse z-10 bg-neutral-100">
+        <div className="absolute inset-0 flex items-center justify-center animate-pulse z-10 bg-cream">
           <div className="text-center">
-            <MapPin className="w-10 h-10 text-neutral-300 mx-auto mb-2 animate-bounce" aria-hidden="true" />
-            <p className="text-sm text-neutral-400">Cargando ubicación...</p>
+            <MapPin className="w-10 h-10 text-gray-soft mx-auto mb-2 animate-bounce" aria-hidden="true" />
+            <p className="text-sm text-gray-soft">Cargando ubicación...</p>
           </div>
         </div>
       )}

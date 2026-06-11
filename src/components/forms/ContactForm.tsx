@@ -137,10 +137,10 @@ export function ContactForm() {
   };
 
   const fieldClass = (name: string) =>
-    `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:bg-neutral-50 disabled:cursor-not-allowed ${
+    `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:bg-cream disabled:cursor-not-allowed ${
       getFieldError(name)
         ? 'border-red-400 focus:border-red-400 focus:ring-red-100'
-        : 'border-neutral-300 focus:border-accent-500 focus:ring-accent-100'
+        : 'border-line focus:border-teal focus:ring-teal/10'
     }`;
 
   return (
@@ -169,7 +169,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label htmlFor="name" className="block text-sm font-medium text-ink mb-1.5">
             {t('name.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -195,7 +195,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label htmlFor="email" className="block text-sm font-medium text-ink mb-1.5">
             {t('email.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -222,7 +222,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label htmlFor="phone" className="block text-sm font-medium text-ink mb-1.5">
             {t('phone.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -249,7 +249,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="comment" className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label htmlFor="comment" className="block text-sm font-medium text-ink mb-1.5">
             {t('comment.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -285,15 +285,15 @@ export function ContactForm() {
             aria-invalid={!!getFieldError('acceptPrivacy')}
             aria-describedby={getFieldError('acceptPrivacy') ? 'privacy-error' : undefined}
             onChange={(e) => validateField('acceptPrivacy', e.target.checked)}
-            className="mt-1 w-4 h-4 text-accent-500 border-neutral-300 rounded focus:ring-accent-500 focus:ring-2"
+            className="mt-1 w-4 h-4 text-teal border-line rounded focus:ring-teal focus:ring-2"
           />
-          <label htmlFor="acceptPrivacy" className="text-sm text-neutral-700">
+          <label htmlFor="acceptPrivacy" className="text-sm text-gray-warm">
             {t('privacy.label')}{' '}
             <a
               href="/aviso-de-privacidad"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent-600 hover:text-accent-700 underline"
+              className="text-teal hover:text-teal-soft underline"
             >
               {t('privacy.linkText')}
             </a>
@@ -315,7 +315,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full md:w-auto bg-accent-500 hover:bg-accent-600 disabled:bg-accent-300 disabled:cursor-not-allowed text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
+          className="w-full md:w-auto bg-teal hover:bg-teal-soft disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
         >
           {isPending ? (
             <>
@@ -383,7 +383,7 @@ function ResultModal({ ok, errorMessage, onClose }: ResultModalProps) {
           type="button"
           onClick={onClose}
           aria-label={t('close')}
-          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 transition-colors"
+          className="absolute top-4 right-4 text-gray-soft hover:text-ink transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -399,14 +399,14 @@ function ResultModal({ ok, errorMessage, onClose }: ResultModalProps) {
             {ok ? t('success.title') : t('error.title')}
           </h2>
 
-          <p className="text-neutral-600 mb-6">
+          <p className="text-gray-warm mb-6">
             {ok ? t('success.description') : getErrorDescription()}
           </p>
 
           <button
             type="button"
             onClick={onClose}
-            className="bg-accent-500 hover:bg-accent-600 text-white font-medium px-6 py-2.5 rounded-lg transition-colors"
+            className="bg-teal hover:bg-teal-soft text-white font-medium px-6 py-2.5 rounded-lg transition-colors"
           >
             {t('close')}
           </button>

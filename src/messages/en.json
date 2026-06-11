@@ -265,6 +265,35 @@
           "description": "Because you are not a file or a protocol. Every plan is designed around you, your story, and your vision for life."
         }
       }
+    },
+    "homeHero": {
+      "eyebrow": "Comprehensive oncology · Guadalajara",
+      "title": "See beyond. Care *deeply*.",
+      "description": "At Onkimia we combine cutting-edge diagnostic technology with profoundly human care. Because behind every study, there is a person.",
+      "cta": {
+        "primary": {
+          "label": "Book an appointment",
+          "href": "/contacto"
+        },
+        "secondary": {
+          "label": "Explore services",
+          "href": "#servicios"
+        }
+      },
+      "features": {
+        "diagnostic": {
+          "title": "Precise diagnosis",
+          "description": "Studies and procedures with the latest generation technology."
+        },
+        "human": {
+          "title": "Human care",
+          "description": "Emotional support at every stage of treatment."
+        },
+        "support": {
+          "title": "Comprehensive backing",
+          "description": "Agreements with the country's leading insurers."
+        }
+      }
     }
   },
   "about": {
