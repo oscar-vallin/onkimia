@@ -150,8 +150,10 @@
       "description": "Cada persona es única, por eso diseñamos tratamientos integrales que te acompañan antes, durante y después de cualquier proceso oncológico."
     },
     "doctors": {
-      "title": "Conoce a nuestros especialistas",
-      "description": "Forma parte de la familia Onkimia. Nuestro equipo multidisciplinario está conformado por médicos altamente capacitados y comprometidos con tu bienestar."
+      "title": "Especialistas que *te acompañan*",
+      "description": "Forma parte de la familia Onkimia. Nuestro equipo multidisciplinario está conformado por médicos altamente capacitados y comprometidos con tu bienestar.",
+      "eyebrow": "Nuestro equipo",
+      "viewDetail": "Ver detalle"
     },
     "wellness": {
       "title": "Bienestar integral, en un solo lugar",
@@ -190,7 +192,9 @@
       "cta": "Agenda tu cita"
     },
     "insurances": {
-      "title": "Convenios"
+      "title": "Convenios",
+      "eyebrow": "Respaldo institucional",
+      "statLabel": "aseguradoras nacionales e internacionales que respaldan tu tratamiento."
     },
     "priorityCare": {
       "title": "Cuidarte es nuestra prioridad",
@@ -208,6 +212,59 @@
         "description": "Apoyo humano y profesional antes, durante y después de tu tratamiento."
       },
       "additionalServices": "Nuestros servicios incluyen: quimioterapia, cirugía oncológica, cuidados paliativos y servicios complementarios personalizados."
+    },
+    "process": {
+      "eyebrow": "Evaluación inicial",
+      "title": "Una mirada *completa* a tu salud",
+      "lead": "Una evaluación oncológica integral que combina estudios, historial y acompañamiento. Así es el camino, paso a paso.",
+      "imageAlt": "Equipo médico de Onkimia en consulta",
+      "step1": {
+        "step": "Paso 01",
+        "title": "Primera consulta",
+        "description": "Conocemos tu historia clínica completa y tus inquietudes. Una conversación sin prisas donde escuchamos antes de actuar, porque cada caso comienza por entender a la persona."
+      },
+      "step2": {
+        "step": "Paso 02",
+        "title": "Estudios diagnósticos",
+        "description": "Realizamos la batería de pruebas necesarias con tecnología de precisión: estudios de imagen, laboratorio y procedimientos de la unidad Endos cuando se requieren, con resultados ágiles."
+      },
+      "step3": {
+        "step": "Paso 03",
+        "title": "Plan personalizado",
+        "description": "Diseñamos un plan de tratamiento a tu medida, evaluado por nuestro equipo multidisciplinario. Te explicamos cada opción con claridad para que decidas con información completa."
+      },
+      "step4": {
+        "step": "Paso 04",
+        "title": "Seguimiento continuo",
+        "description": "Te acompañamos durante todo el proceso. Tu plan evoluciona contigo, con soporte de psicología, nutrición y manejo del dolor cuando lo necesites. Nunca caminas solo."
+      }
+    },
+    "homeProcedures": {
+      "eyebrow": "Lo que hacemos por ti",
+      "title": "Estudios y *procedimientos*",
+      "lead": "Diagnóstico y tratamiento ambulatorio con tecnología de vanguardia, pensados para tu comodidad y tranquilidad."
+    },
+    "orbit": {
+      "eyebrow": "Cómo trabajamos",
+      "title": "Atención que es *diferente*",
+      "items": {
+        "cercana": {
+          "name": "Cercana",
+          "description": "Un primer contacto sin fricción. Agenda tu cita por WhatsApp o teléfono y recibe orientación inmediata, sin esperas ni trámites complejos."
+        },
+        "precisa": {
+          "name": "Precisa",
+          "description": "Diagnóstico con tecnología de vanguardia que permite decisiones clínicas tempranas y acertadas, porque cada día cuenta."
+        },
+        "integral": {
+          "name": "Integral",
+          "description": "Tratamiento, manejo del dolor y bienestar emocional coordinados en un mismo lugar, sin que tengas que peregrinar entre instituciones."
+        },
+        "humana": {
+          "name": "Humana",
+          "description": "Porque no eres un expediente ni un protocolo. Cada plan se diseña alrededor de ti, tu historia y tu proyecto de vida."
+        }
+      }
     }
   },
   "about": {
@@ -455,23 +512,33 @@
       "items": {
         "endoscopy": {
           "name": "Endoscopías",
-          "description": "Diagnóstico del tracto digestivo superior"
+          "description": "Diagnóstico del tracto digestivo superior",
+          "duration": "30 min",
+          "shortDescription": "Exploración del tracto digestivo superior con tecnología de alta definición y sedación monitorizada."
         },
         "colonoscopy": {
           "name": "Colonoscopías",
-          "description": "Diagnóstico del colon"
+          "description": "Diagnóstico del colon",
+          "duration": "45 min",
+          "shortDescription": "Revisión completa del colon para detección temprana de pólipos y patología colorrectal."
         },
         "bronchoscopy": {
           "name": "Broncoscopías",
-          "description": "Diagnóstico de vías respiratorias"
+          "description": "Diagnóstico de vías respiratorias",
+          "duration": "30 min",
+          "shortDescription": "Visualización directa de vías respiratorias y pulmones para diagnóstico preciso y toma de muestra."
         },
         "biopsy": {
           "name": "Biopsias",
-          "description": "Toma de muestra para análisis"
+          "description": "Toma de muestra para análisis",
+          "duration": "20 min",
+          "shortDescription": "Obtención de muestra de tejido guiada por imagen para análisis anatomopatológico definitivo."
         },
         "ultrasoundGuided": {
           "name": "Procedimientos guiados por ultrasonido",
-          "description": "Guiado por imagen de alta precisión"
+          "description": "Guiado por imagen de alta precisión",
+          "duration": "45 min",
+          "shortDescription": "Procedimientos intervencionistas de alta precisión guiados por ultrasonido en tiempo real."
         }
       }
     },

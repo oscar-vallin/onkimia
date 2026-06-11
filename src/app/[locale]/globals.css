@@ -14,7 +14,26 @@
    ============================================ */
 
 @theme {
-  /* ─── BRAND MORADO OSCURO ───
+  /* ════════════════════════════════════════════════════════
+     FASE 1 · TOKENS v3 — Paleta de la maqueta aprobada
+     (estética myhealthprac). Conviven con tokens legados
+     hasta Fase 6.
+     ════════════════════════════════════════════════════════ */
+
+  /* ─── Paleta v3 (NUEVA — usar en todos los componentes migrados) ─── */
+  --color-ink:        #1a1a1f;  /* fondo oscuro principal */
+  --color-ink-2:      #232329;  /* superficie oscura elevada */
+  --color-ink-3:      #2d2d35;  /* borde sobre oscuro */
+  --color-teal:       #1A7A6E;  /* acento principal (único color de acción) */
+  --color-teal-soft:  #2a9d8c;  /* acento hover */
+  --color-teal-light: #5DCAA5;  /* acento claro (badges, detalles) */
+  --color-cream:      #f6f4ef;  /* fondo claro cálido */
+  --color-cream-2:    #ece9e1;
+  --color-gray-warm:  #6b6b73;  /* texto secundario */
+  --color-gray-soft:  #9b9ba3;
+  --color-line:       #e6e3db;  /* bordes sobre fondo claro */
+
+  /* ─── BRAND MORADO OSCURO (LEGADO — mantener hasta Fase 6) ───
      Base: #1E1739 — Pantone P 101-16C (oficial)
      Usado en: footer, headers oscuros, fondos de hero */
   --color-brand-50:  #f5f3f9;
@@ -118,8 +137,8 @@
      Source Code Pro para tagline/mono (equivalente a Source Code Variable)
      next/font inyecta --font-display, --font-body y --font-mono en runtime */
   --font-display: var(--next-font-google-sans-flex), system-ui, sans-serif;
-  --font-serif:   var(--font-display), 'Google Sans Flex 120pt', system-ui, sans-serif;
-  --font-sans:    var(--font-body), 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-serif:   var(--font-fraunces), Georgia, serif;
+  --font-sans:    var(--font-dm-sans), system-ui, -apple-system, sans-serif;
   --font-mono:    var(--font-mono), 'Source Code Pro', Consolas, monospace;
 
   /* ─── ESCALA TIPOGRÁFICA ───
@@ -172,6 +191,13 @@
   --animate-slide-down: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ─── Variables con alpha (no son clases Tailwind; se usan en CSS custom
+   de los componentes nuevos: bordes sobre oscuro, fondos translúcidos) ─── */
+:root {
+  --teal-dim:  rgba(26, 122, 110, 0.12);
+  --line-dark: rgba(255, 255, 255, 0.08);
+}
+
 /* Keyframes referenced by --animate-* variables above */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -215,27 +241,27 @@
 
   h1 {
     font-size: clamp(2rem, 1.2rem + 4vw, 3.75rem);
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
 
   h2 {
     font-size: clamp(1.5rem, 1.1rem + 2vw, 2.75rem);
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.015em;
     line-height: 1.15;
   }
 
   h3 {
     font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: -0.01em;
     line-height: 1.25;
   }
 
   h4, h5, h6 {
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0;
     line-height: 1.3;
   }
@@ -349,4 +375,13 @@
 @keyframes insurance-marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none !important; }
 }

@@ -8,17 +8,13 @@ import type { SiteSettings, FAQ } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import {
-  Activity,
-  Microscope,
-  Wind,
-  TestTube,
-  Radar,
   UserCheck,
   Cpu,
   Zap,
   Clock,
   Heart,
 } from 'lucide-react';
+import { PROCEDURE_KEYS } from '@/data/procedures';
 import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
 import { FAQCarousel } from '@/components/ui/FAQCarousel';
@@ -35,14 +31,6 @@ export async function generateMetadata({
 
   return buildMetadata({ title: t('title'), description: t('description'), locale, pathname: '/endos' });
 }
-
-const PROCEDURE_KEYS = [
-  { key: 'endoscopy', icon: Activity },
-  { key: 'colonoscopy', icon: Microscope },
-  { key: 'bronchoscopy', icon: Wind },
-  { key: 'biopsy', icon: TestTube },
-  { key: 'ultrasoundGuided', icon: Radar },
-] as const;
 
 const BENEFIT_KEYS = [
   { key: 'specializedTeam', icon: UserCheck },

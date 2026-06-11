@@ -3,14 +3,17 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { SITE_SETTINGS_QUERY, DOCTORS_QUERY, INSURANCES_QUERY } from '@/sanity/queries';
-import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
 import { HeroSection } from '@/components/ui/HeroSection';
 import type { SiteSettings, Doctor, Insurance } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import Image from 'next/image';
 import { buildMetadata } from '@/lib/seo/metadata';
-import { InsuranceCarousel } from '@/components/ui/InsuranceCarousel';
+import { ConveniosEditorial } from '@/components/sections/ConveniosEditorial';
+import { StickyStages } from '@/components/sections/StickyStages';
+import { ProcedureCarousel } from '@/components/sections/ProcedureCarousel';
+import { PROCEDURE_KEYS } from '@/data/procedures';
+import { SpecialistList } from '@/components/sections/SpecialistList';
+import { OrbitDiagram } from '@/components/sections/OrbitDiagram';
 import {
   Stethoscope,
   Microscope,
@@ -85,52 +88,67 @@ export default async function HomePage({
         }}
       />
 
+      <ProcedureCarousel
+        eyebrow={t('homeProcedures.eyebrow')}
+        title={t('homeProcedures.title')}
+        lead={t('homeProcedures.lead')}
+        backgroundImageSrc="/images/procedures-bg-placeholder.jpg"
+        procedures={PROCEDURE_KEYS.map(({ key, icon, submark }) => ({
+          key,
+          icon,
+          submark,
+          name: t(`endos.procedures.items.${key}.name` as Parameters<typeof t>[0]),
+          duration: t(`endos.procedures.items.${key}.duration` as Parameters<typeof t>[0]),
+          shortDescription: t(`endos.procedures.items.${key}.shortDescription` as Parameters<typeof t>[0]),
+        }))}
+      />
+
       {/* ─── CUIDARTE ES NUESTRA PRIORIDAD ─── */}
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-4">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink mb-4">
               {t('priorityCare.title')}
             </h2>
-            <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-warm leading-relaxed max-w-3xl mx-auto">
               {t('priorityCare.subtitle')}
             </p>
           </div>
 
           {/* 3 cards principales */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
+            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
                 <Stethoscope className="w-7 h-7" aria-hidden="true" />
               </div>
-              <h3 className="text-xl font-medium text-brand-900 mb-2">
+              <h3 className="text-xl text-ink mb-2">
                 {t('priorityCare.card1.title')}
               </h3>
-              <p className="text-neutral-600 text-sm leading-relaxed">
+              <p className="text-gray-warm text-sm leading-relaxed">
                 {t('priorityCare.card1.description')}
               </p>
             </div>
 
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
+            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
                 <Microscope className="w-7 h-7" aria-hidden="true" />
               </div>
-              <h3 className="text-xl font-medium text-brand-900 mb-2">
+              <h3 className="text-xl text-ink mb-2">
                 {t('priorityCare.card2.title')}
               </h3>
-              <p className="text-neutral-600 text-sm leading-relaxed">
+              <p className="text-gray-warm text-sm leading-relaxed">
                 {t('priorityCare.card2.description')}
               </p>
             </div>
 
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
+            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
                 <HeartHandshake className="w-7 h-7" aria-hidden="true" />
               </div>
-              <h3 className="text-xl font-medium text-brand-900 mb-2">
+              <h3 className="text-xl text-ink mb-2">
                 {t('priorityCare.card3.title')}
               </h3>
-              <p className="text-neutral-600 text-sm leading-relaxed">
+              <p className="text-gray-warm text-sm leading-relaxed">
                 {t('priorityCare.card3.description')}
               </p>
             </div>
@@ -138,64 +156,55 @@ export default async function HomePage({
 
           {/* Servicios adicionales */}
           <div className="text-center max-w-3xl mx-auto">
-            <p className="text-neutral-600 text-sm">{t('priorityCare.additionalServices')}</p>
+            <p className="text-gray-warm text-sm">{t('priorityCare.additionalServices')}</p>
           </div>
         </div>
       </section>
 
-      {/* ─── CONOCE A NUESTROS ESPECIALISTAS ─── */}
-      {doctors.length > 0 && (
-        <section id="especialistas" className="bg-neutral-50 py-16 md:py-24 scroll-mt-20">
-          <div className="container-onkimia">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-4">
-                {t('doctors.title')}
-              </h2>
-              <p className="text-lg text-neutral-700 max-w-3xl mx-auto">
-                {t('doctors.description')}
-              </p>
-            </div>
+      <OrbitDiagram
+        eyebrow={t('orbit.eyebrow')}
+        title={t('orbit.title')}
+        items={[
+          { num: '1', name: t('orbit.items.cercana.name'), description: t('orbit.items.cercana.description') },
+          { num: '2', name: t('orbit.items.precisa.name'), description: t('orbit.items.precisa.description') },
+          { num: '3', name: t('orbit.items.integral.name'), description: t('orbit.items.integral.description') },
+          { num: '4', name: t('orbit.items.humana.name'), description: t('orbit.items.humana.description') },
+        ]}
+      />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-              {doctors.slice(0, 8).map((doctor) => (
-                <article
-                  key={doctor._id}
-                  className="bg-white rounded-xl overflow-hidden border border-neutral-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out"
-                >
-                  <div className="relative aspect-[3/4] bg-brand-100">
-                    {doctor.photo && (
-                      <Image
-                        src={urlFor(doctor.photo).width(400).height(533).url()}
-                        alt={doctor.fullName}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
-                        placeholder={doctor.photo.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                        blurDataURL={doctor.photo.asset?.metadata?.lqip}
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-medium text-brand-900 mb-1">{doctor.fullName}</h3>
-                    <p className="text-sm text-neutral-600">
-                      {getLocalized(doctor.specialty, locale)}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+      <StickyStages
+        eyebrow={t('process.eyebrow')}
+        title={t('process.title')}
+        lead={t('process.lead')}
+        imageSrc="/images/process-placeholder.jpg"
+        imageAlt={t('process.imageAlt')}
+        stages={[
+          { step: t('process.step1.step'), title: t('process.step1.title'), description: t('process.step1.description'), icon: 'users' },
+          { step: t('process.step2.step'), title: t('process.step2.title'), description: t('process.step2.description'), icon: 'microscope' },
+          { step: t('process.step3.step'), title: t('process.step3.title'), description: t('process.step3.description'), icon: 'activity' },
+          { step: t('process.step4.step'), title: t('process.step4.title'), description: t('process.step4.description'), icon: 'heart' },
+        ]}
+      />
+
+      {doctors.length > 0 && (
+        <SpecialistList
+          doctors={doctors}
+          eyebrow={t('doctors.eyebrow')}
+          title={t('doctors.title')}
+          description={t('doctors.description')}
+          ctaLabel={t('doctors.viewDetail')}
+          locale={locale}
+        />
       )}
 
       {/* ─── BIENESTAR INTEGRAL ─── */}
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-4">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink mb-4">
               {t('wellness.title')}
             </h2>
-            <p className="text-lg text-neutral-700 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-warm leading-relaxed max-w-3xl mx-auto">
               {t('wellness.subtitle')}
             </p>
           </div>
@@ -213,15 +222,15 @@ export default async function HomePage({
             ).map(({ key, Icon }) => (
               <div
                 key={key}
-                className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out"
+                className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out"
               >
                 <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6" aria-hidden="true" />
                 </div>
-                <h3 className="text-lg font-medium text-brand-900 mb-2">
+                <h3 className="text-lg text-ink mb-2">
                   {t(`wellness.${key}.title`)}
                 </h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">
+                <p className="text-sm text-gray-warm leading-relaxed">
                   {t(`wellness.${key}.description`)}
                 </p>
               </div>
@@ -231,13 +240,13 @@ export default async function HomePage({
       </section>
 
       {/* ─── AGENDA TU CITA ─── */}
-      <section className="bg-accent-50 py-16 md:py-24">
+      <section className="bg-ink py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6">
               {t('appointment.title')}
             </h2>
-            <p className="text-lg text-neutral-700 mb-12">
+            <p className="text-lg text-white/70 leading-relaxed mb-12">
               {t('appointment.description')}
             </p>
 
@@ -251,21 +260,21 @@ export default async function HomePage({
               ).map(({ Icon, step }, index) => (
                 <div key={step} className="text-center">
                   <div className="relative w-20 h-20 mx-auto mb-4">
-                    <div className="absolute inset-0 rounded-full bg-accent-500 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-full bg-teal flex items-center justify-center">
                       <Icon className="w-10 h-10 text-white" aria-hidden="true" />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-brand-900 text-white text-sm font-bold flex items-center justify-center">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-ink-2 border border-white/[0.08] text-white text-sm font-medium flex items-center justify-center">
                       {index + 1}
                     </div>
                   </div>
-                  <h3 className="font-medium text-brand-900">{t(`appointment.${step}`)}</h3>
+                  <h3 className="text-white">{t(`appointment.${step}`)}</h3>
                 </div>
               ))}
             </div>
 
             <Link
               href="/contacto#contact-form"
-              className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg"
+              className="inline-block bg-teal hover:bg-teal-soft text-white font-medium px-8 py-3 rounded-lg transition-colors text-lg"
             >
               {t('appointment.cta')}
             </Link>
@@ -273,18 +282,12 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ─── CONVENIOS ─── */}
-      <section className="container-onkimia py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-brand-900 text-center mb-12">
-            {t('insurances.title')}
-          </h2>
-
-          {insurances.length > 0 && (
-            <InsuranceCarousel insurances={insurances} />
-          )}
-        </div>
-      </section>
+      <ConveniosEditorial
+        insurances={insurances}
+        eyebrow={t('insurances.eyebrow')}
+        title={t('insurances.title')}
+        statLabel={t('insurances.statLabel')}
+      />
     </>
   );
 }

@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
 import localFont from 'next/font/local';
 import { Montserrat, Source_Code_Pro } from 'next/font/google';
+import { fraunces, dmSans } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { CLINICS_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
@@ -114,7 +115,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${googleSansFlex.variable} ${montserrat.variable} ${sourceCodePro.variable} ${hostGrotesk.variable}`}
+      className={`${googleSansFlex.variable} ${montserrat.variable} ${sourceCodePro.variable} ${hostGrotesk.variable} ${fraunces.variable} ${dmSans.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>

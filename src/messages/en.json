@@ -150,8 +150,10 @@
       "description": "Each person is unique, which is why we design comprehensive treatments that accompany you before, during, and after any oncological process."
     },
     "doctors": {
-      "title": "Meet our specialists",
-      "description": "Be part of the Onkimia family. Our multidisciplinary team is made up of highly trained doctors committed to your well-being."
+      "title": "Specialists who *accompany you*",
+      "description": "Be part of the Onkimia family. Our multidisciplinary team is made up of highly trained doctors committed to your well-being.",
+      "eyebrow": "Our team",
+      "viewDetail": "View profile"
     },
     "wellness": {
       "title": "Comprehensive wellness, all in one place",
@@ -190,7 +192,9 @@
       "cta": "Schedule appointment"
     },
     "insurances": {
-      "title": "Insurance Partners"
+      "title": "Insurance Partners",
+      "eyebrow": "Institutional backing",
+      "statLabel": "national and international insurers that back your treatment."
     },
     "priorityCare": {
       "title": "Caring for you is our priority",
@@ -208,6 +212,59 @@
         "description": "Human and professional support before, during, and after your treatment."
       },
       "additionalServices": "Our services include: chemotherapy, oncological surgery, palliative care, and personalized complementary services."
+    },
+    "process": {
+      "eyebrow": "Initial evaluation",
+      "title": "A *complete* look at your health",
+      "lead": "A comprehensive oncology evaluation combining studies, medical history, and personal support. This is how the journey unfolds, step by step.",
+      "imageAlt": "Onkimia medical team in consultation",
+      "step1": {
+        "step": "Step 01",
+        "title": "First consultation",
+        "description": "We get to know your complete medical history and concerns. An unhurried conversation where we listen before we act, because every case begins with understanding the person."
+      },
+      "step2": {
+        "step": "Step 02",
+        "title": "Diagnostic studies",
+        "description": "We carry out the necessary tests with precision technology: imaging, lab work, and Endos unit procedures when required, with fast results."
+      },
+      "step3": {
+        "step": "Step 03",
+        "title": "Personalized plan",
+        "description": "We design a treatment plan tailored to you, reviewed by our multidisciplinary team. We explain every option clearly so you can decide with complete information."
+      },
+      "step4": {
+        "step": "Step 04",
+        "title": "Continuous follow-up",
+        "description": "We accompany you throughout the entire process. Your plan evolves with you, with psychology, nutrition, and pain management support whenever you need it. You never walk alone."
+      }
+    },
+    "homeProcedures": {
+      "eyebrow": "What we do for you",
+      "title": "Studies and *procedures*",
+      "lead": "Outpatient diagnosis and treatment with cutting-edge technology, designed for your comfort and peace of mind."
+    },
+    "orbit": {
+      "eyebrow": "How we work",
+      "title": "Care that is *different*",
+      "items": {
+        "cercana": {
+          "name": "Close",
+          "description": "A frictionless first contact. Schedule your appointment by WhatsApp or phone and receive immediate guidance, with no waiting or complex paperwork."
+        },
+        "precisa": {
+          "name": "Precise",
+          "description": "Diagnosis with cutting-edge technology that enables early, accurate clinical decisions — because every day matters."
+        },
+        "integral": {
+          "name": "Comprehensive",
+          "description": "Treatment, pain management, and emotional wellbeing coordinated in one place, so you never have to navigate between institutions alone."
+        },
+        "humana": {
+          "name": "Human",
+          "description": "Because you are not a file or a protocol. Every plan is designed around you, your story, and your vision for life."
+        }
+      }
     }
   },
   "about": {
@@ -455,23 +512,33 @@
       "items": {
         "endoscopy": {
           "name": "Endoscopies",
-          "description": "Diagnosis of the upper digestive tract"
+          "description": "Diagnosis of the upper digestive tract",
+          "duration": "30 min",
+          "shortDescription": "Upper digestive tract exploration with high-definition technology and monitored sedation."
         },
         "colonoscopy": {
           "name": "Colonoscopies",
-          "description": "Diagnosis of the colon"
+          "description": "Diagnosis of the colon",
+          "duration": "45 min",
+          "shortDescription": "Complete colon review for early detection of polyps and colorectal pathology."
         },
         "bronchoscopy": {
           "name": "Bronchoscopies",
-          "description": "Diagnosis of the respiratory tract"
+          "description": "Diagnosis of the respiratory tract",
+          "duration": "30 min",
+          "shortDescription": "Direct visualization of airways and lungs for precise diagnosis and tissue sampling."
         },
         "biopsy": {
           "name": "Biopsies",
-          "description": "Sample collection for analysis"
+          "description": "Sample collection for analysis",
+          "duration": "20 min",
+          "shortDescription": "Image-guided tissue sampling for definitive anatomopathological analysis."
         },
         "ultrasoundGuided": {
           "name": "Ultrasound-guided procedures",
-          "description": "High-precision image guidance"
+          "description": "High-precision image guidance",
+          "duration": "45 min",
+          "shortDescription": "High-precision interventional procedures guided by real-time ultrasound imaging."
         }
       }
     },
