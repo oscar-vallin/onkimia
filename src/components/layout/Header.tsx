@@ -10,7 +10,10 @@ import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, Clinic } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
-import { LazyMotion, domAnimation, m, AnimatePresence, type Variants } from 'framer-motion';
+import { LazyMotion, m, AnimatePresence, type Variants } from 'framer-motion';
+
+const loadFeatures = () =>
+  import('framer-motion').then((mod) => mod.domAnimation);
 import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsapp';
 
 interface HeaderProps {
@@ -297,7 +300,7 @@ export function Header({ settings, clinics }: HeaderProps) {
       />
 
       {/* ─── Full-Screen Mobile Menu ─── */}
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={loadFeatures} strict>
         <AnimatePresence>
           {mobileOpen && (
             <m.nav
