@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { urlFor } from '@/sanity/image';
+import type { SanityImageWithLQIP } from '@/sanity/types';
 
 interface ProcedureItem {
   key: string;
@@ -13,7 +15,8 @@ interface ProcedureCarouselProps {
   eyebrow: string;
   title: string;
   lead?: string;
-  backgroundImageSrc: string;
+  backgroundImageSrc?: string;
+  backgroundImage?: SanityImageWithLQIP;
   procedures: ProcedureItem[];
 }
 
@@ -33,7 +36,7 @@ function ProcedureCard({
   submark,
   backgroundImageSrc,
 }: Pick<ProcedureItem, 'name' | 'duration' | 'shortDescription' | 'submark'> & {
-  backgroundImageSrc: string;
+  backgroundImageSrc?: string;
 }) {
   const [durationNum, ...durationUnit] = duration.split(' ');
   const unitStr = durationUnit.join(' ');
@@ -41,14 +44,16 @@ function ProcedureCard({
   return (
     <div className="w-[300px] h-[400px] flex-shrink-0 relative rounded-3xl overflow-hidden bg-[#14463f]">
       {/* Background image */}
-      <Image
-        src={backgroundImageSrc}
-        alt=""
-        fill
-        sizes="300px"
-        className="object-cover"
-        aria-hidden="true"
-      />
+      {backgroundImageSrc && (
+        <Image
+          src={backgroundImageSrc}
+          alt=""
+          fill
+          sizes="300px"
+          className="object-cover"
+          aria-hidden="true"
+        />
+      )}
 
       {/* Dark gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/15 to-ink/90" />
@@ -90,21 +95,28 @@ export function ProcedureCarousel({
   title,
   lead,
   backgroundImageSrc,
+  backgroundImage,
   procedures,
 }: ProcedureCarouselProps) {
+  const bgSrc = backgroundImage
+    ? urlFor(backgroundImage).width(1920).height(1080).format('webp').quality(75).url()!
+    : backgroundImageSrc;
+
   return (
     <section className="bg-ink relative py-20 md:py-28 overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={backgroundImageSrc}
-          alt=""
-          fill
-          priority={false}
-          sizes="100vw"
-          className="object-cover opacity-25"
-          aria-hidden="true"
-        />
+        {bgSrc && (
+          <Image
+            src={bgSrc as string}
+            alt=""
+            fill
+            priority={false}
+            sizes="100vw"
+            className="object-cover opacity-25"
+            aria-hidden="true"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/85 to-ink/95" />
       </div>
 
@@ -137,7 +149,7 @@ export function ProcedureCarousel({
               duration={p.duration}
               shortDescription={p.shortDescription}
               submark={p.submark}
-              backgroundImageSrc={backgroundImageSrc}
+              backgroundImageSrc={bgSrc}
             />
           ))}
           {/* Set B — seamless loop */}
@@ -148,7 +160,7 @@ export function ProcedureCarousel({
               duration={p.duration}
               shortDescription={p.shortDescription}
               submark={p.submark}
-              backgroundImageSrc={backgroundImageSrc}
+              backgroundImageSrc={bgSrc}
             />
           ))}
         </div>

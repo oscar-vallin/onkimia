@@ -90,6 +90,7 @@ export default async function HomePage({
         eyebrow={t('homeProcedures.eyebrow')}
         title={t('homeProcedures.title')}
         lead={t('homeProcedures.lead')}
+        backgroundImage={settings.proceduresBgImage}
         backgroundImageSrc="/images/procedures-bg-placeholder.jpg"
         procedures={PROCEDURE_KEYS.map(({ key, icon, submark }) => ({
           key,
@@ -174,6 +175,7 @@ export default async function HomePage({
         eyebrow={t('process.eyebrow')}
         title={t('process.title')}
         lead={t('process.lead')}
+        heroImage={settings.processImage}
         imageSrc="/images/process-placeholder.jpg"
         imageAlt={t('process.imageAlt')}
         stages={[

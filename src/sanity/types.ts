@@ -24,6 +24,8 @@ export interface SiteSettings {
   endosSafetyImage?: Image;
   homeHeroImage?: SanityImageWithLQIP;
   homeHeroDescription: LocalizedString;
+  processImage?: SanityImageWithLQIP;
+  proceduresBgImage?: SanityImageWithLQIP;
   socialMedia?: {
     instagram?: string;
     facebook?: string;

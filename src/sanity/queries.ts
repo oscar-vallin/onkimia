@@ -22,6 +22,20 @@ export const SITE_SETTINGS_QUERY = groq`
     cuidareHeroImage,
     endosHeroImage,
     endosSafetyImage,
+    processImage {
+      ...,
+      asset-> {
+        ...,
+        metadata { lqip }
+      }
+    },
+    proceduresBgImage {
+      ...,
+      asset-> {
+        ...,
+        metadata { lqip }
+      }
+    },
     socialMedia,
     whatsappCommercial,
     jobBoardEmail

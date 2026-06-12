@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { Users, Microscope, Activity, Heart } from 'lucide-react';
+import { urlFor } from '@/sanity/image';
+import type { SanityImageWithLQIP } from '@/sanity/types';
 
 type StageIcon = 'users' | 'microscope' | 'activity' | 'heart';
 
@@ -15,8 +17,9 @@ interface StickyStagesProps {
   title: string;
   lead: string;
   stages: Stage[];
-  imageSrc: string;
+  imageSrc?: string;
   imageAlt: string;
+  heroImage?: SanityImageWithLQIP;
 }
 
 const ICON_MAP: Record<StageIcon, React.ReactNode> = {
@@ -42,7 +45,13 @@ export function StickyStages({
   stages,
   imageSrc,
   imageAlt,
+  heroImage,
 }: StickyStagesProps) {
+  const src: string = heroImage
+    ? urlFor(heroImage).width(800).height(1000).format('webp').quality(82).url()!
+    : (imageSrc ?? '/images/process-placeholder.jpg');
+  const blur = heroImage?.asset?.metadata?.lqip ?? undefined;
+
   return (
     <section className="bg-cream py-20 md:py-28">
       <div className="container-onkimia">
@@ -52,11 +61,13 @@ export function StickyStages({
           <div className="lg:sticky lg:top-[110px]">
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-ink-2">
               <Image
-                src={imageSrc}
+                src={src}
                 alt={imageAlt}
                 fill
                 priority={false}
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                placeholder={blur ? 'blur' : 'empty'}
+                blurDataURL={blur}
                 className="object-cover"
               />
             </div>

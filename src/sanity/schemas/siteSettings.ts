@@ -141,6 +141,20 @@ export const siteSettings = defineType({
       description: 'Texto descriptivo que aparece debajo del tagline en el hero del home.',
       required: false,
     }),
+    defineField({
+      name: 'processImage',
+      title: 'Imagen del Proceso de Evaluación',
+      description: 'Imagen sticky de la sección "Una mirada completa a tu salud". Recomendado: vertical 4:5, mínimo 1200×1500px, JPG optimizado <300KB.',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'proceduresBgImage',
+      title: 'Imagen de fondo — Carrusel de Procedimientos',
+      description: 'Fondo oscuro del carrusel "Estudios y procedimientos". Recomendado: 1920×1080px, JPG oscuro <200KB.',
+      type: 'image',
+      options: { hotspot: true },
+    }),
   ],
   preview: {
     select: {
