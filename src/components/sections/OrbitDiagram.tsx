@@ -30,6 +30,9 @@ const SLOTS: Record<string, Slot> = {
   '1':  { x: 780, y: 330, r: 26, opacity: 0.85,  showLine: false },
 };
 
+// Mobile override for active node: lower y so there is visible arc+apex gap above it
+const MOBILE_ACTIVE: Slot = { x: 450, y: 140, r: 54, opacity: 1, showLine: true };
+
 function wrapText(text: string, maxChars: number): string[] {
   const words = text.split(' ');
   const lines: string[] = [];
@@ -55,15 +58,17 @@ function parseTitle(raw: string) {
 export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
   const [current, setCurrent] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
-  // SSR-safe: initialise false, hydrate on client
+  // SSR-safe: initialise false (server renders desktop viewBox), hydrate on client
   const [isMobile, setIsMobile] = useState(false);
   const prefersReduced = usePrefersReducedMotion();
   const n = items.length;
 
-  // Responsive viewBox — apex crop on mobile, full arc on desktop
-  // Mobile: y:40–370 — captures full active node (top at y:43) and all 3 desc lines
-  // Desktop: full 900×440 arc
-  const viewBox = isMobile ? '0 40 900 330' : '0 0 900 440';
+  // Responsive viewBox:
+  // Mobile — narrow horizontal crop (x:240–660) centred on arc apex; side nodes at
+  //   x:120 and x:780 fall outside and are clipped. Tall window (y:-60–500) gives
+  //   breathing room above the apex dot and space below the text.
+  // Desktop — full 900×440 arc, unchanged.
+  const viewBox = isMobile ? '240 -60 420 560' : '0 0 900 440';
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -150,10 +155,14 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
     let rel = i - current;
     if (rel > n / 2) rel -= n;
     if (rel < -n / 2) rel += n;
+    // On mobile the active slot uses a lower y position so arc apex is clearly
+    // visible above the node ring
+    if (isMobile && rel === 0) return MOBILE_ACTIVE;
     return SLOTS[String(rel)];
   }
 
-  const descLines = wrapText(items[current].description, 40);
+  const maxChars = isMobile ? 28 : 40;
+  const descLines = wrapText(items[current].description, maxChars);
 
   const textStyle = {
     opacity: textVisible ? 1 : 0,
@@ -163,7 +172,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
   return (
     <section className="bg-ink py-12 md:py-28 overflow-x-hidden">
       {/* Header: padded container for readability */}
-      <div className="container-onkimia mb-8 md:mb-12">
+      <div className="container-onkimia mb-14 md:mb-12">
         <div className="text-center">
           <p className="text-xs font-medium tracking-widest uppercase text-white/90 mb-4">
             {eyebrow}
@@ -182,7 +191,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
       >
         <svg
           viewBox={viewBox}
-          className="w-full h-auto overflow-visible"
+          className="w-full h-auto overflow-hidden md:overflow-visible"
           role="img"
           aria-label={title}
         >
@@ -204,13 +213,36 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
             strokeWidth="1.5"
           />
 
-          {/* Center anchor dot — below mobile viewport, visible on desktop */}
-          <circle cx="450" cy="420" r="5" fill="#2a9d8c" />
+          {/* Apex accent dot — sits on arc curve, mobile only */}
+          {isMobile && (
+            <circle cx={450} cy={40} r={10} fill="#5DCAA5" />
+          )}
 
-          {/* Connector line — only active slot (showLine: true) */}
+          {/* Bottom anchor dot — desktop only */}
+          {!isMobile && (
+            <circle cx="450" cy="420" r="5" fill="#2a9d8c" />
+          )}
+
+          {/* Connector lines */}
           {items.map((_, i) => {
             const slot = getSlot(i);
             if (!slot?.showLine) return null;
+
+            if (isMobile) {
+              // Short vertical stem below the active node on mobile
+              return (
+                <line
+                  key={`line-${i}`}
+                  x1={450} y1={slot.y + slot.r + 10}
+                  x2={450} y2={slot.y + slot.r + 75}
+                  stroke="rgba(255,255,255,0.35)"
+                  strokeWidth="1"
+                  className="transition-all duration-700 ease-out"
+                />
+              );
+            }
+
+            // Desktop: connector from bottom anchor up to node bottom
             return (
               <line
                 key={`line-${i}`}
@@ -223,29 +255,31 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
             );
           })}
 
-          {/* Active item text (name + description) — inside arc, visible in both viewBoxes */}
+          {/* Active item text — name */}
           <text
             x="450"
-            y="200"
+            y={isMobile ? 300 : 200}
             textAnchor="middle"
             fill="#2a9d8c"
             fontFamily="var(--font-fraunces), var(--font-serif, Georgia), serif"
             fontStyle="italic"
-            fontSize="38"
+            fontSize={isMobile ? 40 : 38}
             fontWeight="400"
             style={textStyle}
           >
             {items[current].name}
           </text>
+
+          {/* Active item text — description lines */}
           {descLines.map((line, idx) => (
             <text
               key={idx}
               x="450"
-              y={245 + idx * 32}
+              y={isMobile ? 345 + idx * 34 : 245 + idx * 32}
               textAnchor="middle"
               fill="rgba(255,255,255,0.72)"
               fontFamily="var(--font-dm-sans), var(--font-sans, system-ui), sans-serif"
-              fontSize="17"
+              fontSize={isMobile ? 24 : 17}
               style={textStyle}
             >
               {line}
@@ -280,16 +314,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
                   strokeWidth={isActive ? 2.5 : 1.5}
                   style={{ transition: 'all 700ms cubic-bezier(0.4,0,0.2,1)' }}
                 />
-                {/* Teal accent dot — visual anchor for active node */}
-                {isActive && (
-                  <circle
-                    cx={slot.x}
-                    cy={slot.y}
-                    r={4}
-                    fill="#5DCAA5"
-                    style={{ transition: 'all 700ms cubic-bezier(0.4,0,0.2,1)' }}
-                  />
-                )}
+                {/* Teal accent dot — centre of active node ring */}
                 <text
                   x={slot.x}
                   y={slot.y + slot.r * 0.35}
