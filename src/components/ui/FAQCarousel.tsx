@@ -78,20 +78,20 @@ export function FAQCarousel({ faqs, locale }: FAQCarouselProps) {
         <div className="flex justify-center items-center gap-4 mt-8">
           <button
             onClick={goToPrevious}
-            className="bg-neutral-900 hover:bg-neutral-800 text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-ink hover:bg-ink-2 text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous FAQs"
             disabled={currentIndex === 0}
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           
-          <span className="text-sm text-neutral-600">
+          <span className="text-sm text-gray-warm">
             {currentIndex + 1} / {totalPages}
           </span>
           
           <button
             onClick={goToNext}
-            className="bg-accent-500 hover:bg-accent-600 text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-teal hover:bg-teal-soft text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next FAQs"
             disabled={currentIndex === totalPages - 1}
           >

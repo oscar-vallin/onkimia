@@ -27,7 +27,7 @@ export function Footer({ settings, clinics }: FooterProps) {
     clinics.find((c) => c.isPrimary) || clinics[0] || null;
 
   return (
-    <footer className={`${isDoctorsRoute ? 'bg-doctors-ink' : 'bg-brand-900'} text-neutral-100 mt-section`}>
+    <footer className={`${isDoctorsRoute ? 'bg-doctors-ink' : 'bg-ink'} text-white/90 mt-section`}>
       <div className="container-onkimia py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
           {/* ─── Logo (col-span-2) ─── */}
@@ -66,7 +66,7 @@ export function Footer({ settings, clinics }: FooterProps) {
               <li>
                 <Link
                   href="/"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                 >
                   {tNav('home')}
                 </Link>
@@ -74,7 +74,7 @@ export function Footer({ settings, clinics }: FooterProps) {
               <li>
                 <Link
                   href="/nosotros"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                 >
                   {tNav('about')}
                 </Link>
@@ -82,7 +82,7 @@ export function Footer({ settings, clinics }: FooterProps) {
               <li>
                 <Link
                   href="/servicios"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                 >
                   {tNav('services')}
                 </Link>
@@ -90,7 +90,7 @@ export function Footer({ settings, clinics }: FooterProps) {
               <li>
                 <Link
                   href="/endos"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                 >
                   {tNav('endos')}
                 </Link>
@@ -98,7 +98,7 @@ export function Footer({ settings, clinics }: FooterProps) {
               <li>
                 <Link
                   href="/cuidare"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                 >
                   {tNav('cuidare')}
                 </Link>
@@ -106,7 +106,7 @@ export function Footer({ settings, clinics }: FooterProps) {
               <li>
                 <Link
                   href="/contacto"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                 >
                   {tNav('contact')}
                 </Link>
@@ -125,7 +125,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                   href={settings.socialMedia.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                   aria-label="Facebook"
                 >
                   <FacebookIcon className="w-5 h-5" />
@@ -136,7 +136,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                   href={settings.socialMedia.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                   aria-label="Instagram"
                 >
                   <InstagramIcon className="w-5 h-5" />
@@ -147,7 +147,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                   href={settings.socialMedia.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-300 hover:text-white transition-colors"
+                  className="text-white/60 hover:text-white transition-colors"
                   aria-label="X (Twitter)"
                 >
                   <XIcon className="w-5 h-5" />
@@ -198,11 +198,11 @@ export function Footer({ settings, clinics }: FooterProps) {
               {tNav('contact')}
             </h3>
             {primaryClinic && (
-              <div className="text-sm text-neutral-300 space-y-2">
+              <div className="text-sm text-white/60 space-y-2">
                 {primaryClinic.phone && (
                   <a
                     href={`tel:${primaryClinic.phone.replace(/\s/g, '')}`}
-                    className="block hover:text-accent-400 transition-colors"
+                    className="block hover:text-teal-soft transition-colors"
                   >
                     {primaryClinic.phone}
                   </a>
@@ -221,7 +221,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                       href={`https://maps.google.com/?q=${encodeURIComponent(parts)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block mt-2 hover:text-accent-400 transition-colors"
+                      className="block mt-2 hover:text-teal-soft transition-colors"
                     >
                       <p>C. {primaryClinic.address.street},</p>
                       {primaryClinic.address.neighborhood && (
@@ -251,7 +251,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                 <li>
                   <Link
                     href="/guadalajara"
-                    className="text-neutral-300 hover:text-white transition-colors"
+                    className="text-white/60 hover:text-white transition-colors"
                   >
                     {tFooter('locationGuadalajara')}
                   </Link>
@@ -259,7 +259,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                 <li>
                   <Link
                     href="/colima"
-                    className="text-neutral-300 hover:text-white transition-colors"
+                    className="text-white/60 hover:text-white transition-colors"
                   >
                     {tFooter('locationColima')}
                   </Link>
@@ -274,7 +274,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                 <li>
                   <Link
                     href="/bolsa-de-trabajo"
-                    className="text-neutral-300 hover:text-white transition-colors"
+                    className="text-white/60 hover:text-white transition-colors"
                   >
                     {tFooter('viewPositions')}
                   </Link>
@@ -282,7 +282,7 @@ export function Footer({ settings, clinics }: FooterProps) {
                 <li>
                   <Link
                     href="/aviso-de-privacidad"
-                    className="text-neutral-300 hover:text-white transition-colors"
+                    className="text-white/60 hover:text-white transition-colors"
                   >
                     {tFooter('privacyPolicy')}
                   </Link>

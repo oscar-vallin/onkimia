@@ -36,9 +36,9 @@ export function HeroSection({
 
   // Overlay responsive: vertical en mobile (texto centrado), lateral en desktop (texto a la izquierda)
   const overlayClasses = {
-    light: 'bg-gradient-to-b from-brand-900/70 via-brand-900/40 to-brand-900/65 md:bg-gradient-to-r md:from-brand-900/60 md:via-brand-900/30 md:to-transparent',
-    medium: 'bg-gradient-to-b from-brand-900/85 via-brand-900/70 to-brand-900/80 md:bg-gradient-to-r md:from-brand-900/80 md:via-brand-900/55 md:to-transparent',
-    dark: 'bg-gradient-to-b from-brand-900/90 via-brand-900/70 to-brand-900/90 md:bg-gradient-to-r md:from-brand-900/90 md:via-brand-900/70 md:to-transparent',
+    light: 'bg-gradient-to-b from-ink/70 via-ink/40 to-ink/65 md:bg-gradient-to-r md:from-ink/60 md:via-ink/30 md:to-transparent',
+    medium: 'bg-gradient-to-b from-ink/85 via-ink/70 to-ink/80 md:bg-gradient-to-r md:from-ink/80 md:via-ink/55 md:to-transparent',
+    dark: 'bg-gradient-to-b from-ink/90 via-ink/70 to-ink/90 md:bg-gradient-to-r md:from-ink/90 md:via-ink/70 md:to-transparent',
   };
 
   return (
@@ -57,7 +57,7 @@ export function HeroSection({
           className="object-cover"
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-900 to-brand-700" />
+        <div className="absolute inset-0 bg-gradient-to-br from-ink to-ink-2" />
       )}
 
       {/* Overlay responsive */}
@@ -90,7 +90,7 @@ export function HeroSection({
             <div className="mt-6 md:mt-8">
               <Link
                 href={primaryCta.href}
-                className="inline-flex w-full max-w-sm sm:w-auto sm:max-w-none items-center justify-center gap-2 bg-accent-500 hover:bg-accent-600 text-white font-medium px-6 py-3 rounded-lg transition-colors"
+                className="inline-flex w-full max-w-sm sm:w-auto sm:max-w-none items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white font-medium px-6 py-3 rounded-lg transition-colors"
               >
                 {primaryCta.label}
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -103,4 +103,3 @@ export function HeroSection({
   );
 }
 
-// Made with Bob

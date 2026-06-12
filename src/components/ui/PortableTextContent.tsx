@@ -7,7 +7,7 @@ const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => <p className="mb-4 leading-relaxed">{children}</p>,
     h3: ({ children }) => (
-      <h3 className="mt-8 mb-3 font-display text-lg font-semibold text-brand-900">{children}</h3>
+      <h3 className="mt-8 mb-3 font-serif text-lg text-ink">{children}</h3>
     ),
   },
   list: {
@@ -26,7 +26,7 @@ const components: PortableTextComponents = {
         href={value?.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-accent-500 underline hover:text-accent-600"
+        className="text-teal underline hover:text-teal-soft"
       >
         {children}
       </a>

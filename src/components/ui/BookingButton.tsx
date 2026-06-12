@@ -54,7 +54,7 @@ export async function BookingButton({
   };
 
   const primaryColorClasses =
-    sectionColorMap[section] ?? 'bg-accent-500 hover:bg-accent-600';
+    sectionColorMap[section] ?? 'bg-teal hover:bg-teal-soft';
 
   const baseClasses =
     'inline-flex items-center justify-center gap-2 font-medium px-6 py-3 rounded-md transition-colors';

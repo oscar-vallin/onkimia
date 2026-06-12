@@ -57,22 +57,22 @@ export default async function PrivacyPolicyPage({
   return (
     <main className="min-h-screen bg-white">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-        <header className="mb-10 border-b border-gray-200 pb-8">
-          <h1 className="font-display text-3xl font-bold text-brand-900 sm:text-4xl">{title}</h1>
-          <p className="mt-3 text-sm text-gray-500">{t('lastUpdated', { date: formattedDate })}</p>
+        <header className="mb-10 border-b border-line pb-8">
+          <h1 className="font-serif text-3xl text-ink sm:text-4xl">{title}</h1>
+          <p className="mt-3 text-sm text-gray-soft">{t('lastUpdated', { date: formattedDate })}</p>
           {introduction && (
-            <p className="mt-6 leading-relaxed text-gray-700">{introduction}</p>
+            <p className="mt-6 leading-relaxed text-gray-warm">{introduction}</p>
           )}
         </header>
 
-        <div className="space-y-10 text-gray-700">
+        <div className="space-y-10 text-gray-warm">
           {policy.content.map((section, index) => {
             const heading = locale === 'en' ? section.heading.en : section.heading.es;
             const body = locale === 'en' ? section.bodyEn : section.bodyEs;
 
             return (
               <section key={index}>
-                <h2 className="mb-4 font-display text-xl font-semibold text-brand-900">
+                <h2 className="mb-4 font-serif text-xl text-ink leading-tight">
                   {heading}
                 </h2>
                 <PortableTextContent value={body} />

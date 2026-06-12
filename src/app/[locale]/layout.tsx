@@ -3,8 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
-import localFont from 'next/font/local';
-import { Montserrat, Source_Code_Pro } from 'next/font/google';
+import { Source_Code_Pro } from 'next/font/google';
 import { fraunces, dmSans } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
@@ -19,41 +18,6 @@ import { WelcomeModalProvider } from '@/components/providers/WelcomeModalProvide
 import type { Clinic, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import './globals.css';
-
-const hostGrotesk = localFont({
-  src: [
-    { path: '../fonts/host-grotesk/HostGrotesk-Regular.woff2',  weight: '400', style: 'normal' },
-    { path: '../fonts/host-grotesk/HostGrotesk-Medium.woff2',   weight: '500', style: 'normal' },
-    { path: '../fonts/host-grotesk/HostGrotesk-SemiBold.woff2', weight: '600', style: 'normal' },
-    { path: '../fonts/host-grotesk/HostGrotesk-Bold.woff2',     weight: '700', style: 'normal' },
-  ],
-  variable: '--font-host-grotesk',
-  display: 'swap',
-  preload: false,
-});
-
-const googleSansFlex = localFont({
-  src: [
-    { path: '../fonts/GoogleSansFlex120pt-Thin.woff2',       weight: '100', style: 'normal' },
-    { path: '../fonts/GoogleSansFlex120pt-ExtraLight.woff2', weight: '200', style: 'normal' },
-    { path: '../fonts/GoogleSansFlex120pt-Light.woff2',      weight: '300', style: 'normal' },
-    { path: '../fonts/GoogleSansFlex120pt-Regular.woff2',    weight: '400', style: 'normal' },
-    { path: '../fonts/GoogleSansFlex120pt-Medium.woff2',     weight: '500', style: 'normal' },
-    { path: '../fonts/GoogleSansFlex120pt-SemiBold.woff2',   weight: '600', style: 'normal' },
-    { path: '../fonts/GoogleSansFlex120pt-Bold.woff2',       weight: '700', style: 'normal' },
-    { path: '../fonts/GoogleSansFlex120pt-Black.woff2',      weight: '900', style: 'normal' },
-  ],
-  variable: '--next-font-google-sans-flex',
-  display: 'swap',
-  preload: false,
-});
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-body',
-  display: 'swap',
-});
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
@@ -115,7 +79,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${googleSansFlex.variable} ${montserrat.variable} ${sourceCodePro.variable} ${hostGrotesk.variable} ${fraunces.variable} ${dmSans.variable}`}
+      className={`${sourceCodePro.variable} ${fraunces.variable} ${dmSans.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>

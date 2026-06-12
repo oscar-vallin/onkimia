@@ -68,23 +68,23 @@ export function TestimonialCarousel({ testimonials, locale }: TestimonialCarouse
           <div className="md:col-span-3 flex flex-col justify-center">
             <div className="mb-6">
               <svg
-                className="w-10 h-10 text-accent-500 mb-4"
+                className="w-10 h-10 text-teal mb-4"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
-              <p className="text-lg text-neutral-700 leading-relaxed mb-6">
+              <p className="text-lg text-gray-warm leading-relaxed mb-6">
                 {getLocalized(currentTestimonial.testimonial, locale)}
               </p>
             </div>
             
             <div>
-              <p className="font-medium text-brand-900 text-lg">
+              <p className="font-medium text-ink text-lg">
                 {currentTestimonial.name}
               </p>
               {currentTestimonial.role && (
-                <p className="text-sm text-neutral-600">
+                <p className="text-sm text-gray-warm">
                   {getLocalized(currentTestimonial.role, locale)}
                 </p>
               )}
@@ -98,14 +98,14 @@ export function TestimonialCarousel({ testimonials, locale }: TestimonialCarouse
         <>
           <button
             onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white hover:bg-neutral-50 text-brand-900 p-3 rounded-full shadow-lg transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white hover:bg-cream text-ink p-3 rounded-full shadow-lg transition-colors"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white hover:bg-neutral-50 text-brand-900 p-3 rounded-full shadow-lg transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white hover:bg-cream text-ink p-3 rounded-full shadow-lg transition-colors"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-6 h-6" />
@@ -122,8 +122,8 @@ export function TestimonialCarousel({ testimonials, locale }: TestimonialCarouse
               onClick={() => goToSlide(index)}
               className={`w-2.5 h-2.5 rounded-full transition-all ${
                 index === currentIndex
-                  ? 'bg-accent-500 w-8'
-                  : 'bg-neutral-300 hover:bg-neutral-400'
+                  ? 'bg-teal w-8'
+                  : 'bg-line hover:bg-gray-soft'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />

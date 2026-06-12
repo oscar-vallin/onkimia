@@ -52,6 +52,7 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const t = await getTranslations('home');
+  const tEndos = await getTranslations('endos');
 
   const [doctors, insurances] = await Promise.all([
     sanityFetch<Doctor[]>({
@@ -89,9 +90,9 @@ export default async function HomePage({
           key,
           icon,
           submark,
-          name: t(`endos.procedures.items.${key}.name` as Parameters<typeof t>[0]),
-          duration: t(`endos.procedures.items.${key}.duration` as Parameters<typeof t>[0]),
-          shortDescription: t(`endos.procedures.items.${key}.shortDescription` as Parameters<typeof t>[0]),
+          name: tEndos(`procedures.items.${key}.name`),
+          duration: tEndos(`procedures.items.${key}.duration`),
+          shortDescription: tEndos(`procedures.items.${key}.shortDescription`),
         }))}
       />
 
@@ -110,7 +111,7 @@ export default async function HomePage({
           {/* 3 cards principales */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-              <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <Stethoscope className="w-7 h-7" aria-hidden="true" />
               </div>
               <h3 className="text-xl text-ink mb-2">
@@ -122,7 +123,7 @@ export default async function HomePage({
             </div>
 
             <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-              <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <Microscope className="w-7 h-7" aria-hidden="true" />
               </div>
               <h3 className="text-xl text-ink mb-2">
@@ -134,7 +135,7 @@ export default async function HomePage({
             </div>
 
             <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-              <div className="w-14 h-14 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <HeartHandshake className="w-7 h-7" aria-hidden="true" />
               </div>
               <h3 className="text-xl text-ink mb-2">
@@ -216,7 +217,7 @@ export default async function HomePage({
                 key={key}
                 className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out"
               >
-                <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-3">
+                <div className="w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <h3 className="text-lg text-ink mb-2">

@@ -17,9 +17,9 @@ export function ClinicHours({ hours, locale }: ClinicHoursProps) {
   if (!hours || hours.length === 0) return null;
 
   return (
-    <div className="bg-white border border-neutral-200 rounded-2xl p-6 md:p-8">
+    <div className="bg-white border border-line rounded-2xl p-6 md:p-8">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-lg bg-teal/10 text-teal flex items-center justify-center">
           <Clock className="w-5 h-5" aria-hidden="true" />
         </div>
         <h2 className="text-xl md:text-2xl">{t('title')}</h2>
@@ -29,12 +29,12 @@ export function ClinicHours({ hours, locale }: ClinicHoursProps) {
         {hours.map((hour, idx) => (
           <li
             key={`${hour.days}-${idx}`}
-            className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 pb-3 border-b border-neutral-100 last:border-0 last:pb-0"
+            className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 pb-3 border-b border-line last:border-0 last:pb-0"
           >
-            <span className="text-neutral-800 font-medium">
+            <span className="text-ink font-medium">
               {formatDayLabel(hour.days, locale)}
             </span>
-            <span className="text-neutral-700 font-mono text-sm">
+            <span className="text-gray-warm font-mono text-sm">
               {formatHourRange(hour.opens, hour.closes)}
             </span>
           </li>

@@ -23,7 +23,7 @@ export function UnitAvailabilityBanner({
   return (
     <div
       role="status"
-      className="bg-accent-50 border-y border-accent-200 text-accent-800"
+      className="bg-teal/10 border-y border-teal/20 text-teal"
     >
       <div className="container-onkimia py-3 text-sm text-center">
         {t(messageKey)}

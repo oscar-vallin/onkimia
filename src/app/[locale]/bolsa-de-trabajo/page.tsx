@@ -38,19 +38,13 @@ export default async function JobBoardPage({
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative bg-brand-900 py-20 md:py-28 -mt-16 md:-mt-20 pt-32 md:pt-40 overflow-hidden">
+      <section className="relative bg-ink py-20 md:py-28 -mt-16 md:-mt-20 pt-32 md:pt-40 overflow-hidden">
         <DecorativeBubbles variant="sides" opacity={0.6} />
         <div className="relative container-onkimia text-center">
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl mb-4"
-            style={{ color: '#ffffff' }}
-          >
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-4">
             {t('hero.title')}
           </h1>
-          <p
-            className="text-lg md:text-xl max-w-2xl mx-auto text-pretty"
-            style={{ color: 'rgba(255,255,255,0.85)' }}
-          >
+          <p className="text-lg md:text-xl max-w-2xl mx-auto text-pretty text-white/85">
             {t('hero.description')}
           </p>
         </div>
@@ -58,9 +52,9 @@ export default async function JobBoardPage({
 
       {/* ─── FORMULARIO ─── */}
       <section className="container-onkimia py-16 md:py-24">
-        <div className="max-w-3xl mx-auto bg-white border border-neutral-200 rounded-2xl p-6 md:p-10 shadow-sm">
-          <h2 className="text-2xl md:text-3xl mb-2">{t('form.title')}</h2>
-          <p className="text-neutral-600 mb-8">{t('form.subtitle')}</p>
+        <div className="max-w-3xl mx-auto bg-white border border-line rounded-2xl p-6 md:p-10 shadow-sm">
+          <h2 className="font-serif text-2xl md:text-3xl mb-2">{t('form.title')}</h2>
+          <p className="text-gray-warm mb-8">{t('form.subtitle')}</p>
           <JobApplicationForm vacancies={vacancies} />
         </div>
       </section>

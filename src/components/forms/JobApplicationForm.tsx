@@ -211,10 +211,10 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
   };
 
   const fieldClass = (name: string) =>
-    `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:bg-neutral-50 disabled:cursor-not-allowed ${
+    `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:bg-cream disabled:cursor-not-allowed ${
       getFieldError(name)
         ? 'border-red-400 focus:border-red-400 focus:ring-red-100'
-        : 'border-neutral-300 focus:border-accent-500 focus:ring-accent-100'
+        : 'border-line focus:border-teal focus:ring-teal/10'
     }`;
 
   const errorMsg = (name: string, id: string) => {
@@ -238,7 +238,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         noValidate
       >
         {/* Nota de campos requeridos */}
-        <p className="text-sm text-neutral-500">
+        <p className="text-sm text-gray-soft">
           <span className="text-red-500">*</span> {t('requiredFieldsNote')}
         </p>
 
@@ -256,7 +256,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
 
         {/* ─── Vacante ─── */}
         <div>
-          <label htmlFor="vacancyId" className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label htmlFor="vacancyId" className="block text-sm font-medium text-ink mb-1.5">
             {t('vacancy.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -287,7 +287,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         {/* ─── Descripción libre (solo espontánea) ─── */}
         {isSpontaneous && (
           <div>
-            <label htmlFor="customJobDescription" className="block text-sm font-medium text-neutral-800 mb-1.5">
+            <label htmlFor="customJobDescription" className="block text-sm font-medium text-ink mb-1.5">
               {t('jobDescription.label')}
             </label>
             <textarea
@@ -305,7 +305,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         {/* ─── Ciudad + Área ─── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="city" className="block text-sm font-medium text-neutral-800 mb-1.5">
+            <label htmlFor="city" className="block text-sm font-medium text-ink mb-1.5">
               {t('city.label')}
               <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
@@ -328,7 +328,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
           </div>
 
           <div>
-            <label htmlFor="area" className="block text-sm font-medium text-neutral-800 mb-1.5">
+            <label htmlFor="area" className="block text-sm font-medium text-ink mb-1.5">
               {t('area.label')}
               <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
@@ -357,7 +357,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         {/* ─── Nombre + Apellidos ─── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-neutral-800 mb-1.5">
+            <label htmlFor="firstName" className="block text-sm font-medium text-ink mb-1.5">
               {t('firstName.label')}
               <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
@@ -377,7 +377,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
             {errorMsg('firstName', 'firstName-error')}
           </div>
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-neutral-800 mb-1.5">
+            <label htmlFor="lastName" className="block text-sm font-medium text-ink mb-1.5">
               {t('lastName.label')}
               <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
@@ -401,7 +401,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         {/* ─── Email + Teléfono ─── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-800 mb-1.5">
+            <label htmlFor="email" className="block text-sm font-medium text-ink mb-1.5">
               {t('email.label')}
               <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
@@ -422,7 +422,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
             {errorMsg('email', 'email-error')}
           </div>
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-neutral-800 mb-1.5">
+            <label htmlFor="phone" className="block text-sm font-medium text-ink mb-1.5">
               {t('phone.label')}
               <span className="text-red-500 ml-1" aria-hidden="true">*</span>
             </label>
@@ -446,7 +446,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
 
         {/* ─── Fecha de nacimiento ─── */}
         <div>
-          <label htmlFor="birthDate" className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label htmlFor="birthDate" className="block text-sm font-medium text-ink mb-1.5">
             {t('birthDate.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -466,7 +466,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
 
         {/* ─── Cuéntanos sobre ti ─── */}
         <div>
-          <label htmlFor="aboutYou" className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label htmlFor="aboutYou" className="block text-sm font-medium text-ink mb-1.5">
             {t('aboutYou.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -488,7 +488,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
 
         {/* ─── Upload CV ─── */}
         <div>
-          <label className="block text-sm font-medium text-neutral-800 mb-1.5">
+          <label className="block text-sm font-medium text-ink mb-1.5">
             {t('cv.label')}
             <span className="text-red-500 ml-1" aria-hidden="true">*</span>
           </label>
@@ -496,7 +496,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
             className={`border-2 border-dashed rounded-lg p-6 transition-colors ${
               getFieldError('cv')
                 ? 'border-red-400 bg-red-50'
-                : 'border-neutral-300 hover:border-accent-500'
+                : 'border-line hover:border-teal'
             }`}
           >
             <input
@@ -512,17 +512,17 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
             <label htmlFor="cv" className="cursor-pointer flex flex-col items-center gap-2">
               {cvFile ? (
                 <>
-                  <FileText className="w-10 h-10 text-accent-500" aria-hidden="true" />
-                  <span className="text-sm text-neutral-800 font-medium">{cvFile.name}</span>
-                  <span className="text-xs text-neutral-500">
+                  <FileText className="w-10 h-10 text-teal" aria-hidden="true" />
+                  <span className="text-sm text-ink font-medium">{cvFile.name}</span>
+                  <span className="text-xs text-gray-soft">
                     {(cvFile.size / 1024 / 1024).toFixed(2)} MB
                   </span>
                 </>
               ) : (
                 <>
-                  <Upload className="w-10 h-10 text-neutral-400" aria-hidden="true" />
-                  <span className="text-sm text-neutral-800 font-medium">{t('cv.placeholder')}</span>
-                  <span className="text-xs text-neutral-500">{t('cv.hint')}</span>
+                  <Upload className="w-10 h-10 text-gray-soft" aria-hidden="true" />
+                  <span className="text-sm text-ink font-medium">{t('cv.placeholder')}</span>
+                  <span className="text-xs text-gray-soft">{t('cv.hint')}</span>
                 </>
               )}
             </label>
@@ -546,15 +546,15 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
             aria-invalid={!!getFieldError('acceptPrivacy')}
             aria-describedby={getFieldError('acceptPrivacy') ? 'privacy-jobs-error' : undefined}
             onChange={(e) => validateField('acceptPrivacy', e.target.checked)}
-            className="mt-1 w-4 h-4 text-accent-500 border-neutral-300 rounded focus:ring-accent-500 focus:ring-2"
+            className="mt-1 w-4 h-4 text-teal border-line rounded focus:ring-teal focus:ring-2"
           />
-          <label htmlFor="acceptPrivacy" className="text-sm text-neutral-700">
+          <label htmlFor="acceptPrivacy" className="text-sm text-gray-warm">
             {t('privacy.label')}{' '}
             <a
               href="/aviso-de-privacidad"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent-600 hover:text-accent-700 underline"
+              className="text-teal hover:text-teal-soft underline"
             >
               {t('privacy.linkText')}
             </a>
@@ -576,7 +576,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full md:w-auto bg-accent-500 hover:bg-accent-600 disabled:bg-accent-300 disabled:cursor-not-allowed text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
+          className="w-full md:w-auto bg-teal hover:bg-teal-soft disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
         >
           {isPending ? (
             <>
@@ -646,7 +646,7 @@ function JobResultModal({
           type="button"
           onClick={onClose}
           aria-label={t('close')}
-          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700 transition-colors"
+          className="absolute top-4 right-4 text-gray-soft hover:text-ink transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -659,13 +659,13 @@ function JobResultModal({
           <h2 id="job-modal-title" className="text-2xl mb-3">
             {ok ? t('success.title') : t('error.title')}
           </h2>
-          <p className="text-neutral-600 mb-6">
+          <p className="text-gray-warm mb-6">
             {ok ? t('success.description') : getErrorDescription()}
           </p>
           <button
             type="button"
             onClick={onClose}
-            className="bg-accent-500 hover:bg-accent-600 text-white font-medium px-6 py-2.5 rounded-lg transition-colors"
+            className="bg-teal hover:bg-teal-soft text-white font-medium px-6 py-2.5 rounded-lg transition-colors"
           >
             {t('close')}
           </button>

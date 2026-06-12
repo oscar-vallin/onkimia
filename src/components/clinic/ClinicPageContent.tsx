@@ -42,26 +42,17 @@ export function ClinicPageContent({
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative bg-brand-900 py-20 md:py-28 -mt-16 md:-mt-20 pt-32 md:pt-40 overflow-hidden">
+      <section className="relative bg-ink py-20 md:py-28 -mt-16 md:-mt-20 pt-32 md:pt-40 overflow-hidden">
         <DecorativeBubbles variant="sides" opacity={0.5} />
         <div className="relative container-onkimia text-center">
-          <p
-            className="text-sm md:text-base mb-4 tracking-widest uppercase"
-            style={{ color: 'rgba(255,255,255,0.7)' }}
-          >
+          <p className="text-sm md:text-base mb-4 tracking-widest uppercase text-white/70">
             {clinic.isPrimary ? t('hero.primaryTagline') : t('hero.secondaryTagline')}
           </p>
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl mb-6"
-            style={{ color: '#ffffff' }}
-          >
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6">
             Onkimia {clinicName}
           </h1>
           {description && (
-            <p
-              className="text-lg md:text-xl max-w-3xl mx-auto text-pretty"
-              style={{ color: 'rgba(255,255,255,0.85)' }}
-            >
+            <p className="text-lg md:text-xl max-w-3xl mx-auto text-pretty text-white/85">
               {description}
             </p>
           )}
@@ -72,14 +63,14 @@ export function ClinicPageContent({
       <section className="container-onkimia py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {clinic.address && (
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <MapPin className="w-6 h-6" aria-hidden="true" />
               </div>
-              <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-2">
+              <h3 className="text-sm font-medium text-gray-soft uppercase tracking-wider mb-2">
                 {t('info.addressLabel')}
               </h3>
-              <p className="text-neutral-800">
+              <p className="text-ink">
                 {clinic.address.street}
                 <br />
                 {clinic.address.city}, {clinic.address.state}
@@ -89,16 +80,16 @@ export function ClinicPageContent({
           )}
 
           {primaryPhone && (
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <Phone className="w-6 h-6" aria-hidden="true" />
               </div>
-              <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-2">
+              <h3 className="text-sm font-medium text-gray-soft uppercase tracking-wider mb-2">
                 {t('info.phoneLabel')}
               </h3>
               <a
                 href={`tel:${phoneForTel}`}
-                className="text-neutral-800 hover:text-accent-600 transition-colors"
+                className="text-ink hover:text-teal transition-colors"
               >
                 {primaryPhone}
               </a>
@@ -106,8 +97,8 @@ export function ClinicPageContent({
           )}
 
           {(clinic.email || whatsappUrl) && (
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-lg bg-accent-50 text-accent-600 flex items-center justify-center mb-4">
+            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 {clinic.email ? (
                   <Mail className="w-6 h-6" aria-hidden="true" />
                 ) : (
@@ -116,26 +107,26 @@ export function ClinicPageContent({
               </div>
               {clinic.email ? (
                 <>
-                  <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-2">
+                  <h3 className="text-sm font-medium text-gray-soft uppercase tracking-wider mb-2">
                     {t('info.emailLabel')}
                   </h3>
                   <a
                     href={`mailto:${clinic.email}`}
-                    className="text-neutral-800 hover:text-accent-600 transition-colors break-all"
+                    className="text-ink hover:text-teal transition-colors break-all"
                   >
                     {clinic.email}
                   </a>
                 </>
               ) : (
                 <>
-                  <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-2">
+                  <h3 className="text-sm font-medium text-gray-soft uppercase tracking-wider mb-2">
                     WhatsApp
                   </h3>
                   <a
                     href={whatsappUrl!}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-800 hover:text-accent-600 transition-colors"
+                    className="text-ink hover:text-teal transition-colors"
                   >
                     {whatsappNumber}
                   </a>
@@ -170,11 +161,11 @@ export function ClinicPageContent({
 
       {/* ─── SERVICIOS ─── */}
       {services.length > 0 && (
-        <section className="bg-neutral-50 py-16 md:py-24">
+        <section className="bg-cream py-16 md:py-24">
           <div className="container-onkimia">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl mb-4">{t('services.title')}</h2>
-              <p className="text-neutral-600 max-w-2xl mx-auto">
+              <h2 className="font-serif text-3xl md:text-4xl mb-4">{t('services.title')}</h2>
+              <p className="text-gray-warm max-w-2xl mx-auto">
                 {t('services.subtitle', { clinic: clinicName })}
               </p>
             </div>
@@ -182,13 +173,13 @@ export function ClinicPageContent({
               {services.map((service) => (
                 <div
                   key={service._id}
-                  className="bg-white border border-neutral-200 rounded-2xl p-6 hover:shadow-md transition-shadow"
+                  className="bg-white border border-line rounded-2xl p-6 hover:shadow-md transition-shadow"
                 >
-                  <h3 className="text-lg font-medium mb-2">
+                  <h3 className="font-serif text-lg mb-2">
                     {getLocalized(service.name, locale)}
                   </h3>
                   {service.description && (
-                    <p className="text-sm text-neutral-600">
+                    <p className="text-sm text-gray-warm">
                       {getLocalized(service.description, locale)}
                     </p>
                   )}
@@ -201,11 +192,11 @@ export function ClinicPageContent({
 
       {/* ─── DOCTORES ─── */}
       {doctors.length > 0 && (
-        <section className="bg-neutral-50 py-16 md:py-24">
+        <section className="bg-cream py-16 md:py-24">
           <div className="container-onkimia">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl mb-4">{t('doctors.title')}</h2>
-              <p className="text-neutral-600 max-w-2xl mx-auto">
+              <h2 className="font-serif text-3xl md:text-4xl mb-4">{t('doctors.title')}</h2>
+              <p className="text-gray-warm max-w-2xl mx-auto">
                 {t('doctors.subtitle', { clinic: clinicName })}
               </p>
             </div>
@@ -213,10 +204,10 @@ export function ClinicPageContent({
               {doctors.map((doctor) => (
                 <div
                   key={doctor._id}
-                  className="bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
+                  className="bg-white border border-line rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
                 >
                   {doctor.photo && (
-                    <div className="relative aspect-[4/3] bg-neutral-100">
+                    <div className="relative aspect-[4/3] bg-cream">
                       <Image
                         src={urlFor(doctor.photo).width(600).height(450).url()}
                         alt={doctor.fullName}
@@ -227,9 +218,9 @@ export function ClinicPageContent({
                     </div>
                   )}
                   <div className="p-5">
-                    <h3 className="text-lg font-medium mb-1">{doctor.fullName}</h3>
+                    <h3 className="font-serif text-lg mb-1">{doctor.fullName}</h3>
                     {doctor.specialty && (
-                      <p className="text-sm text-accent-600 font-medium">
+                      <p className="text-sm text-teal font-medium">
                         {getLocalized(doctor.specialty, locale)}
                       </p>
                     )}
@@ -243,13 +234,13 @@ export function ClinicPageContent({
 
       {/* ─── CTA FINAL ─── */}
       <section className="container-onkimia py-16 md:py-24">
-        <div className="bg-brand-900 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
+        <div className="bg-ink rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
           <DecorativeBubbles variant="scattered" opacity={0.4} />
           <div className="relative">
-            <h2 className="text-3xl md:text-4xl mb-4" style={{ color: '#ffffff' }}>
+            <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
               {t('cta.title')}
             </h2>
-            <p className="mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.85)' }}>
+            <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">
               {t('cta.subtitle', { clinic: clinicName })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -258,7 +249,7 @@ export function ClinicPageContent({
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-accent-500 hover:bg-accent-600 text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
+                  className="bg-teal hover:bg-teal-soft text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
                 >
                    <svg
                     viewBox="0 0 24 24"
@@ -274,7 +265,7 @@ export function ClinicPageContent({
               {primaryPhone && (
                 <a
                   href={`tel:${phoneForTel}`}
-                  className="bg-white text-brand-900 hover:bg-neutral-100 font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
+                  className="bg-white text-ink hover:bg-cream font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
                 >
                   <Phone className="w-5 h-5" aria-hidden="true" />
                   {t('cta.call')}

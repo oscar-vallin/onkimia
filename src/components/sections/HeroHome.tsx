@@ -68,7 +68,7 @@ export function HeroHome({
       />
 
       {/* Video — carga diferida, post-load */}
-      {shouldLoadVideo && (
+      {/* {shouldLoadVideo && (
         <video
           ref={videoRef}
           autoPlay
@@ -82,7 +82,7 @@ export function HeroHome({
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
-      )}
+      )} */}
 
       {/* Overlay */}
       <div className="absolute inset-0 z-[2] bg-gradient-to-b from-ink/55 via-ink/65 to-ink/78" />
