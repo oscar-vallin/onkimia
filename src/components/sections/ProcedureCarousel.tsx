@@ -71,7 +71,7 @@ function ProcedureCard({ name, duration, shortDescription, submark, image }: Pro
 
       {/* Bottom: badge + description */}
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-        <span className="inline-block text-[10px] tracking-wider uppercase text-teal-soft border border-teal-soft/40 rounded-full px-3 py-1 mb-2">
+        <span className="inline-flex items-center text-[10px] tracking-wider uppercase font-semibold text-white bg-teal/80 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
           {submark}
         </span>
         <p className="text-sm text-white/85 leading-relaxed">{shortDescription}</p>

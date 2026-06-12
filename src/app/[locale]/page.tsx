@@ -172,7 +172,6 @@ export default async function HomePage({
         title={t('process.title')}
         lead={t('process.lead')}
         heroImage={settings.processImage}
-        imageSrc="/images/process-placeholder.jpg"
         imageAlt={t('process.imageAlt')}
         stages={[
           { step: t('process.step1.step'), title: t('process.step1.title'), description: t('process.step1.description'), icon: 'users' },

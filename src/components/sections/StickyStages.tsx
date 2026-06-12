@@ -47,9 +47,10 @@ export function StickyStages({
   imageAlt,
   heroImage,
 }: StickyStagesProps) {
+  console.log("sticky ", heroImage)
   const src: string = heroImage
     ? urlFor(heroImage).width(800).height(1000).format('webp').quality(82).url()!
-    : (imageSrc ?? '/images/process-placeholder.jpg');
+    : '/images/process-placeholder.jpg';
   const blur = heroImage?.asset?.metadata?.lqip ?? undefined;
 
   return (
@@ -59,7 +60,7 @@ export function StickyStages({
 
           {/* Left — sticky image */}
           <div className="lg:sticky lg:top-[110px]">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-ink-2">
+            <div className="relative aspect-[5/5] rounded-3xl overflow-hidden bg-ink-2">
               <Image
                 src={src}
                 alt={imageAlt}

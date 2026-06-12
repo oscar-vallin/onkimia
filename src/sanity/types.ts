@@ -17,7 +17,7 @@ export interface SiteSettings {
   tagline: LocalizedString;
   logo?: Image;
   logoDark?: Image;
-  aboutHeroImage?: Image;
+  aboutHeroImage?: SanityImageWithLQIP;
   doctorsHeroImage?: Image;
   cuidareHeroImage?: Image;
   endosHeroImage?: Image;

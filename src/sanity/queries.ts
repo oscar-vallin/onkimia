@@ -17,6 +17,15 @@ export const SITE_SETTINGS_QUERY = groq`
         }
       }
     },
+     aboutHeroImage {
+      ...,
+      asset-> {
+        ...,
+        metadata {
+          lqip
+        }
+      }
+    },
     homeHeroDescription,
     doctorsHeroImage,
     cuidareHeroImage,

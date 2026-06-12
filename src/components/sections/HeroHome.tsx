@@ -38,6 +38,7 @@ export function HeroHome({
   features,
   heroImage,
 }: HeroHomeProps) {
+  console.log("hero", heroImage)
   const imageSrc = heroImage
     ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(80).url()
     : '/images/hero-poster.jpg';
