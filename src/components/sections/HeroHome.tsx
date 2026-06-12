@@ -66,7 +66,7 @@ export function HeroHome({
 
         {/* Bloque superior — headline + desc + CTAs (desktop) */}
         <div className="pt-36 md:pt-44 max-w-3xl">
-          <p className="text-xs font-medium tracking-widest uppercase text-teal-soft mb-6">
+          <p className="text-xs font-medium tracking-widest uppercase text-white/90 mb-8 md:mb-10">
             {eyebrow}
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] text-white text-balance">
