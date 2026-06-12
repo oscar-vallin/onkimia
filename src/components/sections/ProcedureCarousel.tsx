@@ -21,7 +21,7 @@ function parseTitle(raw: string) {
 }
 
 function ProcedureCard({ name, duration, shortDescription, submark, image }: Procedure) {
-  const [durationNum, ...durationUnit] = duration.split(' ');
+  const [durationNum, ...durationUnit] = (duration ?? '').split(' ');
   const unitStr = durationUnit.join(' ');
 
   const cardSrc = image

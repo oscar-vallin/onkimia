@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { DOCTORS_QUERY, INSURANCES_QUERY, PROCEDURES_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
+import { DOCTORS_QUERY, INSURANCES_QUERY, allProceduresQuery, SITE_SETTINGS_QUERY } from '@/sanity/queries';
 import { HeroHome } from '@/components/sections/HeroHome';
 import type { Doctor, Insurance, Procedure, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
@@ -66,7 +66,7 @@ export default async function HomePage({
       tags: ['insurance'],
     }),
     sanityFetch<Procedure[]>({
-      query: PROCEDURES_QUERY,
+      query: allProceduresQuery,
       params: { locale },
       tags: ['procedure'],
     }),

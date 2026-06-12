@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, PROCEDURES_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, allProceduresQuery } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, FAQ, Procedure } from '@/sanity/types';
@@ -58,7 +58,7 @@ export default async function EndosPage({
       tags: ['faq'],
     }),
     sanityFetch<Procedure[]>({
-      query: PROCEDURES_QUERY,
+      query: allProceduresQuery,
       params: { locale },
       tags: ['procedure'],
     }),
@@ -129,9 +129,20 @@ export default async function EndosPage({
               <h3 className="font-serif text-xl mb-2">
                 {proc.name}
               </h3>
-              <p className="text-gray-warm text-sm leading-relaxed">
-                {proc.shortDescription}
-              </p>
+              {proc.highlights && proc.highlights.length > 0 ? (
+                <ul className="space-y-1.5 mt-3">
+                  {proc.highlights.map((h) => (
+                    <li key={h._key} className="flex items-start gap-2 text-sm text-gray-warm">
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal flex-shrink-0 mt-1.5" aria-hidden="true" />
+                      {h.text}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-warm text-sm leading-relaxed">
+                  {proc.shortDescription}
+                </p>
+              )}
               <MedicalProcedureLd
                 name={proc.name}
                 description={proc.shortDescription}

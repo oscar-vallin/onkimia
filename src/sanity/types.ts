@@ -37,14 +37,20 @@ export interface SiteSettings {
 }
 
 
+export interface ProcedureHighlight {
+  _key: string;
+  text: string;
+}
+
 export interface Procedure {
   _id: string;
   order: number;
   name: string;
-  duration: string;
   shortDescription: string;
+  highlights?: ProcedureHighlight[];
   submark: 'Endos' | 'Cuidare';
   image: SanityImageWithLQIP;
+  duration?: string;
 }
 
 export interface ClinicAddress {

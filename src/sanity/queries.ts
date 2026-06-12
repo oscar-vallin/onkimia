@@ -326,13 +326,19 @@ export const ABOUT_PAGE_QUERY = groq`
   }
 `;
 
-export const PROCEDURES_QUERY = groq`
+/** @deprecated Use allProceduresQuery */
+export const PROCEDURES_QUERY = groq`*[_type == "procedure"] | order(order asc) { _id }`;
+
+export const allProceduresQuery = groq`
   *[_type == "procedure"] | order(order asc) {
     _id,
     order,
     "name": name[$locale],
-    "duration": duration[$locale],
     "shortDescription": shortDescription[$locale],
+    "highlights": highlights[]{
+      _key,
+      "text": text[$locale]
+    },
     submark,
     image {
       asset-> {
@@ -342,7 +348,8 @@ export const PROCEDURES_QUERY = groq`
       },
       hotspot,
       crop
-    }
+    },
+    "duration": duration[$locale]
   }
 `;
 

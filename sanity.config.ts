@@ -50,6 +50,10 @@ export default defineConfig({
               .child(S.documentTypeList('insurance').title('Aseguradoras')),
             S.divider(),
             S.listItem()
+              .title('Procedimientos')
+              .schemaType('procedure')
+              .child(S.documentTypeList('procedure').title('Procedimientos')),
+            S.listItem()
               .title('Vacantes')
               .schemaType('jobPosting')
               .child(S.documentTypeList('jobPosting').title('Vacantes')),
