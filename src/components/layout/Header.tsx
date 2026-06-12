@@ -267,7 +267,9 @@ export function Header({ settings, clinics }: HeaderProps) {
               <button
                 type="button"
                 onClick={toggleMobileMenu}
-                className={`lg:hidden relative w-8 h-6 flex flex-col justify-between p-0 ${textColor}`}
+                className={`lg:hidden relative w-8 h-6 flex flex-col justify-between p-0 ${
+                  scrolled && !mobileOpen ? 'text-ink' : 'text-white'
+                }`}
                 aria-label="Toggle menu"
                 aria-expanded={mobileOpen}
               >
