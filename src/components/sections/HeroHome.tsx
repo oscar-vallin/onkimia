@@ -1,11 +1,9 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { ArrowRight, Activity, Heart, Shield } from 'lucide-react';
-import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
+import { urlFor } from '@/sanity/image';
 import { parseEmphasis } from '@/lib/parseEmphasis';
+import type { SanityImageWithLQIP } from '@/sanity/types';
 
 type FeatureIcon = 'pulse' | 'heart' | 'shield';
 
@@ -22,6 +20,7 @@ export interface HeroHomeProps {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   features: [Feature, Feature, Feature];
+  heroImage?: SanityImageWithLQIP;
 }
 
 const ICON_MAP: Record<FeatureIcon, React.ComponentType<{ className?: string }>> = {
@@ -37,52 +36,27 @@ export function HeroHome({
   primaryCta,
   secondaryCta,
   features,
+  heroImage,
 }: HeroHomeProps) {
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const prefersReduced = usePrefersReducedMotion();
-
-  useEffect(() => {
-    if (prefersReduced) return;
-
-    if (document.readyState === 'complete') {
-      setShouldLoadVideo(true);
-    } else {
-      const onLoad = () => setShouldLoadVideo(true);
-      window.addEventListener('load', onLoad, { once: true });
-      return () => window.removeEventListener('load', onLoad);
-    }
-  }, [prefersReduced]);
+  const imageSrc = heroImage
+    ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(80).url()
+    : '/images/hero-poster.jpg';
+  const blurDataURL = heroImage?.asset?.metadata?.lqip ?? undefined;
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-ink text-white -mt-16 md:-mt-20">
-      {/* Poster — LCP, siempre visible */}
+      {/* Hero image — LCP, siempre visible */}
       <Image
-        src="/images/hero-poster.jpg"
+        src={imageSrc}
         alt=""
         fill
         priority
         sizes="100vw"
         quality={80}
+        placeholder={blurDataURL ? 'blur' : 'empty'}
+        blurDataURL={blurDataURL}
         className="object-cover z-0"
       />
-
-      {/* Video — carga diferida, post-load */}
-      {/* {shouldLoadVideo && (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/images/hero-poster.jpg"
-          preload="none"
-          className="absolute inset-0 w-full h-full object-cover z-[1]"
-          aria-hidden="true"
-        >
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
-      )} */}
 
       {/* Overlay */}
       <div className="absolute inset-0 z-[2] bg-gradient-to-b from-ink/55 via-ink/65 to-ink/78" />

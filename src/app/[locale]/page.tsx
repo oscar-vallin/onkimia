@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { DOCTORS_QUERY, INSURANCES_QUERY } from '@/sanity/queries';
+import { DOCTORS_QUERY, INSURANCES_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
 import { HeroHome } from '@/components/sections/HeroHome';
-import type { Doctor, Insurance } from '@/sanity/types';
+import type { Doctor, Insurance, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { ConveniosEditorial } from '@/components/sections/ConveniosEditorial';
@@ -54,7 +54,11 @@ export default async function HomePage({
   const t = await getTranslations('home');
   const tEndos = await getTranslations('endos');
 
-  const [doctors, insurances] = await Promise.all([
+  const [settings, doctors, insurances] = await Promise.all([
+    sanityFetch<SiteSettings>({
+      query: SITE_SETTINGS_QUERY,
+      tags: ['siteSettings'],
+    }),
     sanityFetch<Doctor[]>({
       query: DOCTORS_QUERY,
       tags: ['doctor'],
@@ -79,6 +83,7 @@ export default async function HomePage({
           { icon: 'heart', title: t('homeHero.features.human.title'), description: t('homeHero.features.human.description') },
           { icon: 'shield', title: t('homeHero.features.support.title'), description: t('homeHero.features.support.description') },
         ]}
+        heroImage={settings.homeHeroImage}
       />
 
       <ProcedureCarousel
