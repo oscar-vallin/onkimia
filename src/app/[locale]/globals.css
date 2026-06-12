@@ -298,3 +298,15 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none !important; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes kenBurns {
+    0%   { transform: scale(1.0); }
+    50%  { transform: scale(1.03); }
+    100% { transform: scale(1.0); }
+  }
+
+  .hero-ken-burns {
+    animation: kenBurns 18s ease-in-out infinite;
+  }
+}

@@ -45,21 +45,47 @@ export function HeroHome({
 
   return (
     <section className="relative w-full min-h-screen overflow-visible bg-ink text-white -mt-16 md:-mt-20">
-      {/* Hero image — LCP, siempre visible */}
-      <Image
-        src={imageSrc}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        quality={80}
-        placeholder={blurDataURL ? 'blur' : 'empty'}
-        blurDataURL={blurDataURL}
-        className="object-cover z-0"
+      {/* Ken Burns wrapper — slow breathing scale, respects prefers-reduced-motion */}
+      <div className="absolute inset-0 z-0 hero-ken-burns origin-center">
+        <Image
+          src={imageSrc}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={80}
+          placeholder={blurDataURL ? 'blur' : 'empty'}
+          blurDataURL={blurDataURL}
+          className="object-cover"
+        />
+      </div>
+
+      {/* Primary overlay: radial gradient — lighter center, darker edges */}
+      <div
+        className="absolute inset-0 z-[2]"
+        style={{
+          background: `radial-gradient(
+            ellipse 70% 60% at 50% 40%,
+            rgba(26,26,31,0.45) 0%,
+            rgba(26,26,31,0.72) 50%,
+            rgba(26,26,31,0.88) 100%
+          )`,
+        }}
       />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-ink/55 via-ink/65 to-ink/78" />
+      {/* Secondary overlay: bottom vignette — softens lower portion */}
+      <div
+        className="absolute inset-0 z-[2]"
+        style={{
+          background: `linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent 45%,
+            rgba(26,26,31,0.65) 75%,
+            rgba(26,26,31,0.90) 100%
+          )`,
+        }}
+      />
 
       {/* Contenido */}
       <div className="relative z-10 container-onkimia min-h-screen flex flex-col">
@@ -79,14 +105,14 @@ export function HeroHome({
           <div className="hidden sm:flex flex-row gap-4 mt-10">
             <Link
               href={primaryCta.href}
-              className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full transition-all duration-200 ease-in-out hover:scale-[1.02]"
             >
               {primaryCta.label}
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
             <Link
               href={secondaryCta.href}
-              className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white text-white px-7 py-3.5 rounded-full transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white text-white px-7 py-3.5 rounded-full transition-all duration-200 ease-in-out hover:scale-[1.02]"
             >
               {secondaryCta.label}
             </Link>
@@ -97,14 +123,14 @@ export function HeroHome({
         <div className="mt-auto mb-8 flex flex-col gap-3 sm:hidden">
           <Link
             href={primaryCta.href}
-            className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full transition-colors w-full"
+            className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full transition-all duration-200 ease-in-out hover:scale-[1.02] w-full"
           >
             {primaryCta.label}
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </Link>
           <Link
             href={secondaryCta.href}
-            className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white text-white px-7 py-3.5 rounded-full transition-colors w-full"
+            className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white text-white px-7 py-3.5 rounded-full transition-all duration-200 ease-in-out hover:scale-[1.02] w-full"
           >
             {secondaryCta.label}
           </Link>

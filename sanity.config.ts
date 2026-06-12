@@ -4,6 +4,8 @@ import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './src/sanity/schemas';
 import { apiVersion, dataset, projectId } from './src/sanity/env';
 
+const SINGLETON_TYPES = ['siteSettings', 'privacyPolicy', 'aboutPage'] as const;
+
 export default defineConfig({
   name: 'onkimia',
   title: 'Onkimia CMS',
@@ -13,6 +15,30 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  document: {
+    // Remove singletons from the global "New document" button — they already
+    // live at a fixed documentId in the structure, so creating a second one
+    // would cause a conflict and trigger the "Read Only" lock.
+    newDocumentOptions: (prev, { creationContext }) => {
+      if (creationContext.type === 'global') {
+        return prev.filter(
+          (item) => !(SINGLETON_TYPES as readonly string[]).includes(item.templateId)
+        );
+      }
+      return prev;
+    },
+    // For singleton document types, keep publish/edit but remove delete/duplicate
+    // so editors can always save changes.
+    actions: (prev, { schemaType }) => {
+      if ((SINGLETON_TYPES as readonly string[]).includes(schemaType)) {
+        return prev.filter(
+          ({ action }) => action !== 'delete' && action !== 'duplicate'
+        );
+      }
+      return prev;
+    },
   },
 
   plugins: [
@@ -29,6 +55,7 @@ export default defineConfig({
                 S.document()
                   .schemaType('siteSettings')
                   .documentId('siteSettings')
+                  .views([S.view.form()])
               ),
             S.divider(),
             // Clínicas (filtradas)
@@ -66,6 +93,7 @@ export default defineConfig({
                 S.document()
                   .schemaType('privacyPolicy')
                   .documentId('privacyPolicy')
+                  .views([S.view.form()])
               ),
             // Singleton: Página Nosotros
             S.listItem()
@@ -75,6 +103,7 @@ export default defineConfig({
                 S.document()
                   .schemaType('aboutPage')
                   .documentId('aboutPage')
+                  .views([S.view.form()])
               ),
           ]),
     }),

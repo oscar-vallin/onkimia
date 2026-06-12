@@ -62,7 +62,7 @@ export default async function AboutPage({
     <>
       {/* ─── HERO ─── */}
       <HeroSection
-        image={settings.homeHeroImage}
+        image={settings.aboutHeroImage}
         title={getLocalized(aboutPage?.heroTitle, locale) || t('hero.title')}
         subtitle={getLocalized(settings.tagline, locale)}
         description={getLocalized(aboutPage?.heroDescription, locale) || t('hero.description')}
