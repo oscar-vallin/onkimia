@@ -9,6 +9,7 @@ import { insurance } from './insurance';
 import { jobPosting } from './jobPosting';
 import { privacyPolicy } from './privacyPolicy';
 import { aboutPage } from './aboutPage';
+import { procedure } from './procedure';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Singletons
@@ -23,4 +24,5 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   service,
   insurance,
   jobPosting,
+  procedure,
 ];

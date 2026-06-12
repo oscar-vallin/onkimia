@@ -2,15 +2,14 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { DOCTORS_QUERY, INSURANCES_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
+import { DOCTORS_QUERY, INSURANCES_QUERY, PROCEDURES_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
 import { HeroHome } from '@/components/sections/HeroHome';
-import type { Doctor, Insurance, SiteSettings } from '@/sanity/types';
+import type { Doctor, Insurance, Procedure, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { ConveniosEditorial } from '@/components/sections/ConveniosEditorial';
 import { StickyStages } from '@/components/sections/StickyStages';
 import { ProcedureCarousel } from '@/components/sections/ProcedureCarousel';
-import { PROCEDURE_KEYS } from '@/data/procedures';
 import { SpecialistList } from '@/components/sections/SpecialistList';
 import { OrbitDiagram } from '@/components/sections/OrbitDiagram';
 import {
@@ -52,9 +51,8 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const t = await getTranslations('home');
-  const tEndos = await getTranslations('endos');
 
-  const [settings, doctors, insurances] = await Promise.all([
+  const [settings, doctors, insurances, procedures] = await Promise.all([
     sanityFetch<SiteSettings>({
       query: SITE_SETTINGS_QUERY,
       tags: ['siteSettings'],
@@ -66,6 +64,11 @@ export default async function HomePage({
     sanityFetch<Insurance[]>({
       query: INSURANCES_QUERY,
       tags: ['insurance'],
+    }),
+    sanityFetch<Procedure[]>({
+      query: PROCEDURES_QUERY,
+      params: { locale },
+      tags: ['procedure'],
     }),
   ]);
   
@@ -92,14 +95,7 @@ export default async function HomePage({
         lead={t('homeProcedures.lead')}
         backgroundImage={settings.proceduresBgImage}
         backgroundImageSrc="/images/procedures-bg-placeholder.jpg"
-        procedures={PROCEDURE_KEYS.map(({ key, icon, submark }) => ({
-          key,
-          icon,
-          submark,
-          name: tEndos(`procedures.items.${key}.name`),
-          duration: tEndos(`procedures.items.${key}.duration`),
-          shortDescription: tEndos(`procedures.items.${key}.shortDescription`),
-        }))}
+        procedures={procedures}
       />
 
       {/* ─── CUIDARTE ES NUESTRA PRIORIDAD ─── */}

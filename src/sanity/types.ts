@@ -37,6 +37,16 @@ export interface SiteSettings {
 }
 
 
+export interface Procedure {
+  _id: string;
+  order: number;
+  name: string;
+  duration: string;
+  shortDescription: string;
+  submark: 'Endos' | 'Cuidare';
+  image: SanityImageWithLQIP;
+}
+
 export interface ClinicAddress {
   street: string;
   neighborhood?: string;

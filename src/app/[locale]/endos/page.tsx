@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, PROCEDURES_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { SiteSettings, FAQ } from '@/sanity/types';
+import type { SiteSettings, FAQ, Procedure } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import {
@@ -14,7 +14,6 @@ import {
   Clock,
   Heart,
 } from 'lucide-react';
-import { PROCEDURE_KEYS } from '@/data/procedures';
 import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
 import { FAQCarousel } from '@/components/ui/FAQCarousel';
@@ -48,7 +47,7 @@ export default async function EndosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [settings, faqs, t] = await Promise.all([
+  const [settings, faqs, procedures, t] = await Promise.all([
     sanityFetch<SiteSettings>({
       query: SITE_SETTINGS_QUERY,
       tags: ['siteSettings'],
@@ -57,6 +56,11 @@ export default async function EndosPage({
       query: FAQS_BY_PAGE_QUERY,
       params: { page: 'endos' },
       tags: ['faq'],
+    }),
+    sanityFetch<Procedure[]>({
+      query: PROCEDURES_QUERY,
+      params: { locale },
+      tags: ['procedure'],
     }),
     getTranslations('endos'),
   ]);
@@ -115,24 +119,22 @@ export default async function EndosPage({
           </p>
         </div>
 
+        {/* TODO: add longDescription field to procedure schema when client provides full descriptions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROCEDURE_KEYS.map(({ key, icon: Icon }) => (
+          {procedures.map((proc) => (
             <article
-              key={key}
+              key={proc._id}
               className="bg-cream border border-line rounded-2xl p-6 hover:border-teal-soft transition-colors transition-shadow"
             >
-              <div className="w-12 h-12 rounded-lg bg-[var(--color-teal-soft)]/15 text-teal flex items-center justify-center mb-4">
-                <Icon className="w-6 h-6" aria-hidden="true" />
-              </div>
               <h3 className="font-serif text-xl mb-2">
-                {t(`procedures.items.${key}.name`)}
+                {proc.name}
               </h3>
               <p className="text-gray-warm text-sm leading-relaxed">
-                {t(`procedures.items.${key}.description`)}
+                {proc.shortDescription}
               </p>
               <MedicalProcedureLd
-                name={t(`procedures.items.${key}.name`)}
-                description={t(`procedures.items.${key}.description`)}
+                name={proc.name}
+                description={proc.shortDescription}
               />
             </article>
           ))}

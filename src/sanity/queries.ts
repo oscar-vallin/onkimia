@@ -326,6 +326,26 @@ export const ABOUT_PAGE_QUERY = groq`
   }
 `;
 
+export const PROCEDURES_QUERY = groq`
+  *[_type == "procedure"] | order(order asc) {
+    _id,
+    order,
+    "name": name[$locale],
+    "duration": duration[$locale],
+    "shortDescription": shortDescription[$locale],
+    submark,
+    image {
+      asset-> {
+        _id,
+        url,
+        metadata { lqip, dimensions }
+      },
+      hotspot,
+      crop
+    }
+  }
+`;
+
 /** Singleton aviso de privacidad. */
 export const PRIVACY_POLICY_QUERY = groq`
   *[_type == "privacyPolicy" && _id == "privacyPolicy"][0] {

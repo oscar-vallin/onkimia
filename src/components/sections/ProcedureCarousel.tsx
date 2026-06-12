@@ -1,15 +1,6 @@
 import Image from 'next/image';
 import { urlFor } from '@/sanity/image';
-import type { SanityImageWithLQIP } from '@/sanity/types';
-
-interface ProcedureItem {
-  key: string;
-  name: string;
-  duration: string;
-  shortDescription: string;
-  submark: 'Endos' | 'Cuidare';
-  icon: React.ComponentType<{ className?: string }>;
-}
+import type { Procedure, SanityImageWithLQIP } from '@/sanity/types';
 
 interface ProcedureCarouselProps {
   eyebrow: string;
@@ -17,7 +8,7 @@ interface ProcedureCarouselProps {
   lead?: string;
   backgroundImageSrc?: string;
   backgroundImage?: SanityImageWithLQIP;
-  procedures: ProcedureItem[];
+  procedures: Procedure[];
 }
 
 function parseTitle(raw: string) {
@@ -29,29 +20,28 @@ function parseTitle(raw: string) {
   );
 }
 
-function ProcedureCard({
-  name,
-  duration,
-  shortDescription,
-  submark,
-  backgroundImageSrc,
-}: Pick<ProcedureItem, 'name' | 'duration' | 'shortDescription' | 'submark'> & {
-  backgroundImageSrc?: string;
-}) {
+function ProcedureCard({ name, duration, shortDescription, submark, image }: Procedure) {
   const [durationNum, ...durationUnit] = duration.split(' ');
   const unitStr = durationUnit.join(' ');
 
+  const cardSrc = image
+    ? urlFor(image).width(600).height(800).format('webp').quality(80).url()!
+    : undefined;
+  const blur = image?.asset?.metadata?.lqip ?? undefined;
+
   return (
     <div className="w-[300px] h-[400px] flex-shrink-0 relative rounded-3xl overflow-hidden bg-[#14463f]">
-      {/* Background image */}
-      {backgroundImageSrc && (
+      {/* Per-procedure image */}
+      {cardSrc && (
         <Image
-          src={backgroundImageSrc}
-          alt=""
+          src={cardSrc}
+          alt={name}
           fill
           sizes="300px"
+          loading="lazy"
+          placeholder={blur ? 'blur' : 'empty'}
+          blurDataURL={blur}
           className="object-cover"
-          aria-hidden="true"
         />
       )}
 
@@ -104,7 +94,7 @@ export function ProcedureCarousel({
 
   return (
     <section className="bg-ink relative py-20 md:py-28 overflow-hidden">
-      {/* Background image */}
+      {/* Section background image */}
       <div className="absolute inset-0 z-0">
         {bgSrc && (
           <Image
@@ -138,30 +128,16 @@ export function ProcedureCarousel({
       {/* Marquee — full width, outside container */}
       <div className="relative z-10 mt-12 overflow-hidden py-4">
         <div
-          className="flex gap-5 w-max animate-marquee hover:[animation-play-state:paused]"
+          className="flex gap-5 w-max"
           style={{ animation: 'marquee 50s linear infinite' }}
         >
           {/* Set A */}
           {procedures.map((p) => (
-            <ProcedureCard
-              key={`a-${p.key}`}
-              name={p.name}
-              duration={p.duration}
-              shortDescription={p.shortDescription}
-              submark={p.submark}
-              backgroundImageSrc={bgSrc}
-            />
+            <ProcedureCard key={`a-${p._id}`} {...p} />
           ))}
           {/* Set B — seamless loop */}
           {procedures.map((p) => (
-            <ProcedureCard
-              key={`b-${p.key}`}
-              name={p.name}
-              duration={p.duration}
-              shortDescription={p.shortDescription}
-              submark={p.submark}
-              backgroundImageSrc={bgSrc}
-            />
+            <ProcedureCard key={`b-${p._id}`} {...p} />
           ))}
         </div>
       </div>

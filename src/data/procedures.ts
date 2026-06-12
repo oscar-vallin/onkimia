@@ -1,5 +1,6 @@
 import { Activity, Microscope, Wind, TestTube, Radar } from 'lucide-react';
 
+/** @deprecated Procedures are now fetched from Sanity via PROCEDURES_QUERY. */
 export const PROCEDURE_KEYS = [
   { key: 'endoscopy',       icon: Activity,   submark: 'Endos'   },
   { key: 'colonoscopy',     icon: Microscope, submark: 'Endos'   },
