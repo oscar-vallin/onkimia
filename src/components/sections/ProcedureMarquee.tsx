@@ -79,35 +79,27 @@ export function ProcedureMarquee({ children }: ProcedureMarqueeProps) {
     sync();
   }, [sync]);
 
-  // Touch — swipe left speeds up, swipe right reverses temporarily
+  // Touch — hold to freeze, release to resume (no snap-back)
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
   }, []);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (pauseState.current.userPaused || prefersReduced.current) return;
-    const track = trackRef.current;
-    if (!track) return;
-
+    if (prefersReduced.current) return;
     const deltaX = e.touches[0].clientX - touchStartX.current;
     const deltaY = e.touches[0].clientY - touchStartY.current;
-
-    // Ignore vertical scrolls
-    if (Math.abs(deltaY) > Math.abs(deltaX) * 0.8) return;
-
-    // Fast swipe = shorter duration = faster animation
-    const multiplier = Math.max(0.2, 1 - Math.abs(deltaX) / 300);
-    track.style.animationDuration = `${BASE_SPEED * multiplier}s`;
-    track.style.animationDirection = deltaX > 0 ? 'reverse' : 'normal';
+    // Only freeze on horizontal swipes; let vertical scroll pass through
+    if (Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+      const track = trackRef.current;
+      if (track) track.style.animationPlayState = 'paused';
+    }
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.animationDuration = `${BASE_SPEED}s`;
-    track.style.animationDirection = 'normal';
-  }, []);
+    // Resume only if the user hasn't clicked to pause
+    if (!pauseState.current.userPaused) sync();
+  }, [sync]);
 
   return (
     <div

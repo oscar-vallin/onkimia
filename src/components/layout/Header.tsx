@@ -114,7 +114,7 @@ export function Header({ settings, clinics }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0  left-0 w-full z-50 transition-all duration-500 ${
           mobileOpen
             ? 'bg-ink'
             : isDoctorsRoute
@@ -125,7 +125,7 @@ export function Header({ settings, clinics }: HeaderProps) {
         }`}
       >
         <div className="container-onkimia">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between py-3">
             {/* ─── Logo ─── */}
             <Link href="/" className="relative flex items-center gap-2">
               {isDoctorsRoute ? (
@@ -152,12 +152,12 @@ export function Header({ settings, clinics }: HeaderProps) {
                   </span>
                 </>
               ) : settings.logo ? (
-                <span className="relative block w-[150px] h-[80px] md:w-[180px] md:h-[96px] lg:w-[180px] lg:h-[96px]">
+                <span className="relative block w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
                   <Image
-                    src={urlFor(settings.logo).height(96).url()}
+                    src={urlFor(settings.logo).width(600).url()}
                     alt={settings.title}
                     fill
-                    sizes="(max-width: 768px) 150px, 180px"
+                    sizes="(max-width: 768px) 142px, 170px"
                     priority
                     className={`object-contain object-left ${
                       scrolled && !mobileOpen && !isDoctorsRoute ? 'invert' : ''
@@ -263,31 +263,33 @@ export function Header({ settings, clinics }: HeaderProps) {
                 <span>{otherLocale.toUpperCase()}</span>
               </button>
 
-              {/* Hamburger / morphing X */}
+              {/* Hamburger / morphing X — w-11 h-11 hit-area, w-5 h-[18px] visual icon */}
               <button
                 type="button"
                 onClick={toggleMobileMenu}
-                className={`lg:hidden relative w-8 h-6 flex flex-col justify-between p-0 ${
+                className={`lg:hidden -mr-2 w-11 h-11 flex items-center justify-center ${
                   scrolled && !mobileOpen ? 'text-ink' : 'text-white'
                 }`}
                 aria-label="Toggle menu"
                 aria-expanded={mobileOpen}
               >
-                <span
-                  className={`block h-0.5 w-full bg-current transition-all duration-400 ${
-                    mobileOpen ? 'rotate-45 translate-y-[11px]' : ''
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-full bg-current transition-opacity duration-300 ${
-                    mobileOpen ? 'opacity-0' : 'opacity-100'
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-full bg-current transition-all duration-400 ${
-                    mobileOpen ? '-rotate-45 -translate-y-[11px]' : ''
-                  }`}
-                />
+                <span className="relative w-5 h-[18px] flex flex-col justify-between">
+                  <span
+                    className={`block h-0.5 w-full bg-current transition-all duration-400 ${
+                      mobileOpen ? 'rotate-45 translate-y-[8px]' : ''
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-full bg-current transition-opacity duration-300 ${
+                      mobileOpen ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-full bg-current transition-all duration-400 ${
+                      mobileOpen ? '-rotate-45 -translate-y-[8px]' : ''
+                    }`}
+                  />
+                </span>
               </button>
             </div>
           </div>
@@ -335,15 +337,15 @@ export function Header({ settings, clinics }: HeaderProps) {
                     <Link
                       href="/"
                       onClick={() => setMobileOpen(false)}
-                      className="relative block w-[120px] h-[64px]"
+                      className="relative block w-[160px] h-[54px]"
                     >
                       {/* brightness-0 + invert = white silhouette over dark bg.
                           Ideal: replace with a dedicated /logo-blanco.svg asset. */}
                       <Image
-                        src={urlFor(settings.logo).height(64).url()}
+                        src={urlFor(settings.logo).width(400).url()}
                         alt={settings.title}
                         fill
-                        sizes="120px"
+                        sizes="160px"
                         className="object-contain object-left brightness-0 invert"
                       />
                     </Link>
@@ -389,7 +391,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                 </ul>
 
                 {/* Bottom panel */}
-                <div className="mt-auto py-4 text-center space-y-3">
+                <div className="mt-6 py-4 text-center space-y-3">
                   {/* WhatsApp CTA */}
                   {whatsappUrl && (
                     <a
@@ -446,7 +448,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                   </div>
 
                   {/* Language switch */}
-                  <p className="text-white/60 uppercase tracking-widest text-xs mt-3 mb-2">
+                  <p className="text-white/60 uppercase tracking-widest text-xs mt-6 mb-4">
                     {tClinic('selectLanguage')}
                   </p>
                   <button
