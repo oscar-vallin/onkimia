@@ -2,99 +2,148 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { urlFor } from '@/sanity/image';
-import type { SanityImageWithLQIP as SanityImage } from '@/sanity/types';
-import { DecorativeBubbles } from './DecorativeBubbles';
+import type { SanityImageWithLQIP } from '@/sanity/types';
+
+interface Cta {
+  label: string;
+  href: string;
+}
 
 interface HeroSectionProps {
-  image?: SanityImage;
   title: string;
-  subtitle?: string;
   description?: string;
-  align?: 'center' | 'left';
-  height?: 'sm' | 'md' | 'lg';
-  overlay?: 'light' | 'medium' | 'dark';
-  primaryCta?: {
-    label: string;
-    href: string;
-  };
+  image?: SanityImageWithLQIP;
+  imageAlt?: string;
+  height?: 'sm' | 'md' | 'lg' | 'full';
+  // 'light' and 'medium' kept for backward compat — both map to gradient treatment
+  overlay?: 'dark' | 'gradient' | 'light' | 'medium';
+  eyebrow?: string;
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
+  align?: 'left' | 'center';
+  // legacy — ignored in new component, kept to avoid TS errors in callers
+  subtitle?: string;
+}
+
+const HEIGHTS: Record<NonNullable<HeroSectionProps['height']>, string> = {
+  sm:   'min-h-[50svh]',
+  md:   'min-h-[65svh]',
+  lg:   'min-h-[85svh]',
+  full: 'min-h-[100svh]',
+};
+
+function parseTitle(raw: string) {
+  const parts = raw.split(/\*([^*]+)\*/);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <em key={i} className="italic text-teal-soft not-italic">
+        {part}
+      </em>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
 }
 
 export function HeroSection({
-  image,
   title,
-  subtitle,
   description,
+  image,
+  imageAlt = '',
   height = 'lg',
-  overlay = 'medium',
+  overlay = 'dark',
+  eyebrow,
   primaryCta,
+  secondaryCta,
+  align = 'left',
 }: HeroSectionProps) {
-  const heightClasses = {
-    sm: 'min-h-[380px] md:min-h-[480px]',
-    md: 'min-h-[420px] md:min-h-[520px]',
-    lg: 'min-h-[440px] md:min-h-[550px]',
-  };
+  const isGradient = overlay === 'gradient' || overlay === 'light' || overlay === 'medium';
+  const alignClass = align === 'center' ? 'items-center text-center' : 'items-start text-left';
 
-  // Overlay responsive: vertical en mobile (texto centrado), lateral en desktop (texto a la izquierda)
-  const overlayClasses = {
-    light: 'bg-gradient-to-b from-ink/70 via-ink/40 to-ink/65 md:bg-gradient-to-r md:from-ink/60 md:via-ink/30 md:to-transparent',
-    medium: 'bg-gradient-to-b from-ink/85 via-ink/70 to-ink/80 md:bg-gradient-to-r md:from-ink/80 md:via-ink/55 md:to-transparent',
-    dark: 'bg-gradient-to-b from-ink/90 via-ink/70 to-ink/90 md:bg-gradient-to-r md:from-ink/90 md:via-ink/70 md:to-transparent',
-  };
+  const imageSrc = image
+    ? urlFor(image).width(2400).quality(80).format('webp').url()
+    : null;
+  const blurDataURL = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
-    <section className={`relative w-full ${heightClasses[height]} overflow-hidden`}>
-      {/* Background Image */}
-      {image ? (
+    <section className={`relative flex ${HEIGHTS[height]} bg-ink overflow-hidden`}>
+
+      {/* Background image */}
+      {imageSrc && (
         <Image
-          src={urlFor(image).url()}
-          alt={title}
+          src={imageSrc}
+          alt={imageAlt}
           fill
-          sizes="100vw"
           priority
-          quality={75}
-          placeholder={image.asset?.metadata?.lqip ? 'blur' : 'empty'}
-          blurDataURL={image.asset?.metadata?.lqip}
+          sizes="100vw"
+          quality={80}
           className="object-cover"
+          placeholder={blurDataURL ? 'blur' : 'empty'}
+          blurDataURL={blurDataURL}
         />
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-ink to-ink-2" />
       )}
 
-      {/* Overlay responsive */}
-      <div  />
+      {/* Overlay */}
+      {isGradient ? (
+        <>
+          <div className="absolute inset-0 bg-ink/30" aria-hidden="true" />
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/15 md:hidden"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 hidden md:block bg-gradient-to-r from-ink/90 via-ink/50 to-ink/10"
+            aria-hidden="true"
+          />
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-ink/60" aria-hidden="true" />
+      )}
 
-      {/* Burbujas decorativas */}
-      <DecorativeBubbles variant="sides" opacity={0.6} />
-
-      {/* Content — centrado en mobile, izquierda en desktop */}
-      <div className="relative h-full container-onkimia flex flex-col justify-center items-center text-center md:items-start md:text-left text-white pt-20 md:pt-28 px-4">
-        {/* Wrapper que restringe el ancho del texto en desktop */}
-        <div className="w-full max-w-xl">
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-normal mb-3 md:mb-4 font-sans text-balance text-white">
-            {title}
-          </h1>
-
-          {subtitle && (
-            <span className="block text-lg md:text-2xl font-serif italic font-normal mb-3 md:mb-4 text-white">
-              {subtitle}
-            </span>
+      {/* Content */}
+      <div className="container-onkimia relative z-10 flex w-full">
+        <div
+          className={`flex flex-col justify-end md:justify-center ${alignClass} w-full max-w-3xl pb-14 pt-32 md:py-32`}
+        >
+          {eyebrow && (
+            <p className="text-xs font-medium tracking-widest uppercase text-white/90 mb-5 md:mb-6">
+              {eyebrow}
+            </p>
           )}
 
+          <h1 className="font-serif font-normal text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] text-balance">
+            {parseTitle(title)}
+          </h1>
+
           {description && (
-            <p className="text-base md:text-lg text-white leading-relaxed mt-2 md:mt-3">
+            <p className="font-sans text-lg md:text-xl leading-relaxed text-white/80 mt-6 max-w-xl">
               {description}
             </p>
           )}
 
-          {primaryCta && (
-            <div className="mt-6 md:mt-8">
-              <Link
-                href={primaryCta.href}
-                className="inline-flex w-full max-w-sm sm:w-auto sm:max-w-none items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white font-medium px-6 py-3 rounded-lg transition-colors"
-              >
-                {primaryCta.label}
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
+          {(primaryCta || secondaryCta) && (
+            <div
+              className={`flex flex-col sm:flex-row gap-4 mt-9 md:mt-10 w-full sm:w-auto ${
+                align === 'center' ? 'sm:justify-center' : ''
+              }`}
+            >
+              {primaryCta && (
+                <Link
+                  href={primaryCta.href}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-teal px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:bg-teal-soft hover:scale-[1.02] w-full sm:w-auto"
+                >
+                  {primaryCta.label}
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+              )}
+              {secondaryCta && (
+                <Link
+                  href={secondaryCta.href}
+                  className="inline-flex items-center justify-center rounded-full border border-white/30 px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:border-white/60 hover:bg-white/5 hover:scale-[1.02] w-full sm:w-auto"
+                >
+                  {secondaryCta.label}
+                </Link>
+              )}
             </div>
           )}
         </div>
@@ -102,4 +151,3 @@ export function HeroSection({
     </section>
   );
 }
-

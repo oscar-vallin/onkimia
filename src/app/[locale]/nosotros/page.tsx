@@ -59,12 +59,13 @@ export default async function NosotrosPage({
     <>
       {/* ─── HERO ─── */}
       <HeroSection
-        image={settings.aboutHeroImage}
+        eyebrow="NOSOTROS · ONCOLOGÍA INTEGRAL"
         title={getLocalized(aboutPage?.heroTitle, locale) || t('hero.title')}
         description={getLocalized(aboutPage?.heroDescription, locale) || t('hero.description')}
+        image={settings.aboutHeroImage}
+        height="full"
+        overlay="gradient"
         align="left"
-        height="md"
-        overlay="medium"
         primaryCta={{ label: t('cta.button'), href: '/contacto' }}
       />
 
