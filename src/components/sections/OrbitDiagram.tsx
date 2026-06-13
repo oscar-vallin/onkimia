@@ -60,6 +60,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
   const [textVisible, setTextVisible] = useState(true);
   // SSR-safe: initialise false (server renders desktop viewBox), hydrate on client
   const [isMobile, setIsMobile] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const prefersReduced = usePrefersReducedMotion();
   const n = items.length;
 
@@ -142,14 +143,14 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
     resetAuto();
   };
 
-  // Auto-loop — resets when current changes
+  // Auto-loop — pauses on hover or reduced-motion; resets on manual navigation via current dep
   useEffect(() => {
-    if (prefersReduced) return;
+    if (prefersReduced || isHovered) return;
     const id = setInterval(() => {
       setCurrent(c => (c + 1) % n);
-    }, 4000);
+    }, 7000);
     return () => clearInterval(id);
-  }, [prefersReduced, n, current]);
+  }, [prefersReduced, isHovered, n, current]);
 
   function getSlot(i: number): Slot | undefined {
     let rel = i - current;
@@ -200,6 +201,8 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
       {/* SVG: full-width on mobile (bleeds to edges), max-width on desktop */}
       <div
         className="w-full md:max-w-[1100px] md:mx-auto touch-pan-y"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >

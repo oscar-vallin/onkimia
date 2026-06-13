@@ -131,7 +131,7 @@ export function ProcedureCarousel({
         <ProcedureMarquee>
           <div
             className="marquee-track flex gap-5 w-max"
-            style={{ animation: 'marquee 50s linear infinite' }}
+            style={{ animation: 'marquee 80s linear infinite' }}
           >
             {/* Set A */}
             {procedures.map((p) => (
