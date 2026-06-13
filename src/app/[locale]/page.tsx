@@ -10,7 +10,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { ConveniosEditorial } from '@/components/sections/ConveniosEditorial';
 import { StickyStages } from '@/components/sections/StickyStages';
 import { ProcedureCarousel } from '@/components/sections/ProcedureCarousel';
-import { SpecialistList } from '@/components/sections/SpecialistList';
+import { DoctorsGrid } from '@/components/sections/DoctorsGrid';
 import { OrbitDiagram } from '@/components/sections/OrbitDiagram';
 import {
   Stethoscope,
@@ -182,12 +182,12 @@ export default async function HomePage({
       />
 
       {doctors.length > 0 && (
-        <SpecialistList
+        <DoctorsGrid
           doctors={doctors}
           eyebrow={t('doctors.eyebrow')}
           title={t('doctors.title')}
           description={t('doctors.description')}
-          ctaLabel={t('doctors.viewDetail')}
+          viewProfileLabel={t('doctors.viewDetail')}
           locale={locale}
         />
       )}

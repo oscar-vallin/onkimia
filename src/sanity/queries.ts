@@ -140,7 +140,7 @@ export const SERVICES_BY_CLINIC_QUERY = groq`
 `;
 
 export const DOCTORS_QUERY = groq`
-  *[_type == "doctor" && isActive == true] | order(order asc, fullName asc) {
+  *[_type == "doctor"] | order(order asc, fullName asc) {
     _id,
     _type,
     fullName,

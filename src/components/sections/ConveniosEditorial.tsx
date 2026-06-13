@@ -76,22 +76,19 @@ export function ConveniosEditorial({
 
 function InsuranceCard({ insurance }: { insurance: Insurance }) {
   const inner = (
-    <div className="group bg-white border border-line rounded-2xl min-h-[90px] flex items-center justify-center relative overflow-hidden transition-all duration-200 hover:-translate-y-1.5 hover:border-teal hover:shadow-[0_18px_36px_rgba(26,122,110,0.20)] cursor-pointer">
-      {/* Teal gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-teal to-teal-soft opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-
+    <div className="group bg-white border border-line rounded-2xl min-h-[90px] flex items-center justify-center relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(26,122,110,0.15)] hover:border-teal-soft/40 cursor-pointer">
       {/* Content */}
-      <div className="relative z-10 px-4 py-3 flex items-center justify-center">
+      <div className="px-4 py-3 flex items-center justify-center">
         {insurance.logo?.asset ? (
           <Image
-            src={urlFor(insurance.logo).height(40).url()}
+            src={urlFor(insurance.logo).height(80).url()}
             alt={insurance.name}
             width={120}
             height={40}
-            className="object-contain max-h-10 group-hover:brightness-0 group-hover:invert transition-[filter] duration-200"
+            className="object-contain max-h-10 opacity-60 transition-all duration-300 group-hover:opacity-100 [filter:grayscale(1)_drop-shadow(0_2px_8px_rgba(0,0,0,0.22))] group-hover:[filter:grayscale(0)_drop-shadow(0_2px_4px_rgba(0,0,0,0.10))]"
           />
         ) : (
-          <span className="font-medium text-gray-warm text-sm text-center group-hover:text-white transition-colors duration-200">
+          <span className="font-medium text-gray-warm text-sm text-center">
             {insurance.name}
           </span>
         )}
