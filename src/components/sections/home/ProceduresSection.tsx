@@ -29,6 +29,10 @@ export async function ProceduresSection({ locale, backgroundImage }: ProceduresS
       lead={t('homeProcedures.lead')}
       backgroundImage={backgroundImage}
       procedures={procedures}
+      badgeEndos={t('procedures.badge.endos')}
+      badgeCuidare={t('procedures.badge.cuidare')}
+      categoryEndos={t('procedures.category.endos')}
+      categoryCuidare={t('procedures.category.cuidare')}
     />
   );
 }

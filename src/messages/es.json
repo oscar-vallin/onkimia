@@ -294,6 +294,16 @@
           "description": "Convenios con las principales aseguradoras del país."
         }
       }
+    },
+    "procedures": {
+      "badge": {
+        "endos": "Diagnóstico · Endos",
+        "cuidare": "Cuidados · Cuidare"
+      },
+      "category": {
+        "endos": "Diagnóstico",
+        "cuidare": "Cuidado"
+      }
     }
   },
   "about": {

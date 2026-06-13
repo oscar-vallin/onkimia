@@ -337,12 +337,14 @@ export function Header({ settings, clinics }: HeaderProps) {
                       onClick={() => setMobileOpen(false)}
                       className="relative block w-[120px] h-[64px]"
                     >
+                      {/* brightness-0 + invert = white silhouette over dark bg.
+                          Ideal: replace with a dedicated /logo-blanco.svg asset. */}
                       <Image
                         src={urlFor(settings.logo).height(64).url()}
                         alt={settings.title}
                         fill
                         sizes="120px"
-                        className="object-contain object-left invert"
+                        className="object-contain object-left brightness-0 invert"
                       />
                     </Link>
                   ) : null}
@@ -360,13 +362,13 @@ export function Header({ settings, clinics }: HeaderProps) {
                 </div>
 
                 {/* Nav links */}
-                <ul className="flex flex-col items-center mt-8 gap-2">
+                <ul className="flex flex-col items-center mt-4 gap-1">
                   {navLinks.map((link) => (
                     <m.li key={link.href} variants={mobileLinkVariants}>
                       <Link
                         href={link.href}
                         onClick={toggleMobileMenu}
-                        className={`relative block font-serif text-3xl md:text-4xl font-normal transition-colors py-2 ${
+                        className={`relative block font-serif text-xl md:text-2xl font-normal transition-colors py-1.5 ${
                           isActive(link.href)
                             ? 'text-teal-soft'
                             : 'text-white hover:text-teal-soft'
@@ -387,7 +389,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                 </ul>
 
                 {/* Bottom panel */}
-                <div className="mt-auto py-6 text-center space-y-6">
+                <div className="mt-auto py-4 text-center space-y-3">
                   {/* WhatsApp CTA */}
                   {whatsappUrl && (
                     <a
@@ -415,7 +417,7 @@ export function Header({ settings, clinics }: HeaderProps) {
 
                   {/* Clinic selector */}
                   <div className="flex flex-col items-center text-white">
-                    <p className="uppercase tracking-widest text-xs mb-4 text-white/60">
+                    <p className="uppercase tracking-widest text-xs mb-2 text-white/60">
                       {tClinic('selectClinic')}
                     </p>
                     <div className="flex justify-center gap-4">
@@ -444,7 +446,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                   </div>
 
                   {/* Language switch */}
-                  <p className="text-white/60 uppercase tracking-widest text-xs mt-6 mb-4">
+                  <p className="text-white/60 uppercase tracking-widest text-xs mt-3 mb-2">
                     {tClinic('selectLanguage')}
                   </p>
                   <button

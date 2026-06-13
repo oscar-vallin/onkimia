@@ -10,6 +10,17 @@ interface ProcedureCarouselProps {
   backgroundImageSrc?: string;
   backgroundImage?: SanityImageWithLQIP;
   procedures: Procedure[];
+  badgeEndos: string;
+  badgeCuidare: string;
+  categoryEndos: string;
+  categoryCuidare: string;
+}
+
+interface ProcedureCardProps extends Procedure {
+  badgeEndos: string;
+  badgeCuidare: string;
+  categoryEndos: string;
+  categoryCuidare: string;
 }
 
 function parseTitle(raw: string) {
@@ -21,9 +32,20 @@ function parseTitle(raw: string) {
   );
 }
 
-function ProcedureCard({ name, duration, shortDescription, submark, image }: Procedure) {
-  const [durationNum, ...durationUnit] = (duration ?? '').split(' ');
-  const unitStr = durationUnit.join(' ');
+function ProcedureCard({
+  name,
+  duration,
+  shortDescription,
+  submark,
+  image,
+  badgeEndos,
+  badgeCuidare,
+  categoryEndos,
+  categoryCuidare,
+}: ProcedureCardProps) {
+  const hasDuration = !!duration;
+  const [durationNum, ...durationUnit] = hasDuration ? duration!.split(' ') : [];
+  const unitStr = durationUnit?.join(' ') ?? '';
 
   const cardSrc = image
     ? urlFor(image).width(300).height(400).format('webp').quality(82).url()!
@@ -49,20 +71,22 @@ function ProcedureCard({ name, duration, shortDescription, submark, image }: Pro
       {/* Dark gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/15 to-ink/90" />
 
-      {/* Top grid: duration | name */}
-      <div className="absolute top-0 left-0 right-0 grid grid-cols-2 z-10">
-        <div className="p-5 border-r border-white/20">
-          <div className="font-serif text-3xl text-white leading-none">
-            {durationNum || '—'}
+      {/* Top: duration (optional) | name */}
+      <div className={`absolute top-0 left-0 right-0 z-10 ${hasDuration ? 'grid grid-cols-2' : 'flex'}`}>
+        {hasDuration && (
+          <div className="p-5 border-r border-white/20">
+            <div className="font-serif text-3xl text-white leading-none">
+              {durationNum}
+            </div>
+            {unitStr && (
+              <div className="text-xs text-teal-soft mt-1">{unitStr}</div>
+            )}
           </div>
-          {unitStr && (
-            <div className="text-xs text-teal-soft mt-1">{unitStr}</div>
-          )}
-        </div>
+        )}
         <div className="p-5">
           <div className="text-base font-medium text-white leading-tight">{name}</div>
           <div className="text-xs text-white/65 mt-1">
-            {submark === 'Endos' ? 'Diagnóstico' : 'Cuidado'}
+            {submark === 'Endos' ? categoryEndos : categoryCuidare}
           </div>
         </div>
       </div>
@@ -72,8 +96,8 @@ function ProcedureCard({ name, duration, shortDescription, submark, image }: Pro
 
       {/* Bottom: badge + description */}
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-        <span className="inline-flex items-center text-[10px] tracking-wider uppercase font-semibold text-white bg-teal/80 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
-          {submark}
+        <span className="inline-flex items-center text-[9px] tracking-wider uppercase font-semibold text-white bg-teal/80 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
+          {submark === 'Endos' ? badgeEndos : badgeCuidare}
         </span>
         <p className="text-sm text-white/85 leading-relaxed">{shortDescription}</p>
       </div>
@@ -88,6 +112,10 @@ export function ProcedureCarousel({
   backgroundImageSrc,
   backgroundImage,
   procedures,
+  badgeEndos,
+  badgeCuidare,
+  categoryEndos,
+  categoryCuidare,
 }: ProcedureCarouselProps) {
   const bgSrc = backgroundImage
     ? urlFor(backgroundImage).width(1920).height(1080).format('webp').quality(75).url()!
@@ -135,11 +163,25 @@ export function ProcedureCarousel({
           >
             {/* Set A */}
             {procedures.map((p) => (
-              <ProcedureCard key={`a-${p._id}`} {...p} />
+              <ProcedureCard
+                key={`a-${p._id}`}
+                {...p}
+                badgeEndos={badgeEndos}
+                badgeCuidare={badgeCuidare}
+                categoryEndos={categoryEndos}
+                categoryCuidare={categoryCuidare}
+              />
             ))}
             {/* Set B — seamless loop */}
             {procedures.map((p) => (
-              <ProcedureCard key={`b-${p._id}`} {...p} />
+              <ProcedureCard
+                key={`b-${p._id}`}
+                {...p}
+                badgeEndos={badgeEndos}
+                badgeCuidare={badgeCuidare}
+                categoryEndos={categoryEndos}
+                categoryCuidare={categoryCuidare}
+              />
             ))}
           </div>
         </ProcedureMarquee>

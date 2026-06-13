@@ -83,45 +83,46 @@ export default async function HomePage({
       </Suspense>
 
       {/* ─── CUIDARTE ES NUESTRA PRIORIDAD — static ─── */}
-      <section className="container-onkimia py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-ink py-16 md:py-24">
+        <div className="container-onkimia max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink mb-4">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-4">
               {t('priorityCare.title')}
             </h2>
-            <p className="text-lg text-gray-warm leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg text-white/65 leading-relaxed max-w-3xl mx-auto">
               {t('priorityCare.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-              <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
-                <Stethoscope className="w-7 h-7" aria-hidden="true" />
-              </div>
-              <h3 className="text-xl text-ink mb-2">{t('priorityCare.card1.title')}</h3>
-              <p className="text-gray-warm text-sm leading-relaxed">{t('priorityCare.card1.description')}</p>
-            </div>
-
-            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-              <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
-                <Microscope className="w-7 h-7" aria-hidden="true" />
-              </div>
-              <h3 className="text-xl text-ink mb-2">{t('priorityCare.card2.title')}</h3>
-              <p className="text-gray-warm text-sm leading-relaxed">{t('priorityCare.card2.description')}</p>
-            </div>
-
-            <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
-              <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
-                <HeartHandshake className="w-7 h-7" aria-hidden="true" />
-              </div>
-              <h3 className="text-xl text-ink mb-2">{t('priorityCare.card3.title')}</h3>
-              <p className="text-gray-warm text-sm leading-relaxed">{t('priorityCare.card3.description')}</p>
-            </div>
+            {(
+              [
+                { Icon: Stethoscope, titleKey: 'priorityCare.card1.title', descKey: 'priorityCare.card1.description' },
+                { Icon: Microscope,  titleKey: 'priorityCare.card2.title', descKey: 'priorityCare.card2.description' },
+                { Icon: HeartHandshake, titleKey: 'priorityCare.card3.title', descKey: 'priorityCare.card3.description' },
+              ] as const
+            ).map(({ Icon, titleKey, descKey }) => (
+              <article
+                key={titleKey}
+                className="group relative rounded-3xl overflow-hidden bg-ink-2 border border-white/[0.08] p-8 md:p-10 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(0,0,0,0.4)] hover:border-white/[0.16]"
+              >
+                {/* Teal glow on hover */}
+                <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-teal/[0.05] blur-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
+                <div className="relative w-12 h-12 rounded-2xl bg-teal/10 flex items-center justify-center mb-8">
+                  <Icon className="w-6 h-6 text-teal-soft" aria-hidden="true" />
+                </div>
+                <h3 className="relative font-serif text-2xl text-white mb-4 leading-tight">
+                  {t(titleKey)}
+                </h3>
+                <p className="relative text-white/65 text-base leading-relaxed">
+                  {t(descKey)}
+                </p>
+              </article>
+            ))}
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <p className="text-gray-warm text-sm">{t('priorityCare.additionalServices')}</p>
+            <p className="text-white/45 text-sm">{t('priorityCare.additionalServices')}</p>
           </div>
         </div>
       </section>
@@ -159,8 +160,8 @@ export default async function HomePage({
       </Suspense>
 
       {/* ─── BIENESTAR INTEGRAL — static ─── */}
-      <section className="container-onkimia py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-cream py-16 md:py-24">
+        <div className="container-onkimia max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink mb-4">
               {t('wellness.title')}
@@ -181,16 +182,16 @@ export default async function HomePage({
                 { key: 'genomics', Icon: Dna },
               ] as const
             ).map(({ key, Icon }) => (
-              <div
+              <article
                 key={key}
-                className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out"
+                className="rounded-2xl border border-line bg-white p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(26,122,110,0.12)] hover:border-teal/30"
               >
-                <div className="w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-3">
-                  <Icon className="w-6 h-6" aria-hidden="true" />
+                <div className="w-10 h-10 rounded-xl bg-[var(--teal-dim)] flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-teal" aria-hidden="true" />
                 </div>
-                <h3 className="text-lg text-ink mb-2">{t(`wellness.${key}.title`)}</h3>
-                <p className="text-sm text-gray-warm leading-relaxed">{t(`wellness.${key}.description`)}</p>
-              </div>
+                <h3 className="font-sans font-medium text-ink text-lg mb-2">{t(`wellness.${key}.title`)}</h3>
+                <p className="text-gray-warm text-sm leading-relaxed">{t(`wellness.${key}.description`)}</p>
+              </article>
             ))}
           </div>
         </div>

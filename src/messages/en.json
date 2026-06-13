@@ -294,6 +294,16 @@
           "description": "Agreements with the country's leading insurers."
         }
       }
+    },
+    "procedures": {
+      "badge": {
+        "endos": "Diagnostics · Endos",
+        "cuidare": "Care · Cuidare"
+      },
+      "category": {
+        "endos": "Diagnostics",
+        "cuidare": "Care"
+      }
     }
   },
   "about": {
