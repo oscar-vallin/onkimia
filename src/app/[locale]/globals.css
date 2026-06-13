@@ -316,3 +316,16 @@
     animation: none !important;
   }
 }
+
+/* ─── Mision section — wave drift ─── */
+@keyframes wave-drift {
+  0%, 100% { transform: translateX(0px); }
+  50%       { transform: translateX(-18px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wave-1 { animation: wave-drift 9s  ease-in-out infinite 0s;    }
+  .wave-2 { animation: wave-drift 11s ease-in-out infinite 1.5s;  }
+  .wave-3 { animation: wave-drift 13s ease-in-out infinite 3s;    }
+  .wave-4 { animation: wave-drift 10s ease-in-out infinite 0.75s; }
+}

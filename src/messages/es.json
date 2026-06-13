@@ -325,10 +325,18 @@
     },
     "supportGroup": {
       "title": "Grupo de apoyo",
-      "description": "Forma parte de nuestra comunidad compartiendo experiencias y creando lazos que te brindarán herramientas en cada paso."
+      "description": "Forma parte de nuestra comunidad compartiendo experiencias y creando lazos que te brindarán herramientas en cada paso. No estás solo en este camino.",
+      "category": "Comunidad",
+      "link": "Unirme al grupo"
     },
     "aware": {
-      "description": "Es una iniciativa integral diseñada para promover la prevención y detección oportuna del cáncer, combinando los servicios médicos especializados con actividades culturales y deportivas que impulsan el cuidado del cuerpo y la mente."
+      "description": "Una iniciativa integral diseñada para promover la prevención y detección oportuna del cáncer, combinando servicios médicos especializados con actividades culturales y deportivas que impulsan el cuidado del cuerpo y la mente.",
+      "category": "Prevención",
+      "link": "Conocer más"
+    },
+    "initiativeCards": {
+      "eyebrow": "Más allá del tratamiento",
+      "description": "Un ecosistema de bienestar que te conecta con otros y te impulsa a una vida más plena."
     },
     "testimonials": {
       "title": "Testimonios",
@@ -340,15 +348,35 @@
       "description": "Conoce nuestras instalaciones y al equipo que hará la diferencia en tu vida."
     },
     "faq": {
-      "headingUnderlined": "Pregu",
-      "headingSuffix": "ntas frecuentes",
-      "empty": "Próximamente agregaremos preguntas frecuentes.",
-      "eyebrow": "Resolvemos tus dudas"
+      "eyebrow": "RESOLVEMOS TUS DUDAS",
+      "title": "¿Tienes dudas?\nNuestros expertos te responden"
     },
     "cta": {
       "button": "Contáctanos"
     },
-    "downloadHere": "descárgala aquí"
+    "downloadHere": "descárgala aquí",
+    "mision": {
+      "eyebrow": "Nuestra misión",
+      "title": "Toma el control\nde tu salud hoy",
+      "description": "En Onkimia estamos comprometidos con impulsar avances significativos en la salud y calidad de vida de cada paciente. No solo buscamos que vivas más, sino que cada año sea el mejor que puedas vivir."
+    },
+    "enfoque360": {
+      "eyebrow": "ENFOQUE 360°",
+      "title": "Cuerpo, mente\ny cuidado integral",
+      "description": "Creemos que la oncología va más allá del tratamiento. Integramos el bienestar físico, emocional y espiritual de cada paciente para ofrecer una atención que transforma vidas.",
+      "stat1Value": "15+",
+      "stat1Label": "Años de experiencia",
+      "stat2Value": "98%",
+      "stat2Label": "Satisfacción del paciente",
+      "items": {
+        "item1Title": "Atención personalizada",
+        "item1Description": "Cada plan de tratamiento se diseña a la medida de tu historia, necesidades y objetivos de vida.",
+        "item2Title": "Tecnología de vanguardia",
+        "item2Description": "Contamos con equipamiento de última generación para diagnóstico y tratamiento oncológico de precisión.",
+        "item3Title": "Acompañamiento continuo",
+        "item3Description": "Un equipo multidisciplinario te acompaña en cada etapa, desde el diagnóstico hasta la recuperación."
+      }
+    }
   },
   "footer": {
     "menu": "Menú",

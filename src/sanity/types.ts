@@ -270,8 +270,10 @@ export interface AboutPage {
   bodyMindDescription?: LocalizedString;
   supportGroupTitle?: LocalizedString;
   supportGroupDescription?: LocalizedString;
+  supportGroupImage?: SanityImageWithLQIP;
   awareTitle?: LocalizedString;
   awareDescription?: LocalizedString;
+  awareImage?: SanityImageWithLQIP;
   testimonialsTitle?: LocalizedString;
   testimonialsSubtitle?: LocalizedString;
   doubtsTitleUnderlined?: LocalizedString;
@@ -279,6 +281,7 @@ export interface AboutPage {
   doubtsDescription?: LocalizedString;
   faqTitleUnderlined?: LocalizedString;
   faqTitleSuffix?: LocalizedString;
+  enfoque360Image?: SanityImageWithLQIP;
   reikyImage?: SanityImageWithLQIP;
   faqItems?: FAQItem[];
 }

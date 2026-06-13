@@ -325,10 +325,18 @@
     },
     "supportGroup": {
       "title": "Support group",
-      "description": "Be part of our community by sharing experiences and creating bonds that will provide you with tools at every step."
+      "description": "Be part of our community by sharing experiences and creating bonds that will provide you with tools at every step. You are not alone on this journey.",
+      "category": "Community",
+      "link": "Join the group"
     },
     "aware": {
-      "description": "A comprehensive initiative designed to promote cancer prevention and early detection, combining specialized medical services with cultural and sports activities that promote body and mind care."
+      "description": "A comprehensive initiative designed to promote cancer prevention and early detection, combining specialized medical services with cultural and sports activities that promote body and mind care.",
+      "category": "Prevention",
+      "link": "Learn more"
+    },
+    "initiativeCards": {
+      "eyebrow": "Beyond treatment",
+      "description": "A wellness ecosystem that connects you with others and drives you toward a fuller life."
     },
     "testimonials": {
       "title": "Testimonials",
@@ -340,15 +348,35 @@
       "description": "Visit our facilities and meet the team that will make a difference in your life."
     },
     "faq": {
-      "headingUnderlined": "Frequ",
-      "headingSuffix": "ently asked questions",
-      "empty": "FAQs coming soon.",
-      "eyebrow": "We answer your questions"
+      "eyebrow": "WE ANSWER YOUR QUESTIONS",
+      "title": "Have questions?\nOur experts respond"
     },
     "cta": {
       "button": "Contact us"
     },
-    "downloadHere": "download here"
+    "downloadHere": "download here",
+    "mision": {
+      "eyebrow": "Our mission",
+      "title": "Take control\nof your health today",
+      "description": "At Onkimia we are committed to driving significant advances in the health and quality of life of each patient. We do not only want you to live longer — we want every year to be the best year you can live."
+    },
+    "enfoque360": {
+      "eyebrow": "360° APPROACH",
+      "title": "Body, mind\nand integral care",
+      "description": "We believe oncology goes beyond treatment. We integrate the physical, emotional and spiritual wellbeing of each patient to deliver care that transforms lives.",
+      "stat1Value": "15+",
+      "stat1Label": "Years of experience",
+      "stat2Value": "98%",
+      "stat2Label": "Patient satisfaction",
+      "items": {
+        "item1Title": "Personalized care",
+        "item1Description": "Every treatment plan is tailored to your story, needs, and life goals.",
+        "item2Title": "State-of-the-art technology",
+        "item2Description": "We have the latest equipment for precision oncology diagnosis and treatment.",
+        "item3Title": "Continuous accompaniment",
+        "item3Description": "A multidisciplinary team supports you at every stage, from diagnosis to recovery."
+      }
+    }
   },
   "footer": {
     "menu": "Menu",

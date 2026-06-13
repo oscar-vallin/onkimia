@@ -51,10 +51,33 @@ export const aboutPage = defineType({
     // ─── GRUPO DE APOYO ───
     localizedString({ name: 'supportGroupTitle', title: 'Grupo de apoyo — Título' }),
     localizedText({ name: 'supportGroupDescription', title: 'Grupo de apoyo — Descripción', rows: 4 }),
+    defineField({
+      name: 'supportGroupImage',
+      title: 'Grupo de apoyo — Imagen',
+      type: 'image',
+      description: 'Foto para la tarjeta "Grupo de apoyo". Recomendado: 16:9 o 3:2, JPG <200KB.',
+      options: { hotspot: true },
+    }),
 
     // ─── ONKIMIA AWARE ───
     localizedString({ name: 'awareTitle', title: 'Onkimia Aware — Título' }),
     localizedText({ name: 'awareDescription', title: 'Onkimia Aware — Descripción', rows: 4 }),
+    defineField({
+      name: 'awareImage',
+      title: 'Onkimia Aware — Imagen',
+      type: 'image',
+      description: 'Foto para la tarjeta "Onkimia Aware". Recomendado: 16:9 o 3:2, JPG <200KB.',
+      options: { hotspot: true },
+    }),
+
+    // ─── ENFOQUE 360° ───
+    defineField({
+      name: 'enfoque360Image',
+      title: 'Enfoque 360° — Imagen de la clínica',
+      type: 'image',
+      description: 'Foto de la clínica o pasillo. Recomendado: vertical 3:4 o cuadrada, JPG <250KB.',
+      options: { hotspot: true },
+    }),
 
     // ─── TESTIMONIALES (cabecera) ───
     localizedString({ name: 'testimonialsTitle', title: 'Testimoniales — Título de la sección' }),
@@ -72,7 +95,7 @@ export const aboutPage = defineType({
     localizedString({ name: 'doubtsTitleSuffix', title: '¿Tienes dudas? — Texto final' }),
     localizedText({ name: 'doubtsDescription', title: '¿Tienes dudas? — Descripción', rows: 3 }),
 
-    // ─── FAQ (cabecera) ───
+    // ─── FAQ (preguntas + respuestas + foto de doctor, todo desde Sanity) ───
     localizedString({ name: 'faqTitleUnderlined', title: 'FAQ — Texto subrayado del encabezado' }),
     localizedString({ name: 'faqTitleSuffix', title: 'FAQ — Texto final del encabezado' }),
     defineField({

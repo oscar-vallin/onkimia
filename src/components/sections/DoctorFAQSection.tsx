@@ -1,4 +1,3 @@
-import { parseEmphasis } from '@/lib/parseEmphasis';
 import type { FAQItem } from '@/sanity/types';
 import { DoctorFAQItem } from './DoctorFAQItem';
 
@@ -11,15 +10,22 @@ interface DoctorFAQSectionProps {
 export function DoctorFAQSection({ eyebrow, title, items }: DoctorFAQSectionProps) {
   if (!items.length) return null;
 
+  const titleLines = title.split('\n');
+
   return (
-    <section className="bg-ink py-20 md:py-28">
+    <section className="bg-white py-20 md:py-28">
       <div className="container-onkimia">
-        <div className="text-center mb-14 md:mb-16">
-          <p className="text-xs font-medium tracking-widest uppercase text-teal-soft mb-4">
+        <div className="text-center mb-12 md:mb-16">
+          <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5">
             {eyebrow}
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
-            {parseEmphasis(title)}
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight">
+            {titleLines.map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < titleLines.length - 1 && <br />}
+              </span>
+            ))}
           </h2>
         </div>
 

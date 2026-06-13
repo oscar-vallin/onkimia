@@ -323,8 +323,16 @@ export const ABOUT_PAGE_QUERY = groq`
     bodyMindDescription,
     supportGroupTitle,
     supportGroupDescription,
+    supportGroupImage {
+      asset->{ _id, url, metadata { lqip, dimensions } },
+      hotspot, crop
+    },
     awareTitle,
     awareDescription,
+    awareImage {
+      asset->{ _id, url, metadata { lqip, dimensions } },
+      hotspot, crop
+    },
     testimonialsTitle,
     testimonialsSubtitle,
     doubtsTitleUnderlined,
@@ -332,6 +340,10 @@ export const ABOUT_PAGE_QUERY = groq`
     doubtsDescription,
     faqTitleUnderlined,
     faqTitleSuffix,
+    enfoque360Image {
+      asset->{ _id, url, metadata { lqip, dimensions } },
+      hotspot, crop
+    },
     reikyImage {
       asset->{ _id, url, metadata { lqip, dimensions } },
       hotspot, crop

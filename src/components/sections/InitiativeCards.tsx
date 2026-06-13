@@ -1,54 +1,150 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { urlFor } from '@/sanity/image';
+import type { SanityImageWithLQIP } from '@/sanity/types';
+
 interface InitiativeCardsProps {
-  bodyMindTitlePrefix: string;
-  bodyMindTitleUnderlined: string;
-  bodyMindTitleSuffix: string;
-  bodyMindDescription: string;
+  eyebrow: string;
+  description: string;
+  /* kept for callers that still pass these — unused in new design */
+  bodyMindTitlePrefix?: string;
+  bodyMindTitleUnderlined?: string;
+  bodyMindTitleSuffix?: string;
+  bodyMindDescription?: string;
   supportGroupTitle: string;
   supportGroupDescription: string;
+  supportGroupCategory: string;
+  supportGroupLink: string;
+  supportGroupImage?: SanityImageWithLQIP;
   awareTitle: string;
   awareDescription: string;
+  awareCategory: string;
+  awareLink: string;
+  awareImage?: SanityImageWithLQIP;
+}
+
+function CommunityIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  );
+}
+
+function PreventionIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4M12 8h.01"/>
+    </svg>
+  );
+}
+
+interface CardProps {
+  title: string;
+  description: string;
+  category: string;
+  linkText: string;
+  linkHref: string;
+  icon: React.ReactNode;
+  image?: SanityImageWithLQIP;
+}
+
+function InitiativeCard({ title, description, category, linkText, linkHref, icon, image }: CardProps) {
+  const imgSrc = image
+    ? urlFor(image).width(760).height(480).format('webp').quality(82).url()
+    : null;
+  const blur = image?.asset?.metadata?.lqip ?? undefined;
+
+  return (
+    <article className="flex flex-col">
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-cream-2 mb-6">
+        {imgSrc ? (
+          <Image
+            src={imgSrc}
+            alt={title}
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+            placeholder={blur ? 'blur' : 'empty'}
+            blurDataURL={blur}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-cream-2" />
+        )}
+      </div>
+
+      <div className="flex items-center gap-2.5 mb-4">
+        <div className="w-8 h-8 rounded-full bg-cream-2 flex items-center justify-center text-gray-warm flex-shrink-0">
+          {icon}
+        </div>
+        <span className="text-xs tracking-[0.18em] uppercase font-medium text-gray-warm">
+          {category}
+        </span>
+      </div>
+
+      <h3 className="font-serif text-3xl text-ink mb-4 leading-tight">{title}</h3>
+      <p className="text-gray-warm text-base leading-relaxed flex-1">{description}</p>
+
+      <Link
+        href={linkHref}
+        className="inline-flex items-center gap-1.5 text-ink text-sm font-medium mt-6 border-b border-ink pb-0.5 w-fit hover:text-teal hover:border-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 rounded-sm"
+      >
+        {linkText}
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </Link>
+    </article>
+  );
 }
 
 export function InitiativeCards({
-  bodyMindTitlePrefix,
-  bodyMindTitleUnderlined,
-  bodyMindTitleSuffix,
-  bodyMindDescription,
+  eyebrow,
+  description,
   supportGroupTitle,
   supportGroupDescription,
+  supportGroupCategory,
+  supportGroupLink,
+  supportGroupImage,
   awareTitle,
   awareDescription,
+  awareCategory,
+  awareLink,
+  awareImage,
 }: InitiativeCardsProps) {
   return (
-    <section className="bg-ink py-20 md:py-28">
+    <section className="bg-white py-20 md:py-28">
       <div className="container-onkimia">
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
-            {bodyMindTitlePrefix}{' '}
-            <em className="italic text-teal-soft not-italic">{bodyMindTitleUnderlined}</em>
-            {bodyMindTitleSuffix && ` ${bodyMindTitleSuffix}`}
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <h2 className="font-serif text-4xl md:text-5xl text-ink leading-tight mb-4">
+            {eyebrow}
           </h2>
-          <p className="text-white/70 text-lg leading-relaxed max-w-2xl mx-auto mt-6">
-            {bodyMindDescription}
-          </p>
+          <p className="text-gray-warm text-lg leading-relaxed">{description}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-8 md:p-10">
-            <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center mb-6">
-              <div className="w-4 h-4 rounded-full bg-teal-soft" />
-            </div>
-            <h3 className="font-serif text-2xl text-white mb-4">{supportGroupTitle}</h3>
-            <p className="text-white/70 text-base leading-relaxed">{supportGroupDescription}</p>
-          </div>
-
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-8 md:p-10">
-            <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center mb-6">
-              <div className="w-4 h-4 rounded-full bg-teal-soft" />
-            </div>
-            <h3 className="font-serif text-2xl text-white mb-4">{awareTitle}</h3>
-            <p className="text-white/70 text-base leading-relaxed">{awareDescription}</p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
+          <InitiativeCard
+            title={supportGroupTitle}
+            description={supportGroupDescription}
+            category={supportGroupCategory}
+            linkText={supportGroupLink}
+            linkHref="/nosotros#grupo-apoyo"
+            icon={<CommunityIcon />}
+            image={supportGroupImage}
+          />
+          <InitiativeCard
+            title={awareTitle}
+            description={awareDescription}
+            category={awareCategory}
+            linkText={awareLink}
+            linkHref="/nosotros#onkimia-aware"
+            icon={<PreventionIcon />}
+            image={awareImage}
+          />
         </div>
       </div>
     </section>

@@ -8,6 +8,8 @@ import { InitiativeCards } from '@/components/sections/InitiativeCards';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { DoctorFAQSection } from '@/components/sections/DoctorFAQSection';
+import { MisionSection } from '@/components/sections/MisionSection';
+import { Enfoque360Section } from '@/components/sections/Enfoque360Section';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import type { Testimonial, SiteSettings, AboutPage } from '@/sanity/types';
@@ -69,6 +71,30 @@ export default async function NosotrosPage({
         primaryCta={{ label: t('cta.button'), href: '/contacto' }}
       />
 
+      {/* ─── NUESTRA MISIÓN ─── */}
+      <MisionSection
+        eyebrow={t('mision.eyebrow')}
+        title={t('mision.title')}
+        description={t('mision.description')}
+      />
+
+      {/* ─── ENFOQUE 360° ─── */}
+      <Enfoque360Section
+        eyebrow={t('enfoque360.eyebrow')}
+        title={t('enfoque360.title')}
+        description={t('enfoque360.description')}
+        stat1Value={t('enfoque360.stat1Value')}
+        stat1Label={t('enfoque360.stat1Label')}
+        stat2Value={t('enfoque360.stat2Value')}
+        stat2Label={t('enfoque360.stat2Label')}
+        image={aboutPage?.enfoque360Image}
+        items={[
+          { title: t('enfoque360.items.item1Title'), description: t('enfoque360.items.item1Description') },
+          { title: t('enfoque360.items.item2Title'), description: t('enfoque360.items.item2Description') },
+          { title: t('enfoque360.items.item3Title'), description: t('enfoque360.items.item3Description') },
+        ]}
+      />
+
       {/* ─── MÁS QUE MEDICINA ─── */}
       <MoreThanMedicine
         titleLine1={getLocalized(aboutPage?.moreTitleLine1, locale) || t('moreThanMedicine.headingLine1')}
@@ -82,16 +108,20 @@ export default async function NosotrosPage({
         }))}
       />
 
-      {/* ─── CUERPO, MENTE Y CUIDADO INTEGRAL + INICIATIVAS ─── */}
+      {/* ─── MÁS ALLÁ DEL TRATAMIENTO ─── */}
       <InitiativeCards
-        bodyMindTitlePrefix={getLocalized(aboutPage?.bodyMindTitlePrefix, locale) || t('bodyMind.headingPrefix')}
-        bodyMindTitleUnderlined={getLocalized(aboutPage?.bodyMindTitleUnderlined, locale) || t('bodyMind.headingUnderlined')}
-        bodyMindTitleSuffix={getLocalized(aboutPage?.bodyMindTitleSuffix, locale) || t('bodyMind.headingSuffix')}
-        bodyMindDescription={getLocalized(aboutPage?.bodyMindDescription, locale) || t('bodyMind.description')}
+        eyebrow={t('initiativeCards.eyebrow')}
+        description={t('initiativeCards.description')}
         supportGroupTitle={getLocalized(aboutPage?.supportGroupTitle, locale) || t('supportGroup.title')}
         supportGroupDescription={getLocalized(aboutPage?.supportGroupDescription, locale) || t('supportGroup.description')}
+        supportGroupCategory={t('supportGroup.category')}
+        supportGroupLink={t('supportGroup.link')}
+        supportGroupImage={aboutPage?.supportGroupImage}
         awareTitle={getLocalized(aboutPage?.awareTitle, locale) || 'Onkimia Aware'}
         awareDescription={getLocalized(aboutPage?.awareDescription, locale) || t('aware.description')}
+        awareCategory={t('aware.category')}
+        awareLink={t('aware.link')}
+        awareImage={aboutPage?.awareImage}
       />
 
       {/* ─── TESTIMONIALES + REIKI IMAGE ─── */}
@@ -116,7 +146,7 @@ export default async function NosotrosPage({
       {aboutPage?.faqItems && aboutPage.faqItems.length > 0 && (
         <DoctorFAQSection
           eyebrow={t('faq.eyebrow')}
-          title={`${getLocalized(aboutPage.faqTitleUnderlined, locale) || t('faq.headingUnderlined')} *${getLocalized(aboutPage.faqTitleSuffix, locale) || t('faq.headingSuffix')}*`}
+          title={t('faq.title')}
           items={aboutPage.faqItems}
         />
       )}

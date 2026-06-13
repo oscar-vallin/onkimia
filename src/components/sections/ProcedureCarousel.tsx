@@ -48,13 +48,13 @@ function ProcedureCard({
   const unitStr = durationUnit?.join(' ') ?? '';
 
   const cardSrc = image
-    ? urlFor(image).width(300).height(400).format('webp').quality(82).url()!
+    ? urlFor(image).width(300).height(500).format('webp').quality(82).url()!
     : undefined;
   const blur = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
-    <div className="w-[300px] h-[400px] flex-shrink-0 relative rounded-3xl overflow-hidden bg-[#14463f]">
-      {/* Per-procedure image */}
+    <div className="w-[300px] h-[420px] flex-shrink-0 relative rounded-3xl overflow-hidden bg-[#14463f]">
+      {/* Image — fills full card, top-anchored */}
       {cardSrc && (
         <Image
           src={cardSrc}
@@ -68,19 +68,15 @@ function ProcedureCard({
         />
       )}
 
-      {/* Dark gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/15 to-ink/90" />
+      {/* Gradient — dark at top for text, clear in middle, dark at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-transparent via-50% to-ink/92" />
 
-      {/* Top: duration (optional) | name */}
+      {/* Top: name + category (+ duration if present) */}
       <div className={`absolute top-0 left-0 right-0 z-10 ${hasDuration ? 'grid grid-cols-2' : 'flex'}`}>
         {hasDuration && (
           <div className="p-5 border-r border-white/20">
-            <div className="font-serif text-3xl text-white leading-none">
-              {durationNum}
-            </div>
-            {unitStr && (
-              <div className="text-xs text-teal-soft mt-1">{unitStr}</div>
-            )}
+            <div className="font-serif text-3xl text-white leading-none">{durationNum}</div>
+            {unitStr && <div className="text-xs text-teal-soft mt-1">{unitStr}</div>}
           </div>
         )}
         <div className="p-5">
@@ -90,9 +86,6 @@ function ProcedureCard({
           </div>
         </div>
       </div>
-
-      {/* Horizontal divider */}
-      <div className="absolute top-[94px] left-5 right-5 h-px bg-white/20 z-10" />
 
       {/* Bottom: badge + description */}
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
