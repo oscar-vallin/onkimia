@@ -25,7 +25,7 @@ export function DoctorFAQItem({ item, defaultOpen = false }: DoctorFAQItemProps)
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between gap-4 py-6 text-left group"
+        className="w-full flex items-center justify-between gap-4 py-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         aria-expanded={open}
       >
         <span className="font-serif text-lg md:text-xl text-white leading-snug group-hover:text-teal-soft transition-colors duration-200">

@@ -18,7 +18,7 @@
   --color-teal-light: #5DCAA5;  /* acento claro (badges, detalles) */
   --color-cream:      #f6f4ef;  /* fondo claro cálido */
   --color-cream-2:    #ece9e1;
-  --color-gray-warm:  #6b6b73;  /* texto secundario */
+  --color-gray-warm:  #525258;  /* texto secundario — AA contrast on cream+white */
   --color-gray-soft:  #9b9ba3;
   --color-line:       #e6e3db;  /* bordes sobre fondo claro */
 

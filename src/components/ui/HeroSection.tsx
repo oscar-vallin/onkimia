@@ -130,7 +130,7 @@ export function HeroSection({
               {primaryCta && (
                 <Link
                   href={primaryCta.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-teal px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:bg-teal-soft hover:scale-[1.02] w-full sm:w-auto"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-teal px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:bg-teal-soft hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
                 >
                   {primaryCta.label}
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -139,7 +139,7 @@ export function HeroSection({
               {secondaryCta && (
                 <Link
                   href={secondaryCta.href}
-                  className="inline-flex items-center justify-center rounded-full border border-white/30 px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:border-white/60 hover:bg-white/5 hover:scale-[1.02] w-full sm:w-auto"
+                  className="inline-flex items-center justify-center rounded-full border border-white/30 px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:border-white/60 hover:bg-white/5 hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   {secondaryCta.label}
                 </Link>

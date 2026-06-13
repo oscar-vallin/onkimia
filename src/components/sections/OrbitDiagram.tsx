@@ -169,8 +169,22 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
     transition: prefersReduced ? 'none' : 'opacity 150ms ease',
   };
 
+  const activeItem = items[current];
+
   return (
-    <section className="bg-ink py-12 md:py-28 overflow-x-hidden">
+    <section
+      className="bg-ink py-12 md:py-28 overflow-x-hidden"
+      role="region"
+      aria-label={eyebrow}
+    >
+      {/* Live region: announces active item to screen readers on change */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {activeItem.name}: {activeItem.description}
+      </div>
       {/* Header: padded container for readability */}
       <div className="container-onkimia mb-14 md:mb-12">
         <div className="text-center">
@@ -192,8 +206,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
         <svg
           viewBox={viewBox}
           className="w-full h-auto overflow-hidden md:overflow-visible"
-          role="img"
-          aria-label={title}
+          aria-hidden="true"
         >
           <defs>
             <radialGradient id="orbGlow" cx="50%" cy="100%" r="70%">
@@ -337,7 +350,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
             type="button"
             onClick={prev}
             aria-label="Anterior"
-            className="w-14 h-14 rounded-full border border-white/[0.08] flex items-center justify-center text-white hover:bg-teal hover:border-teal transition-colors"
+            className="w-14 h-14 rounded-full border border-white/[0.08] flex items-center justify-center text-white hover:bg-teal hover:border-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <ArrowRight className="w-5 h-5 rotate-180" aria-hidden="true" />
           </button>
@@ -350,7 +363,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
                 onClick={() => goTo(i)}
                 aria-label={item.name}
                 aria-current={i === current ? 'true' : undefined}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${
                   i === current ? 'w-6 bg-teal-soft' : 'w-2 bg-white/20'
                 }`}
               />
@@ -361,7 +374,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
             type="button"
             onClick={next}
             aria-label="Siguiente"
-            className="w-14 h-14 rounded-full border border-white/[0.08] flex items-center justify-center text-white hover:bg-teal hover:border-teal transition-colors"
+            className="w-14 h-14 rounded-full border border-white/[0.08] flex items-center justify-center text-white hover:bg-teal hover:border-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <ArrowRight className="w-5 h-5" aria-hidden="true" />
           </button>

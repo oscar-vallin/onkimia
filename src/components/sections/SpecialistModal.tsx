@@ -74,7 +74,7 @@ export function SpecialistModal({ doctor, locale, open, onClose }: SpecialistMod
           type="button"
           onClick={onClose}
           aria-label="Cerrar"
-          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/40 text-white hover:bg-teal transition-colors flex items-center justify-center"
+          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/40 text-white hover:bg-teal transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           <X className="w-5 h-5" aria-hidden="true" />
         </button>

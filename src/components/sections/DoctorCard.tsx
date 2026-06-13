@@ -31,7 +31,7 @@ export function DoctorCard({ doctor, locale, viewProfileLabel }: DoctorCardProps
   return (
     <>
       <article
-        className="group relative cursor-pointer rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.45)]"
+        className="group relative cursor-pointer rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         onClick={() => setModalOpen(true)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
