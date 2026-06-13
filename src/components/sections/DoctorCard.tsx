@@ -6,7 +6,12 @@ import { ArrowRight } from 'lucide-react';
 import { urlFor } from '@/sanity/image';
 import { getLocalized, type Locale } from '@/sanity/lib/localization';
 import type { Doctor } from '@/sanity/types';
-import { SpecialistModal } from './SpecialistModal';
+import dynamic from 'next/dynamic';
+
+const SpecialistModal = dynamic(
+  () => import('./SpecialistModal').then((mod) => mod.SpecialistModal),
+  { ssr: false, loading: () => null }
+);
 
 interface DoctorCardProps {
   doctor: Doctor;

@@ -83,7 +83,8 @@ export default async function LocaleLayout({
       data-scroll-behavior="smooth"
     >
       <head>
-        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <MedicalOrganizationJsonLd settings={settings} clinics={clinics} />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col">
