@@ -82,6 +82,10 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
   const touchStartX = useRef<number>(0);
   const touchStartY = useRef<number>(0);
 
+  // Nudge refs
+  const svgWrapRef = useRef<HTMLDivElement>(null);
+  const nudgeDone = useRef(false);
+
   const resetAuto = useCallback(() => {
     // Resetting happens implicitly: changing `current` restarts the useEffect timer
   }, []);
@@ -143,6 +147,33 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
     resetAuto();
   };
 
+  // Capa 3 — nudge inicial: sutil deslizamiento en X la primera vez en viewport (solo móvil)
+  useEffect(() => {
+    if (prefersReduced || !isMobile || nudgeDone.current) return;
+    const el = svgWrapRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || nudgeDone.current) return;
+        nudgeDone.current = true;
+        observer.disconnect();
+        el.style.transition = 'transform 210ms ease';
+        el.style.transform = 'translateX(14px)';
+        setTimeout(() => {
+          el.style.transition = 'transform 420ms ease';
+          el.style.transform = 'translateX(0)';
+          setTimeout(() => {
+            el.style.transition = '';
+            el.style.transform = '';
+          }, 420);
+        }, 210);
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isMobile, prefersReduced]);
+
   // Auto-loop — pauses on hover or reduced-motion; resets on manual navigation via current dep
   useEffect(() => {
     if (prefersReduced || isHovered) return;
@@ -200,6 +231,7 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
 
       {/* SVG: full-width on mobile (bleeds to edges), max-width on desktop */}
       <div
+        ref={svgWrapRef}
         className="w-full md:max-w-[1100px] md:mx-auto touch-pan-y"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -229,14 +261,86 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
             strokeWidth="1.5"
           />
 
-          {/* Apex accent dot — sits on arc curve, mobile only */}
-          {isMobile && (
-            <circle cx={450} cy={40} r={10} fill="#5DCAA5" />
-          )}
+          {/* Capa 1 — arc indicator dots (mobile only)
+               Arc: centre (450,420) r=380. Point i: x=450+380·sin(θ), y=420−380·cos(θ)
+               θ = −22°, −8°, +8°, +22° → (308,68) (397,44) (503,44) (592,68) */}
+          {isMobile && (() => {
+            const ARC_PTS = [
+              { x: 308, y: 68 },
+              { x: 397, y: 44 },
+              { x: 503, y: 44 },
+              { x: 592, y: 68 },
+            ] as const;
+            return ARC_PTS.map((pt, i) => {
+              const active = i === current;
+              return (
+                <g
+                  key={`arc-dot-${i}`}
+                  role="button"
+                  aria-label={items[i].name}
+                  aria-current={active ? 'true' : undefined}
+                  onClick={() => goTo(i)}
+                  className="cursor-pointer"
+                >
+                  {/* Transparent hit-area */}
+                  <circle cx={pt.x} cy={pt.y} r={20} fill="transparent" />
+                  {/* Visible dot */}
+                  <circle
+                    cx={pt.x}
+                    cy={pt.y}
+                    r={active ? 10 : 6}
+                    fill={active ? '#5DCAA5' : 'rgba(255,255,255,0.28)'}
+                    style={{ transition: 'all 300ms ease' }}
+                  />
+                </g>
+              );
+            });
+          })()}
 
           {/* Bottom anchor dot — desktop only */}
           {!isMobile && (
             <circle cx="450" cy="420" r="5" fill="#2a9d8c" />
+          )}
+
+          {/* Capa 2 — chevrons ‹ › flanqueando el nodo activo (mobile only)
+               MOBILE_ACTIVE: x=450, y=140, r=54 → chevrons en y=148 */}
+          {isMobile && (
+            <>
+              <g
+                role="button"
+                aria-label="Anterior"
+                onClick={prev}
+                className="cursor-pointer"
+              >
+                <circle cx={360} cy={148} r={28} fill="transparent" />
+                <text
+                  x={360} y={162}
+                  textAnchor="middle"
+                  fill="rgba(255,255,255,0.28)"
+                  fontSize={40}
+                  fontFamily="system-ui, sans-serif"
+                >
+                  ‹
+                </text>
+              </g>
+              <g
+                role="button"
+                aria-label="Siguiente"
+                onClick={next}
+                className="cursor-pointer"
+              >
+                <circle cx={540} cy={148} r={28} fill="transparent" />
+                <text
+                  x={540} y={162}
+                  textAnchor="middle"
+                  fill="rgba(255,255,255,0.28)"
+                  fontSize={40}
+                  fontFamily="system-ui, sans-serif"
+                >
+                  ›
+                </text>
+              </g>
+            </>
           )}
 
           {/* Connector lines */}
