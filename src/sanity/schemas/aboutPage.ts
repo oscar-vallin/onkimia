@@ -59,6 +59,13 @@ export const aboutPage = defineType({
     // ─── TESTIMONIALES (cabecera) ───
     localizedString({ name: 'testimonialsTitle', title: 'Testimoniales — Título de la sección' }),
     localizedString({ name: 'testimonialsSubtitle', title: 'Testimoniales — Subtítulo' }),
+    defineField({
+      name: 'reikyImage',
+      title: 'Imagen de Reiki / Proceso',
+      type: 'image',
+      description: 'Imagen decorativa junto a la sección de testimoniales. Recomendado: vertical 4:5, JPG <200KB.',
+      options: { hotspot: true },
+    }),
 
     // ─── ¿TIENES DUDAS? ───
     localizedString({ name: 'doubtsTitleUnderlined', title: '¿Tienes dudas? — Texto subrayado' }),
@@ -68,6 +75,42 @@ export const aboutPage = defineType({
     // ─── FAQ (cabecera) ───
     localizedString({ name: 'faqTitleUnderlined', title: 'FAQ — Texto subrayado del encabezado' }),
     localizedString({ name: 'faqTitleSuffix', title: 'FAQ — Texto final del encabezado' }),
+    defineField({
+      name: 'faqItems',
+      title: 'Preguntas frecuentes',
+      type: 'array',
+      description: 'Hasta 6 preguntas respondidas por doctores. Editables desde el CMS.',
+      validation: (Rule) => Rule.max(6),
+      of: [
+        {
+          type: 'object',
+          name: 'faqItem',
+          fields: [
+            localizedString({ name: 'question', title: 'Pregunta', required: true }),
+            localizedText({ name: 'answer', title: 'Respuesta', rows: 5, required: true }),
+            defineField({
+              name: 'doctor',
+              title: 'Doctor que responde',
+              type: 'reference',
+              to: [{ type: 'doctor' }],
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'question.es',
+              subtitle: 'doctor.fullName',
+            },
+            prepare({ title, subtitle }: { title?: string; subtitle?: string }) {
+              return {
+                title: title || 'Sin pregunta',
+                subtitle: subtitle ? `Dr. ${subtitle}` : 'Sin doctor asignado',
+              };
+            },
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     prepare() {

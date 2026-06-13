@@ -332,6 +332,24 @@ export const ABOUT_PAGE_QUERY = groq`
     doubtsDescription,
     faqTitleUnderlined,
     faqTitleSuffix,
+    reikyImage {
+      asset->{ _id, url, metadata { lqip, dimensions } },
+      hotspot, crop
+    },
+    "faqItems": faqItems[]{
+      _key,
+      "question": question[$locale],
+      "answer": answer[$locale],
+      "doctor": doctor->{
+        _id,
+        fullName,
+        "specialty": specialty[$locale],
+        photo {
+          asset->{ _id, url, metadata { lqip, dimensions } },
+          hotspot, crop
+        }
+      }
+    }
   }
 `;
 

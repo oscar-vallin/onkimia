@@ -332,7 +332,11 @@
     "faq": {
       "headingUnderlined": "Frequ",
       "headingSuffix": "ently asked questions",
-      "empty": "FAQs coming soon."
+      "empty": "FAQs coming soon.",
+      "eyebrow": "We answer your questions"
+    },
+    "cta": {
+      "button": "Contact us"
     },
     "downloadHere": "download here"
   },

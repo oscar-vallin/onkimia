@@ -243,6 +243,18 @@ export interface DifferentialService {
   linkText?: LocalizedString;
 }
 
+export interface FAQItem {
+  _key: string;
+  question: string;
+  answer: string;
+  doctor: {
+    _id: string;
+    fullName: string;
+    specialty: string;
+    photo: SanityImageWithLQIP;
+  };
+}
+
 export interface AboutPage {
   _id: string;
   heroTitle?: LocalizedString;
@@ -267,4 +279,6 @@ export interface AboutPage {
   doubtsDescription?: LocalizedString;
   faqTitleUnderlined?: LocalizedString;
   faqTitleSuffix?: LocalizedString;
+  reikyImage?: SanityImageWithLQIP;
+  faqItems?: FAQItem[];
 }

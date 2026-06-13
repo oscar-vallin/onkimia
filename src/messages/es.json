@@ -332,7 +332,11 @@
     "faq": {
       "headingUnderlined": "Pregu",
       "headingSuffix": "ntas frecuentes",
-      "empty": "Próximamente agregaremos preguntas frecuentes."
+      "empty": "Próximamente agregaremos preguntas frecuentes.",
+      "eyebrow": "Resolvemos tus dudas"
+    },
+    "cta": {
+      "button": "Contáctanos"
     },
     "downloadHere": "descárgala aquí"
   },
