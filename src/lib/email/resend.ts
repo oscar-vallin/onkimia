@@ -41,7 +41,6 @@ export async function sendContactEmail(
       return { ok: false, error: error.message };
     }
 
-    console.log('[Resend] Email sent, id:', data?.id);
     return { ok: true };
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';

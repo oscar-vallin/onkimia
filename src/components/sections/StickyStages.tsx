@@ -47,7 +47,6 @@ export function StickyStages({
   imageAlt,
   heroImage,
 }: StickyStagesProps) {
-  console.log("sticky ", heroImage)
   const src: string = heroImage
     ? urlFor(heroImage).width(800).height(1000).format('webp').quality(82).url()!
     : '/images/process-placeholder.jpg';

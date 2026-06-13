@@ -86,6 +86,7 @@ function InsuranceCard({ insurance }: { insurance: Insurance }) {
             width={120}
             height={40}
             className="object-contain max-h-10 opacity-60 transition-all duration-300 group-hover:opacity-100 [filter:grayscale(1)_drop-shadow(0_2px_8px_rgba(0,0,0,0.22))] group-hover:[filter:grayscale(0)_drop-shadow(0_2px_4px_rgba(0,0,0,0.10))]"
+            style={{ width: 'auto' }}
           />
         ) : (
           <span className="font-medium text-gray-warm text-sm text-center">

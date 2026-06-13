@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
         pathname: '/images/**',
       },
     ],
+    qualities: [75, 80, 85],
   },
   experimental: {
     optimizePackageImports: [

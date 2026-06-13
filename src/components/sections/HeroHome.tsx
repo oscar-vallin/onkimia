@@ -38,7 +38,6 @@ export function HeroHome({
   features,
   heroImage,
 }: HeroHomeProps) {
-  console.log("hero", heroImage)
   const imageSrc = heroImage
     ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(80).url()
     : '/images/hero-poster.jpg';
@@ -46,20 +45,18 @@ export function HeroHome({
 
   return (
     <section className="relative w-full min-h-screen overflow-visible bg-ink text-white -mt-16 md:-mt-20">
-      {/* Ken Burns wrapper — slow breathing scale, respects prefers-reduced-motion */}
-      <div className="absolute inset-0 z-0 hero-ken-burns origin-center">
-        <Image
-          src={imageSrc}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          quality={80}
-          placeholder={blurDataURL ? 'blur' : 'empty'}
-          blurDataURL={blurDataURL}
-          className="object-cover"
-        />
-      </div>
+      {/* Ken Burns — applied directly on <Image> so Next.js emits fetchpriority="high" */}
+      <Image
+        src={imageSrc}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        quality={80}
+        placeholder={blurDataURL ? 'blur' : 'empty'}
+        blurDataURL={blurDataURL}
+        className="object-cover z-0 hero-ken-burns origin-center"
+      />
 
       {/* Primary overlay: radial gradient — lighter center, darker edges */}
       <div

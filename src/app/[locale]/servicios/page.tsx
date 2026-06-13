@@ -42,8 +42,6 @@ export default async function ServicesPage({
 
   const t = await getTranslations({ locale, namespace: 'services' });
 
-  console.log(services)
-
   const clinics = [
     { name: t('clinics.breast') },
     { name: t('clinics.lung') },
