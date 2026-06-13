@@ -1,17 +1,18 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { DOCTORS_QUERY, INSURANCES_QUERY, allProceduresQuery, SITE_SETTINGS_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY } from '@/sanity/queries';
 import { HeroHome } from '@/components/sections/HeroHome';
-import type { Doctor, Insurance, Procedure, SiteSettings } from '@/sanity/types';
+import type { SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { buildMetadata } from '@/lib/seo/metadata';
-import { ConveniosEditorial } from '@/components/sections/ConveniosEditorial';
 import { StickyStages } from '@/components/sections/StickyStages';
-import { ProcedureCarousel } from '@/components/sections/ProcedureCarousel';
-import { DoctorsGrid } from '@/components/sections/DoctorsGrid';
 import { OrbitDiagram } from '@/components/sections/OrbitDiagram';
+import { DoctorsSection } from '@/components/sections/home/DoctorsSection';
+import { InsurancesSection } from '@/components/sections/home/InsurancesSection';
+import { ProceduresSection } from '@/components/sections/home/ProceduresSection';
 import {
   Stethoscope,
   Microscope,
@@ -52,29 +53,16 @@ export default async function HomePage({
 
   const t = await getTranslations('home');
 
-  const [settings, doctors, insurances, procedures] = await Promise.all([
-    sanityFetch<SiteSettings>({
-      query: SITE_SETTINGS_QUERY,
-      tags: ['siteSettings'],
-    }),
-    sanityFetch<Doctor[]>({
-      query: DOCTORS_QUERY,
-      tags: ['doctor'],
-    }),
-    sanityFetch<Insurance[]>({
-      query: INSURANCES_QUERY,
-      tags: ['insurance'],
-    }),
-    sanityFetch<Procedure[]>({
-      query: allProceduresQuery,
-      params: { locale },
-      tags: ['procedure'],
-    }),
-  ]);
-  
+  // Only settings fetched here — hero flushes immediately while
+  // doctors/insurances/procedures stream in via Suspense boundaries below.
+  const settings = await sanityFetch<SiteSettings>({
+    query: SITE_SETTINGS_QUERY,
+    tags: ['siteSettings'],
+  });
+
   return (
     <>
-      {/* ─── HERO ─── */}
+      {/* ─── HERO — above the fold, renders immediately ─── */}
       <HeroHome
         eyebrow={t('homeHero.eyebrow')}
         title={t('homeHero.title')}
@@ -89,16 +77,12 @@ export default async function HomePage({
         heroImage={settings.homeHeroImage}
       />
 
-      <ProcedureCarousel
-        eyebrow={t('homeProcedures.eyebrow')}
-        title={t('homeProcedures.title')}
-        lead={t('homeProcedures.lead')}
-        backgroundImage={settings.proceduresBgImage}
-        
-        procedures={procedures}
-      />
+      {/* ─── PROCEDURES — streamed ─── */}
+      <Suspense fallback={<ProceduresCarouselSkeleton />}>
+        <ProceduresSection locale={locale} backgroundImage={settings.proceduresBgImage} />
+      </Suspense>
 
-      {/* ─── CUIDARTE ES NUESTRA PRIORIDAD ─── */}
+      {/* ─── CUIDARTE ES NUESTRA PRIORIDAD — static ─── */}
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -110,52 +94,39 @@ export default async function HomePage({
             </p>
           </div>
 
-          {/* 3 cards principales */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <Stethoscope className="w-7 h-7" aria-hidden="true" />
               </div>
-              <h3 className="text-xl text-ink mb-2">
-                {t('priorityCare.card1.title')}
-              </h3>
-              <p className="text-gray-warm text-sm leading-relaxed">
-                {t('priorityCare.card1.description')}
-              </p>
+              <h3 className="text-xl text-ink mb-2">{t('priorityCare.card1.title')}</h3>
+              <p className="text-gray-warm text-sm leading-relaxed">{t('priorityCare.card1.description')}</p>
             </div>
 
             <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <Microscope className="w-7 h-7" aria-hidden="true" />
               </div>
-              <h3 className="text-xl text-ink mb-2">
-                {t('priorityCare.card2.title')}
-              </h3>
-              <p className="text-gray-warm text-sm leading-relaxed">
-                {t('priorityCare.card2.description')}
-              </p>
+              <h3 className="text-xl text-ink mb-2">{t('priorityCare.card2.title')}</h3>
+              <p className="text-gray-warm text-sm leading-relaxed">{t('priorityCare.card2.description')}</p>
             </div>
 
             <div className="bg-white border border-line rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
               <div className="w-14 h-14 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-4">
                 <HeartHandshake className="w-7 h-7" aria-hidden="true" />
               </div>
-              <h3 className="text-xl text-ink mb-2">
-                {t('priorityCare.card3.title')}
-              </h3>
-              <p className="text-gray-warm text-sm leading-relaxed">
-                {t('priorityCare.card3.description')}
-              </p>
+              <h3 className="text-xl text-ink mb-2">{t('priorityCare.card3.title')}</h3>
+              <p className="text-gray-warm text-sm leading-relaxed">{t('priorityCare.card3.description')}</p>
             </div>
           </div>
 
-          {/* Servicios adicionales */}
           <div className="text-center max-w-3xl mx-auto">
             <p className="text-gray-warm text-sm">{t('priorityCare.additionalServices')}</p>
           </div>
         </div>
       </section>
 
+      {/* ─── ORBIT — static ─── */}
       <OrbitDiagram
         eyebrow={t('orbit.eyebrow')}
         title={t('orbit.title')}
@@ -167,6 +138,7 @@ export default async function HomePage({
         ]}
       />
 
+      {/* ─── STICKY STAGES — static (uses settings already resolved above) ─── */}
       <StickyStages
         eyebrow={t('process.eyebrow')}
         title={t('process.title')}
@@ -181,18 +153,12 @@ export default async function HomePage({
         ]}
       />
 
-      {doctors.length > 0 && (
-        <DoctorsGrid
-          doctors={doctors}
-          eyebrow={t('doctors.eyebrow')}
-          title={t('doctors.title')}
-          description={t('doctors.description')}
-          viewProfileLabel={t('doctors.viewDetail')}
-          locale={locale}
-        />
-      )}
+      {/* ─── DOCTORS — streamed ─── */}
+      <Suspense fallback={<DoctorsGridSkeleton />}>
+        <DoctorsSection locale={locale} />
+      </Suspense>
 
-      {/* ─── BIENESTAR INTEGRAL ─── */}
+      {/* ─── BIENESTAR INTEGRAL — static ─── */}
       <section className="container-onkimia py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -222,19 +188,15 @@ export default async function HomePage({
                 <div className="w-12 h-12 rounded-lg bg-teal/10 text-teal flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6" aria-hidden="true" />
                 </div>
-                <h3 className="text-lg text-ink mb-2">
-                  {t(`wellness.${key}.title`)}
-                </h3>
-                <p className="text-sm text-gray-warm leading-relaxed">
-                  {t(`wellness.${key}.description`)}
-                </p>
+                <h3 className="text-lg text-ink mb-2">{t(`wellness.${key}.title`)}</h3>
+                <p className="text-sm text-gray-warm leading-relaxed">{t(`wellness.${key}.description`)}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── AGENDA TU CITA ─── */}
+      {/* ─── AGENDA TU CITA — static ─── */}
       <section className="bg-ink py-16 md:py-24">
         <div className="container-onkimia">
           <div className="max-w-4xl mx-auto text-center">
@@ -277,12 +239,65 @@ export default async function HomePage({
         </div>
       </section>
 
-      <ConveniosEditorial
-        insurances={insurances}
-        eyebrow={t('insurances.eyebrow')}
-        title={t('insurances.title')}
-        statLabel={t('insurances.statLabel')}
-      />
+      {/* ─── INSURANCES — streamed ─── */}
+      <Suspense fallback={<InsurancesSkeleton />}>
+        <InsurancesSection />
+      </Suspense>
     </>
+  );
+}
+
+function ProceduresCarouselSkeleton() {
+  return (
+    <div className="bg-ink py-20 md:py-28 animate-pulse">
+      <div className="container-onkimia">
+        <div className="h-3 w-36 bg-white/10 rounded mb-4" />
+        <div className="h-10 w-72 bg-white/10 rounded" />
+      </div>
+      <div className="mt-12 flex gap-5 overflow-hidden px-6">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="w-[300px] h-[400px] flex-shrink-0 rounded-3xl bg-white/5" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DoctorsGridSkeleton() {
+  return (
+    <div className="bg-ink py-20 md:py-28 animate-pulse">
+      <div className="container-onkimia">
+        <div className="text-center mb-16">
+          <div className="h-3 w-28 bg-white/10 rounded mx-auto mb-4" />
+          <div className="h-10 w-80 bg-white/10 rounded mx-auto mb-3" />
+          <div className="h-4 w-96 bg-white/10 rounded mx-auto" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="aspect-[3/4] rounded-2xl bg-white/5" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InsurancesSkeleton() {
+  return (
+    <div className="bg-cream py-20 md:py-28 animate-pulse">
+      <div className="container-onkimia">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_2fr] gap-12 items-center">
+          <div>
+            <div className="h-24 w-20 bg-ink/10 rounded mb-4" />
+            <div className="h-3 w-48 bg-ink/10 rounded" />
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            {Array.from({ length: 9 }).map((_, i) => (
+              <div key={i} className="h-[90px] rounded-2xl bg-ink/10" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
