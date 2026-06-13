@@ -94,7 +94,7 @@ export default async function HomePage({
         title={t('homeProcedures.title')}
         lead={t('homeProcedures.lead')}
         backgroundImage={settings.proceduresBgImage}
-        backgroundImageSrc="/images/procedures-bg-placeholder.jpg"
+        
         procedures={procedures}
       />
 

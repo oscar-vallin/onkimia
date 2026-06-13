@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { urlFor } from '@/sanity/image';
 import type { Procedure, SanityImageWithLQIP } from '@/sanity/types';
+import { ProcedureMarquee } from './ProcedureMarquee';
 
 interface ProcedureCarouselProps {
   eyebrow: string;
@@ -25,7 +26,7 @@ function ProcedureCard({ name, duration, shortDescription, submark, image }: Pro
   const unitStr = durationUnit.join(' ');
 
   const cardSrc = image
-    ? urlFor(image).width(600).height(800).format('webp').quality(80).url()!
+    ? urlFor(image).width(300).height(400).format('webp').quality(82).url()!
     : undefined;
   const blur = image?.asset?.metadata?.lqip ?? undefined;
 
@@ -127,19 +128,21 @@ export function ProcedureCarousel({
 
       {/* Marquee — full width, outside container */}
       <div className="relative z-10 mt-12 overflow-hidden py-4">
-        <div
-          className="flex gap-5 w-max"
-          style={{ animation: 'marquee 50s linear infinite' }}
-        >
-          {/* Set A */}
-          {procedures.map((p) => (
-            <ProcedureCard key={`a-${p._id}`} {...p} />
-          ))}
-          {/* Set B — seamless loop */}
-          {procedures.map((p) => (
-            <ProcedureCard key={`b-${p._id}`} {...p} />
-          ))}
-        </div>
+        <ProcedureMarquee>
+          <div
+            className="marquee-track flex gap-5 w-max"
+            style={{ animation: 'marquee 50s linear infinite' }}
+          >
+            {/* Set A */}
+            {procedures.map((p) => (
+              <ProcedureCard key={`a-${p._id}`} {...p} />
+            ))}
+            {/* Set B — seamless loop */}
+            {procedures.map((p) => (
+              <ProcedureCard key={`b-${p._id}`} {...p} />
+            ))}
+          </div>
+        </ProcedureMarquee>
       </div>
     </section>
   );
