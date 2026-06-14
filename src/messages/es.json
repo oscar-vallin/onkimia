@@ -583,13 +583,35 @@
       }
     },
     "radiology": {
-      "title": "Procedimientos de radiología intervencionista con ultrasonido",
+      "eyebrow": "INTERVENCIONISMO",
+      "headlinePart1": "Procedimientos de radiología intervencionista",
+      "headlinePart2": "con ultrasonido",
+      "description": "Realizamos intervenciones de alta precisión guiadas en tiempo real por ultrasonido, minimizando riesgos y maximizando resultados sin necesidad de cirugía abierta.",
+      "stat1Value": "Mínima",
+      "stat1Label": "invasión",
+      "stat2Value": "Tiempo real",
+      "stat2Label": "guiado por imagen",
       "items": {
-        "abscessDrainage": "Drenaje de abscesos superficiales o profundos guiado por ultrasonido",
-        "biopsies": "Biopsias percutáneas guiadas",
-        "venousCatheter": "Colocación de catéter venoso profundo guiado por ultrasonido",
-        "evacuatingPuncture": "Punción evacuadora de derrames pleurales o ascíticos",
-        "infiltrations": "Infiltraciones terapéuticas (articulares, musculares, nerviosas)"
+        "abscessDrainage": {
+          "name": "Drenaje de abscesos superficiales o profundos guiado por ultrasonido",
+          "description": "Evacuación precisa de colecciones líquidas con mínima invasión y control visual en tiempo real."
+        },
+        "biopsies": {
+          "name": "Biopsias percutáneas guiadas",
+          "description": "Toma de muestras tisulares con máxima precisión diagnóstica y mínimo riesgo para el paciente."
+        },
+        "venousCatheter": {
+          "name": "Colocación de catéter venoso profundo guiado por ultrasonido",
+          "description": "Acceso venoso seguro y verificado para tratamientos prolongados o de alta complejidad."
+        },
+        "evacuatingPuncture": {
+          "name": "Punción evacuadora de derrames pleurales o ascíticos",
+          "description": "Drenaje terapéutico de líquidos acumulados en pleura o abdomen para alivio inmediato de síntomas."
+        },
+        "infiltrations": {
+          "name": "Infiltraciones terapéuticas (articulares, musculares, nerviosas)",
+          "description": "Aplicación localizada de fármacos terapéuticos guiada por imagen para manejo del dolor y la inflamación."
+        }
       }
     },
     "palliative": {
@@ -610,9 +632,12 @@
       "description": "Unidad de procedimientos ambulatorios no quirúrgicos de Onkimia. Diagnósticos y tratamientos especializados con calidad hospitalaria, sin internamiento."
     },
     "hero": {
-      "eyebrow": "Endos",
+      "eyebrow": "ENDOS",
       "headline": "Tu salud, con calidad y eficiencia",
-      "description": "Procedimientos ambulatorios no quirúrgicos: diagnósticos y tratamientos especializados, sin hospitalización."
+      "description": "Procedimientos ambulatorios no quirúrgicos: diagnósticos y tratamientos especializados, sin hospitalización.",
+      "headlinePart1": "Tu salud, con",
+      "headlinePart2": "calidad y eficiencia",
+      "quote": "\"Calidad hospitalaria sin hospitalización.\""
     },
     "availability": {
       "banner": "La unidad Endos está disponible únicamente en nuestra sede de Guadalajara."
@@ -651,7 +676,12 @@
           "duration": "45 min",
           "shortDescription": "Procedimientos intervencionistas de alta precisión guiados por ultrasonido en tiempo real."
         }
-      }
+      },
+      "eyebrow": "PROCEDIMIENTOS",
+      "headlinePart1": "Diagnóstico",
+      "headlinePart2": "ambulatorio",
+      "others": "Otros procedimientos",
+      "othersDescription": "Contamos con un amplio catálogo de procedimientos diagnósticos y terapéuticos adaptados a las necesidades de cada paciente."
     },
     "benefits": {
       "title": "Calidad hospitalaria sin hospitalización",
@@ -661,18 +691,42 @@
         "agileProcedures": "Procedimientos ágiles y sin internamiento",
         "timeAndCostSavings": "Ahorro de tiempo y costos",
         "empatheticCare": "Atención empática, centrada en ti"
-      }
+      },
+      "eyebrow": "VENTAJAS",
+      "description": "Todos los beneficios de un hospital, en un entorno ágil, cómodo y sin internamiento innecesario."
     },
     "safety": {
       "title": "Seguridad y confianza",
-      "description": "Sabemos que la salud no admite improvisaciones. En Endos, cada procedimiento es realizado por especialistas con amplia experiencia, en espacios diseñados para cuidar cada detalle de tu bienestar."
+      "description": "Sabemos que la salud no admite improvisaciones. En Endos, cada procedimiento es realizado por especialistas con amplia experiencia, en espacios diseñados para cuidar cada detalle de tu bienestar.",
+      "eyebrow": "NUESTRO COMPROMISO",
+      "badge": "Procedimientos seguros",
+      "badgeSub": "100% ambulatorios · sin internamiento",
+      "quote": "\"Agiliza tu proceso. Mejora tu experiencia. Ya sea por indicación médica o por iniciativa propia, Endos es tu mejor opción para realizar procedimientos sin hospitalización prolongada, con toda la calidad, comodidad y eficiencia que mereces.\"",
+      "checklistItems": {
+        "protocols": {
+          "title": "Protocolos internacionales",
+          "description": "Seguimos estrictos protocolos de esterilización, asepsia y seguridad del paciente alineados con estándares internacionales."
+        },
+        "doctors": {
+          "title": "Médicos certificados y subespecializados",
+          "description": "Cada procedimiento es ejecutado por gastroenterólogos, neumólogos y radiólogos intervencionistas certificados."
+        },
+        "technology": {
+          "title": "Salas equipadas con tecnología de vanguardia",
+          "description": "Torres de endoscopía HD, ecógrafos de alta resolución y sistemas de monitoreo cardiorespiratorio en tiempo real."
+        }
+      }
     },
     "faq": {
-      "title": "Preguntas frecuentes"
+      "title": "Preguntas frecuentes",
+      "eyebrow": "PREGUNTAS FRECUENTES"
     },
     "cta": {
       "title": "Agiliza tu proceso. Mejora tu experiencia.",
-      "description": "Ya sea por indicación médica o por iniciativa propia, Endos es tu mejor opción para realizar procedimientos sin hospitalización prolongada, con toda la calidad, comodidad y eficiencia que mereces."
+      "description": "Ya sea por indicación médica o por iniciativa propia, Endos es tu mejor opción para realizar procedimientos sin hospitalización prolongada, con toda la calidad, comodidad y eficiencia que mereces.",
+      "eyebrow": "ENDOS",
+      "button": "Agendar Cita",
+      "message": "Hola, me gustaría agendar una cita en Endos."
     }
   },
   "contact": {
@@ -692,8 +746,8 @@
       "hoursLabel": "Horario"
     },
     "form": {
-      "title": "Agenda tu consulta",
-      "subtitle": "Completa el formulario y te contactaremos pronto.",
+      "title": "Agenda tu cita",
+      "subtitle": "Completa el formulario y te contactaremos a la brevedad.",
       "name": {
         "label": "Nombre completo",
         "placeholder": "Ej: María González"
@@ -725,7 +779,8 @@
         "tooShort": "Texto muy corto",
         "privacyRequired": "Debes aceptar el aviso de privacidad"
       },
-      "requiredFieldsNote": "Los campos marcados con * son obligatorios"
+      "requiredFieldsNote": "Los campos marcados con * son obligatorios",
+      "messagePlaceholder": "¿Cómo podemos ayudarte?"
     },
     "errors": {
       "name": {
@@ -777,6 +832,23 @@
     },
     "map": {
       "title": "Ubicación de Onkimia"
+    },
+    "section": {
+      "eyebrow": "HABLEMOS",
+      "headlinePart1": "Agenda tu",
+      "headlinePart2": "cita",
+      "description": "Completa el formulario y te contactaremos a la brevedad. También puedes escribirnos por WhatsApp para una respuesta inmediata.",
+      "whatsappLabel": "WhatsApp",
+      "whatsappDesc": "Respuesta inmediata para agendar tu cita.",
+      "phoneLabel": "Teléfono",
+      "phoneDesc": "Atención telefónica en horario de oficina.",
+      "emailLabel": "Correo",
+      "emailDesc": "Para consultas administrativas y de convenios."
+    },
+    "sedes": {
+      "eyebrow": "NUESTRAS SEDES",
+      "headlinePart1": "Dónde",
+      "headlinePart2": "encontrarnos"
     }
   },
   "jobBoard": {

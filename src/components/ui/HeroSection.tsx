@@ -26,9 +26,9 @@ interface HeroSectionProps {
 }
 
 const HEIGHTS: Record<NonNullable<HeroSectionProps['height']>, string> = {
-  sm:   'min-h-[50svh]',
-  md:   'min-h-[65svh]',
-  lg:   'min-h-[85svh]',
+  sm:   'min-h-[55svh]',
+  md:   'min-h-[70svh]',
+  lg:   'min-h-[100svh] md:min-h-[85svh]',
   full: 'min-h-[100svh]',
 };
 
@@ -77,7 +77,7 @@ export function HeroSection({
           priority
           sizes="100vw"
           quality={80}
-          className="object-cover"
+          className="object-cover object-top md:object-center"
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
         />
@@ -86,13 +86,16 @@ export function HeroSection({
       {/* Overlay */}
       {isGradient ? (
         <>
-          <div className="absolute inset-0 bg-ink/30" aria-hidden="true" />
+          {/* Mobile: light veil at top so image shows, heavy dark only at bottom 40% where text is */}
           <div
-            className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/15 md:hidden"
+            className="absolute inset-0 md:hidden"
+            style={{ background: 'linear-gradient(to top, rgba(20,30,28,0.97) 0%, rgba(20,30,28,0.75) 38%, rgba(20,30,28,0.15) 65%, rgba(20,30,28,0.05) 100%)' }}
             aria-hidden="true"
           />
+          {/* Desktop: dark band on the left where text lives */}
           <div
-            className="absolute inset-0 hidden md:block bg-gradient-to-r from-ink/90 via-ink/50 to-ink/10"
+            className="absolute inset-0 hidden md:block"
+            style={{ background: 'linear-gradient(to right, rgba(20,30,28,0.92) 0%, rgba(20,30,28,0.65) 42%, rgba(20,30,28,0.10) 72%, transparent 100%)' }}
             aria-hidden="true"
           />
         </>
@@ -103,34 +106,43 @@ export function HeroSection({
       {/* Content */}
       <div className="container-onkimia relative z-10 flex w-full">
         <div
-          className={`flex flex-col justify-end md:justify-center ${alignClass} w-full max-w-3xl pb-14 pt-32 md:py-32`}
+          className={`flex flex-col ${alignClass} w-full max-w-2xl pt-28 pb-14 md:py-24`}
         >
-          {eyebrow && (
-            <p className="text-xs font-medium tracking-widest uppercase text-white/90 mb-5 md:mb-6">
-              {eyebrow}
-            </p>
-          )}
+          {/* Mobile: spacer pushes content to bottom third */}
+          <div className="flex-1 md:hidden" />
 
-          <h1 className="font-serif font-normal text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] text-balance">
-            {parseTitle(title)}
-          </h1>
+          {/* Title block */}
+          <div>
+            {eyebrow && (
+              <p className="text-xs font-medium tracking-widest uppercase text-white/70 mb-4 md:mb-5">
+                {eyebrow}
+              </p>
+            )}
+            <h1 className="font-serif font-normal text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] text-balance">
+              {parseTitle(title)}
+            </h1>
+            {description && (
+              <p className="font-sans text-base md:text-lg lg:text-xl leading-relaxed text-white/75 mt-5 max-w-xl">
+                {description}
+              </p>
+            )}
+          </div>
 
-          {description && (
-            <p className="font-sans text-lg md:text-xl leading-relaxed text-white/80 mt-6 max-w-xl">
-              {description}
-            </p>
+          {/* Desktop spacer — pushes CTA to bottom */}
+          {(primaryCta || secondaryCta) && (
+            <div className="hidden md:block flex-1 min-h-[80px]" />
           )}
 
           {(primaryCta || secondaryCta) && (
             <div
-              className={`flex flex-col sm:flex-row gap-4 mt-9 md:mt-10 w-full sm:w-auto ${
+              className={`flex flex-col sm:flex-row gap-3 mt-8 md:mt-0 w-full sm:w-auto ${
                 align === 'center' ? 'sm:justify-center' : ''
               }`}
             >
               {primaryCta && (
                 <Link
                   href={primaryCta.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-teal px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:bg-teal-soft hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-teal px-7 py-3.5 font-sans font-medium text-white transition-all duration-200 hover:bg-teal-soft hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
                 >
                   {primaryCta.label}
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -139,7 +151,7 @@ export function HeroSection({
               {secondaryCta && (
                 <Link
                   href={secondaryCta.href}
-                  className="inline-flex items-center justify-center rounded-full border border-white/30 px-8 py-4 font-sans font-medium text-white transition-all duration-200 ease-in-out hover:border-white/60 hover:bg-white/5 hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                  className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 font-sans font-medium text-white transition-all duration-200 hover:border-white/60 hover:bg-white/5 hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   {secondaryCta.label}
                 </Link>

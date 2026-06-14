@@ -74,6 +74,13 @@ export const siteSettings = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'cuidareRadiologyImage',
+      title: 'Imagen de fondo — "Radiología Intervencionista" (Cuidare)',
+      description: 'Imagen de fondo oscura para la sección de procedimientos guiados por ultrasonido en /cuidare.',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'socialMedia',
       title: 'Redes sociales',
       type: 'object',

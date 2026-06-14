@@ -20,8 +20,9 @@ export interface SiteSettings {
   aboutHeroImage?: SanityImageWithLQIP;
   doctorsHeroImage?: Image;
   cuidareHeroImage?: Image;
-  endosHeroImage?: Image;
-  endosSafetyImage?: Image;
+  endosHeroImage?: SanityImageWithLQIP;
+  endosSafetyImage?: SanityImageWithLQIP;
+  cuidareRadiologyImage?: SanityImageWithLQIP;
   homeHeroImage?: SanityImageWithLQIP;
   homeHeroDescription: LocalizedString;
   processImage?: SanityImageWithLQIP;

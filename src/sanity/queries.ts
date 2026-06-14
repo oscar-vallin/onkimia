@@ -29,8 +29,18 @@ export const SITE_SETTINGS_QUERY = groq`
     homeHeroDescription,
     doctorsHeroImage,
     cuidareHeroImage,
-    endosHeroImage,
-    endosSafetyImage,
+    endosHeroImage {
+      ...,
+      asset->{ ..., metadata { lqip } }
+    },
+    endosSafetyImage {
+      ...,
+      asset->{ ..., metadata { lqip } }
+    },
+    cuidareRadiologyImage {
+      ...,
+      asset->{ ..., metadata { lqip } }
+    },
     processImage {
       ...,
       asset-> {
@@ -364,6 +374,51 @@ export const ABOUT_PAGE_QUERY = groq`
         }
       }
     }
+  }
+`;
+
+/** Procedimientos de la unidad Cuidare (submark == "Cuidare"), con imagen LQIP. */
+export const CUIDARE_PROCEDURES_QUERY = groq`
+  *[_type == "procedure" && submark == "Cuidare"] | order(order asc) {
+    _id,
+    order,
+    "name": name[$locale],
+    "shortDescription": shortDescription[$locale],
+    submark,
+    image {
+      asset-> {
+        _id,
+        url,
+        metadata { lqip, dimensions }
+      },
+      hotspot,
+      crop
+    }
+  }
+`;
+
+/** Procedimientos de la unidad Endos (submark == "Endos"), con imagen LQIP. */
+export const ENDOS_PROCEDURES_QUERY = groq`
+  *[_type == "procedure" && submark == "Endos"] | order(order asc) {
+    _id,
+    order,
+    "name": name[$locale],
+    "shortDescription": shortDescription[$locale],
+    "highlights": highlights[]{
+      _key,
+      "text": text[$locale]
+    },
+    submark,
+    image {
+      asset-> {
+        _id,
+        url,
+        metadata { lqip, dimensions }
+      },
+      hotspot,
+      crop
+    },
+    "duration": duration[$locale]
   }
 `;
 

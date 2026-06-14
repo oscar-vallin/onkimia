@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, CUIDARE_PROCEDURES_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { SiteSettings, FAQ } from '@/sanity/types';
+import type { SiteSettings, FAQ, Procedure } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import {
@@ -14,7 +14,6 @@ import {
   Clock,
   TrendingDown,
   Heart,
-  Check,
 } from 'lucide-react';
 import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
@@ -68,7 +67,7 @@ export default async function CuidarePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [settings, faqs, t] = await Promise.all([
+  const [settings, faqs, procedures, t] = await Promise.all([
     sanityFetch<SiteSettings>({
       query: SITE_SETTINGS_QUERY,
       tags: ['siteSettings'],
@@ -77,6 +76,11 @@ export default async function CuidarePage({
       query: FAQS_BY_PAGE_QUERY,
       params: { page: 'cuidare' },
       tags: ['faq'],
+    }),
+    sanityFetch<Procedure[]>({
+      query: CUIDARE_PROCEDURES_QUERY,
+      params: { locale },
+      tags: ['procedure'],
     }),
     getTranslations('cuidare'),
   ]);
@@ -179,35 +183,125 @@ export default async function CuidarePage({
         ))}
       </section>
 
+      {/* ─── PROCEDIMIENTOS CUIDARE — fotos prominentes ─── */}
+      {procedures.length > 0 && (
+        <section className="bg-white py-20 md:py-28" aria-label="Procedimientos Cuidare">
+          <div className="container-onkimia">
+            <div className={`grid gap-4 ${
+              procedures.length === 1 ? 'grid-cols-1 max-w-2xl mx-auto' :
+              procedures.length === 2 ? 'grid-cols-1 md:grid-cols-2' :
+              'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            }`}>
+              {procedures.map((proc, i) => (
+                <article
+                  key={proc._id}
+                  className={`relative rounded-3xl overflow-hidden group ${
+                    procedures.length >= 3 && i === 0 ? 'sm:col-span-2 lg:col-span-1' : ''
+                  }`}
+                >
+                  <div className="relative w-full aspect-[4/3]">
+                    {proc.image?.asset ? (
+                      <Image
+                        src={urlFor(proc.image).width(1400).height(1050).format('webp').quality(85).url()}
+                        alt={proc.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                        placeholder={proc.image?.asset?.metadata?.lqip ? 'blur' : 'empty'}
+                        blurDataURL={proc.image?.asset?.metadata?.lqip ?? undefined}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-ink/10" />
+                    )}
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 45%, rgba(0,0,0,0.85) 100%)' }}
+                      aria-hidden="true"
+                    />
+                    <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+                      <div>
+                        <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-white/60 bg-white/[0.12] rounded-full px-3 py-1.5 backdrop-blur-sm">
+                          CUIDARE
+                        </span>
+                        <h3 className="font-serif text-2xl md:text-3xl text-white mt-3 leading-tight">{proc.name}</h3>
+                      </div>
+                      <p className="text-white/70 text-sm leading-relaxed">{proc.shortDescription}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ─── RADIOLOGÍA INTERVENCIONISTA ─── */}
-      <section
-        className="bg-cream py-16 md:py-24"
-        aria-labelledby="cuidare-radiology-title"
-      >
-        <div className="container-onkimia max-w-4xl">
-          <h2
-            id="cuidare-radiology-title"
-            className="font-serif text-4xl md:text-5xl text-center mb-12 text-balance"
-          >
-            {t('radiology.title')}
-          </h2>
-          <ul className="space-y-3">
-            {RADIOLOGY_KEYS.map((key) => (
-              <li
-                key={key}
-                className="flex items-start gap-3 bg-white p-4 rounded-2xl"
-              >
-                <Check
-                  className="w-5 h-5 text-teal flex-shrink-0 mt-0.5"
-                  aria-hidden="true"
-                />
-                <span className="text-ink">
-                  {t(`radiology.items.${key}`)}
-                </span>
-                <MedicalProcedureLd name={t(`radiology.items.${key}`)} />
-              </li>
-            ))}
-          </ul>
+      <section className="relative overflow-hidden py-20 md:py-28" aria-labelledby="cuidare-radiology-title">
+        {/* Background image */}
+        {settings.cuidareRadiologyImage?.asset && (
+          <Image
+            src={urlFor(settings.cuidareRadiologyImage).width(2400).height(1400).format('webp').quality(80).url()}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            placeholder={settings.cuidareRadiologyImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
+            blurDataURL={settings.cuidareRadiologyImage?.asset?.metadata?.lqip ?? undefined}
+          />
+        )}
+        {/* Dark overlay — always present, deeper when no image */}
+        <div
+          className="absolute inset-0 bg-ink"
+          style={{ opacity: settings.cuidareRadiologyImage?.asset ? 0.82 : 1 }}
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 container-onkimia">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+            {/* Left */}
+            <div>
+              <p className="text-[10px] tracking-[0.28em] uppercase text-white/50 font-medium mb-6">
+                {t('radiology.eyebrow')}
+              </p>
+              <h2 id="cuidare-radiology-title" className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
+                {t('radiology.headlinePart1')}<br/>
+                <em className="not-italic italic">{t('radiology.headlinePart2')}</em>
+              </h2>
+              <p className="text-white/60 text-base md:text-lg leading-relaxed mb-10">
+                {t('radiology.description')}
+              </p>
+              {/* Stat pills */}
+              <div className="flex flex-wrap gap-3">
+                <div className="bg-white/[0.07] border border-white/[0.10] rounded-2xl px-7 py-5 text-center min-w-[130px]">
+                  <p className="font-serif text-2xl text-white leading-none mb-1">{t('radiology.stat1Value')}</p>
+                  <p className="text-[11px] tracking-[0.15em] uppercase text-white/40">{t('radiology.stat1Label')}</p>
+                </div>
+                <div className="bg-white/[0.07] border border-white/[0.10] rounded-2xl px-7 py-5 text-center min-w-[130px]">
+                  <p className="font-serif text-2xl text-white leading-none mb-1">{t('radiology.stat2Value')}</p>
+                  <p className="text-[11px] tracking-[0.15em] uppercase text-white/40">{t('radiology.stat2Label')}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right — items with icon + name + description */}
+            <ul className="space-y-3">
+              {RADIOLOGY_KEYS.map((key, i) => {
+                const icons = ['⚡', '📋', '↔', '🧪', '🎯'];
+                return (
+                  <li key={key} className="flex gap-4 bg-white/[0.04] border border-white/[0.08] rounded-2xl px-6 py-5 hover:bg-white/[0.07] transition-colors">
+                    <div className="w-9 h-9 rounded-full bg-white/[0.08] flex items-center justify-center flex-shrink-0 mt-0.5 text-white/50">
+                      <span className="text-sm" aria-hidden="true">{icons[i]}</span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-white text-sm leading-snug mb-1">{t(`radiology.items.${key}.name`)}</p>
+                      <p className="text-white/50 text-sm leading-relaxed">{t(`radiology.items.${key}.description`)}</p>
+                    </div>
+                    <MedicalProcedureLd name={t(`radiology.items.${key}.name`)} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </section>
 

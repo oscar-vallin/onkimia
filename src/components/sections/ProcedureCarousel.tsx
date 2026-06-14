@@ -48,51 +48,84 @@ function ProcedureCard({
   const unitStr = durationUnit?.join(' ') ?? '';
 
   const cardSrc = image
-    ? urlFor(image).width(300).height(500).format('webp').quality(82).url()!
+    ? urlFor(image).width(800).format('webp').quality(82).url()!
     : undefined;
   const blur = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
-    <div className="w-[300px] h-[420px] flex-shrink-0 relative rounded-3xl overflow-hidden bg-[#14463f]">
-      {/* Image — fills full card, top-anchored */}
+    <div className="w-[380px] h-[580px] flex-shrink-0 relative rounded-3xl overflow-hidden bg-[#1a2420]">
+      {/* Layer 1 — blurred background (fills card, hides letterbox gaps) */}
+      {cardSrc && (
+        <Image
+          src={cardSrc}
+          alt=""
+          fill
+          sizes="380px"
+          loading="lazy"
+          placeholder={blur ? 'blur' : 'empty'}
+          blurDataURL={blur}
+          className="object-cover scale-110 blur-xl opacity-60"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Layer 2 — actual image, fully visible without cropping */}
       {cardSrc && (
         <Image
           src={cardSrc}
           alt={name}
           fill
-          sizes="300px"
+          sizes="380px"
           loading="lazy"
           placeholder={blur ? 'blur' : 'empty'}
           blurDataURL={blur}
-          className="object-cover"
+          className="object-contain"
         />
       )}
 
-      {/* Gradient — dark at top for text, clear in middle, dark at bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-transparent via-50% to-ink/92" />
+      {/* Scrim: only top and bottom for text legibility */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.60) 100%)' }}
+        aria-hidden="true"
+      />
 
-      {/* Top: name + category (+ duration if present) */}
-      <div className={`absolute top-0 left-0 right-0 z-10 ${hasDuration ? 'grid grid-cols-2' : 'flex'}`}>
-        {hasDuration && (
-          <div className="p-5 border-r border-white/20">
-            <div className="font-serif text-3xl text-white leading-none">{durationNum}</div>
-            {unitStr && <div className="text-xs text-teal-soft mt-1">{unitStr}</div>}
+      {/* ── Header — overlaid on image ── */}
+      <div className="absolute top-0 left-0 right-0 z-10">
+        {hasDuration ? (
+          <div className="grid grid-cols-2 divide-x divide-white/25">
+            <div className="px-5 pt-5 pb-4">
+              <div className="font-serif text-4xl text-white leading-none">{durationNum}</div>
+              {unitStr && <div className="text-[10px] text-white/55 mt-1 uppercase tracking-wider">{unitStr}</div>}
+            </div>
+            <div className="px-5 pt-5 pb-4">
+              <div className="text-sm font-medium text-white leading-snug">{name}</div>
+              <div className="text-[11px] text-white/55 mt-1">
+                {submark === 'Endos' ? categoryEndos : categoryCuidare}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="px-5 pt-5 pb-4">
+            <div className="text-sm font-medium text-white leading-snug">{name}</div>
+            <div className="text-[11px] text-white/55 mt-1">
+              {submark === 'Endos' ? categoryEndos : categoryCuidare}
+            </div>
           </div>
         )}
-        <div className="p-5">
-          <div className="text-base font-medium text-white leading-tight">{name}</div>
-          <div className="text-xs text-white/65 mt-1">
-            {submark === 'Endos' ? categoryEndos : categoryCuidare}
-          </div>
-        </div>
+        {/* Horizontal divider line */}
+        <div className="h-px bg-white/25 mx-0" />
       </div>
 
-      {/* Bottom: badge + description */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-        <span className="inline-flex items-center text-[9px] tracking-wider uppercase font-semibold text-white bg-teal/80 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
-          {submark === 'Endos' ? badgeEndos : badgeCuidare}
-        </span>
-        <p className="text-sm text-white/85 leading-relaxed">{shortDescription}</p>
+      {/* ── Footer — overlaid on image ── */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="h-px bg-white/25" />
+        <div className="px-5 py-4">
+          <span className="inline-flex items-center text-[9px] tracking-wider uppercase font-semibold text-white bg-teal/70 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
+            {submark === 'Endos' ? badgeEndos : badgeCuidare}
+          </span>
+          <p className="text-xs text-white/85 leading-relaxed line-clamp-2">{shortDescription}</p>
+        </div>
       </div>
     </div>
   );

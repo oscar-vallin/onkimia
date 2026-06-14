@@ -583,13 +583,35 @@
       }
     },
     "radiology": {
-      "title": "Ultrasound-guided interventional radiology procedures",
+      "eyebrow": "INTERVENTIONISM",
+      "headlinePart1": "Interventional radiology procedures",
+      "headlinePart2": "with ultrasound",
+      "description": "We perform high-precision interventions guided in real time by ultrasound, minimizing risks and maximizing outcomes without open surgery.",
+      "stat1Value": "Minimal",
+      "stat1Label": "invasion",
+      "stat2Value": "Real time",
+      "stat2Label": "image-guided",
       "items": {
-        "abscessDrainage": "Ultrasound-guided drainage of superficial or deep abscesses",
-        "biopsies": "Guided percutaneous biopsies",
-        "venousCatheter": "Ultrasound-guided deep venous catheter placement",
-        "evacuatingPuncture": "Evacuating puncture of pleural or ascitic effusions",
-        "infiltrations": "Therapeutic infiltrations (joint, muscular, nerve)"
+        "abscessDrainage": {
+          "name": "Ultrasound-guided superficial or deep abscess drainage",
+          "description": "Precise evacuation of liquid collections with minimal invasion and real-time visual control."
+        },
+        "biopsies": {
+          "name": "Guided percutaneous biopsies",
+          "description": "Tissue sampling with maximum diagnostic precision and minimal patient risk."
+        },
+        "venousCatheter": {
+          "name": "Ultrasound-guided deep venous catheter placement",
+          "description": "Safe and verified venous access for prolonged or complex treatments."
+        },
+        "evacuatingPuncture": {
+          "name": "Evacuating puncture of pleural or ascitic effusions",
+          "description": "Therapeutic drainage of fluids accumulated in the pleura or abdomen for immediate symptom relief."
+        },
+        "infiltrations": {
+          "name": "Therapeutic infiltrations (joint, muscle, nerve)",
+          "description": "Image-guided localized application of therapeutic drugs for pain and inflammation management."
+        }
       }
     },
     "palliative": {
@@ -610,9 +632,12 @@
       "description": "Onkimia's non-surgical ambulatory procedures unit. Specialized diagnostics and treatments with hospital quality, without admission."
     },
     "hero": {
-      "eyebrow": "Endos",
+      "eyebrow": "ENDOS",
       "headline": "Your health, with quality and efficiency",
-      "description": "Non-surgical ambulatory procedures: specialized diagnostics and treatments, without hospitalization."
+      "description": "Non-surgical ambulatory procedures: specialized diagnostics and treatments, without hospitalization.",
+      "headlinePart1": "Your health, with",
+      "headlinePart2": "quality and efficiency",
+      "quote": "\"Hospital-level quality, without hospitalization.\""
     },
     "availability": {
       "banner": "The Endos unit is available only at our Guadalajara location."
@@ -651,7 +676,12 @@
           "duration": "45 min",
           "shortDescription": "High-precision interventional procedures guided by real-time ultrasound imaging."
         }
-      }
+      },
+      "eyebrow": "PROCEDURES",
+      "headlinePart1": "Ambulatory",
+      "headlinePart2": "diagnosis",
+      "others": "Other procedures",
+      "othersDescription": "We offer a wide catalog of diagnostic and therapeutic procedures tailored to each patient's needs."
     },
     "benefits": {
       "title": "Hospital quality without hospitalization",
@@ -661,18 +691,42 @@
         "agileProcedures": "Agile procedures without admission",
         "timeAndCostSavings": "Time and cost savings",
         "empatheticCare": "Empathetic care, centered on you"
-      }
+      },
+      "eyebrow": "ADVANTAGES",
+      "description": "All the benefits of a hospital in an agile, comfortable setting — without unnecessary hospitalization."
     },
     "safety": {
       "title": "Safety and trust",
-      "description": "We know that health does not allow for improvisation. At Endos, each procedure is performed by specialists with extensive experience, in spaces designed to care for every detail of your well-being."
+      "description": "We know that health does not allow for improvisation. At Endos, each procedure is performed by specialists with extensive experience, in spaces designed to care for every detail of your well-being.",
+      "eyebrow": "OUR COMMITMENT",
+      "badge": "Safe procedures",
+      "badgeSub": "100% ambulatory · no hospitalization",
+      "quote": "\"Streamline your process. Improve your experience. Whether by medical referral or your own initiative, Endos is your best option for procedures without prolonged hospitalization, with all the quality, comfort and efficiency you deserve.\"",
+      "checklistItems": {
+        "protocols": {
+          "title": "International protocols",
+          "description": "We follow strict sterilization, asepsis and patient safety protocols aligned with international standards."
+        },
+        "doctors": {
+          "title": "Certified subspecialist physicians",
+          "description": "Each procedure is performed by certified gastroenterologists, pulmonologists and interventional radiologists."
+        },
+        "technology": {
+          "title": "State-of-the-art equipped rooms",
+          "description": "HD endoscopy towers, high-resolution ultrasound systems and real-time cardiorespiratory monitoring."
+        }
+      }
     },
     "faq": {
-      "title": "Frequently Asked Questions"
+      "title": "Frequently Asked Questions",
+      "eyebrow": "FREQUENTLY ASKED QUESTIONS"
     },
     "cta": {
       "title": "Speed up your process. Improve your experience.",
-      "description": "Whether by medical indication or your own initiative, Endos is your best option for procedures without prolonged hospitalization, with all the quality, comfort, and efficiency you deserve."
+      "description": "Whether by medical indication or your own initiative, Endos is your best option for procedures without prolonged hospitalization, with all the quality, comfort, and efficiency you deserve.",
+      "eyebrow": "ENDOS",
+      "button": "Book Appointment",
+      "message": "Hello, I would like to book an appointment at Endos."
     }
   },
   "contact": {
@@ -777,6 +831,23 @@
     },
     "map": {
       "title": "Onkimia location"
+    },
+    "section": {
+      "eyebrow": "LET'S TALK",
+      "headlinePart1": "Book your",
+      "headlinePart2": "appointment",
+      "description": "Fill out the form and we'll get back to you shortly. You can also message us on WhatsApp for an immediate response.",
+      "whatsappLabel": "WhatsApp",
+      "whatsappDesc": "Immediate response to schedule your appointment.",
+      "phoneLabel": "Phone",
+      "phoneDesc": "Phone support during office hours.",
+      "emailLabel": "Email",
+      "emailDesc": "For administrative and insurance inquiries."
+    },
+    "sedes": {
+      "eyebrow": "OUR LOCATIONS",
+      "headlinePart1": "Where to",
+      "headlinePart2": "find us"
     }
   },
   "jobBoard": {
