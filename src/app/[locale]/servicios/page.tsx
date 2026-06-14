@@ -1,9 +1,9 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, MAIN_SERVICES_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY, SERVICIOS_PAGE_QUERY } from '@/sanity/queries';
 import { HeroSection } from '@/components/ui/HeroSection';
-import type { Service, SiteSettings } from '@/sanity/types';
+import type { ServiciosPage, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -53,7 +53,7 @@ export default async function ServicesPage({
 
   const [settings, services, t] = await Promise.all([
     sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
-    sanityFetch<Service>({ query: MAIN_SERVICES_QUERY, tags: ['service'] }),
+    sanityFetch<ServiciosPage | null>({ query: SERVICIOS_PAGE_QUERY, tags: ['serviciosPage'] }),
     getTranslations({ locale, namespace: 'services' }),
   ]);
 

@@ -136,14 +136,6 @@ export const siteSettings = defineType({
       options: { hotspot: true },
     }),
     defineField({
-      name: 'endosSafetyImage',
-      title: 'Imagen "Seguridad y confianza" (Endos)',
-      type: 'image',
-      group: 'sections',
-      description: 'Foto del consultorio o sala de procedimientos para la sección de confianza en /endos.',
-      options: { hotspot: true },
-    }),
-    defineField({
       name: 'cuidareRadiologyImage',
       title: 'Fondo — Radiología Intervencionista (Cuidare)',
       type: 'image',

@@ -22,7 +22,6 @@ export const SITE_SETTINGS_QUERY = groq`
     // Section images
     processImage ${HERO_IMAGE_FRAGMENT},
     proceduresBgImage ${HERO_IMAGE_FRAGMENT},
-    endosSafetyImage ${HERO_IMAGE_FRAGMENT},
     cuidareRadiologyImage ${HERO_IMAGE_FRAGMENT},
     socialMedia,
     whatsappCommercial,
@@ -203,19 +202,10 @@ export const FAQS_BY_PAGE_QUERY = groq`
 // SERVICES
 // ============================================
 
-/** Servicios principales activos. Usado en Home sección "Cuidarte es nuestra prioridad". */
-export const MAIN_SERVICES_QUERY = groq`
-  *[_type == "service" && category == "main"]
-    | order(order asc) [0] {
+/** Singleton página Servicios — solo imágenes de sección. */
+export const SERVICIOS_PAGE_QUERY = groq`
+  *[_type == "serviciosPage" && _id == "serviciosPage"][0] {
     _id,
-    _type,
-    name,
-    description,
-    icon,
-    category,
-    order,
-    isActive,
-    heroImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     enfoqueImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     clinicsSectionImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     partnersImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop }
@@ -287,44 +277,8 @@ export const INSURANCES_QUERY = groq`
 export const ABOUT_PAGE_QUERY = groq`
   *[_type == "aboutPage" && _id == "aboutPage"][0] {
     _id,
-    heroTitle,
-    heroDescription,
-    moreTitleLine1,
-    moreTitleUnderlined,
-    moreTitleSuffix,
-    moreDescription,
-    differentialServices[] {
-      title,
-      link,
-      linkText,
-    },
-    bodyMindTitlePrefix,
-    bodyMindTitleUnderlined,
-    bodyMindTitleSuffix,
-    bodyMindDescription,
-    supportGroupTitle,
-    supportGroupDescription,
-    supportGroupImage {
-      asset->{ _id, url, metadata { lqip, dimensions } },
-      hotspot, crop
-    },
-    awareTitle,
-    awareDescription,
-    awareImage {
-      asset->{ _id, url, metadata { lqip, dimensions } },
-      hotspot, crop
-    },
     testimonialsTitle,
     testimonialsSubtitle,
-    doubtsTitleUnderlined,
-    doubtsTitleSuffix,
-    doubtsDescription,
-    faqTitleUnderlined,
-    faqTitleSuffix,
-    enfoque360Image {
-      asset->{ _id, url, metadata { lqip, dimensions } },
-      hotspot, crop
-    },
     reikyImage {
       asset->{ _id, url, metadata { lqip, dimensions } },
       hotspot, crop
@@ -363,6 +317,14 @@ export const CUIDARE_PROCEDURES_QUERY = groq`
       hotspot,
       crop
     }
+  }
+`;
+
+/** Singleton página Endos — solo imágenes de sección. */
+export const ENDOS_PAGE_QUERY = groq`
+  *[_type == "endosPage" && _id == "endosPage"][0] {
+    _id,
+    safetyImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop }
   }
 `;
 

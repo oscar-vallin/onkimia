@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, ENDOS_PROCEDURES_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, ENDOS_PROCEDURES_QUERY, ENDOS_PAGE_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { SiteSettings, FAQ, Procedure } from '@/sanity/types';
+import type { SiteSettings, FAQ, Procedure, EndosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, UserCheck, Cpu, Zap, Clock, Heart, Check } from 'lucide-react';
@@ -45,8 +45,9 @@ export default async function EndosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [settings, faqs, procedures, t] = await Promise.all([
+  const [settings, endosPageData, faqs, procedures, t] = await Promise.all([
     sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+    sanityFetch<EndosPage | null>({ query: ENDOS_PAGE_QUERY, tags: ['endosPage'] }),
     sanityFetch<FAQ[]>({ query: FAQS_BY_PAGE_QUERY, params: { page: 'endos' }, tags: ['faq'] }),
     sanityFetch<Procedure[]>({ query: ENDOS_PROCEDURES_QUERY, params: { locale }, tags: ['procedure'] }),
     getTranslations('endos'),
@@ -266,15 +267,15 @@ export default async function EndosPage({
             {/* Right — image */}
             <div className="relative">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden">
-                {settings.endosSafetyImage?.asset ? (
+                {endosPageData?.safetyImage?.asset ? (
                   <Image
-                    src={urlFor(settings.endosSafetyImage).width(900).height(1125).format('webp').quality(85).url()}
+                    src={urlFor(endosPageData?.safetyImage).width(900).height(1125).format('webp').quality(85).url()}
                     alt={t('safety.title')}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
-                    placeholder={settings.endosSafetyImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                    blurDataURL={settings.endosSafetyImage?.asset?.metadata?.lqip ?? undefined}
+                    placeholder={endosPageData?.safetyImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
+                    blurDataURL={endosPageData?.safetyImage?.asset?.metadata?.lqip ?? undefined}
                   />
                 ) : (
                   <div className="absolute inset-0 bg-white/[0.03] border border-white/[0.08] flex flex-col items-center justify-center gap-2">

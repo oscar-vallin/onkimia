@@ -29,7 +29,6 @@ export interface SiteSettings {
   // Section images
   processImage?: SanityImageWithLQIP;
   proceduresBgImage?: SanityImageWithLQIP;
-  endosSafetyImage?: SanityImageWithLQIP;
   cuidareRadiologyImage?: SanityImageWithLQIP;
   socialMedia?: {
     instagram?: string;
@@ -143,11 +142,19 @@ export interface Service {
   category: ServiceCategory;
   order?: number;
   isActive: boolean;
-  heroImage?: SanityImageWithLQIP;
+  availableAt?: Array<{ _id: string; slug: string }>;
+}
+
+export interface ServiciosPage {
+  _id: string;
   enfoqueImage?: SanityImageWithLQIP;
   clinicsSectionImage?: SanityImageWithLQIP;
   partnersImage?: SanityImageWithLQIP;
-  availableAt?: Array<{ _id: string; slug: string }>;
+}
+
+export interface EndosPage {
+  _id: string;
+  safetyImage?: SanityImageWithLQIP;
 }
 
 
@@ -258,12 +265,6 @@ export interface OnkimiaDocsSettings {
 // ABOUT PAGE
 // ============================================
 
-export interface DifferentialService {
-  title?: LocalizedString;
-  link?: string;
-  linkText?: LocalizedString;
-}
-
 export interface FAQItem {
   _key: string;
   question: string;
@@ -278,31 +279,8 @@ export interface FAQItem {
 
 export interface AboutPage {
   _id: string;
-  heroTitle?: LocalizedString;
-  heroDescription?: LocalizedString;
-  moreTitleLine1?: LocalizedString;
-  moreTitleUnderlined?: LocalizedString;
-  moreTitleSuffix?: LocalizedString;
-  moreDescription?: LocalizedString;
-  differentialServices?: DifferentialService[];
-  bodyMindTitlePrefix?: LocalizedString;
-  bodyMindTitleUnderlined?: LocalizedString;
-  bodyMindTitleSuffix?: LocalizedString;
-  bodyMindDescription?: LocalizedString;
-  supportGroupTitle?: LocalizedString;
-  supportGroupDescription?: LocalizedString;
-  supportGroupImage?: SanityImageWithLQIP;
-  awareTitle?: LocalizedString;
-  awareDescription?: LocalizedString;
-  awareImage?: SanityImageWithLQIP;
   testimonialsTitle?: LocalizedString;
   testimonialsSubtitle?: LocalizedString;
-  doubtsTitleUnderlined?: LocalizedString;
-  doubtsTitleSuffix?: LocalizedString;
-  doubtsDescription?: LocalizedString;
-  faqTitleUnderlined?: LocalizedString;
-  faqTitleSuffix?: LocalizedString;
-  enfoque360Image?: SanityImageWithLQIP;
   reikyImage?: SanityImageWithLQIP;
   faqItems?: FAQItem[];
 }

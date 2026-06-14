@@ -11,6 +11,8 @@ import { privacyPolicy } from './privacyPolicy';
 import { aboutPage } from './aboutPage';
 import { procedure } from './procedure';
 import { onkimiaDocsSettings } from './onkimiaDocsSettings';
+import { serviciosPage } from './serviciosPage';
+import { endosPage } from './endosPage';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Singletons
@@ -18,6 +20,8 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   privacyPolicy,
   aboutPage,
   onkimiaDocsSettings,
+  serviciosPage,
+  endosPage,
   // Document types
   clinic,
   doctor,

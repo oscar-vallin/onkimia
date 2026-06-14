@@ -8,36 +8,6 @@ export const service = defineType({
   type: 'document',
   icon: ActivityIcon,
   fields: [
-    defineField({
-      name: 'heroImage',
-      title: 'Imagen Hero de Servicios',
-      type: 'image',
-      description: 'Imagen principal (Atención Oncológica Especializada)',
-      options: { hotspot: true },
-      validation: (Rule) =>
-        Rule.required().error('La imagen del hero es necesaria'),
-    }),
-    defineField({
-      name: 'enfoqueImage',
-      title: 'Imagen "Nuestro Enfoque"',
-      type: 'image',
-      description: 'Imagen de impacto editorial después de las 3 tarjetas de enfoque. Recomendado: 16:7, JPG <300KB.',
-      options: { hotspot: true },
-    }),
-    defineField({
-      name: 'clinicsSectionImage',
-      title: 'Imagen de Sección Clínicas',
-      type: 'image',
-      description: 'Imagen decorativa entre Clínicas y Unidades Complementarias.',
-      options: { hotspot: true },
-    }),
-    defineField({
-      name: 'partnersImage',
-      title: 'Imagen Socios Comerciales',
-      type: 'image',
-      description: 'Imagen decorativa en la sección de Socios Comerciales. Recomendado: 16:7, JPG <300KB.',
-      options: { hotspot: true },
-    }),
     localizedString({
       name: 'name',
       title: 'Nombre del servicio',

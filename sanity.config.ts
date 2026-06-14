@@ -4,7 +4,7 @@ import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './src/sanity/schemas';
 import { apiVersion, dataset, projectId } from './src/sanity/env';
 
-const SINGLETON_TYPES = ['siteSettings', 'privacyPolicy', 'aboutPage', 'onkimiaDocsSettings'] as const;
+const SINGLETON_TYPES = ['siteSettings', 'privacyPolicy', 'aboutPage', 'onkimiaDocsSettings', 'serviciosPage', 'endosPage'] as const;
 
 export default defineConfig({
   name: 'onkimia',
@@ -113,6 +113,26 @@ export default defineConfig({
                 S.document()
                   .schemaType('onkimiaDocsSettings')
                   .documentId('onkimiaDocsSettings')
+                  .views([S.view.form()])
+              ),
+            // Singleton: Página Servicios — imágenes de sección
+            S.listItem()
+              .title('Página Servicios')
+              .id('serviciosPage')
+              .child(
+                S.document()
+                  .schemaType('serviciosPage')
+                  .documentId('serviciosPage')
+                  .views([S.view.form()])
+              ),
+            // Singleton: Página Endos — imágenes de sección
+            S.listItem()
+              .title('Página Endos')
+              .id('endosPage')
+              .child(
+                S.document()
+                  .schemaType('endosPage')
+                  .documentId('endosPage')
                   .views([S.view.form()])
               ),
           ]),
