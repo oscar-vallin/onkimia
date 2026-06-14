@@ -87,7 +87,7 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <MedicalOrganizationJsonLd settings={settings} clinics={clinics} />
       </head>
-      <body className="font-sans antialiased min-h-screen flex flex-col">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-cream">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-teal focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium"

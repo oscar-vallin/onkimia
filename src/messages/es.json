@@ -59,20 +59,29 @@
   },
   "services": {
     "hero": {
-      "title": "Atención Oncológica Especializada",
+      "eyebrow": "SERVICIOS",
+      "title": "Atención Oncológica *Especializada*",
       "description": "Abordamos cada caso desde un enfoque médico integral y humano."
     },
     "main": {
+      "eyebrow": "NUESTRO ENFOQUE",
       "title": "Atención Oncológica Especializada",
       "description": "Abordamos cada caso desde un enfoque médico integral y humano.",
-      "feature1": "Unidades médico-quirúrgicas por tipo de cáncer",
-      "feature2": "Servicios complementarios únicos",
-      "feature3": "Tecnología avanzada",
-      "prevention": "Prevenir también es parte del tratamiento. Ofrecemos programas de detección oportuna y estudios de secuenciación genética para tratamientos más eficaces y personalizados."
+      "lead": "Ofrecemos programas de detección oportuna y estudios de secuenciación genética para tratamientos más eficaces y personalizados.",
+      "feature1Title": "Unidades médico-quirúrgicas por tipo de cáncer",
+      "feature1Description": "Cada unidad está diseñada y equipada específicamente para el tipo de cáncer que trata, con equipos multidisciplinarios especializados en cada diagnóstico.",
+      "feature1Stat": "14 clínicas especializadas",
+      "feature2Title": "Servicios complementarios únicos",
+      "feature2Description": "Nutrición clínica, psico-oncología, fisioterapia, boutique oncológica, estética con causa y cuidados paliativos: un ecosistema de bienestar sin igual en México.",
+      "feature2Stat": "4 unidades complementarias propias",
+      "feature3Title": "Tecnología avanzada",
+      "feature3Description": "IRM de última generación, paneles de secuenciación genómica, imagen molecular y equipos diagnósticos de precisión para los resultados más confiables.",
+      "feature3Stat": "30+ estudios en un solo día"
     },
     "clinics": {
+      "eyebrow": "ESPECIALIDADES",
       "title": "Clínicas de Atención Oncológica",
-      "description": "En Onkimia, brindamos una gama de servicios especializados a través de nuestras clínicas médico-quirúrgicas y unidades funcionales, tales como:",
+      "description": "En Onkimia, brindamos una gama de servicios especializados a través de nuestras clínicas médico-quirúrgicas y unidades funcionales:",
       "breast": "Mama",
       "lung": "Pulmón",
       "prostate": "Próstata",
@@ -89,53 +98,66 @@
       "gastrointestinal": "Tumores gastrointestinales"
     },
     "complementary": {
-      "title": "Servicios Complementarios",
-      "description": "Como extensión de nuestra misión por siempre proporcionar atención integral y personalizada. Contamos con servicios complementarios como:",
+      "eyebrow": "ECOSISTEMA PROPIO",
+      "unitLabel": "UNIDAD",
+      "title": "Unidades Complementarias",
+      "description": "Como extensión de nuestra misión por siempre proporcionar atención integral y personalizada, contamos con servicios complementarios como:",
+      "knowMore": "Conocer más",
       "endos": {
         "name": "Endos",
-        "description": "Especialistas en endoscopía diagnóstica y terapéutica, con tecnología de punta y atención profesional."
+        "description": "Especialistas en endoscopía diagnóstica y terapéutica, con tecnología de punta y atención profesional.",
+        "link": "/endos"
       },
       "cuidare": {
         "name": "Cuidare",
-        "description": "Expertos en cuidados paliativos, enfocados en brindar calidad de vida, confort y acompañamiento profesional."
+        "description": "Expertos en cuidados paliativos, enfocados en brindar calidad de vida, confort y acompañamiento profesional.",
+        "link": "/cuidare"
       },
       "haranna": {
         "name": "Haranna",
-        "description": "Boutique oncológica con productos seleccionados para tu bienestar físico y emocional durante cada etapa del tratamiento."
+        "description": "Boutique oncológica con productos seleccionados para tu bienestar físico y emocional durante cada etapa del tratamiento.",
+        "link": "#"
       },
       "kalika": {
         "name": "Kalika",
-        "description": "Estética con Causa, un espacio para reconectar contigo. Cuidado personal con productos amigables para ti y para el medio ambiente."
-      },
-      "moreInfo": "Más información"
+        "description": "Estética con Causa, un espacio para reconectar contigo. Cuidado personal con productos amigables para ti y para el medio ambiente.",
+        "link": "#"
+      }
     },
     "partners": {
+      "eyebrow": "SOCIOS COMERCIALES",
       "title": "Socios Comerciales",
+      "visitWebsite": "Visitar sitio web",
       "sanvite": {
         "name": "Sanvite",
-        "description": "Especialistas en nutrición clínica y funcional. Promueven estilos de vida saludables y personalizados con suplementos de alta calidad."
+        "description": "Especialistas en nutrición clínica y funcional. Promueven estilos de vida saludables y personalizados con suplementos de alta calidad.",
+        "link": "#"
       },
       "aster": {
         "name": "Aster Clinic",
-        "description": "Clínica especializada en dermatología médica y estética. Ofrece atención integral para el cuidado de la piel, cabello en todas las etapas de la vida."
+        "description": "Clínica especializada en dermatología médica y estética. Ofrece atención integral para el cuidado de la piel, cabello en todas las etapas de la vida.",
+        "link": "#"
       },
       "sedi": {
         "name": "Sedi",
-        "description": "Laboratorio clínico confiable y ágil. Estudios diagnósticos para cada etapa del tratamiento."
+        "description": "Laboratorio clínico confiable y ágil. Estudios diagnósticos para cada etapa del tratamiento.",
+        "link": "#"
       },
       "breeze": {
         "name": "Breeze & Blue",
-        "description": "Restaurante de comida saludable con opciones nutritivas y deliciosas pensadas para pacientes, familiares y personal médico."
+        "description": "Restaurante de comida saludable con opciones nutritivas y deliciosas pensadas para pacientes, familiares y personal médico.",
+        "link": "#"
       },
       "vocalia": {
         "name": "Vocalia",
-        "description": "Centro de Alta Especialidad en Laringología. Diagnóstico y tratamiento avanzado para problemas de la voz y la vía aérea."
-      },
-      "visitWebsite": "Visitar sitio web"
+        "description": "Centro de Alta Especialidad en Laringología. Diagnóstico y tratamiento avanzado para problemas de la voz y la vía aérea.",
+        "link": "#"
+      }
     },
     "cta": {
+      "eyebrow": "AGENDA TU CITA",
       "title": "¿Listo para comenzar tu tratamiento?",
-      "description": "Agenda tu cita con nuestros especialistas y recibe atención personalizada.",
+      "description": "Agenda tu cita con nuestros especialistas y recibe atención personalizada desde el primer día.",
       "button": "Agendar Cita"
     }
   },
@@ -350,6 +372,12 @@
     "faq": {
       "eyebrow": "RESOLVEMOS TUS DUDAS",
       "title": "¿Tienes dudas?\nNuestros expertos te responden"
+    },
+    "appBanner": {
+      "title": "App Onkimia",
+      "description": "Lleva tu historial, citas y resultados siempre contigo. Consulta a tu equipo médico, recibe recordatorios y accede a tu plan de bienestar desde cualquier lugar.",
+      "appStore": "App Store",
+      "googlePlay": "Google Play"
     },
     "cta": {
       "button": "Contáctanos"

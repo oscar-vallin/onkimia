@@ -236,8 +236,10 @@ export const MAIN_SERVICES_QUERY = groq`
     category,
     order,
     isActive,
-    heroImage,
-    clinicsSectionImage
+    heroImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    enfoqueImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    clinicsSectionImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    partnersImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop }
   }
 `;
 

@@ -10,6 +10,7 @@ import { ContactCTA } from '@/components/sections/ContactCTA';
 import { DoctorFAQSection } from '@/components/sections/DoctorFAQSection';
 import { MisionSection } from '@/components/sections/MisionSection';
 import { Enfoque360Section } from '@/components/sections/Enfoque360Section';
+import { AppBanner } from '@/components/sections/AppBanner';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import type { Testimonial, SiteSettings, AboutPage } from '@/sanity/types';
@@ -150,6 +151,14 @@ export default async function NosotrosPage({
           items={aboutPage.faqItems}
         />
       )}
+
+      {/* ─── APP ONKIMIA ─── */}
+      <AppBanner
+        title={t('appBanner.title')}
+        description={t('appBanner.description')}
+        appStoreLabel={t('appBanner.appStore')}
+        googlePlayLabel={t('appBanner.googlePlay')}
+      />
     </>
   );
 }

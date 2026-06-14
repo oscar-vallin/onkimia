@@ -16,14 +16,28 @@ export const service = defineType({
       options: { hotspot: true },
       validation: (Rule) =>
         Rule.required().error('La imagen del hero es necesaria'),
-      }),
-      defineField({
-        name: 'clinicsSectionImage',
-        title: 'Imagen de Sección Clínicas',
-        type: 'image',
-        description: 'Imagen que acompaña al listado de especialidades',
-        options: { hotspot: true },
-      }),
+    }),
+    defineField({
+      name: 'enfoqueImage',
+      title: 'Imagen "Nuestro Enfoque"',
+      type: 'image',
+      description: 'Imagen de impacto editorial después de las 3 tarjetas de enfoque. Recomendado: 16:7, JPG <300KB.',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'clinicsSectionImage',
+      title: 'Imagen de Sección Clínicas',
+      type: 'image',
+      description: 'Imagen decorativa entre Clínicas y Unidades Complementarias.',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'partnersImage',
+      title: 'Imagen Socios Comerciales',
+      type: 'image',
+      description: 'Imagen decorativa en la sección de Socios Comerciales. Recomendado: 16:7, JPG <300KB.',
+      options: { hotspot: true },
+    }),
     localizedString({
       name: 'name',
       title: 'Nombre del servicio',

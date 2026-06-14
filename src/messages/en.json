@@ -59,20 +59,29 @@
   },
   "services": {
     "hero": {
-      "title": "Specialized Oncology Care",
+      "eyebrow": "SERVICES",
+      "title": "Specialized Oncology *Care*",
       "description": "We approach each case from a comprehensive and human medical perspective."
     },
     "main": {
+      "eyebrow": "OUR APPROACH",
       "title": "Specialized Oncology Care",
       "description": "We approach each case from a comprehensive and human medical perspective.",
-      "feature1": "Medical-surgical units by type of cancer",
-      "feature2": "Unique complementary services",
-      "feature3": "Advanced technology",
-      "prevention": "Prevention is also part of treatment. We offer early detection programs and genetic sequencing studies for more effective and personalized treatments."
+      "lead": "We offer early detection programs and genetic sequencing studies for more effective and personalized treatments.",
+      "feature1Title": "Medical-surgical units by cancer type",
+      "feature1Description": "Each unit is specifically designed and equipped for the type of cancer it treats, with specialized multidisciplinary teams for each diagnosis.",
+      "feature1Stat": "14 specialized clinics",
+      "feature2Title": "Unique complementary services",
+      "feature2Description": "Clinical nutrition, psycho-oncology, physiotherapy, oncology boutique, aesthetics with a cause, and palliative care: a wellness ecosystem unmatched in Mexico.",
+      "feature2Stat": "4 in-house complementary units",
+      "feature3Title": "Advanced technology",
+      "feature3Description": "Latest-generation MRI, genomic sequencing panels, molecular imaging, and precision diagnostic equipment for the most reliable results.",
+      "feature3Stat": "30+ studies in a single day"
     },
     "clinics": {
+      "eyebrow": "SPECIALTIES",
       "title": "Oncology Care Clinics",
-      "description": "At Onkimia, we provide a range of specialized services through our medical-surgical clinics and functional units, such as:",
+      "description": "At Onkimia, we provide a range of specialized services through our medical-surgical clinics and functional units:",
       "breast": "Breast",
       "lung": "Lung",
       "prostate": "Prostate",
@@ -89,53 +98,66 @@
       "gastrointestinal": "Gastrointestinal tumors"
     },
     "complementary": {
-      "title": "Complementary Services",
-      "description": "As an extension of our mission to always provide comprehensive and personalized care. We have complementary services such as:",
+      "eyebrow": "OWN ECOSYSTEM",
+      "unitLabel": "UNIT",
+      "title": "Complementary Units",
+      "description": "As an extension of our mission to always provide comprehensive and personalized care, we have complementary services such as:",
+      "knowMore": "Learn more",
       "endos": {
         "name": "Endos",
-        "description": "Specialists in diagnostic and therapeutic endoscopy, with cutting-edge technology and professional care."
+        "description": "Specialists in diagnostic and therapeutic endoscopy, with cutting-edge technology and professional care.",
+        "link": "/endos"
       },
       "cuidare": {
         "name": "Cuidare",
-        "description": "Experts in palliative care, focused on providing quality of life, comfort, and professional support."
+        "description": "Experts in palliative care, focused on providing quality of life, comfort, and professional support.",
+        "link": "/cuidare"
       },
       "haranna": {
         "name": "Haranna",
-        "description": "Oncology boutique with selected products for your physical and emotional well-being during each stage of treatment."
+        "description": "Oncology boutique with selected products for your physical and emotional well-being during each stage of treatment.",
+        "link": "#"
       },
       "kalika": {
         "name": "Kalika",
-        "description": "Aesthetics with a Cause, a space to reconnect with yourself. Personal care with products friendly to you and the environment."
-      },
-      "moreInfo": "More information"
+        "description": "Aesthetics with a Cause, a space to reconnect with yourself. Personal care with products friendly to you and the environment.",
+        "link": "#"
+      }
     },
     "partners": {
+      "eyebrow": "COMMERCIAL PARTNERS",
       "title": "Commercial Partners",
+      "visitWebsite": "Visit website",
       "sanvite": {
         "name": "Sanvite",
-        "description": "Specialists in clinical and functional nutrition. They promote healthy and personalized lifestyles with high-quality supplements."
+        "description": "Specialists in clinical and functional nutrition. They promote healthy and personalized lifestyles with high-quality supplements.",
+        "link": "#"
       },
       "aster": {
         "name": "Aster Clinic",
-        "description": "Clinic specialized in medical and aesthetic dermatology. Offers comprehensive care for skin and hair at all stages of life."
+        "description": "Clinic specialized in medical and aesthetic dermatology. Offers comprehensive care for skin and hair at all stages of life.",
+        "link": "#"
       },
       "sedi": {
         "name": "Sedi",
-        "description": "Reliable and agile clinical laboratory. Diagnostic studies for each stage of treatment."
+        "description": "Reliable and agile clinical laboratory. Diagnostic studies for each stage of treatment.",
+        "link": "#"
       },
       "breeze": {
         "name": "Breeze & Blue",
-        "description": "Healthy food restaurant with nutritious and delicious options designed for patients, families, and medical staff."
+        "description": "Healthy food restaurant with nutritious and delicious options designed for patients, families, and medical staff.",
+        "link": "#"
       },
       "vocalia": {
         "name": "Vocalia",
-        "description": "High Specialty Center in Laryngology. Advanced diagnosis and treatment for voice and airway problems."
-      },
-      "visitWebsite": "Visit website"
+        "description": "High Specialty Center in Laryngology. Advanced diagnosis and treatment for voice and airway problems.",
+        "link": "#"
+      }
     },
     "cta": {
+      "eyebrow": "SCHEDULE YOUR APPOINTMENT",
       "title": "Ready to start your treatment?",
-      "description": "Schedule your appointment with our specialists and receive personalized care.",
+      "description": "Schedule your appointment with our specialists and receive personalized care from day one.",
       "button": "Schedule Appointment"
     }
   },
@@ -350,6 +372,12 @@
     "faq": {
       "eyebrow": "WE ANSWER YOUR QUESTIONS",
       "title": "Have questions?\nOur experts respond"
+    },
+    "appBanner": {
+      "title": "Onkimia App",
+      "description": "Keep your history, appointments, and results always with you. Consult your medical team, receive reminders, and access your wellness plan from anywhere.",
+      "appStore": "App Store",
+      "googlePlay": "Google Play"
     },
     "cta": {
       "button": "Contact us"

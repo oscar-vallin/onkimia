@@ -160,36 +160,30 @@ export function Footer({ settings, clinics }: FooterProps) {
               <h3 className="text-base font-semibold text-white mb-4">
                 {tFooter('downloadApp')}
               </h3>
-              <div className="flex flex-col gap-3">
-                <a
-                  href="https://play.google.com/store/apps/details?id=mx.com.center_onkimia&pcampaignid=web_share"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Onkimia en Google Play"
-                  className="inline-block"
-                >
-                  <Image
-                    src="/badges/google-play.png"
-                    alt="Disponible en Google Play"
-                    width={160}
-                    height={48}
-                    className="h-10 w-auto"
-                  />
-                </a>
+              <div className="flex flex-col gap-2.5">
                 <a
                   href="https://apps.apple.com/mx/app/onkimia/id6446001299"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Onkimia en App Store"
-                  className="inline-block"
+                  className="inline-flex items-center gap-2.5 bg-white/[0.08] hover:bg-white/[0.14] border border-white/[0.12] text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
                 >
-                  <Image
-                    src="/badges/app-store.png"
-                    alt="Descargar en App Store"
-                    width={160}
-                    height={48}
-                    className="h-10 w-auto"
-                  />
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+                  </svg>
+                  App Store
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=mx.com.center_onkimia&pcampaignid=web_share"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Onkimia en Google Play"
+                  className="inline-flex items-center gap-2.5 bg-white/[0.08] hover:bg-white/[0.14] border border-white/[0.12] text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M3.18 23.76c.3.17.65.19.98.07l13.3-7.68-2.83-2.83-11.45 10.44zM.5 1.41C.19 1.74 0 2.24 0 2.9v18.2c0 .66.19 1.16.51 1.49l.08.08L10.36 12.7v-.23L.58 1.33l-.08.08zM20.49 10.46l-2.89-1.67-3.16 3.16 3.16 3.16 2.91-1.68c.83-.48.83-1.26-.02-1.97zM3.18.24L16.47 7.92l-2.83 2.83L2.2.31C2.53.19 2.88.07 3.18.24z"/>
+                  </svg>
+                  Google Play
                 </a>
               </div>
             </div>

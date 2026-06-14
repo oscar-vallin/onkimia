@@ -138,8 +138,10 @@ export interface Service {
   category: ServiceCategory;
   order?: number;
   isActive: boolean;
-  heroImage?: Image;
-  clinicsSectionImage?: Image;
+  heroImage?: SanityImageWithLQIP;
+  enfoqueImage?: SanityImageWithLQIP;
+  clinicsSectionImage?: SanityImageWithLQIP;
+  partnersImage?: SanityImageWithLQIP;
   availableAt?: Array<{ _id: string; slug: string }>;
 }
 
