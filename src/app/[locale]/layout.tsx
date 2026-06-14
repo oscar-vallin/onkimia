@@ -7,7 +7,7 @@ import { Source_Code_Pro } from 'next/font/google';
 import { fraunces, dmSans } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { CLINICS_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
+import { CLINICS_QUERY, SITE_SETTINGS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
 import { ClinicProvider } from '@/lib/clinic-context';
 import { getClinicCookie } from '@/lib/cookies';
 import { Header } from '@/components/layout/Header';
@@ -15,7 +15,7 @@ import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
 import { MedicalOrganizationJsonLd } from '@/components/seo/JsonLd';
 import { WelcomeModalProvider } from '@/components/providers/WelcomeModalProvider';
-import type { Clinic, SiteSettings } from '@/sanity/types';
+import type { Clinic, SiteSettings, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import './globals.css';
 
@@ -64,7 +64,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   // Fetch global data (cached con ISR)
-  const [settings, clinics, initialClinic] = await Promise.all([
+  const [settings, clinics, odSettings, initialClinic] = await Promise.all([
     sanityFetch<SiteSettings>({
       query: SITE_SETTINGS_QUERY,
       tags: ['siteSettings'],
@@ -72,6 +72,10 @@ export default async function LocaleLayout({
     sanityFetch<Clinic[]>({
       query: CLINICS_QUERY,
       tags: ['clinic'],
+    }),
+    sanityFetch<OnkimiaDocsSettings>({
+      query: ONKIMIA_DOCS_SETTINGS_QUERY,
+      tags: ['onkimiaDocsSettings'],
     }),
     getClinicCookie(),
   ]);
@@ -96,7 +100,7 @@ export default async function LocaleLayout({
         </a>
         <NextIntlClientProvider>
           <ClinicProvider initialClinic={initialClinic}>
-            <Header settings={settings} clinics={clinics} />
+            <Header settings={settings} clinics={clinics} odSettings={odSettings} />
             <main id="main-content" className="flex-1">{children}</main>
             <Footer settings={settings} clinics={clinics} locale={locale as 'es' | 'en'} />
             <WhatsAppButton settings={settings} clinics={clinics} />

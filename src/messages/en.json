@@ -330,8 +330,8 @@
   },
   "about": {
     "hero": {
-      "title": "Welcome to Onkimia",
-      "description": "Medical innovation and deeply human care at every stage of your treatment."
+      "title": "Life Experts, Committed to Your *Wellbeing*",
+      "description": "A multidisciplinary team dedicated to transforming the oncological experience through advanced science and human warmth."
     },
     "moreThanMedicine": {
       "headingLine1": "More than medicine,",
@@ -380,7 +380,7 @@
       "googlePlay": "Google Play"
     },
     "cta": {
-      "button": "Contact us"
+      "button": "Meet our team"
     },
     "downloadHere": "download here",
     "mision": {

@@ -252,6 +252,14 @@
     text-wrap: pretty;
   }
 
+  /* ─── PROCEDURE MOBILE CAROUSEL — scroll nativo sin scrollbar ─── */
+  .procedure-mobile-track {
+    scrollbar-width: none;        /* Firefox */
+  }
+  .procedure-mobile-track::-webkit-scrollbar {
+    display: none;                /* Chrome / Safari */
+  }
+
   /* ─── INSURANCE CAROUSEL — Marquee infinito ─── */
   .insurance-carousel-track {
     animation: insurance-marquee 40s linear infinite;

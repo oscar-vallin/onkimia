@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
-import { HeroSection } from '@/components/ui/HeroSection';
+import { AboutHero } from '@/components/sections/AboutHero';
 import { MoreThanMedicine } from '@/components/sections/MoreThanMedicine';
 import { InitiativeCards } from '@/components/sections/InitiativeCards';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
@@ -61,15 +61,13 @@ export default async function NosotrosPage({
   return (
     <>
       {/* ─── HERO ─── */}
-      <HeroSection
+      <AboutHero
         eyebrow="NOSOTROS · ONCOLOGÍA INTEGRAL"
         title={getLocalized(aboutPage?.heroTitle, locale) || t('hero.title')}
         description={getLocalized(aboutPage?.heroDescription, locale) || t('hero.description')}
+        ctaLabel={t('cta.button')}
+        ctaHref="/nosotros#doctores"
         image={settings.aboutHeroImage}
-        height="full"
-        overlay="gradient"
-        align="left"
-        primaryCta={{ label: t('cta.button'), href: '/contacto' }}
       />
 
       {/* ─── NUESTRA MISIÓN ─── */}

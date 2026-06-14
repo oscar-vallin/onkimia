@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { urlFor } from '@/sanity/image';
 import type { Procedure, SanityImageWithLQIP } from '@/sanity/types';
 import { ProcedureMarquee } from './ProcedureMarquee';
+import { ProcedureMobileCarousel } from './ProcedureMobileCarousel';
 
 interface ProcedureCarouselProps {
   eyebrow: string;
@@ -180,8 +181,8 @@ export function ProcedureCarousel({
         )}
       </div>
 
-      {/* Marquee — full width, outside container */}
-      <div className="relative z-10 mt-12 overflow-hidden py-4">
+      {/* ── DESKTOP md+: marquee infinito — sin cambios ── */}
+      <div className="hidden md:block relative z-10 mt-12 overflow-hidden py-4">
         <ProcedureMarquee>
           <div
             className="marquee-track flex gap-5 w-max"
@@ -211,6 +212,17 @@ export function ProcedureCarousel({
             ))}
           </div>
         </ProcedureMarquee>
+      </div>
+
+      {/* ── MÓVIL <md: scroll nativo + snap + dots — bloque autónomo ── */}
+      <div className="md:hidden relative z-10 mt-10">
+        <ProcedureMobileCarousel
+          procedures={procedures}
+          badgeEndos={badgeEndos}
+          badgeCuidare={badgeCuidare}
+          categoryEndos={categoryEndos}
+          categoryCuidare={categoryCuidare}
+        />
       </div>
     </section>
   );

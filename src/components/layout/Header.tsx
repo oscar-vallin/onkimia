@@ -7,7 +7,7 @@ import { Globe, MapPin } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { SiteSettings, Clinic } from '@/sanity/types';
+import type { SiteSettings, Clinic, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { LazyMotion, m, AnimatePresence, type Variants } from 'framer-motion';
@@ -19,6 +19,7 @@ import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsap
 interface HeaderProps {
   settings: SiteSettings;
   clinics: Clinic[];
+  odSettings?: OnkimiaDocsSettings;
 }
 
 const mobileMenuVariants: Variants = {
@@ -44,7 +45,7 @@ const mobileLinkVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
-export function Header({ settings, clinics }: HeaderProps) {
+export function Header({ settings, clinics, odSettings }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [clinicMenuOpen, setClinicMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -114,11 +115,11 @@ export function Header({ settings, clinics }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed top-0  left-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           mobileOpen
             ? 'bg-ink'
-            : isDoctorsRoute
-            ? 'bg-doctors-ink'
+            : isDoctorsRoute && scrolled
+            ? 'bg-doctors-ink/95 backdrop-blur-md border-b border-white/10'
             : scrolled
             ? 'bg-white/95 backdrop-blur-md border-b border-line'
             : 'bg-transparent'
@@ -129,28 +130,58 @@ export function Header({ settings, clinics }: HeaderProps) {
             {/* ─── Logo ─── */}
             <Link href="/" className="relative flex items-center gap-2">
               {isDoctorsRoute ? (
-                <>
-                  <span className="relative hidden md:block w-[150px] h-[80px] lg:w-[180px] lg:h-[96px]">
-                    <Image
-                      src="/logo-OD.svg"
-                      alt="Onkimia Doctors"
-                      fill
-                      sizes="(max-width: 1024px) 150px, 180px"
-                      priority
-                      className="object-contain object-left"
-                    />
-                  </span>
-                  <span className="relative block md:hidden w-[48px] h-[48px]">
-                    <Image
-                      src="/simbolo-OD.svg"
-                      alt="Onkimia Doctors"
-                      fill
-                      sizes="48px"
-                      priority
-                      className="object-contain object-left"
-                    />
-                  </span>
-                </>
+                // Only show the nav logo once the user has scrolled — at the top
+                // the hero content owns the brand lockup, so duplicating it here
+                // creates visual noise. On scroll the hero leaves the viewport and
+                // the nav logo anchors the brand.
+                (scrolled || mobileOpen) && (
+                  <>
+                    {/* Desktop: full OD logo from Sanity, fallback to local SVG */}
+                    <span className="relative hidden md:block w-[150px] h-[56px] lg:w-[170px] lg:h-[64px]">
+                      {odSettings?.logo?.asset ? (
+                        <Image
+                          src={urlFor(odSettings.logo).height(128).format('webp').quality(90).url()}
+                          alt="Onkimia Doctors"
+                          fill
+                          sizes="(max-width: 1024px) 150px, 170px"
+                          priority
+                          className="object-contain object-left"
+                        />
+                      ) : (
+                        <Image
+                          src="/logo-OD.svg"
+                          alt="Onkimia Doctors"
+                          fill
+                          sizes="(max-width: 1024px) 150px, 170px"
+                          priority
+                          className="object-contain object-left"
+                        />
+                      )}
+                    </span>
+                    {/* Mobile: symbol from Sanity, fallback to local SVG */}
+                    <span className="relative block md:hidden w-[40px] h-[40px]">
+                      {odSettings?.symbol?.asset ? (
+                        <Image
+                          src={urlFor(odSettings.symbol).height(80).format('webp').quality(90).url()}
+                          alt="Onkimia Doctors"
+                          fill
+                          sizes="40px"
+                          priority
+                          className="object-contain object-left"
+                        />
+                      ) : (
+                        <Image
+                          src="/simbolo-OD.svg"
+                          alt="Onkimia Doctors"
+                          fill
+                          sizes="40px"
+                          priority
+                          className="object-contain object-left"
+                        />
+                      )}
+                    </span>
+                  </>
+                )
               ) : settings.logo ? (
                 <span className="relative block w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
                   <Image
@@ -268,7 +299,7 @@ export function Header({ settings, clinics }: HeaderProps) {
                 type="button"
                 onClick={toggleMobileMenu}
                 className={`lg:hidden -mr-2 w-11 h-11 flex items-center justify-center ${
-                  scrolled && !mobileOpen ? 'text-ink' : 'text-white'
+                  scrolled && !mobileOpen && !isDoctorsRoute ? 'text-ink' : 'text-white'
                 }`}
                 aria-label="Toggle menu"
                 aria-expanded={mobileOpen}
