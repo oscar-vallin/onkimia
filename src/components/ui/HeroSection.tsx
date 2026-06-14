@@ -61,7 +61,7 @@ export function HeroSection({
   const alignClass = align === 'center' ? 'items-center text-center' : 'items-start text-left';
 
   const imageSrc = image
-    ? urlFor(image).width(2400).quality(80).format('webp').url()
+    ? urlFor(image).width(1920).quality(80).format('webp').url()
     : null;
   const blurDataURL = image?.asset?.metadata?.lqip ?? undefined;
 

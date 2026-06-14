@@ -100,7 +100,7 @@ export default async function CuidarePage({
       <section className="relative w-full min-h-[480px] md:min-h-[600px] max-h-[800px] overflow-hidden -mt-16 md:-mt-20">
         {heroImage && (
           <Image
-            src={urlFor(heroImage).width(2400).quality(82).format('webp').url()}
+            src={urlFor(heroImage).width(1920).quality(82).format('webp').url()}
             alt={t('hero.headline')}
             fill
             sizes="100vw"
@@ -240,7 +240,7 @@ export default async function CuidarePage({
         {/* Background image */}
         {settings.cuidareRadiologyImage?.asset && (
           <Image
-            src={urlFor(settings.cuidareRadiologyImage).width(2400).height(1400).format('webp').quality(80).url()}
+            src={urlFor(settings.cuidareRadiologyImage).width(1920).height(1080).format('webp').quality(80).url()}
             alt=""
             fill
             sizes="100vw"

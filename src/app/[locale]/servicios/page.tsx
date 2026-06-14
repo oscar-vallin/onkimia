@@ -142,7 +142,7 @@ export default async function ServicesPage({
           <div className="container-onkimia">
             <div className="relative w-full aspect-[16/6] rounded-3xl overflow-hidden">
               <Image
-                src={urlFor(services.enfoqueImage).width(2400).height(900).format('webp').quality(85).url()}
+                src={urlFor(services.enfoqueImage).width(1920).height(720).format('webp').quality(85).url()}
                 alt={t('main.title')}
                 fill
                 sizes="(max-width: 1440px) 100vw, 1440px"
@@ -199,7 +199,7 @@ export default async function ServicesPage({
           <div className="container-onkimia">
             <div className="relative w-full aspect-[16/6] rounded-3xl overflow-hidden">
               <Image
-                src={urlFor(services.clinicsSectionImage).width(2400).height(900).format('webp').quality(85).url()}
+                src={urlFor(services.clinicsSectionImage).width(1920).height(720).format('webp').quality(85).url()}
                 alt={t('clinics.title')}
                 fill
                 sizes="(max-width: 1440px) 100vw, 1440px"
@@ -300,7 +300,7 @@ export default async function ServicesPage({
             <div className="mt-14">
               <div className="relative w-full aspect-[16/6] rounded-3xl overflow-hidden">
                 <Image
-                  src={urlFor(services.partnersImage).width(2400).height(900).format('webp').quality(85).url()}
+                  src={urlFor(services.partnersImage).width(1920).height(720).format('webp').quality(85).url()}
                   alt={t('partners.title')}
                   fill
                   sizes="(max-width: 1440px) 100vw, 1440px"

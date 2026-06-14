@@ -63,7 +63,7 @@ export default async function EndosPage({
       <section className="relative w-full min-h-[580px] md:min-h-[680px] overflow-hidden -mt-16 md:-mt-20 flex flex-col">
         {heroImage && (
           <Image
-            src={urlFor(heroImage).width(2400).height(1400).format('webp').quality(82).url()}
+            src={urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url()}
             alt={t('hero.headline')}
             fill
             sizes="100vw"

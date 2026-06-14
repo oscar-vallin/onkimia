@@ -44,7 +44,7 @@ export function HeroHome({
   const blurDataURL = heroImage?.asset?.metadata?.lqip ?? undefined;
 
   return (
-    <section className="relative w-full min-h-screen overflow-visible bg-ink text-white -mt-16 md:-mt-20">
+    <section className="relative w-full min-h-[100svh] overflow-visible bg-ink text-white -mt-16 md:-mt-20">
       {/* Ken Burns — applied directly on <Image> so Next.js emits fetchpriority="high" */}
       <Image
         src={imageSrc}
@@ -55,12 +55,15 @@ export function HeroHome({
         quality={80}
         placeholder={blurDataURL ? 'blur' : 'empty'}
         blurDataURL={blurDataURL}
-        className="object-cover z-0 hero-ken-burns origin-center"
+        className="object-cover object-[70%_center] md:object-center z-0 hero-ken-burns origin-center"
       />
 
-      {/* Primary overlay: radial gradient — lighter center, darker edges */}
+      {/* Primary overlay: radial gradient — lighter center, darker edges.
+          On mobile the image is anchored right so we shift the radial center
+          leftward (35% 40%) to keep the subject area lighter while still
+          providing enough contrast for the left-aligned text. */}
       <div
-        className="absolute inset-0 z-[2]"
+        className="absolute inset-0 z-[2] hidden md:block"
         style={{
           background: `radial-gradient(
             ellipse 70% 60% at 50% 40%,
@@ -69,6 +72,21 @@ export function HeroHome({
             rgba(26,26,31,0.88) 100%
           )`,
         }}
+        aria-hidden="true"
+      />
+      {/* Mobile overlay: linear gradient — heavy dark on left where text lives,
+          lighter on right to let the doctor/patient scene breathe */}
+      <div
+        className="absolute inset-0 z-[2] md:hidden"
+        style={{
+          background: `linear-gradient(
+            to right,
+            rgba(26,26,31,0.92) 0%,
+            rgba(26,26,31,0.70) 45%,
+            rgba(26,26,31,0.40) 100%
+          )`,
+        }}
+        aria-hidden="true"
       />
 
       {/* Secondary overlay: bottom vignette — softens lower portion */}
@@ -86,7 +104,7 @@ export function HeroHome({
       />
 
       {/* Contenido */}
-      <div className="relative z-10 container-onkimia min-h-screen flex flex-col">
+      <div className="relative z-10 container-onkimia min-h-[100svh] flex flex-col">
 
         {/* Bloque superior — headline + desc + CTAs (desktop) */}
         <div className="pt-36 md:pt-44 max-w-3xl">

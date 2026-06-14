@@ -5,27 +5,29 @@ interface ProcedureMarqueeProps {
   children: React.ReactNode;
 }
 
-const BASE_SPEED = 80; // seconds — must match ProcedureCarousel animation duration
+const DURATION = 80; // must match the `marquee` keyframe duration in globals.css
 
 export function ProcedureMarquee({ children }: ProcedureMarqueeProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLElement | null>(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Read once — never changes after mount
   const prefersReduced = useRef(
     typeof window !== 'undefined'
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false,
   );
 
-  // All pause conditions in one ref so sync() always reads latest values
   const pauseState = useRef({ outOfView: true, userPaused: false, focused: false });
 
-  const touchStartX = useRef<number>(0);
-  const touchStartY = useRef<number>(0);
+  // Drag state (mobile swipe)
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartY = useRef(0);
+  const dragBaseX = useRef(0);   // animation translateX at drag start (px)
+  const dragLastX = useRef(0);   // last finger X (for momentum)
+  const dragLastT = useRef(0);   // last event timestamp
 
-  // Single source of truth for animationPlayState
   const sync = useCallback(() => {
     const track = trackRef.current;
     if (!track || prefersReduced.current) return;
@@ -34,7 +36,6 @@ export function ProcedureMarquee({ children }: ProcedureMarqueeProps) {
       outOfView || userPaused || focused ? 'paused' : 'running';
   }, []);
 
-  // Resolve track ref once on mount
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -42,7 +43,7 @@ export function ProcedureMarquee({ children }: ProcedureMarqueeProps) {
     sync();
   }, [sync]);
 
-  // IntersectionObserver — pause when out of viewport
+  // IntersectionObserver
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -71,34 +72,118 @@ export function ProcedureMarquee({ children }: ProcedureMarqueeProps) {
     };
   }, [sync]);
 
-  // Click — toggle user pause
+  // Non-passive touchmove listener so we can preventDefault on horizontal drags
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDragging.current) return;
+      const track = trackRef.current;
+      if (!track || prefersReduced.current) return;
+
+      const dx = e.touches[0].clientX - dragStartX.current;
+      const dy = e.touches[0].clientY - dragStartY.current;
+
+      // Only hijack horizontal swipes
+      if (Math.abs(dx) < Math.abs(dy) * 1.2 && Math.abs(dx) < 8) return;
+
+      e.preventDefault(); // blocks page scroll during horizontal drag
+
+      dragLastX.current = e.touches[0].clientX;
+      dragLastT.current = e.timeStamp;
+
+      // Move track inline, bypassing the CSS animation
+      track.style.transform = `translateX(${dragBaseX.current + dx}px)`;
+    };
+
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    return () => el.removeEventListener('touchmove', onTouchMove);
+  }, []);
+
+  // Read current animation translateX in pixels
+  const getComputedX = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return 0;
+    const matrix = new DOMMatrix(getComputedStyle(track).transform);
+    return matrix.m41;
+  }, []);
+
+  // Resume animation from a given pixel position using negative animation-delay
+  const resumeFromX = useCallback((x: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const halfWidth = track.scrollWidth / 2;
+    if (halfWidth === 0) { sync(); return; }
+
+    // Normalize x into (-halfWidth, 0] to find loop position
+    let normalized = x % halfWidth;
+    if (normalized > 0) normalized -= halfWidth;
+
+    const progress = -normalized / halfWidth;          // 0..1
+    const delay = -(progress * DURATION);              // negative = seek forward
+
+    track.style.transform = '';
+    track.style.animationDelay = `${delay}s`;
+    sync();
+  }, [sync]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (prefersReduced.current) return;
+    const track = trackRef.current;
+    if (!track) return;
+
+    dragStartX.current = e.touches[0].clientX;
+    dragStartY.current = e.touches[0].clientY;
+    dragLastX.current = e.touches[0].clientX;
+    dragLastT.current = e.timeStamp;
+
+    // Freeze animation and capture its current pixel position
+    dragBaseX.current = getComputedX();
+    track.style.animationPlayState = 'paused';
+    isDragging.current = true;
+  }, [getComputedX]);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+
+    const track = trackRef.current;
+    if (!track) { sync(); return; }
+
+    const dx = e.changedTouches[0].clientX - dragStartX.current;
+
+    // If barely moved (tap) — toggle user pause
+    if (Math.abs(dx) < 6) {
+      const next = !pauseState.current.userPaused;
+      pauseState.current.userPaused = next;
+      setIsPaused(next);
+      track.style.transform = '';
+      sync();
+      return;
+    }
+
+    // Momentum: add velocity * 0.18 s of extra travel
+    const dt = e.timeStamp - dragLastT.current;
+    const velocity = dt > 0 ? (e.changedTouches[0].clientX - dragLastX.current) / dt : 0;
+    const momentum = velocity * 180;
+
+    const finalX = dragBaseX.current + dx + momentum;
+
+    if (pauseState.current.userPaused) {
+      // Stay paused at final position
+      track.style.transform = `translateX(${finalX}px)`;
+    } else {
+      resumeFromX(finalX);
+    }
+  }, [sync, resumeFromX]);
+
+  // Click (desktop) — toggle pause
   const handleClick = useCallback(() => {
     const next = !pauseState.current.userPaused;
     pauseState.current.userPaused = next;
     setIsPaused(next);
     sync();
-  }, [sync]);
-
-  // Touch — hold to freeze, release to resume (no snap-back)
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-  }, []);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (prefersReduced.current) return;
-    const deltaX = e.touches[0].clientX - touchStartX.current;
-    const deltaY = e.touches[0].clientY - touchStartY.current;
-    // Only freeze on horizontal swipes; let vertical scroll pass through
-    if (Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
-      const track = trackRef.current;
-      if (track) track.style.animationPlayState = 'paused';
-    }
-  }, []);
-
-  const handleTouchEnd = useCallback(() => {
-    // Resume only if the user hasn't clicked to pause
-    if (!pauseState.current.userPaused) sync();
   }, [sync]);
 
   return (
@@ -107,7 +192,6 @@ export function ProcedureMarquee({ children }: ProcedureMarqueeProps) {
       className="marquee-wrap relative cursor-pointer select-none touch-pan-y"
       onClick={handleClick}
       onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       role="region"
       aria-label={

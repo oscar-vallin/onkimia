@@ -75,7 +75,7 @@ export default async function OnkimiaDoctorsPage({
         {/* Background image */}
         {heroImage && (
           <Image
-            src={urlFor(heroImage).width(2400).height(1400).format('webp').quality(82).url()}
+            src={urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url()}
             alt={t('hero.headlinePart1')}
             fill
             sizes="100vw"
@@ -238,7 +238,7 @@ export default async function OnkimiaDoctorsPage({
           <div className="container-onkimia">
             <div className="relative w-full aspect-[16/6] rounded-3xl overflow-hidden">
               <Image
-                src={urlFor(od.improvementsImage).width(2400).height(900).format('webp').quality(85).url()}
+                src={urlFor(od.improvementsImage).width(1920).height(720).format('webp').quality(85).url()}
                 alt=""
                 fill
                 sizes="(max-width: 1440px) 100vw, 1440px"
