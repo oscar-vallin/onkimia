@@ -20,7 +20,7 @@ export const clinic = defineType({
             name: 'slug',
             invert: false,
           })
-          .error('Solo letras minúsculas y guiones'),
+          .error('Solo letras minúsculas y guiones'),  
     }),
     localizedString({
       name: 'name',

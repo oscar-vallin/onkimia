@@ -394,6 +394,20 @@ export const allProceduresQuery = groq`
   }
 `;
 
+/** Singleton Onkimia Doctors — branding + imágenes de sección. */
+export const ONKIMIA_DOCS_SETTINGS_QUERY = groq`
+  *[_type == "onkimiaDocsSettings"][0] {
+    logo { asset->{ _id, url, metadata { dimensions } } },
+    symbol { asset->{ _id, url, metadata { dimensions } } },
+    heroImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    whatIsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    improvementsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    benefitsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    whatsappEndos,
+    whatsappCuidare
+  }
+`;
+
 /** Singleton aviso de privacidad. */
 export const PRIVACY_POLICY_QUERY = groq`
   *[_type == "privacyPolicy" && _id == "privacyPolicy"][0] {

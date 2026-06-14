@@ -422,9 +422,21 @@
       "description": "Modelo de colaboración para médicos especialistas. Infraestructura, procesos y unidades complementarias para elevar la práctica clínica."
     },
     "hero": {
-      "eyebrow": "Onkimia Doctors",
+      "eyebrow": "ONKIMIA DOCTORS · B2B",
       "headline": "Sé parte de la red médica Onkimia",
-      "description": "Un modelo de colaboración diseñado para que el médico se enfoque en lo más importante: el paciente."
+      "description": "Un modelo de colaboración diseñado para que el médico se enfoque en lo más importante: el paciente.",
+      "badge": "RED MÉDICA ONKIMIA",
+      "quote": "\"Un modelo de colaboración diseñado para que el médico se enfoque en lo más importante: el paciente.\"",
+      "headlinePart1": "Sé parte de la red",
+      "headlinePart2": "médica Onkimia",
+      "joinButton": "Únete ahora",
+      "benefitsButton": "Ver beneficios",
+      "stat1Value": "Ecosistema",
+      "stat1Label": "ONCOLÓGICO INTEGRADO",
+      "stat2Value": "Infraestructura",
+      "stat2Label": "LISTA PARA TI",
+      "stat3Value": "Multidisciplinario",
+      "stat3Label": "RED DE ESPECIALISTAS"
     },
     "about": {
       "title": "¿Qué es Onkimia Doctors?",

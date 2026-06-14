@@ -422,9 +422,21 @@
       "description": "Collaboration model for specialist physicians. Infrastructure, processes, and complementary units to elevate clinical practice."
     },
     "hero": {
-      "eyebrow": "Onkimia Doctors",
+      "eyebrow": "ONKIMIA DOCTORS · B2B",
       "headline": "Become part of the Onkimia medical network",
-      "description": "A collaboration model designed so the physician can focus on what matters most: the patient."
+      "description": "A collaboration model designed so the physician can focus on what matters most: the patient.",
+      "badge": "ONKIMIA MEDICAL NETWORK",
+      "quote": "\"A collaboration model designed so the physician can focus on what matters most: the patient.\"",
+      "headlinePart1": "Be part of the",
+      "headlinePart2": "Onkimia medical network",
+      "joinButton": "Join now",
+      "benefitsButton": "See benefits",
+      "stat1Value": "Ecosystem",
+      "stat1Label": "INTEGRATED ONCOLOGY",
+      "stat2Value": "Infrastructure",
+      "stat2Label": "READY FOR YOU",
+      "stat3Value": "Multidisciplinary",
+      "stat3Label": "SPECIALIST NETWORK"
     },
     "about": {
       "title": "What is Onkimia Doctors?",

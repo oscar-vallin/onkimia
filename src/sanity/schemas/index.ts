@@ -10,12 +10,14 @@ import { jobPosting } from './jobPosting';
 import { privacyPolicy } from './privacyPolicy';
 import { aboutPage } from './aboutPage';
 import { procedure } from './procedure';
+import { onkimiaDocsSettings } from './onkimiaDocsSettings';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Singletons
   siteSettings,
   privacyPolicy,
   aboutPage,
+  onkimiaDocsSettings,
   // Document types
   clinic,
   doctor,
