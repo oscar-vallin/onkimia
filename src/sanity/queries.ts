@@ -1,5 +1,7 @@
 import { groq } from 'next-sanity';
 
+const HERO_IMAGE_FRAGMENT = groq`{ ..., asset->{ ..., metadata { lqip } } }`;
+
 export const SITE_SETTINGS_QUERY = groq`
   *[_type == "siteSettings"][0] {
     _id,
@@ -8,53 +10,20 @@ export const SITE_SETTINGS_QUERY = groq`
     tagline,
     logo,
     logoDark,
-    homeHeroImage {
-      ...,
-      asset-> {
-        ...,
-        metadata {
-          lqip
-        }
-      }
-    },
-     aboutHeroImage {
-      ...,
-      asset-> {
-        ...,
-        metadata {
-          lqip
-        }
-      }
-    },
+    // Hero images — one per page
+    homeHeroImage ${HERO_IMAGE_FRAGMENT},
     homeHeroDescription,
-    doctorsHeroImage,
-    cuidareHeroImage,
-    endosHeroImage {
-      ...,
-      asset->{ ..., metadata { lqip } }
-    },
-    endosSafetyImage {
-      ...,
-      asset->{ ..., metadata { lqip } }
-    },
-    cuidareRadiologyImage {
-      ...,
-      asset->{ ..., metadata { lqip } }
-    },
-    processImage {
-      ...,
-      asset-> {
-        ...,
-        metadata { lqip }
-      }
-    },
-    proceduresBgImage {
-      ...,
-      asset-> {
-        ...,
-        metadata { lqip }
-      }
-    },
+    aboutHeroImage ${HERO_IMAGE_FRAGMENT},
+    serviciosHeroImage ${HERO_IMAGE_FRAGMENT},
+    endosHeroImage ${HERO_IMAGE_FRAGMENT},
+    cuidareHeroImage ${HERO_IMAGE_FRAGMENT},
+    doctorsHeroImage ${HERO_IMAGE_FRAGMENT},
+    contactHeroImage ${HERO_IMAGE_FRAGMENT},
+    // Section images
+    processImage ${HERO_IMAGE_FRAGMENT},
+    proceduresBgImage ${HERO_IMAGE_FRAGMENT},
+    endosSafetyImage ${HERO_IMAGE_FRAGMENT},
+    cuidareRadiologyImage ${HERO_IMAGE_FRAGMENT},
     socialMedia,
     whatsappCommercial,
     jobBoardEmail

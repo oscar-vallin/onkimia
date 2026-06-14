@@ -86,10 +86,10 @@ export default async function ServicesPage({
   ];
 
   return (
-    <>
+    <div className="flex flex-col flex-1">
       {/* ─── HERO ─── */}
       <HeroSection
-        image={settings.homeHeroImage}
+        image={settings.serviciosHeroImage ?? settings.homeHeroImage}
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
@@ -315,7 +315,7 @@ export default async function ServicesPage({
       </section>
 
       {/* ─── 5. CTA ─── */}
-      <section className="bg-ink py-20 md:py-28">
+      <section className="bg-ink py-20 md:py-28 grow">
         <div className="container-onkimia">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-xs tracking-[0.25em] uppercase text-teal-soft font-medium mb-6">
@@ -339,6 +339,6 @@ export default async function ServicesPage({
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

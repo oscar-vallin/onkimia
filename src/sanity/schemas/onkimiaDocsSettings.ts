@@ -22,12 +22,6 @@ export const onkimiaDocsSettings = defineType({
     }),
     // ─── Imágenes de sección ───
     defineField({
-      name: 'heroImage',
-      title: 'Imagen del Hero',
-      type: 'image',
-      options: { hotspot: true },
-    }),
-    defineField({
       name: 'whatIsImage',
       title: 'Imagen "¿Qué es Onkimia Doctors?"',
       description: 'Aparece junto a la descripción de la sección introductoria.',

@@ -56,10 +56,8 @@ export default async function OnkimiaDoctorsPage({
     getTranslations('doctors'),
   ]);
 
-  const heroImageOd = od?.heroImage;
-  const heroImageFallback = settings.doctorsHeroImage ?? settings.homeHeroImage;
-  const heroImage = heroImageOd ?? heroImageFallback;
-  const heroLqip = heroImageOd?.asset?.metadata?.lqip;
+  const heroImage = settings.doctorsHeroImage ?? settings.homeHeroImage;
+  const heroLqip = heroImage?.asset?.metadata?.lqip;
   const waCommercial = settings.whatsappCommercial;
   const waEndos = od?.whatsappEndos ?? waCommercial;
   const waCuidare = od?.whatsappCuidare ?? waCommercial;

@@ -17,16 +17,20 @@ export interface SiteSettings {
   tagline: LocalizedString;
   logo?: Image;
   logoDark?: Image;
-  aboutHeroImage?: SanityImageWithLQIP;
-  doctorsHeroImage?: Image;
-  cuidareHeroImage?: Image;
-  endosHeroImage?: SanityImageWithLQIP;
-  endosSafetyImage?: SanityImageWithLQIP;
-  cuidareRadiologyImage?: SanityImageWithLQIP;
+  // Hero images — one per page, all fall back to homeHeroImage
   homeHeroImage?: SanityImageWithLQIP;
   homeHeroDescription: LocalizedString;
+  aboutHeroImage?: SanityImageWithLQIP;
+  serviciosHeroImage?: SanityImageWithLQIP;
+  endosHeroImage?: SanityImageWithLQIP;
+  cuidareHeroImage?: SanityImageWithLQIP;
+  doctorsHeroImage?: SanityImageWithLQIP;
+  contactHeroImage?: SanityImageWithLQIP;
+  // Section images
   processImage?: SanityImageWithLQIP;
   proceduresBgImage?: SanityImageWithLQIP;
+  endosSafetyImage?: SanityImageWithLQIP;
+  cuidareRadiologyImage?: SanityImageWithLQIP;
   socialMedia?: {
     instagram?: string;
     facebook?: string;
@@ -243,7 +247,6 @@ export interface PrivacyPolicy {
 export interface OnkimiaDocsSettings {
   logo?: SanityImageWithLQIP;
   symbol?: SanityImageWithLQIP;
-  heroImage?: SanityImageWithLQIP;
   whatIsImage?: SanityImageWithLQIP;
   improvementsImage?: SanityImageWithLQIP;
   benefitsImage?: SanityImageWithLQIP;

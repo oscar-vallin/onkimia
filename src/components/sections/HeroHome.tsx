@@ -45,7 +45,6 @@ export function HeroHome({
 
   return (
     <section className="relative w-full min-h-[100svh] overflow-visible bg-ink text-white -mt-16 md:-mt-20">
-      {/* Ken Burns — applied directly on <Image> so Next.js emits fetchpriority="high" */}
       <Image
         src={imageSrc}
         alt=""

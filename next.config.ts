@@ -22,9 +22,6 @@ const nextConfig: NextConfig = {
     formats: ['image/webp'],
   },
   experimental: {
-    // Inline critical CSS and defer the rest, removing 150ms render-blocking time.
-    // Requires `critters` devDependency (installed).
-    optimizeCss: true,
     optimizePackageImports: [
       'lucide-react',
       'framer-motion',

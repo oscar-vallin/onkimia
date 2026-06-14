@@ -54,7 +54,7 @@ export default async function ContactPage({
     <>
       {/* ─── HERO ─── */}
       <HeroSection
-        image={settings?.homeHeroImage}
+        image={settings?.contactHeroImage ?? settings?.homeHeroImage}
         eyebrow={t('section.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
