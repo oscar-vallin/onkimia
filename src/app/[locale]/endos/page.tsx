@@ -68,7 +68,7 @@ export default async function EndosPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover"
+            className="object-cover object-[center_25%] md:object-center"
             placeholder={heroLqip ? 'blur' : 'empty'}
             blurDataURL={heroLqip ?? undefined}
           />

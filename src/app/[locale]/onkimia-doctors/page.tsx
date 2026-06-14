@@ -80,7 +80,7 @@ export default async function OnkimiaDoctorsPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover"
+            className="object-cover object-[75%_center] md:object-center"
             placeholder={heroLqip ? 'blur' : 'empty'}
             blurDataURL={heroLqip ?? undefined}
           />

@@ -21,6 +21,11 @@ interface HeroSectionProps {
   primaryCta?: Cta;
   secondaryCta?: Cta;
   align?: 'left' | 'center';
+  // Tailwind arbitrary-value class for mobile object-position.
+  // Default 'object-[center_30%]' anchors to upper-center, keeping faces visible
+  // in the top half while text sits at the bottom via the flex spacer.
+  // Pass e.g. 'object-[75%_center]' when the subject is on the right side.
+  mobileObjectPosition?: string;
   // legacy — ignored in new component, kept to avoid TS errors in callers
   subtitle?: string;
 }
@@ -56,6 +61,7 @@ export function HeroSection({
   primaryCta,
   secondaryCta,
   align = 'left',
+  mobileObjectPosition = 'object-[center_30%]',
 }: HeroSectionProps) {
   const isGradient = overlay === 'gradient' || overlay === 'light' || overlay === 'medium';
   const alignClass = align === 'center' ? 'items-center text-center' : 'items-start text-left';
@@ -77,7 +83,7 @@ export function HeroSection({
           priority
           sizes="100vw"
           quality={80}
-          className="object-cover object-top md:object-center"
+          className={`object-cover ${mobileObjectPosition} md:object-center`}
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
         />

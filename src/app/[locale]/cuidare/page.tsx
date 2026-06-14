@@ -105,7 +105,7 @@ export default async function CuidarePage({
             fill
             sizes="100vw"
             priority
-            className="object-cover"
+            className="object-cover object-[center_25%] md:object-center"
           />
         )}
         <div
