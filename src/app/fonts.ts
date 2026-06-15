@@ -4,7 +4,7 @@
 // next/font auto-hospeda las fuentes: sin request a Google en runtime,
 // sin FOUT/parpadeo, sin <link> bloqueante. Mejora directa de LCP.
 
-import { Fraunces, DM_Sans } from 'next/font/google';
+import { Fraunces, DM_Sans, Source_Code_Pro } from 'next/font/google';
 
 // Fraunces es fuente variable: incluye todos los pesos del rango.
 // La maqueta usa: 400, 500 e itálica 400, con el eje óptico (opsz)
@@ -25,4 +25,10 @@ export const dmSans = DM_Sans({
   variable: '--font-dm-sans',
 });
 
-// Made with Bob
+export const sourceCodePro = Source_Code_Pro({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+  preload: false,   // ← no es above-the-fold; libera ancho de banda para Fraunces
+});
+

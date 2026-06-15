@@ -96,10 +96,7 @@ export function HeroHome({
           <p className="text-xs font-medium tracking-widest uppercase text-white/90 mb-8 md:mb-10">
             {eyebrow}
           </p>
-          <h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] text-white text-balance"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] text-white text-balance">
             {parseEmphasis(title)}
           </h1>
           <p className="hidden md:block text-lg md:text-xl text-white/80 leading-relaxed max-w-xl mt-6">
