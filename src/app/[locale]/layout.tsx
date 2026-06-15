@@ -104,7 +104,7 @@ export default async function LocaleLayout({
             <main id="main-content" className="flex-1">{children}</main>
             <Footer settings={settings} clinics={clinics} locale={locale as 'es' | 'en'} />
             <WhatsAppButton settings={settings} clinics={clinics} />
-            <WelcomeModalProvider locale={locale as Locale} />
+            {/* <WelcomeModalProvider locale={locale as Locale} /> */}
           </ClinicProvider>
         </NextIntlClientProvider>
       </body>
