@@ -7,6 +7,7 @@ import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, FAQ, Procedure, EndosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
+import { PageHero } from '@/components/sections/PageHero';
 import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, UserCheck, Cpu, Zap, Clock, Heart, Check } from 'lucide-react';
 import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
@@ -58,44 +59,18 @@ export default async function EndosPage({
 
   return (
     <>
-      {/* ════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[580px] md:min-h-[680px] overflow-hidden -mt-16 md:-mt-20 flex flex-col">
-        {heroImage && (
-          <Image
-            src={urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url()}
-            alt={t('hero.headline')}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover object-[center_25%] md:object-center"
-            placeholder={heroLqip ? 'blur' : 'empty'}
-            blurDataURL={heroLqip ?? undefined}
-          />
-        )}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.70) 100%)' }}
-          aria-hidden="true"
-        />
-        <div className="relative z-10 container-onkimia flex flex-col flex-1 justify-center pt-28 md:pt-36 pb-20 md:pb-28 max-w-3xl">
-          <p className="text-[10px] tracking-[0.28em] uppercase text-white/55 font-medium mb-6">
-            {t('hero.eyebrow')}
-          </p>
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
-            {t('hero.headlinePart1')}<br/>
-            <em className="not-italic italic">{t('hero.headlinePart2')}</em>
-          </h1>
-          <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-xl mb-4">
-            {t('hero.description')}
-          </p>
-          <p className="text-white/45 text-sm italic mb-10">{t('hero.quote')}</p>
-          <div>
-            <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
-          </div>
-        </div>
-      </section>
+      {/* ─── HERO ─── */}
+      <PageHero
+        imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
+        blurDataURL={heroLqip ?? undefined}
+        mobileObjectPosition="object-[center_25%]"
+        eyebrow={t('hero.eyebrow')}
+        title={`${t('hero.headlinePart1')} *${t('hero.headlinePart2')}*`}
+        description={t('hero.description')}
+      >
+        <p className="text-white/45 text-sm italic mb-8">{t('hero.quote')}</p>
+        <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
+      </PageHero>
 
       {/* ─── AVAILABILITY BANNER ─── */}
       <UnitAvailabilityBanner availableIn={['guadalajara']} messageKey="endos.availability.banner" />

@@ -141,14 +141,20 @@ export function HeroHome({
             </Link>
           </div>
 
-          {/* Scroll cue */}
-          <div className="flex justify-center md:justify-start" aria-hidden="true">
+          {/* Scroll cue — mobile only (desktop version is centered absolutely below) */}
+          <div className="flex justify-center md:hidden" aria-hidden="true">
             <ChevronDown className="w-5 h-5 text-white/40 animate-bounce" />
           </div>
 
         </div>
 
       </div>
+
+      {/* Scroll cue — desktop only, pinned to horizontal center of hero */}
+      <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10" aria-hidden="true">
+        <ChevronDown className="w-5 h-5 text-white/40 animate-bounce" />
+      </div>
+
     </section>
   );
 }

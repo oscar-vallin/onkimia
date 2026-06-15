@@ -2,7 +2,8 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
-import { AboutHero } from '@/components/sections/AboutHero';
+import { PageHero } from '@/components/sections/PageHero';
+import { urlFor } from '@/sanity/image';
 import { MisionSection } from '@/components/sections/MisionSection';
 import { MoreThanMedicine } from '@/components/sections/MoreThanMedicine';
 import { Enfoque360Section } from '@/components/sections/Enfoque360Section';
@@ -54,13 +55,14 @@ export default async function NosotrosPage({
   return (
     <>
       {/* ─── HERO ─── */}
-      <AboutHero
+      <PageHero
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
-        ctaLabel={t('cta.button')}
-        ctaHref="/contacto#contact-form"
-        image={settings.aboutHeroImage}
+        primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
+        imageSrc={settings.aboutHeroImage ? urlFor(settings.aboutHeroImage).width(1920).quality(82).format('webp').url() : undefined}
+        blurDataURL={settings.aboutHeroImage?.asset?.metadata?.lqip ?? undefined}
+        imageAlt=""
       />
 
       {/* ─── NUESTRA MISIÓN ─── */}

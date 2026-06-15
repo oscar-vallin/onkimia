@@ -8,7 +8,8 @@ import type { Locale } from '@/i18n/routing';
 import { MapPin, MessageCircle, Phone, Mail } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { GoogleMapsEmbed } from '@/components/ui/GoogleMapsEmbed';
-import { HeroSection } from '@/components/ui/HeroSection';
+import { PageHero } from '@/components/sections/PageHero';
+import { urlFor } from '@/sanity/image';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -53,14 +54,12 @@ export default async function ContactPage({
   return (
     <>
       {/* ─── HERO ─── */}
-      <HeroSection
-        image={settings?.contactHeroImage ?? settings?.homeHeroImage}
+      <PageHero
+        imageSrc={(() => { const img = settings?.contactHeroImage ?? settings?.homeHeroImage; return img ? urlFor(img).width(1920).quality(82).format('webp').url() : undefined; })()}
+        blurDataURL={(settings?.contactHeroImage ?? settings?.homeHeroImage)?.asset?.metadata?.lqip ?? undefined}
         eyebrow={t('section.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
-        align="left"
-        height="sm"
-        overlay="gradient"
       />
 
       {/* ════════════════════════════════════════

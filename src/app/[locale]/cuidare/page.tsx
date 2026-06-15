@@ -7,6 +7,7 @@ import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, FAQ, Procedure } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
+import { PageHero } from '@/components/sections/PageHero';
 import {
   UserCheck,
   Cpu,
@@ -97,31 +98,15 @@ export default async function CuidarePage({
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative w-full min-h-[480px] md:min-h-[600px] max-h-[800px] overflow-hidden -mt-16 md:-mt-20">
-        {heroImage && (
-          <Image
-            src={urlFor(heroImage).width(1920).quality(82).format('webp').url()}
-            alt={t('hero.headline')}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover object-[center_25%] md:object-center"
-          />
-        )}
-        <div
-          className=""
-          aria-hidden="true"
-        />
-        <div className="relative h-full container-onkimia flex flex-col items-center justify-center text-center pt-24 md:pt-32">
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 md:mb-6 text-balance mt-12">
-            {t('hero.headline')}
-          </h1>
-          <p className="text-sm md:text-xl text-white/90 max-w-3xl text-pretty mb-6 md:mb-8">
-            {t('hero.description')}
-          </p>
-          <BookingButton section="cuidare" variant="primary" />
-        </div>
-      </section>
+      <PageHero
+        imageSrc={heroImage ? urlFor(heroImage).width(1920).quality(82).format('webp').url() : undefined}
+        mobileObjectPosition="object-[center_25%]"
+        title={t('hero.headline')}
+        description={t('hero.description')}
+        align="center"
+      >
+        <BookingButton section="cuidare" variant="primary" />
+      </PageHero>
 
       {/* ─── BANNER DISPONIBILIDAD ─── */}
       <UnitAvailabilityBanner

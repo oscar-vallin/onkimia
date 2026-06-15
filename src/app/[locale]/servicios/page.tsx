@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { SITE_SETTINGS_QUERY, SERVICIOS_PAGE_QUERY } from '@/sanity/queries';
-import { HeroSection } from '@/components/ui/HeroSection';
+import { PageHero } from '@/components/sections/PageHero';
 import type { ServiciosPage, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
@@ -88,14 +88,12 @@ export default async function ServicesPage({
   return (
     <div className="flex flex-col flex-1">
       {/* ─── HERO ─── */}
-      <HeroSection
-        image={settings.serviciosHeroImage ?? settings.homeHeroImage}
+      <PageHero
+        imageSrc={(() => { const img = settings.serviciosHeroImage ?? settings.homeHeroImage; return img ? urlFor(img).width(1920).quality(82).format('webp').url() : undefined; })()}
+        blurDataURL={(settings.serviciosHeroImage ?? settings.homeHeroImage)?.asset?.metadata?.lqip ?? undefined}
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
-        align="left"
-        height="md"
-        overlay="gradient"
         primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
       />
 

@@ -6,6 +6,7 @@ import { urlFor } from '@/sanity/image';
 import type { SiteSettings, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
+import { PageHero } from '@/components/sections/PageHero';
 import { Activity, HeartPulse, Flower2, Target, Users, Sparkles, Shield, Check } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { MedicalBusinessLd } from '@/components/seo/JsonLd';
@@ -66,116 +67,75 @@ export default async function OnkimiaDoctorsPage({
 
   return (
     <>
-      {/* ════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[600px] md:min-h-[700px] overflow-hidden -mt-16 md:-mt-20 flex flex-col">
-        {/* Background image */}
-        {heroImage && (
-          <Image
-            src={urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url()}
-            alt={t('hero.headlinePart1')}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover object-[75%_center] md:object-center"
-            placeholder={heroLqip ? 'blur' : 'empty'}
-            blurDataURL={heroLqip ?? undefined}
-          />
-        )}
-        {/* Gradient overlay */}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.60) 100%)' }}
-          aria-hidden="true"
-        />
-
-        {/* ─── OD symbol / logo (top left, below nav) ─── */}
-        <div className="relative z-10 container-onkimia pt-28 md:pt-36 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            {/* Symbol (mobile) / Logo (desktop) — from Sanity */}
-            {od?.symbol?.asset && (
-              <div className="md:hidden">
-                <Image
-                  src={urlFor(od.symbol).height(40).format('webp').quality(90).url()}
-                  alt="Onkimia Doctors"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
-            )}
-            {od?.logo?.asset && (
-              <div className="hidden md:block">
-                <Image
-                  src={urlFor(od.logo).height(36).format('webp').quality(90).url()}
-                  alt="Onkimia Doctors"
-                  width={180}
-                  height={36}
-                  className="object-contain"
-                />
-              </div>
-            )}
-            <p className="text-[10px] tracking-[0.22em] uppercase text-white/60 font-medium">
-              {t('hero.eyebrow')}
-            </p>
-          </div>
-          {/* Badge top-right */}
+      {/* ─── HERO ─── */}
+      <PageHero
+        imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
+        blurDataURL={heroLqip ?? undefined}
+        mobileObjectPosition="object-[75%_center]"
+        eyebrow={t('hero.eyebrow')}
+        title={`${t('hero.headlinePart1')} *${t('hero.headlinePart2')}*`}
+        description={t('hero.description')}
+        topSlot={
           <div className="hidden sm:flex items-center gap-2 border border-white/25 rounded-full px-4 py-2 bg-white/[0.06] backdrop-blur-sm">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-white/70" aria-hidden="true">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             <span className="text-[11px] tracking-[0.18em] uppercase text-white/80">{t('hero.badge')}</span>
           </div>
-        </div>
-
-        {/* ─── Hero content ─── */}
-        <div className="relative z-10 container-onkimia flex flex-col flex-1 justify-center pb-24 md:pb-32 mt-10 md:mt-12 max-w-3xl">
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
-            {t('hero.headlinePart1')}<br/>
-            <em className="not-italic italic">{t('hero.headlinePart2')}</em>
-          </h1>
-          <p className="text-white/75 text-base md:text-lg italic mb-4 max-w-xl leading-relaxed">
-            {t('hero.quote')}
-          </p>
-          <p className="text-white/65 text-sm md:text-base leading-relaxed max-w-lg mb-10">
-            {t('hero.description')}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={buildWhatsApp(waCommercial, t('cta.message'))}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-ink font-medium px-7 py-3.5 rounded-xl hover:bg-white/90 transition-colors text-sm"
-            >
-              {t('hero.joinButton')}
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-            <a
-              href="#beneficios"
-              className="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-7 py-3.5 rounded-xl hover:bg-white/10 transition-colors text-sm"
-            >
-              {t('hero.benefitsButton')}
-            </a>
+        }
+        footerSlot={
+          <div className="border-t border-white/10 bg-black/30 backdrop-blur-sm">
+            <div className="container-onkimia grid grid-cols-3">
+              {([
+                [t('hero.stat1Value'), t('hero.stat1Label')],
+                [t('hero.stat2Value'), t('hero.stat2Label')],
+                [t('hero.stat3Value'), t('hero.stat3Label')],
+              ] as [string, string][]).map(([val, label], i) => (
+                <div key={i} className={`py-5 text-center ${i > 0 ? 'border-l border-white/10' : ''}`}>
+                  <p className="font-serif text-base md:text-lg text-white leading-none mb-1">{val}</p>
+                  <p className="text-[10px] tracking-[0.18em] uppercase text-white/45">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
+        }
+      >
+        <p className="text-white/75 text-base md:text-lg italic mb-6 max-w-xl leading-relaxed">
+          {t('hero.quote')}
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href={buildWhatsApp(waCommercial, t('cta.message'))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-white text-ink font-medium px-7 py-3.5 rounded-xl hover:bg-white/90 transition-colors text-sm"
+          >
+            {t('hero.joinButton')}
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a
+            href="#beneficios"
+            className="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-7 py-3.5 rounded-xl hover:bg-white/10 transition-colors text-sm"
+          >
+            {t('hero.benefitsButton')}
+          </a>
         </div>
-
-        {/* ─── Stats bar ─── */}
-        <div className="relative z-10 w-full border-t border-white/10 bg-black/30 backdrop-blur-sm">
-          <div className="container-onkimia grid grid-cols-3">
-            {([
-              [t('hero.stat1Value'), t('hero.stat1Label')],
-              [t('hero.stat2Value'), t('hero.stat2Label')],
-              [t('hero.stat3Value'), t('hero.stat3Label')],
-            ] as [string, string][]).map(([val, label], i) => (
-              <div key={i} className={`py-5 text-center ${i > 0 ? 'border-l border-white/10' : ''}`}>
-                <p className="font-serif text-base md:text-lg text-white leading-none mb-1">{val}</p>
-                <p className="text-[10px] tracking-[0.18em] uppercase text-white/45">{label}</p>
+        {/* OD symbol / logo — rendered below eyebrow in mobile, desktop */}
+        {(od?.symbol?.asset || od?.logo?.asset) && (
+          <div className="flex items-center gap-3 mt-6 order-first">
+            {od?.symbol?.asset && (
+              <div className="md:hidden">
+                <Image src={urlFor(od.symbol).height(40).format('webp').quality(90).url()} alt="Onkimia Doctors" width={40} height={40} className="object-contain" />
               </div>
-            ))}
+            )}
+            {od?.logo?.asset && (
+              <div className="hidden md:block">
+                <Image src={urlFor(od.logo).height(36).format('webp').quality(90).url()} alt="Onkimia Doctors" width={180} height={36} className="object-contain" />
+              </div>
+            )}
           </div>
-        </div>
-      </section>
+        )}
+      </PageHero>
 
       {/* ════════════════════════════════════════
           ¿QUÉ ES ONKIMIA DOCTORS?
