@@ -1,7 +1,10 @@
-import Image from 'next/image';
+import ReactDOM from 'react-dom';
 import { Link } from '@/i18n/navigation';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { parseEmphasis } from '@/lib/parseEmphasis';
+
+const HERO_SRCSET = '/hero/hero-main-750.webp 750w, /hero/hero-main-1280.webp 1280w, /hero/hero-main-1920.webp 1920w';
+const HERO_SIZES = '100vw';
 
 type FeatureIcon = 'pulse' | 'heart' | 'shield';
 
@@ -28,18 +31,24 @@ export function HeroHome({
   secondaryCta,
   features,
 }: HeroHomeProps) {
+  ReactDOM.preload('/hero/hero-main-1920.webp', {
+    as: 'image',
+    imageSrcSet: HERO_SRCSET,
+    imageSizes: HERO_SIZES,
+    fetchPriority: 'high',
+  });
+
   return (
     <section className="relative w-full min-h-[100svh] overflow-visible bg-ink text-white -mt-16 md:-mt-20">
-      <Image
-        src="/hero/hero-main.jpg"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/hero/hero-main-1920.webp"
+        srcSet={HERO_SRCSET}
+        sizes={HERO_SIZES}
         alt="Médico oncólogo acompañando a un paciente en Onkimia"
-        fill
-        priority
         fetchPriority="high"
-        sizes="100vw"
-        quality={85}
-        placeholder="empty"
-        className="object-cover [object-position:65%_center] md:object-center z-0 hero-ken-burns origin-center"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover [object-position:65%_center] md:object-center z-0 hero-ken-burns origin-center"
       />
 
       {/* Primary overlay: radial gradient — lighter center, darker edges.
