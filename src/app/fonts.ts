@@ -12,9 +12,10 @@ import { Fraunces, DM_Sans, Source_Code_Pro } from 'next/font/google';
 export const fraunces = Fraunces({
   subsets: ['latin'],
   display: 'swap',
+  weight: ['400', '500'], 
   style: ['normal', 'italic'],
-  axes: ['opsz'],
   variable: '--font-fraunces',
+    //axes: ['opsz'],
 });
 
 // DM Sans — pesos usados en la maqueta: 400, 500, 600.
