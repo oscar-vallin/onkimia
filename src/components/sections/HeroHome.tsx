@@ -33,7 +33,7 @@ export function HeroHome({
   return (
     <section className="relative w-full min-h-[100svh] overflow-visible bg-ink text-white -mt-16 md:-mt-20">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      {/* <img
         src="/hero/hero-main-1920.webp"
         srcSet={HERO_SRCSET}
         sizes={HERO_SIZES}
@@ -41,7 +41,7 @@ export function HeroHome({
         fetchPriority="high"
         decoding="async"
         className="absolute inset-0 h-full w-full object-cover [object-position:65%_center] md:object-center z-0 hero-ken-burns origin-center"
-      />
+      /> */}
 
       {/* Primary overlay: radial gradient — lighter center, darker edges.
           On mobile the image is anchored right so we shift the radial center
