@@ -74,7 +74,6 @@ export default async function HomePage({
           { icon: 'heart', title: t('homeHero.features.human.title'), description: t('homeHero.features.human.description') },
           { icon: 'shield', title: t('homeHero.features.support.title'), description: t('homeHero.features.support.description') },
         ]}
-        heroImage={settings.homeHeroImage}
       />
 
       {/* ─── PROCEDURES — streamed ─── */}

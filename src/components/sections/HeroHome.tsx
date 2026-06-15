@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import { urlFor } from '@/sanity/image';
 import { parseEmphasis } from '@/lib/parseEmphasis';
-import type { SanityImageWithLQIP } from '@/sanity/types';
 
 type FeatureIcon = 'pulse' | 'heart' | 'shield';
 
@@ -20,9 +18,7 @@ export interface HeroHomeProps {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   features: [Feature, Feature, Feature];
-  heroImage?: SanityImageWithLQIP;
 }
-
 
 export function HeroHome({
   eyebrow,
@@ -31,24 +27,18 @@ export function HeroHome({
   primaryCta,
   secondaryCta,
   features,
-  heroImage,
 }: HeroHomeProps) {
-  const imageSrc = heroImage
-    ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(80).url()
-    : '/images/hero-poster.jpg';
-  const blurDataURL = heroImage?.asset?.metadata?.lqip ?? undefined;
-
   return (
     <section className="relative w-full min-h-[100svh] overflow-visible bg-ink text-white -mt-16 md:-mt-20">
       <Image
-        src={imageSrc}
-        alt=""
+        src="/hero/hero-main.jpg"
+        alt="Médico oncólogo acompañando a un paciente en Onkimia"
         fill
         priority
+        fetchPriority="high"
         sizes="100vw"
-        quality={80}
-        placeholder={blurDataURL ? 'blur' : 'empty'}
-        blurDataURL={blurDataURL}
+        quality={85}
+        placeholder="empty"
         className="object-cover [object-position:65%_center] md:object-center z-0 hero-ken-burns origin-center"
       />
 
