@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import { Link } from '@/i18n/navigation';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { parseEmphasis } from '@/lib/parseEmphasis';
@@ -31,13 +30,6 @@ export function HeroHome({
   secondaryCta,
   features,
 }: HeroHomeProps) {
-  ReactDOM.preload('/hero/hero-main-1920.webp', {
-    as: 'image',
-    imageSrcSet: HERO_SRCSET,
-    imageSizes: HERO_SIZES,
-    fetchPriority: 'high',
-  });
-
   return (
     <section className="relative w-full min-h-[100svh] overflow-visible bg-ink text-white -mt-16 md:-mt-20">
       {/* eslint-disable-next-line @next/next/no-img-element */}

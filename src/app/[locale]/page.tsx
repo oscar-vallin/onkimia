@@ -62,6 +62,19 @@ export default async function HomePage({
 
   return (
     <>
+      {/* Preload hero image — must match img srcset/sizes exactly so the browser
+          resolves the same candidate from the preload scanner and the <img>,
+          guaranteeing a single network fetch and passing the fetchpriority audit. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/hero/hero-main-1920.webp"
+        imageSrcSet="/hero/hero-main-750.webp 750w, /hero/hero-main-1280.webp 1280w, /hero/hero-main-1920.webp 1920w"
+        imageSizes="100vw"
+        // @ts-expect-error — fetchpriority is valid HTML but not yet in React's LinkHTMLAttributes
+        fetchpriority="high"
+      />
+
       {/* ─── HERO — above the fold, renders immediately ─── */}
       <HeroHome
         eyebrow={t('homeHero.eyebrow')}
