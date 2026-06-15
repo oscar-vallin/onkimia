@@ -3,8 +3,14 @@ import { sanityFetch } from '@/sanity/lib/fetch';
 import { TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
 import { AboutHero } from '@/components/sections/AboutHero';
+import { MisionSection } from '@/components/sections/MisionSection';
+import { MoreThanMedicine } from '@/components/sections/MoreThanMedicine';
+import { Enfoque360Section } from '@/components/sections/Enfoque360Section';
+import { InitiativeCards } from '@/components/sections/InitiativeCards';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
+import { ContactCTA } from '@/components/sections/ContactCTA';
 import { DoctorFAQSection } from '@/components/sections/DoctorFAQSection';
+import { AppBanner } from '@/components/sections/AppBanner';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import type { Testimonial, SiteSettings, AboutPage } from '@/sanity/types';
@@ -42,6 +48,9 @@ export default async function NosotrosPage({
     sanityFetch<AboutPage | null>({ query: ABOUT_PAGE_QUERY, params: { locale }, tags: ['aboutPage'] }),
   ]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const differentialServices = (t.raw('moreThanMedicine.services') as any[]) ?? [];
+
   return (
     <>
       {/* ─── HERO ─── */}
@@ -54,7 +63,57 @@ export default async function NosotrosPage({
         image={settings.aboutHeroImage}
       />
 
-      {/* ─── CARRUSEL DE TESTIMONIALES ─── */}
+      {/* ─── NUESTRA MISIÓN ─── */}
+      <MisionSection
+        eyebrow={t('mision.eyebrow')}
+        title={t('mision.title')}
+        description={t('mision.description')}
+      />
+
+      {/* ─── 1. MÁS QUE MEDICINA ─── */}
+      <MoreThanMedicine
+        eyebrow={t('moreThanMedicine.eyebrow')}
+        titleLine1={t('moreThanMedicine.headingLine1')}
+        titleUnderlined={t('moreThanMedicine.headingUnderlined')}
+        titleSuffix={t('moreThanMedicine.headingSuffix')}
+        description={t('moreThanMedicine.description')}
+        services={differentialServices}
+      />
+
+      {/* ─── 2. CUERPO, MENTE Y CUIDADO INTEGRAL ─── */}
+      <Enfoque360Section
+        eyebrow={t('enfoque360.eyebrow')}
+        title={t('enfoque360.title')}
+        description={t('enfoque360.description')}
+        stat1Value={t('enfoque360.stat1Value')}
+        stat1Label={t('enfoque360.stat1Label')}
+        stat2Value={t('enfoque360.stat2Value')}
+        stat2Label={t('enfoque360.stat2Label')}
+        image={aboutPage?.enfoque360Image}
+        items={[
+          { title: t('enfoque360.items.item1Title'), description: t('enfoque360.items.item1Description') },
+          { title: t('enfoque360.items.item2Title'), description: t('enfoque360.items.item2Description') },
+          { title: t('enfoque360.items.item3Title'), description: t('enfoque360.items.item3Description') },
+        ]}
+      />
+
+      {/* ─── 3 & 4. GRUPO DE APOYO + ONKIMIA AWARE ─── */}
+      <InitiativeCards
+        eyebrow={t('initiativeCards.eyebrow')}
+        description={t('initiativeCards.description')}
+        supportGroupTitle={t('supportGroup.title')}
+        supportGroupDescription={t('supportGroup.description')}
+        supportGroupCategory={t('supportGroup.category')}
+        supportGroupLink={t('supportGroup.link')}
+        supportGroupImage={aboutPage?.supportGroupImage}
+        awareTitle="Onkimia Aware"
+        awareDescription={t('aware.description')}
+        awareCategory={t('aware.category')}
+        awareLink={t('aware.link')}
+        awareImage={aboutPage?.awareImage}
+      />
+
+      {/* ─── 5. CARRUSEL DE TESTIMONIALES ─── */}
       <TestimonialsSection
         title={getLocalized(aboutPage?.testimonialsTitle, locale) || t('testimonials.title')}
         subtitle={getLocalized(aboutPage?.testimonialsSubtitle, locale) || t('testimonials.subtitle')}
@@ -63,7 +122,7 @@ export default async function NosotrosPage({
         reikyImage={aboutPage?.reikyImage}
       />
 
-      {/* ─── FAQ CON FOTO DE DOCTOR ─── */}
+      {/* ─── 6. FAQ CON FOTO DE DOCTOR ─── */}
       {aboutPage?.faqItems && aboutPage.faqItems.length > 0 && (
         <DoctorFAQSection
           eyebrow={t('faq.eyebrow')}
@@ -71,6 +130,23 @@ export default async function NosotrosPage({
           items={aboutPage.faqItems}
         />
       )}
+
+      {/* ─── 7. CONTÁCTANOS ─── */}
+      <ContactCTA
+        titleUnderlined={t('doubts.headingUnderlined')}
+        titleSuffix={t('doubts.headingSuffix')}
+        description={t('doubts.description')}
+        buttonLabel={t('cta.button')}
+        buttonHref="/contacto"
+      />
+
+      {/* ─── APP ONKIMIA ─── */}
+      <AppBanner
+        title={t('appBanner.title')}
+        description={t('appBanner.description')}
+        appStoreLabel={t('appBanner.appStore')}
+        googlePlayLabel={t('appBanner.googlePlay')}
+      />
     </>
   );
 }

@@ -8,6 +8,29 @@ export const aboutPage = defineType({
   type: 'document',
   icon: UsersIcon,
   fields: [
+    // ─── IMÁGENES DE SECCIÓN ─────────────────────────────────────────────────
+    defineField({
+      name: 'enfoque360Image',
+      title: 'Imagen "Cuerpo, mente y cuidado integral"',
+      type: 'image',
+      description: 'Foto de la clínica o pasillo. Vertical 3:4 o cuadrada, JPG <250KB.',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'supportGroupImage',
+      title: 'Imagen — Grupo de Apoyo',
+      type: 'image',
+      description: 'Foto para la tarjeta "Grupo de apoyo". 16:9 o 3:2, JPG <200KB.',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'awareImage',
+      title: 'Imagen — Onkimia Aware',
+      type: 'image',
+      description: 'Foto para la tarjeta "Onkimia Aware". 16:9 o 3:2, JPG <200KB.',
+      options: { hotspot: true },
+    }),
+
     // ─── TESTIMONIALES ───────────────────────────────────────────────────────
     localizedString({ name: 'testimonialsTitle', title: 'Testimoniales — Título de la sección' }),
     localizedString({ name: 'testimonialsSubtitle', title: 'Testimoniales — Subtítulo' }),

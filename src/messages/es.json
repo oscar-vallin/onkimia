@@ -335,10 +335,19 @@
       "description": "Un equipo multidisciplinario dedicado a transformar la experiencia oncológica a través de la ciencia avanzada y la calidez humana."
     },
     "moreThanMedicine": {
+      "eyebrow": "Nuestra filosofía",
       "headingLine1": "Más que medicina,",
       "headingUnderlined": "un comprom",
       "headingSuffix": "iso con tu vida",
-      "description": "En Onkimia nuestro eje eres tú. Nuestra filosofía combina tratamientos innovadores, atención de calidad y los mejores especialistas."
+      "description": "En Onkimia nuestro eje eres tú. Nuestra filosofía combina tratamientos innovadores, atención de calidad y los mejores especialistas.",
+      "services": [
+        { "icon": "car", "title": "Valet parking", "description": "Servicio de valet parking disponible en todas nuestras sedes para que llegues sin preocupaciones." },
+        { "icon": "smartphone", "title": "App Onkimia", "description": "Accede a tu historial clínico, agenda citas y consulta resultados desde tu teléfono." },
+        { "icon": "sparkles", "title": "Hospitalidad premium", "description": "Sala de espera con amenidades de lujo para que tu experiencia sea cómoda desde el primer momento." },
+        { "icon": "shield-check", "title": "Concierge de seguros", "description": "Coordinamos directamente con tu aseguradora para autorizaciones, reembolsos y coberturas sin estrés." },
+        { "icon": "users", "title": "Acompañante bienvenido", "description": "Tu familia o acompañante es siempre bienvenido en consultas y durante los procedimientos." },
+        { "icon": "globe", "title": "Atención bilingüe", "description": "Nuestro equipo te atiende con la misma calidez en español e inglés." }
+      ]
     },
     "bodyMind": {
       "headingPrefix": "Cuerpo, mente y",

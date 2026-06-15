@@ -279,6 +279,9 @@ export interface FAQItem {
 
 export interface AboutPage {
   _id: string;
+  enfoque360Image?: SanityImageWithLQIP;
+  supportGroupImage?: SanityImageWithLQIP;
+  awareImage?: SanityImageWithLQIP;
   testimonialsTitle?: LocalizedString;
   testimonialsSubtitle?: LocalizedString;
   reikyImage?: SanityImageWithLQIP;

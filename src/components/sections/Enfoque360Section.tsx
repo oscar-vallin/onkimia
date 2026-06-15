@@ -31,7 +31,7 @@ export function Enfoque360Section({
   image,
 }: Enfoque360SectionProps) {
   const imgSrc = image
-    ? urlFor(image).width(800).height(1000).format('webp').quality(85).url()
+    ? urlFor(image).width(1200).format('webp').quality(85).url()
     : null;
   const blur = image?.asset?.metadata?.lqip ?? undefined;
 
@@ -79,19 +79,33 @@ export function Enfoque360Section({
 
           {/* Right column — image with stat badges */}
           <div className="relative">
-            <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden bg-line">
+            <div className="relative w-full rounded-3xl overflow-hidden bg-line">
               {imgSrc ? (
-                <Image
-                  src={imgSrc}
-                  alt="Instalaciones Onkimia"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                  placeholder={blur ? 'blur' : 'empty'}
-                  blurDataURL={blur}
-                />
+                <>
+                  {/* Layer 1 — blurred absolute fill (behind), gives depth when image has letterbox */}
+                  <Image
+                    src={imgSrc}
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover scale-110 blur-xl opacity-50"
+                    aria-hidden="true"
+                  />
+                  {/* Layer 2 — natural dimensions, defines container height, shows full image */}
+                  <Image
+                    src={imgSrc}
+                    alt="Instalaciones Onkimia"
+                    width={1200}
+                    height={900}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                    className="relative z-10"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    placeholder={blur ? 'blur' : 'empty'}
+                    blurDataURL={blur}
+                  />
+                </>
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-teal/20 to-ink/30" />
+                <div className="min-h-[420px] bg-gradient-to-br from-teal/20 to-ink/30" />
               )}
 
               {/* Stat badge — top right */}

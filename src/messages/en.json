@@ -335,10 +335,19 @@
       "description": "A multidisciplinary team dedicated to transforming the oncological experience through advanced science and human warmth."
     },
     "moreThanMedicine": {
+      "eyebrow": "Our philosophy",
       "headingLine1": "More than medicine,",
       "headingUnderlined": "a commitm",
       "headingSuffix": "ent to your life",
-      "description": "At Onkimia, you are our focus. Our philosophy combines innovative treatments, quality care, and the best specialists."
+      "description": "At Onkimia, you are our focus. Our philosophy combines innovative treatments, quality care, and the best specialists.",
+      "services": [
+        { "icon": "car", "title": "Valet parking", "description": "Valet parking available at all our locations so you can arrive without worries." },
+        { "icon": "smartphone", "title": "Onkimia App", "description": "Access your medical history, schedule appointments, and check results from your phone." },
+        { "icon": "sparkles", "title": "Premium hospitality", "description": "A luxury waiting room with amenities so your experience is comfortable from the very first moment." },
+        { "icon": "shield-check", "title": "Insurance concierge", "description": "We coordinate directly with your insurance provider for authorizations, reimbursements, and coverage — stress-free." },
+        { "icon": "users", "title": "Companion welcome", "description": "Your family or companion is always welcome during consultations and procedures." },
+        { "icon": "globe", "title": "Bilingual care", "description": "Our team serves you with the same warmth in Spanish and English." }
+      ]
     },
     "bodyMind": {
       "headingPrefix": "Body, mind and",

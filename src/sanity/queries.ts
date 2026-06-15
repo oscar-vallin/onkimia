@@ -277,12 +277,12 @@ export const INSURANCES_QUERY = groq`
 export const ABOUT_PAGE_QUERY = groq`
   *[_type == "aboutPage" && _id == "aboutPage"][0] {
     _id,
+    enfoque360Image { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    supportGroupImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    awareImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     testimonialsTitle,
     testimonialsSubtitle,
-    reikyImage {
-      asset->{ _id, url, metadata { lqip, dimensions } },
-      hotspot, crop
-    },
+    reikyImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     "faqItems": faqItems[]{
       _key,
       "question": question[$locale],
