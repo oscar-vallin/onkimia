@@ -94,27 +94,29 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
     });
   }, []);
 
-  // Scroll detection — observes the real end of THIS page's hero (each hero
-  // renders a #hero-end-sentinel marker at its own bottom edge), so the
-  // transition point always matches the actual hero height instead of a
-  // hardcoded viewport fraction. Falls back to a scroll-position check if a
-  // page has no hero marker, so the header can never get stuck transparent.
+  // Scroll detection — plain scrollY check against a per-page threshold.
+  // Deliberately NOT IntersectionObserver: its callback can report a stale
+  // isIntersecting read during the initial hydration/paint race, flipping
+  // `scrolled` true for a frame on load (the white-flash bug). A direct
+  // scrollY comparison is synchronous and deterministic — no race window.
+  //
+  // Threshold: defaults to 150px (never trigger on a trivial scroll), but
+  // when this page has a real hero (#hero-end-sentinel marker at its bottom
+  // edge), we read the marker's actual page position so the white state
+  // only kicks in once the user has scrolled past THAT hero — short hero,
+  // short threshold; tall hero, tall threshold. Prevents the white nav from
+  // popping in early over a still-visible dark hero image.
   useEffect(() => {
+    const MIN_THRESHOLD = 150;
     const sentinel = document.getElementById('hero-end-sentinel');
+    const threshold = sentinel
+      ? Math.max(sentinel.getBoundingClientRect().top + window.scrollY - 80, MIN_THRESHOLD)
+      : MIN_THRESHOLD;
 
-    if (!sentinel) {
-      const onScroll = () => setScrolled(window.scrollY > 80);
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive: true });
-      return () => window.removeEventListener('scroll', onScroll);
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setScrolled(!entry.isIntersecting),
-      { threshold: 0, rootMargin: '-80px 0px 0px 0px' },
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
+    const onScroll = () => setScrolled(window.scrollY > threshold);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, [pathname]);
 
   // Derived text/hover color based on header state
@@ -126,14 +128,17 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        // Base state is always transparent — `scrolled` (and its derived
+        // background classes below) only ever ADDS the white/dark solid
+        // look on top of this default; it never starts any other way.
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent ${
           mobileOpen
             ? 'bg-ink'
             : isDoctorsRoute && scrolled
             ? 'bg-doctors-ink/95 backdrop-blur-md border-b border-white/10 shadow-sm'
             : scrolled
             ? 'bg-white/95 backdrop-blur-md border-b border-line shadow-sm'
-            : 'bg-transparent'
+            : ''
         }`}
       >
         <div className="container-onkimia">
