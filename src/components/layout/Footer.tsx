@@ -5,6 +5,9 @@ import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { urlFor } from '@/sanity/image';
 import { InstagramIcon, FacebookIcon, XIcon } from '@/components/icons/SocialIcons';
+import { MessageCircle } from 'lucide-react';
+import { useClinic } from '@/lib/clinic-context';
+import { getClinicConfig } from '@/config/clinicConfig';
 import type { SiteSettings, Clinic } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
@@ -15,16 +18,17 @@ interface FooterProps {
   locale: Locale;
 }
 
-export function Footer({ settings, clinics }: FooterProps) {
+export function Footer({ settings }: FooterProps) {
   const tNav = useTranslations('navigation');
   const tFooter = useTranslations('footer');
   const pathname = usePathname();
+  const { clinic } = useClinic();
 
   const isDoctorsRoute = pathname.startsWith('/onkimia-doctors');
 
-  // Sede principal para datos de contacto (Beethoven 287 del Figma)
-  const primaryClinic =
-    clinics.find((c) => c.isPrimary) || clinics[0] || null;
+  // Contact data follows the globally selected clinic, not a fixed
+  // "primary" location — see src/config/clinicConfig.ts.
+  const clinicData = getClinicConfig(clinic);
 
   return (
     <footer className={`${isDoctorsRoute ? 'bg-doctors-ink' : 'bg-ink'} text-white/90 mt-section`}>
@@ -191,48 +195,36 @@ export function Footer({ settings, clinics }: FooterProps) {
             <h3 className="text-base font-semibold text-white mb-4">
               {tNav('contact')}
             </h3>
-            {primaryClinic && (
-              <div className="text-sm text-white/60 space-y-2">
-                {primaryClinic.phone && (
-                  <a
-                    href={`tel:${primaryClinic.phone.replace(/\s/g, '')}`}
-                    className="block hover:text-teal-soft transition-colors"
-                  >
-                    {primaryClinic.phone}
-                  </a>
-                )}
-                {primaryClinic.address && (() => {
-                  const parts = [
-                    `C. ${primaryClinic.address.street}`,
-                    primaryClinic.address.neighborhood,
-                    primaryClinic.address.postalCode,
-                    primaryClinic.address.city,
-                    primaryClinic.address.state,
-                    'México',
-                  ].filter(Boolean).join(', ');
-                  return (
-                    <a
-                      href={`https://maps.google.com/?q=${encodeURIComponent(parts)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block mt-2 hover:text-teal-soft transition-colors"
-                    >
-                      <p>C. {primaryClinic.address.street},</p>
-                      {primaryClinic.address.neighborhood && (
-                        <p>
-                          {primaryClinic.address.neighborhood},{' '}
-                          {primaryClinic.address.postalCode}
-                        </p>
-                      )}
-                      <p>
-                        {primaryClinic.address.city},{' '}
-                        {primaryClinic.address.state}.
-                      </p>
-                    </a>
-                  );
-                })()}
-              </div>
-            )}
+            {/* Reflects the globally selected clinic (useClinic()), not a
+                fixed "primary" location — switching clinics in the Header
+                updates this immediately. */}
+            <div className="text-sm text-white/60 space-y-2">
+              <a
+                href={clinicData.phoneHref}
+                className="block hover:text-teal-soft transition-colors"
+              >
+                {clinicData.phone}
+              </a>
+              {clinicData.whatsappHref && (
+                <a
+                  href={clinicData.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-teal-soft transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+                  <span>{clinicData.whatsapp}</span>
+                </a>
+              )}
+              <a
+                href={clinicData.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mt-2 hover:text-teal-soft transition-colors"
+              >
+                {clinicData.address}
+              </a>
+            </div>
           </div>
 
           {/* ─── Sedes + Bolsa de Trabajo ─── */}
@@ -242,14 +234,6 @@ export function Footer({ settings, clinics }: FooterProps) {
                 {tFooter('locations')}
               </h3>
               <ul className="space-y-2.5 text-sm">
-                <li>
-                  <Link
-                    href="/guadalajara"
-                    className="text-white/60 hover:text-white transition-colors"
-                  >
-                    {tFooter('locationGuadalajara')}
-                  </Link>
-                </li>
                 <li>
                   <Link
                     href="/colima"

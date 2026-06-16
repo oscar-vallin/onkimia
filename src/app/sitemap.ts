@@ -19,7 +19,6 @@ const STATIC_PAGES: Array<{
   { path: '/servicios', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/contacto', changeFrequency: 'yearly', priority: 0.7 },
   { path: '/bolsa-de-trabajo', changeFrequency: 'weekly', priority: 0.6 },
-  { path: '/guadalajara', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/colima', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/aviso-de-privacidad', changeFrequency: 'yearly', priority: 0.3 },
 ];

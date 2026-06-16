@@ -5,8 +5,9 @@ import { CLINICS_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
 import type { Clinic, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import { MapPin, MessageCircle, Phone, Mail } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
+import { ContactInfo } from '@/components/sections/ContactInfo';
 import { GoogleMapsEmbed } from '@/components/ui/GoogleMapsEmbed';
 import { PageHero } from '@/components/sections/PageHero';
 import { urlFor } from '@/sanity/image';
@@ -37,10 +38,6 @@ export default async function ContactPage({
   ]);
 
   const primaryClinic = clinics?.find((c) => c.isPrimary) ?? clinics?.[0];
-  const waNumber = (settings.whatsappCommercial ?? '').replace(/\D/g, '');
-  const waHref = waNumber
-    ? `https://wa.me/${waNumber}?text=${encodeURIComponent(t('section.whatsappDesc'))}`
-    : '#';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -83,62 +80,10 @@ export default async function ContactPage({
                 {t('section.description')}
               </p>
 
-              {/* Contact methods — divider list */}
-              <ul className="divide-y divide-line">
-                {/* WhatsApp */}
-                <li className="py-5 first:pt-0">
-                  <a
-                    href={waHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 group"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-colors">
-                      <MessageCircle className="w-5 h-5 text-teal" aria-hidden="true"/>
-                    </div>
-                    <div>
-                      <p className="font-medium text-ink text-sm group-hover:text-teal transition-colors">{t('section.whatsappLabel')}</p>
-                      <p className="text-gray-warm text-sm">{t('section.whatsappDesc')}</p>
-                    </div>
-                  </a>
-                </li>
-
-                {/* Phone */}
-                {primaryClinic?.phone && (
-                  <li className="py-5">
-                    <a
-                      href={`tel:${primaryClinic.phone.replace(/\s/g, '')}`}
-                      className="flex items-center gap-4 group"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-colors">
-                        <Phone className="w-5 h-5 text-teal" aria-hidden="true"/>
-                      </div>
-                      <div>
-                        <p className="font-medium text-ink text-sm group-hover:text-teal transition-colors">{t('section.phoneLabel')}</p>
-                        <p className="text-gray-warm text-sm">{t('section.phoneDesc')}</p>
-                      </div>
-                    </a>
-                  </li>
-                )}
-
-                {/* Email */}
-                {primaryClinic?.email && (
-                  <li className="py-5 last:pb-0">
-                    <a
-                      href={`mailto:${primaryClinic.email}`}
-                      className="flex items-center gap-4 group"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-colors">
-                        <Mail className="w-5 h-5 text-teal" aria-hidden="true"/>
-                      </div>
-                      <div>
-                        <p className="font-medium text-ink text-sm group-hover:text-teal transition-colors">{t('section.emailLabel')}</p>
-                        <p className="text-gray-warm text-sm">{t('section.emailDesc')}</p>
-                      </div>
-                    </a>
-                  </li>
-                )}
-              </ul>
+              {/* Contact methods — follows the globally selected clinic
+                  (useClinic()); switching clinics in the Header updates
+                  this list immediately. See src/config/clinicConfig.ts. */}
+              <ContactInfo />
             </div>
 
             {/* ─── Right: form card ─── */}

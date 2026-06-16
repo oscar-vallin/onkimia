@@ -861,6 +861,34 @@
       "headlinePart2": "encontrarnos"
     }
   },
+  "colima": {
+    "hero": {
+      "eyebrow": "Onkimia · Colima",
+      "title": "Atención oncológica de *excelencia* en Colima",
+      "description": "La misma calidad de atención, el mismo equipo especializado, ahora cerca de ti en Colima.",
+      "cta": "Agendar una cita"
+    },
+    "contact": {
+      "eyebrow": "Encuéntranos",
+      "title": "Estamos en *Colima*",
+      "description": "Visítanos en nuestras instalaciones o contáctanos por el medio que prefieras. Estamos para acompañarte en cada paso.",
+      "viewMap": "Ver en Google Maps",
+      "addressLabel": "Dirección",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Correo electrónico"
+    },
+    "services": {
+      "eyebrow": "Nuestros servicios",
+      "title": "Todo lo que necesitas, en un solo lugar",
+      "description": "En Colima ofrecemos la misma gama completa de servicios oncológicos especializados.",
+      "cta": "Ver todos los servicios"
+    },
+    "cta": {
+      "title": "¿Tienes dudas?",
+      "description": "Estamos aquí para acompañarte. Contáctanos y con gusto te orientamos.",
+      "button": "Contáctanos"
+    }
+  },
   "jobBoard": {
     "metadata": {
       "title": "Bolsa de Trabajo — Onkimia",
