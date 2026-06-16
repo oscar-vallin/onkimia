@@ -10,7 +10,7 @@ export function MisionSection({ eyebrow, title, description }: MisionSectionProp
 
   return (
     <section className="bg-white overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6 text-center pt-20 pb-8">
+      <div className="max-w-4xl mx-auto px-6 text-center pt-24 md:pt-28 pb-8">
         <p className="text-xs tracking-[0.25em] uppercase text-gray-warm mb-5">
           {eyebrow}
         </p>

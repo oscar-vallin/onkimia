@@ -64,6 +64,7 @@ export default async function EndosPage({
         imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
         blurDataURL={heroLqip ?? undefined}
         mobileObjectPosition="object-[center_25%]"
+        imagePosition="md:object-[68%_45%]"
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')} *${t('hero.headlinePart2')}*`}
         description={t('hero.description')}
@@ -209,7 +210,7 @@ export default async function EndosPage({
       ════════════════════════════════════════ */}
       <section className="bg-ink py-20 md:py-28 border-t border-white/[0.06]" aria-labelledby="endos-safety-title">
         <div className="container-onkimia">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-stretch">
             {/* Left */}
             <div>
               <p className="text-xs tracking-[0.25em] uppercase text-teal-soft font-medium mb-5">
@@ -240,20 +241,35 @@ export default async function EndosPage({
             </div>
 
             {/* Right — image */}
-            <div className="relative">
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden">
+            <div className="relative h-full min-h-[420px] lg:min-h-0">
+              <div className="relative w-full h-full rounded-3xl overflow-hidden bg-white/[0.03]">
                 {endosPageData?.safetyImage?.asset ? (
-                  <Image
-                    src={urlFor(endosPageData?.safetyImage).width(900).height(1125).format('webp').quality(85).url()}
-                    alt={t('safety.title')}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
-                    placeholder={endosPageData?.safetyImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                    blurDataURL={endosPageData?.safetyImage?.asset?.metadata?.lqip ?? undefined}
-                  />
+                  <>
+                    {/* Background fill — blurred cover, prevents jarring empty letterbox
+                        space around the contained image while keeping the premium dark feel */}
+                    <Image
+                      src={urlFor(endosPageData.safetyImage).width(900).format('webp').quality(85).url()}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover scale-110 blur-xl opacity-30"
+                      aria-hidden="true"
+                    />
+                    {/* Foreground — object-contain shows the full image, never cropped.
+                        Centers automatically within the box (matches text column height
+                        via h-full on the parent), no further alignment markup needed. */}
+                    <Image
+                      src={urlFor(endosPageData.safetyImage).width(900).format('webp').quality(85).url()}
+                      alt={t('safety.title')}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-contain relative z-10"
+                      placeholder={endosPageData.safetyImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
+                      blurDataURL={endosPageData.safetyImage?.asset?.metadata?.lqip ?? undefined}
+                    />
+                  </>
                 ) : (
-                  <div className="absolute inset-0 bg-white/[0.03] border border-white/[0.08] flex flex-col items-center justify-center gap-2">
+                  <div className="absolute inset-0 border border-white/[0.08] flex flex-col items-center justify-center gap-2">
                     <ShieldCheck className="w-10 h-10 text-white/10"/>
                     <p className="text-white/20 text-xs">endosSafetyImage</p>
                   </div>

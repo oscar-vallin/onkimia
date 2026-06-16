@@ -137,10 +137,10 @@ export function ContactForm() {
   };
 
   const fieldClass = (name: string) =>
-    `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors disabled:bg-cream disabled:cursor-not-allowed ${
+    `w-full px-4 py-3.5 border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 disabled:bg-cream disabled:cursor-not-allowed ${
       getFieldError(name)
         ? 'border-red-400 focus:border-red-400 focus:ring-red-100'
-        : 'border-line focus:border-teal focus:ring-teal/10'
+        : 'border-line focus:border-teal focus:ring-teal/15'
     }`;
 
   return (
@@ -315,7 +315,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full md:w-auto bg-teal hover:bg-teal-soft disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-8 py-3 rounded-lg transition-colors inline-flex items-center justify-center gap-2"
+          className="w-full sm:w-auto bg-teal hover:bg-teal-soft disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none text-white font-medium px-7 py-3.5 rounded-full transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30 inline-flex items-center justify-center gap-2"
         >
           {isPending ? (
             <>

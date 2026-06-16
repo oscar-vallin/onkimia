@@ -101,11 +101,12 @@ export default async function CuidarePage({
       <PageHero
         imageSrc={heroImage ? urlFor(heroImage).width(1920).quality(82).format('webp').url() : undefined}
         mobileObjectPosition="object-[center_25%]"
+        imagePosition="md:object-[65%_55%]"
         title={t('hero.headline')}
         description={t('hero.description')}
         align="center"
       >
-        <BookingButton section="cuidare" variant="primary" />
+        <BookingButton section="cuidare" variant="brand" />
       </PageHero>
 
       {/* ─── BANNER DISPONIBILIDAD ─── */}
@@ -130,7 +131,7 @@ export default async function CuidarePage({
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
               <li
                 key={key}
-                className="flex items-start gap-3 bg-white p-4 rounded-2xl border border-line"
+                className="flex items-start gap-3 bg-white p-6 rounded-2xl border border-line transition-all duration-300 ease-out hover:border-gray-300 hover:shadow-sm hover:-translate-y-0.5"
               >
                 <div className="w-10 h-10 flex-shrink-0 rounded-full bg-teal/10 text-teal flex items-center justify-center">
                   <Icon className="w-5 h-5" aria-hidden="true" />

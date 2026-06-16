@@ -20,6 +20,14 @@ export interface PageHeroProps {
    * Example: 'object-[75%_center]' for a subject on the right.
    */
   mobileObjectPosition?: string;
+  /**
+   * Tailwind class for desktop (md+) object-position.
+   * Default 'md:object-[50%_25%]' biases the focal point toward the upper
+   * area of the frame, giving headroom so subjects' heads aren't clipped.
+   * Override per page when the image composition needs a different anchor
+   * (e.g. a landscape/architectural shot vs. a portrait team photo).
+   */
+  imagePosition?: string;
 
   eyebrow?: string;
   /** Supports *word* syntax → teal-soft italic emphasis */
@@ -49,6 +57,14 @@ export interface PageHeroProps {
    * Use for page-specific badges or secondary branding marks.
    */
   topSlot?: React.ReactNode;
+
+  /**
+   * Adds a uniform low-opacity dark wash across the whole image, on top of
+   * the existing directional/text-side gradients. Off by default — opt in
+   * for specific source photos with bright/blown-out areas (e.g. overhead
+   * lighting) that need dampening to match the site's darker hero mood.
+   */
+  extraDim?: boolean;
 }
 
 export function PageHero({
@@ -56,6 +72,7 @@ export function PageHero({
   imageAlt = '',
   blurDataURL,
   mobileObjectPosition = 'object-[center_25%]',
+  imagePosition = 'md:object-[50%_25%]',
   eyebrow,
   title,
   description,
@@ -65,6 +82,7 @@ export function PageHero({
   children,
   footerSlot,
   topSlot,
+  extraDim = false,
 }: PageHeroProps) {
   const isCenter = align === 'center';
 
@@ -83,7 +101,7 @@ export function PageHero({
           quality={82}
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
-          className={`object-cover ${mobileObjectPosition} md:object-center z-0 hero-ken-burns origin-center`}
+          className={`object-cover ${mobileObjectPosition} ${imagePosition} z-0 hero-ken-burns origin-center`}
           aria-hidden={imageAlt === ''}
         />
       )}
@@ -93,7 +111,7 @@ export function PageHero({
         className="absolute inset-0 z-[1] hidden md:block"
         style={{
           background: isCenter
-            ? 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.40) 50%, rgba(0,0,0,0.65) 100%)'
+            ? 'linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.50) 50%, rgba(0,0,0,0.72) 100%)'
             : 'linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.10) 72%, transparent 100%)',
         }}
         aria-hidden="true"
@@ -106,9 +124,33 @@ export function PageHero({
         aria-hidden="true"
       />
 
+      {/* Top fade — keeps logo/nav legible over any image brightness */}
+      <div
+        className="absolute inset-x-0 top-0 h-32 md:h-40 z-[1] pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%)' }}
+        aria-hidden="true"
+      />
+
+      {/* Text scrim — extra local darkening behind the headline for authority/contrast */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background: isCenter
+            ? 'radial-gradient(ellipse 70% 60% at 50% 62%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 75%)'
+            : 'radial-gradient(ellipse 60% 65% at 18% 62%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 72%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Ambient dim — uniform wash to dampen bright/blown-out source photos
+          (e.g. overhead lighting), opt-in per page, on top of all other overlays */}
+      {extraDim && (
+        <div className="absolute inset-0 z-[1] bg-black/25 pointer-events-none" aria-hidden="true" />
+      )}
+
       {/* Top bar — eyebrow + optional top-right slot */}
       {(eyebrow || topSlot) && (
-        <div className={`relative z-10 container-onkimia pt-28 md:pt-36 flex items-start ${topSlot ? 'justify-between' : ''}`}>
+        <div className={`relative z-10 container-onkimia pt-32 md:pt-44 flex ${topSlot ? 'items-center justify-between' : 'items-start'}`}>
           {eyebrow && (
             <p className="text-[10px] tracking-[0.28em] uppercase text-white/60 font-medium">
               {eyebrow}
@@ -122,7 +164,7 @@ export function PageHero({
 
       {/* Main content */}
       <div
-        className={`relative z-10 container-onkimia flex flex-col flex-1 ${eyebrow || topSlot ? 'pt-8 md:pt-10' : 'pt-28 md:pt-36'} pb-16 md:pb-20 ${isCenter ? 'items-center text-center' : 'items-start'} max-w-3xl ${isCenter ? 'mx-auto' : ''}`}
+        className={`relative z-10 container-onkimia flex flex-col flex-1 ${eyebrow || topSlot ? 'pt-8 md:pt-10' : 'pt-40 md:pt-52'} pb-16 md:pb-20 ${isCenter ? 'items-center text-center' : 'items-start'} max-w-3xl ${isCenter ? 'mx-auto' : ''}`}
       >
         {/* Mobile spacer — pushes content to lower third on small screens */}
         <div className="flex-1 md:hidden" aria-hidden="true" />
@@ -142,7 +184,7 @@ export function PageHero({
             {primaryCta && !primaryCta.external && (
               <Link
                 href={primaryCta.href}
-                className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full font-medium transition-all duration-200 hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
+                className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full font-medium transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30 w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
               >
                 {primaryCta.label}
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -153,7 +195,7 @@ export function PageHero({
                 href={primaryCta.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full font-medium transition-all duration-200 hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
+                className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full font-medium transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30 w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
               >
                 {primaryCta.label}
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -162,7 +204,7 @@ export function PageHero({
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
-                className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 font-medium text-white transition-all duration-200 hover:border-white/60 hover:bg-white/5 hover:scale-[1.02] w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 font-medium text-white transition-all duration-300 ease-out hover:border-white/60 hover:bg-white/5 hover:-translate-y-0.5 w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 {secondaryCta.label}
               </Link>
@@ -178,6 +220,11 @@ export function PageHero({
       {footerSlot && (
         <div className="relative z-10 w-full">{footerSlot}</div>
       )}
+
+      {/* Header scroll sentinel — marks the real end of the hero so the
+          fixed nav knows exactly when to switch from transparent/white-text
+          to solid/dark-text, regardless of this hero's actual height. */}
+      <div id="hero-end-sentinel" className="absolute bottom-0 left-0 w-px h-px pointer-events-none" aria-hidden="true" />
 
     </section>
   );

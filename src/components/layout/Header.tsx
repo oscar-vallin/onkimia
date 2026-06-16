@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Globe, MapPin } from 'lucide-react';
@@ -49,7 +49,6 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [clinicMenuOpen, setClinicMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const sentinelRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale() as Locale;
@@ -95,14 +94,26 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
     });
   }, []);
 
-  // Sentinel-based scroll detection — re-observes on route change
+  // Scroll detection — observes the real end of THIS page's hero (each hero
+  // renders a #hero-end-sentinel marker at its own bottom edge), so the
+  // transition point always matches the actual hero height instead of a
+  // hardcoded viewport fraction. Falls back to a scroll-position check if a
+  // page has no hero marker, so the header can never get stuck transparent.
   useEffect(() => {
-    if (!sentinelRef.current) return;
+    const sentinel = document.getElementById('hero-end-sentinel');
+
+    if (!sentinel) {
+      const onScroll = () => setScrolled(window.scrollY > 80);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      return () => window.removeEventListener('scroll', onScroll);
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => setScrolled(!entry.isIntersecting),
       { threshold: 0, rootMargin: '-80px 0px 0px 0px' },
     );
-    observer.observe(sentinelRef.current);
+    observer.observe(sentinel);
     return () => observer.disconnect();
   }, [pathname]);
 
@@ -119,14 +130,14 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
           mobileOpen
             ? 'bg-ink'
             : isDoctorsRoute && scrolled
-            ? 'bg-doctors-ink/95 backdrop-blur-md border-b border-white/10'
+            ? 'bg-doctors-ink/95 backdrop-blur-md border-b border-white/10 shadow-sm'
             : scrolled
-            ? 'bg-white/95 backdrop-blur-md border-b border-line'
+            ? 'bg-white/95 backdrop-blur-md border-b border-line shadow-sm'
             : 'bg-transparent'
         }`}
       >
         <div className="container-onkimia">
-          <div className="flex items-center justify-between py-3">
+          <div className="flex items-center justify-between py-4 md:py-5">
             {/* ─── Logo ─── */}
             <Link href="/" className="relative flex items-center gap-2">
               {isDoctorsRoute ? (
@@ -327,12 +338,6 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
         </div>
       </header>
 
-      {/* Sentinel: detecta cuando el hero sale del viewport */}
-      <div
-        ref={sentinelRef}
-        className="absolute top-[90vh] left-0 w-px h-px pointer-events-none"
-        aria-hidden="true"
-      />
 
       {/* ─── Full-Screen Mobile Menu ─── */}
       <LazyMotion features={loadFeatures} strict>

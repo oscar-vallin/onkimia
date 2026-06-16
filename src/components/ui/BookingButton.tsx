@@ -7,7 +7,14 @@ import type { Clinic, SiteSettings } from '@/sanity/types';
 
 interface BookingButtonProps {
   section: Section;
-  variant?: 'primary' | 'secondary';
+  /**
+   * 'primary'/'secondary' use the section's own brand color (endos teal,
+   * cuidare blue, etc). 'brand' forces the site-wide elegant teal
+   * rounded-full CTA used across PageHero — for pages that want full
+   * visual consistency with the rest of the site instead of the
+   * section-specific accent.
+   */
+  variant?: 'primary' | 'secondary' | 'brand';
   customLabel?: string;
   customMessage?: string;
   className?: string;
@@ -57,9 +64,13 @@ export async function BookingButton({
     sectionColorMap[section] ?? 'bg-teal hover:bg-teal-soft';
 
   const baseClasses =
-    'inline-flex items-center justify-center gap-2 font-medium px-6 py-3 rounded-md transition-colors';
+    variant === 'brand'
+      ? 'inline-flex items-center justify-center gap-2 font-medium px-7 py-3.5 rounded-full transition-all duration-300 ease-out hover:-translate-y-0.5'
+      : 'inline-flex items-center justify-center gap-2 font-medium px-6 py-3 rounded-md transition-colors';
   const variantClasses =
-    variant === 'primary'
+    variant === 'brand'
+      ? 'bg-teal hover:bg-teal-soft text-white hover:shadow-lg hover:shadow-teal/30'
+      : variant === 'primary'
       ? `${primaryColorClasses} text-white shadow-sm hover:shadow-md`
       : 'border border-white text-white hover:bg-white/10';
 

@@ -155,6 +155,11 @@ export function HeroHome({
         <ChevronDown className="w-5 h-5 text-white/40 animate-bounce" />
       </div>
 
+      {/* Header scroll sentinel — marks the real end of the hero so the
+          fixed nav knows exactly when to switch from transparent/white-text
+          to solid/dark-text, regardless of this hero's actual height. */}
+      <div id="hero-end-sentinel" className="absolute bottom-0 left-0 w-px h-px pointer-events-none" aria-hidden="true" />
+
     </section>
   );
 }

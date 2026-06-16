@@ -85,13 +85,16 @@ export default async function OnkimiaDoctorsPage({
         }
         footerSlot={
           <div className="border-t border-white/10 bg-black/30 backdrop-blur-sm">
-            <div className="container-onkimia grid grid-cols-3">
+            <div className="container-onkimia grid grid-cols-3 gap-3 md:gap-4 py-4">
               {([
                 [t('hero.stat1Value'), t('hero.stat1Label')],
                 [t('hero.stat2Value'), t('hero.stat2Label')],
                 [t('hero.stat3Value'), t('hero.stat3Label')],
               ] as [string, string][]).map(([val, label], i) => (
-                <div key={i} className={`py-5 text-center ${i > 0 ? 'border-l border-white/10' : ''}`}>
+                <div
+                  key={i}
+                  className="rounded-xl border border-white/10 bg-white/[0.02] py-4 text-center transition-all duration-300 ease-out hover:border-white/25 hover:bg-white/[0.06] hover:-translate-y-0.5 cursor-default"
+                >
                   <p className="font-serif text-base md:text-lg text-white leading-none mb-1">{val}</p>
                   <p className="text-[10px] tracking-[0.18em] uppercase text-white/45">{label}</p>
                 </div>
@@ -122,7 +125,7 @@ export default async function OnkimiaDoctorsPage({
         </div>
         {/* OD symbol / logo — rendered below eyebrow in mobile, desktop */}
         {(od?.symbol?.asset || od?.logo?.asset) && (
-          <div className="flex items-center gap-3 mt-6 order-first">
+          <div className="flex items-center gap-3 mt-6 mb-8 md:mb-10 order-first">
             {od?.symbol?.asset && (
               <div className="md:hidden">
                 <Image src={urlFor(od.symbol).height(40).format('webp').quality(90).url()} alt="Onkimia Doctors" width={40} height={40} className="object-contain" />
