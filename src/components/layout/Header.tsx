@@ -283,7 +283,9 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                           onClick={() => {
                             setClinic(c.slug as 'guadalajara' | 'colima');
                             setClinicMenuOpen(false);
-                            router.push(`/${c.slug}`);
+                            if (c.slug === 'colima') {
+                              router.push(`/${locale}/colima`);
+                            }
                           }}
                           className={`w-full text-left cursor-pointer px-4 py-2 text-sm hover:bg-cream transition-colors ${
                             isSelected
@@ -473,7 +475,9 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                             onClick={() => {
                               setClinic(c.slug as 'guadalajara' | 'colima');
                               toggleMobileMenu();
-                              router.push(`/${c.slug}`);
+                              if (c.slug === 'colima') {
+                                router.push(`/${locale}/colima`);
+                              }
                             }}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                               isSelected

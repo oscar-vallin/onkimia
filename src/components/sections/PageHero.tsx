@@ -12,6 +12,9 @@ interface Cta {
 export interface PageHeroProps {
   /** Resolved image URL — Sanity CDN string or local /public path */
   imageSrc?: string;
+  /** Optional portrait-oriented image served only on mobile (< md). When set,
+   *  the component renders two <Image> layers and swaps them via CSS. */
+  mobileImageSrc?: string;
   imageAlt?: string;
   blurDataURL?: string;
   /**
@@ -69,6 +72,7 @@ export interface PageHeroProps {
 
 export function PageHero({
   imageSrc,
+  mobileImageSrc,
   imageAlt = '',
   blurDataURL,
   mobileObjectPosition = 'object-[center_25%]',
@@ -87,9 +91,9 @@ export function PageHero({
   const isCenter = align === 'center';
 
   return (
-    <section className="relative w-full min-h-[60vh] md:min-h-[70vh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex flex-col">
+    <section className="relative w-full min-h-[75vh] md:min-h-[70vh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex flex-col">
 
-      {/* Background image */}
+      {/* Desktop image — hidden on mobile when a mobile variant is provided */}
       {imageSrc && (
         <Image
           src={imageSrc}
@@ -101,7 +105,22 @@ export function PageHero({
           quality={82}
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
-          className={`object-cover ${mobileObjectPosition} ${imagePosition} z-0 hero-ken-burns origin-center`}
+          className={`object-cover ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0 hero-ken-burns origin-center`}
+          aria-hidden={imageAlt === ''}
+        />
+      )}
+
+      {/* Mobile image — portrait crop, only shown below md */}
+      {mobileImageSrc && (
+        <Image
+          src={mobileImageSrc}
+          alt={imageAlt}
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          quality={82}
+          className={`object-cover md:hidden ${mobileObjectPosition} z-0 origin-center`}
           aria-hidden={imageAlt === ''}
         />
       )}

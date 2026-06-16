@@ -70,8 +70,9 @@ export default async function OnkimiaDoctorsPage({
       {/* ─── HERO ─── */}
       <PageHero
         imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
+        mobileImageSrc={heroImage ? urlFor(heroImage).width(750).height(1200).fit('crop').crop('focalpoint').format('webp').quality(82).url() : undefined}
         blurDataURL={heroLqip ?? undefined}
-        mobileObjectPosition="object-[75%_center]"
+        mobileObjectPosition="object-[70%_top]"
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')} *${t('hero.headlinePart2')}*`}
         description={t('hero.description')}
@@ -85,7 +86,7 @@ export default async function OnkimiaDoctorsPage({
         }
         footerSlot={
           <div className="border-t border-white/10 bg-black/30 backdrop-blur-sm">
-            <div className="container-onkimia grid grid-cols-3 gap-3 md:gap-4 py-4">
+            <div className="container-onkimia grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 py-4">
               {([
                 [t('hero.stat1Value'), t('hero.stat1Label')],
                 [t('hero.stat2Value'), t('hero.stat2Label')],
@@ -93,10 +94,10 @@ export default async function OnkimiaDoctorsPage({
               ] as [string, string][]).map(([val, label], i) => (
                 <div
                   key={i}
-                  className="rounded-xl border border-white/10 bg-white/[0.02] py-4 text-center transition-all duration-300 ease-out hover:border-white/25 hover:bg-white/[0.06] hover:-translate-y-0.5 cursor-default"
+                  className="rounded-xl border border-white/10 bg-white/[0.02] py-4 px-3 text-center transition-all duration-300 ease-out hover:border-white/25 hover:bg-white/[0.06] hover:-translate-y-0.5 cursor-default"
                 >
-                  <p className="font-serif text-base md:text-lg text-white leading-none mb-1">{val}</p>
-                  <p className="text-[10px] tracking-[0.18em] uppercase text-white/45">{label}</p>
+                  <p className="font-serif text-base md:text-lg text-white leading-none mb-1 break-words">{val}</p>
+                  <p className="text-[10px] tracking-[0.18em] uppercase text-white/45 break-words">{label}</p>
                 </div>
               ))}
             </div>
