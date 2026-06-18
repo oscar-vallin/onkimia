@@ -7,6 +7,7 @@ import { DecorativeBubbles } from './DecorativeBubbles';
 
 interface HeroSectionProps {
   image?: SanityImage;
+  imageSrc?: string;
   title: string;
   subtitle?: string;
   description?: string;
@@ -21,6 +22,7 @@ interface HeroSectionProps {
 
 export function HeroSection({
   image,
+  imageSrc,
   title,
   subtitle,
   description,
@@ -44,7 +46,17 @@ export function HeroSection({
   return (
     <section className={`relative w-full ${heightClasses[height]} overflow-hidden`}>
       {/* Background Image */}
-      {image ? (
+      {imageSrc ? (
+        <Image
+          src={imageSrc}
+          alt={title}
+          fill
+          sizes="100vw"
+          priority
+          quality={75}
+          className="object-cover"
+        />
+      ) : image ? (
         <Image
           src={urlFor(image).url()}
           alt={title}

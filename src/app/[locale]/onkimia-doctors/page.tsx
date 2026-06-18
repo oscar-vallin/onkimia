@@ -107,16 +107,14 @@ export default async function OnkimiaDoctorsPage({
     <div className="font-[family-name:var(--font-host-grotesk)]">
       {/* ─── HERO ─── */}
       <section className="relative w-full min-h-[480px] md:min-h-[600px] max-h-[800px] overflow-hidden -mt-16 md:-mt-20">
-        {heroImage && (
-          <Image
-            src={urlFor(heroImage).width(2400).quality(82).format('webp').url()}
-            alt={t('hero.headline')}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-          />
-        )}
+        <Image
+          src="/onkimia-clinic.jpg"
+          alt={t('hero.headline')}
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover"
+        />
         <div
           className="absolute inset-0"
           style={{

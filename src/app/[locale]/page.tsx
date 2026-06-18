@@ -73,7 +73,7 @@ export default async function HomePage({
     <>
       {/* ─── HERO ─── */}
       <HeroSection
-        image={settings.homeHeroImage}
+        imageSrc="/onkimia-clinic.jpg"
         title={`${t('hero.welcome')}`}
         subtitle={getLocalized(settings.tagline, locale)}
         description={heroDescription}

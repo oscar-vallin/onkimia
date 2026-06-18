@@ -113,8 +113,8 @@ export function Header({ settings, clinics }: HeaderProps) {
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           mobileOpen
             ? 'bg-transparent'
-            : isDoctorsRoute
-            ? 'bg-doctors-ink'
+            : isDoctorsRoute && scrolled
+            ? 'bg-doctors-ink backdrop-blur-md'
             : scrolled
             ? 'bg-brand-900/80 backdrop-blur-md'
             : 'bg-transparent'
@@ -128,7 +128,7 @@ export function Header({ settings, clinics }: HeaderProps) {
               <>
                 <span className="relative hidden md:block w-[150px] h-[80px] lg:w-[180px] lg:h-[96px]">
                   <Image
-                    src="/logo-OD.svg"
+                    src="/logo-OD-clean.svg"
                     alt="Onkimia Doctors"
                     fill
                     sizes="(max-width: 1024px) 150px, 180px"

@@ -116,7 +116,7 @@ export default async function ServicesPage({
   return (
     <>
       <HeroSection
-        image={settings.homeHeroImage}
+        imageSrc="/onkimia-clinic.jpg"
         title={t('hero.title')}
         subtitle={t('hero.description')}
         description=""

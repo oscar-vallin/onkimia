@@ -67,7 +67,7 @@ export default async function ContactPage({
   return (
     <>
       <HeroSection
-        image={heroImage}
+        imageSrc="/onkimia-clinic.jpg"
         title={t('hero.title')}
         description={t('hero.description')}
         align="left"
