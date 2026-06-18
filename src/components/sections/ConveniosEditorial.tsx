@@ -84,14 +84,14 @@ function InsuranceCard({ insurance }: { insurance: Insurance }) {
 
   const inner = (
     <div className="group bg-white border border-line rounded-2xl min-h-[140px] flex items-center justify-center relative overflow-hidden shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(26,122,110,0.13)] hover:border-teal/25">
-      <div className="px-8 py-6 flex items-center justify-center w-full h-full">
+      <div className="px-8 py-6 flex items-center justify-center w-full">
         {insurance.logo?.asset ? (
           <Image
-            src={urlFor(insurance.logo).height(120).format('webp').quality(90).url()}
+            src={urlFor(insurance.logo).width(400).format('webp').quality(90).url()}
             alt={insurance.name}
-            width={160}
-            height={60}
-            className="object-contain max-h-14 w-auto opacity-75 transition-opacity duration-300 group-hover:opacity-100"
+            width={200}
+            height={56}
+            className="h-12 w-auto max-w-[80%] object-contain opacity-75 transition-opacity duration-300 group-hover:opacity-100"
           />
         ) : (
           <span className="font-medium text-gray-warm text-sm text-center leading-snug px-2">

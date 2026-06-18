@@ -175,8 +175,8 @@ export default async function ServicesPage({
                 className="bg-white border border-line rounded-2xl p-5 flex flex-col gap-3 hover:border-teal/25 hover:shadow-sm transition-all duration-200"
               >
                 <div className="flex items-start justify-between">
-                  <div className="w-8 h-8 text-gray-soft">
-                    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                  <div className="w-10 h-10 text-gray-soft">
+                    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
                       {clinicIcons[i]}
                     </svg>
                   </div>
