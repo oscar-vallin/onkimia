@@ -35,7 +35,7 @@ export function Footer({ settings }: FooterProps) {
       <div className="container-onkimia py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
           {/* ─── Logo (col-span-2) ─── */}
-          <div className="md:col-span-2 flex md:items-center">
+          <div className="md:col-span-2 flex md:items-start md:pt-1">
             {isDoctorsRoute ? (
               <>
                 {/* Desktop: full logo */}
