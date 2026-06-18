@@ -299,7 +299,7 @@
         },
         "secondary": {
           "label": "Conocer servicios",
-          "href": "#servicios"
+          "href": "/servicios"
         }
       },
       "features": {

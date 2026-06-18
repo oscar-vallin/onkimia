@@ -60,12 +60,12 @@ export function Footer({ settings }: FooterProps) {
                 </div>
               </>
             ) : settings.logo ? (
-              <div className="relative h-24 w-80">
+              <div className="relative w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
                 <Image
-                  src={urlFor(settings.logo).height(192).url()}
+                  src={urlFor(settings.logo).height(110).url()}
                   alt={settings.title}
                   fill
-                  sizes="320px"
+                  sizes="(max-width: 768px) 142px, 170px"
                   className="object-contain object-left invert brightness-0"
                 />
               </div>

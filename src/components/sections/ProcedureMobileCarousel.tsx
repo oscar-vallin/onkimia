@@ -36,7 +36,7 @@ function MobileCard({
   return (
     <div
       className="relative rounded-3xl overflow-hidden flex-shrink-0"
-      style={{ width: '85vw', height: '580px', scrollSnapAlign: 'center' }}
+      style={{ width: '75vw', height: '420px', scrollSnapAlign: 'center' }}
     >
       {/* Full-bleed background image */}
       {cardSrc && (
@@ -55,7 +55,7 @@ function MobileCard({
       {/* Gradient for legibility */}
       <div
         className="absolute inset-0 z-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, transparent 40%, transparent 55%, rgba(0,0,0,0.70) 100%)' }}
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, transparent 35%, transparent 45%, rgba(0,0,0,0.80) 70%, rgba(0,0,0,0.92) 100%)' }}
         aria-hidden="true"
       />
 
@@ -67,10 +67,10 @@ function MobileCard({
             <div className="font-serif text-4xl text-white leading-none mb-1">{durationNum}</div>
           )}
           {hasDuration && unitStr && (
-            <div className="text-[10px] text-white/55 uppercase tracking-wider mb-2">{unitStr}</div>
+            <div className="text-[10px] text-white/80 uppercase tracking-wider mb-2">{unitStr}</div>
           )}
-          <div className="text-sm font-medium text-white leading-snug">{name}</div>
-          <div className="text-[11px] text-white/55 mt-1">
+          <div className="text-[16px] font-medium text-white leading-snug">{name}</div>
+          <div className="text-[14px] text-white/80 mt-1">
             {submark === 'Endos' ? categoryEndos : categoryCuidare}
           </div>
         </div>
@@ -80,7 +80,7 @@ function MobileCard({
           <span className="inline-flex items-center text-[9px] tracking-wider uppercase font-semibold text-white bg-teal/70 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
             {submark === 'Endos' ? badgeEndos : badgeCuidare}
           </span>
-          <p className="text-xs text-white/85 leading-relaxed line-clamp-2">{shortDescription}</p>
+          <p className="text-[12.5px] text-white/95 leading-relaxed line-clamp-3">{shortDescription}</p>
         </div>
       </div>
     </div>

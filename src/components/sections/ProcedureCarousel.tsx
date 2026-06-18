@@ -72,32 +72,32 @@ function ProcedureCard({
       {/* Gradient for legibility */}
       <div
         className="absolute inset-0 z-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, transparent 40%, transparent 55%, rgba(0,0,0,0.70) 100%)' }}
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, transparent 35%, transparent 45%, rgba(0,0,0,0.80) 70%, rgba(0,0,0,0.92) 100%)' }}
         aria-hidden="true"
       />
 
       {/* Overlaid content */}
-      <div className="relative z-20 h-full flex flex-col justify-between p-5">
+      <div className="relative z-20 h-full flex flex-col justify-between p-6">
         {/* Top: name + category (+ optional duration) */}
         <div>
           {hasDuration && (
             <div className="font-serif text-4xl text-white leading-none mb-1">{durationNum}</div>
           )}
           {hasDuration && unitStr && (
-            <div className="text-[10px] text-white/55 uppercase tracking-wider mb-2">{unitStr}</div>
+            <div className="text-[10px] text-white/80 uppercase tracking-wider mb-2">{unitStr}</div>
           )}
-          <div className="text-mx font-medium text-white leading-snug">{name}</div>
-          <div className="text-[12px] text-white/55 mt-1">
+          <div className="text-[18px] font-medium text-white leading-snug">{name}</div>
+          <div className="text-[16px] text-white/90 mt-2">
             {submark === 'Endos' ? categoryEndos : categoryCuidare}
           </div>
         </div>
 
         {/* Bottom: badge + description */}
-        <div className="pb-3">
+        <div className="pb-6">
           <span className="inline-flex items-center text-[12px] tracking-wider uppercase font-semibold text-white bg-teal/70 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
             {submark === 'Endos' ? badgeEndos : badgeCuidare}
           </span>
-          <p className="text-mx text-white/85 leading-relaxed line-clamp-2">{shortDescription}</p>
+          <p className="text-mx text-white/100 leading-relaxed line-clamp-2">{shortDescription}</p>
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@ export function ProcedureCarousel({
         <ProcedureMarquee>
           <div
             className="marquee-track flex gap-5 w-max"
-            style={{ animation: 'marquee 60s linear infinite' }}
+            style={{ animation: 'marquee 35s linear infinite' }}
           >
             {/* Set A */}
             {procedures.map((p) => (

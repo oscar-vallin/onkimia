@@ -155,7 +155,7 @@ export default async function EndosPage({
                     )}
                     <div
                       className="absolute inset-0"
-                      style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 45%, rgba(0,0,0,0.82) 100%)' }}
+                      style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 35%, transparent 45%, rgba(0,0,0,0.80) 70%, rgba(0,0,0,0.92) 100%)' }}
                       aria-hidden="true"
                     />
                     <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
@@ -165,7 +165,7 @@ export default async function EndosPage({
                         </span>
                         <h3 className="font-serif text-2xl md:text-3xl text-white mt-3 leading-tight">{proc.name}</h3>
                       </div>
-                      <p className="text-white/70 text-sm leading-relaxed">{proc.shortDescription}</p>
+                      <p className="text-white/95 text-mx leading-relaxed">{proc.shortDescription}</p>
                     </div>
                   </div>
                   <MedicalProcedureLd name={proc.name} description={proc.shortDescription} />
@@ -219,7 +219,7 @@ export default async function EndosPage({
               <h2 id="endos-safety-title" className="font-serif text-4xl md:text-5xl text-white leading-tight mb-8">
                 {t('safety.title')}
               </h2>
-              <p className="text-white/60 text-base leading-relaxed mb-10">
+              <p className="text-white/80 text-base leading-relaxed mb-10">
                 {t('safety.description')}
               </p>
               <ul className="space-y-7 mb-10">
@@ -229,14 +229,14 @@ export default async function EndosPage({
                       <Check className="w-3.5 h-3.5 text-teal-soft" aria-hidden="true"/>
                     </div>
                     <div>
-                      <p className="font-medium text-white text-sm mb-1">{t(`safety.checklistItems.${key}.title`)}</p>
-                      <p className="text-white/50 text-sm leading-relaxed">{t(`safety.checklistItems.${key}.description`)}</p>
+                      <p className="font-medium text-white text-mx mb-1">{t(`safety.checklistItems.${key}.title`)}</p>
+                      <p className="text-white/75 text-sm leading-relaxed">{t(`safety.checklistItems.${key}.description`)}</p>
                     </div>
                   </li>
                 ))}
               </ul>
-              <blockquote className="border-l-2 border-teal/40 pl-5">
-                <p className="text-white/45 text-sm italic leading-relaxed">{t('safety.quote')}</p>
+              <blockquote className="border-l-2 border-teal-soft/60 pl-5">
+                <p className="text-teal-soft/100 text-mx italic leading-relaxed">{t('safety.quote')}</p>
               </blockquote>
             </div>
 

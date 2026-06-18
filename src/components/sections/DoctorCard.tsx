@@ -44,7 +44,7 @@ export function DoctorCard({ doctor, locale }: DoctorCardProps) {
           <h3 className="font-serif text-xl text-white leading-tight mb-1">
             {doctor.fullName}
           </h3>
-          <p className="text-sm text-teal-soft">
+          <p className="text-mx text-teal-soft">
             {getLocalized(doctor.specialty, locale)}
           </p>
         </div>
