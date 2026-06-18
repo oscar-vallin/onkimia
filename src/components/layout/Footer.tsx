@@ -37,15 +37,28 @@ export function Footer({ settings }: FooterProps) {
           {/* ─── Logo (col-span-2) ─── */}
           <div className="md:col-span-2 flex md:items-center">
             {isDoctorsRoute ? (
-              <div className="relative h-24 w-40">
-                <Image
-                  src="/logo-OD.svg"
-                  alt="Onkimia Doctors"
-                  fill
-                  sizes="320px"
-                  className="object-contain object-left"
-                />
-              </div>
+              <>
+                {/* Desktop: full logo */}
+                <div className="relative hidden md:block h-16 w-44">
+                  <Image
+                    src="/logo-OD-clean.svg"
+                    alt="Onkimia Doctors"
+                    fill
+                    sizes="176px"
+                    className="object-contain object-left"
+                  />
+                </div>
+                {/* Mobile: symbol */}
+                <div className="relative block md:hidden h-10 w-10">
+                  <Image
+                    src="/simbolo-OD-clean.svg"
+                    alt="Onkimia Doctors"
+                    fill
+                    sizes="40px"
+                    className="object-contain object-left"
+                  />
+                </div>
+              </>
             ) : settings.logo ? (
               <div className="relative h-24 w-80">
                 <Image

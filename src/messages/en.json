@@ -331,7 +331,7 @@
   "about": {
     "hero": {
       "eyebrow": "ABOUT US · INTEGRAL ONCOLOGY",
-      "title": "Life Experts, Committed to Your *Wellbeing*",
+      "title": "Experts in *Life*",
       "description": "A multidisciplinary team dedicated to transforming the oncological experience through advanced science and human warmth."
     },
     "moreThanMedicine": {
@@ -546,11 +546,12 @@
     },
     "hero": {
       "eyebrow": "Cuidare",
-      "headline": "Hospital quality, without hospitalization",
+      "headlinePart1": "Hospital quality,",
+      "headlinePart2": "without *hospitalization*",
       "description": "Safe, personalized ambulatory medical procedures to care for your health without hospital admission."
     },
     "availability": {
-      "banner": "The Cuidare unit is available only at our Guadalajara location."
+      "banner": "Is currently unavailable in your location."
     },
     "benefits": {
       "title": "Safe, accessible treatments with a human focus.",
@@ -650,7 +651,7 @@
       "quote": "\"Hospital-level quality, without hospitalization.\""
     },
     "availability": {
-      "banner": "The Endos unit is available only at our Guadalajara location."
+      "banner": "Is currently unavailable in your location."
     },
     "procedures": {
       "title": "What do we do at Endos?",

@@ -54,23 +54,8 @@ function ProcedureCard({
   const blur = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
-    <div className="w-[380px] h-[580px] flex-shrink-0 relative rounded-3xl overflow-hidden bg-[#1a2420]">
-      {/* Layer 1 — blurred background (fills card, hides letterbox gaps) */}
-      {cardSrc && (
-        <Image
-          src={cardSrc}
-          alt=""
-          fill
-          sizes="380px"
-          loading="lazy"
-          placeholder={blur ? 'blur' : 'empty'}
-          blurDataURL={blur}
-          className="object-cover scale-110 blur-xl opacity-60"
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Layer 2 — actual image, fully visible without cropping */}
+    <div className="w-[450px] h-[580px] flex-shrink-0 relative rounded-3xl overflow-hidden">
+      {/* Full-bleed background image */}
       {cardSrc && (
         <Image
           src={cardSrc}
@@ -80,52 +65,39 @@ function ProcedureCard({
           loading="lazy"
           placeholder={blur ? 'blur' : 'empty'}
           blurDataURL={blur}
-          className="object-contain"
+          className="absolute inset-0 w-full h-full  object-center"
         />
       )}
 
-      {/* Scrim: only top and bottom for text legibility */}
+      {/* Gradient for legibility */}
       <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.60) 100%)' }}
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, transparent 40%, transparent 55%, rgba(0,0,0,0.70) 100%)' }}
         aria-hidden="true"
       />
 
-      {/* ── Header — overlaid on image ── */}
-      <div className="absolute top-0 left-0 right-0 z-10">
-        {hasDuration ? (
-          <div className="grid grid-cols-2 divide-x divide-white/25">
-            <div className="px-5 pt-5 pb-4">
-              <div className="font-serif text-4xl text-white leading-none">{durationNum}</div>
-              {unitStr && <div className="text-[10px] text-white/55 mt-1 uppercase tracking-wider">{unitStr}</div>}
-            </div>
-            <div className="px-5 pt-5 pb-4">
-              <div className="text-sm font-medium text-white leading-snug">{name}</div>
-              <div className="text-[11px] text-white/55 mt-1">
-                {submark === 'Endos' ? categoryEndos : categoryCuidare}
-              </div>
-            </div>
+      {/* Overlaid content */}
+      <div className="relative z-20 h-full flex flex-col justify-between p-5">
+        {/* Top: name + category (+ optional duration) */}
+        <div>
+          {hasDuration && (
+            <div className="font-serif text-4xl text-white leading-none mb-1">{durationNum}</div>
+          )}
+          {hasDuration && unitStr && (
+            <div className="text-[10px] text-white/55 uppercase tracking-wider mb-2">{unitStr}</div>
+          )}
+          <div className="text-mx font-medium text-white leading-snug">{name}</div>
+          <div className="text-[12px] text-white/55 mt-1">
+            {submark === 'Endos' ? categoryEndos : categoryCuidare}
           </div>
-        ) : (
-          <div className="px-5 pt-5 pb-4">
-            <div className="text-sm font-medium text-white leading-snug">{name}</div>
-            <div className="text-[11px] text-white/55 mt-1">
-              {submark === 'Endos' ? categoryEndos : categoryCuidare}
-            </div>
-          </div>
-        )}
-        {/* Horizontal divider line */}
-        <div className="h-px bg-white/25 mx-0" />
-      </div>
+        </div>
 
-      {/* ── Footer — overlaid on image ── */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="h-px bg-white/25" />
-        <div className="px-5 py-4">
-          <span className="inline-flex items-center text-[9px] tracking-wider uppercase font-semibold text-white bg-teal/70 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
+        {/* Bottom: badge + description */}
+        <div className="pb-3">
+          <span className="inline-flex items-center text-[12px] tracking-wider uppercase font-semibold text-white bg-teal/70 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
             {submark === 'Endos' ? badgeEndos : badgeCuidare}
           </span>
-          <p className="text-xs text-white/85 leading-relaxed line-clamp-2">{shortDescription}</p>
+          <p className="text-mx text-white/85 leading-relaxed line-clamp-2">{shortDescription}</p>
         </div>
       </div>
     </div>
@@ -186,7 +158,7 @@ export function ProcedureCarousel({
         <ProcedureMarquee>
           <div
             className="marquee-track flex gap-5 w-max"
-            style={{ animation: 'marquee 80s linear infinite' }}
+            style={{ animation: 'marquee 40s linear infinite' }}
           >
             {/* Set A */}
             {procedures.map((p) => (

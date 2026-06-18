@@ -97,7 +97,7 @@ export function AboutHero({
           </motion.p>
 
           <motion.h1
-            className="font-serif font-normal text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] text-balance mb-6"
+            className="font-serif font-normal text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] mb-6"
             {...fadeUp(0.1)}
           >
             {parseTitle(title)}

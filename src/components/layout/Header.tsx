@@ -48,7 +48,9 @@ const mobileLinkVariants: Variants = {
 export function Header({ settings, clinics, odSettings }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [clinicMenuOpen, setClinicMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(() =>
+    typeof window !== 'undefined' ? window.scrollY > 150 : false
+  );
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale() as Locale;
@@ -81,6 +83,10 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
 
   const otherLocale = locale === 'es' ? 'en' : 'es';
 
+  const switchLocale = () => {
+    router.replace(pathname, { locale: otherLocale, scroll: false });
+  };
+
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/' || pathname === '';
     return pathname.startsWith(href);
@@ -107,13 +113,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   // short threshold; tall hero, tall threshold. Prevents the white nav from
   // popping in early over a still-visible dark hero image.
   useEffect(() => {
-    const MIN_THRESHOLD = 150;
-    const sentinel = document.getElementById('hero-end-sentinel');
-    const threshold = sentinel
-      ? Math.max(sentinel.getBoundingClientRect().top + window.scrollY - 80, MIN_THRESHOLD)
-      : MIN_THRESHOLD;
-
-    const onScroll = () => setScrolled(window.scrollY > threshold);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -121,9 +121,12 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
 
   // Derived text/hover color based on header state
   const textColor =
-    mobileOpen || isDoctorsRoute || !scrolled ? 'text-white' : 'text-ink';
-  const hoverColor =
-    scrolled && !mobileOpen && !isDoctorsRoute ? 'hover:text-teal' : 'hover:text-teal-soft';
+    mobileOpen || !scrolled || isDoctorsRoute ? 'text-white' : 'text-ink';
+  const hoverColor = isDoctorsRoute
+    ? 'hover:text-doctors-blue'
+    : !scrolled || mobileOpen
+    ? 'hover:text-teal-soft'
+    : 'hover:text-teal';
 
   return (
     <>
@@ -131,14 +134,14 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
         // Base state is always transparent — `scrolled` (and its derived
         // background classes below) only ever ADDS the white/dark solid
         // look on top of this default; it never starts any other way.
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           mobileOpen
             ? 'bg-ink'
             : isDoctorsRoute && scrolled
-            ? 'bg-doctors-ink/95 backdrop-blur-md border-b border-white/10 shadow-sm'
+            ? 'bg-doctors-ink backdrop-blur-md border-b border-white/10 shadow-sm'
             : scrolled
             ? 'bg-white/95 backdrop-blur-md border-b border-line shadow-sm'
-            : ''
+            : 'bg-transparent'
         }`}
       >
         <div className="container-onkimia">
@@ -146,58 +149,30 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
             {/* ─── Logo ─── */}
             <Link href="/" className="relative flex items-center gap-2">
               {isDoctorsRoute ? (
-                // Only show the nav logo once the user has scrolled — at the top
-                // the hero content owns the brand lockup, so duplicating it here
-                // creates visual noise. On scroll the hero leaves the viewport and
-                // the nav logo anchors the brand.
-                (scrolled || mobileOpen) && (
-                  <>
-                    {/* Desktop: full OD logo from Sanity, fallback to local SVG */}
-                    <span className="relative hidden md:block w-[150px] h-[56px] lg:w-[170px] lg:h-[64px]">
-                      {odSettings?.logo?.asset ? (
-                        <Image
-                          src={urlFor(odSettings.logo).height(128).format('webp').quality(90).url()}
-                          alt="Onkimia Doctors"
-                          fill
-                          sizes="(max-width: 1024px) 150px, 170px"
-                          priority
-                          className="object-contain object-left"
-                        />
-                      ) : (
-                        <Image
-                          src="/logo-OD.svg"
-                          alt="Onkimia Doctors"
-                          fill
-                          sizes="(max-width: 1024px) 150px, 170px"
-                          priority
-                          className="object-contain object-left"
-                        />
-                      )}
-                    </span>
-                    {/* Mobile: symbol from Sanity, fallback to local SVG */}
-                    <span className="relative block md:hidden w-[40px] h-[40px]">
-                      {odSettings?.symbol?.asset ? (
-                        <Image
-                          src={urlFor(odSettings.symbol).height(80).format('webp').quality(90).url()}
-                          alt="Onkimia Doctors"
-                          fill
-                          sizes="40px"
-                          priority
-                          className="object-contain object-left"
-                        />
-                      ) : (
-                        <Image
-                          src="/simbolo-OD.svg"
-                          alt="Onkimia Doctors"
-                          fill
-                          sizes="40px"
-                          priority
-                          className="object-contain object-left"
-                        />
-                      )}
-                    </span>
-                  </>
-                )
+                <>
+                  {/* Desktop: full OD logo — always visible */}
+                  <span className="relative hidden md:block w-[150px] h-[56px] lg:w-[170px] lg:h-[64px]">
+                      <Image
+                        src="/logo-OD-clean.svg"
+                        alt="Onkimia Doctors"
+                        fill
+                        sizes="(max-width: 1024px) 150px, 170px"
+                        priority
+                        className="object-contain object-left"
+                      />
+                  </span>
+                  {/* Mobile: symbol — always visible */}
+                  <span className="relative block md:hidden w-[35px] h-[35px]">
+                      <Image
+                        src="/simbolo-OD-clean.svg"
+                        alt="Onkimia Doctors"
+                        fill
+                        sizes="40px"
+                        priority
+                        className="object-contain object-left"
+                      />
+                  </span>
+                </>
               ) : settings.logo ? (
                 <span className="relative block w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
                   <Image
@@ -284,7 +259,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                             setClinic(c.slug as 'guadalajara' | 'colima');
                             setClinicMenuOpen(false);
                             if (c.slug === 'colima') {
-                              router.push(`/${locale}/colima`);
+                              router.push('/colima');
                             }
                           }}
                           className={`w-full text-left cursor-pointer px-4 py-2 text-sm hover:bg-cream transition-colors ${
@@ -304,7 +279,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
               {/* Language switch */}
               <button
                 type="button"
-                onClick={() => router.replace(pathname, { locale: otherLocale })}
+                onClick={switchLocale}
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-300 cursor-pointer ${textColor} ${hoverColor}`}
                 aria-label={`Switch to ${otherLocale.toUpperCase()}`}
               >
@@ -366,10 +341,10 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                     <Link
                       href="/"
                       onClick={() => setMobileOpen(false)}
-                      className="relative block w-[64px] h-[64px]"
+                      className="relative block w-[35px] h-[35px]"
                     >
                       <Image
-                        src="/simbolo-OD.svg"
+                        src="/simbolo-OD-clean.svg"
                         alt="Onkimia Doctors"
                         fill
                         sizes="64px"
@@ -415,8 +390,8 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                         onClick={toggleMobileMenu}
                         className={`relative block font-serif text-xl md:text-2xl font-normal transition-colors py-1.5 ${
                           isActive(link.href)
-                            ? 'text-teal-soft'
-                            : 'text-white hover:text-teal-soft'
+                            ? isDoctorsRoute ? 'text-doctors-blue' : 'text-teal-soft'
+                            : isDoctorsRoute ? 'text-white hover:text-doctors-blue' : 'text-white hover:text-teal-soft'
                         }`}
                       >
                         {link.label}
@@ -476,12 +451,12 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                               setClinic(c.slug as 'guadalajara' | 'colima');
                               toggleMobileMenu();
                               if (c.slug === 'colima') {
-                                router.push(`/${locale}/colima`);
+                                router.push('/colima');
                               }
                             }}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                               isSelected
-                                ? 'bg-teal text-white shadow-md border-transparent'
+                                ? isDoctorsRoute ? 'bg-doctors-blue text-white shadow-md border-transparent' : 'bg-teal text-white shadow-md border-transparent'
                                 : 'bg-white/10 text-white/70 border border-white/20 hover:bg-white/20'
                             }`}
                           >
@@ -498,7 +473,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                   </p>
                   <button
                     type="button"
-                    onClick={() => router.replace(pathname, { locale: otherLocale })}
+                    onClick={switchLocale}
                     className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-white/5 border border-white/20 text-white/60 hover:bg-white/10 hover:text-white transition-colors mx-auto"
                     aria-label={`Switch to ${otherLocale.toUpperCase()}`}
                   >

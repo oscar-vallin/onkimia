@@ -102,9 +102,9 @@ export default async function CuidarePage({
         imageSrc={heroImage ? urlFor(heroImage).width(1920).quality(82).format('webp').url() : undefined}
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[65%_55%]"
-        title={t('hero.headline')}
+        eyebrow={t('hero.eyebrow')}
+        title={`${t('hero.headlinePart1')}\n${t('hero.headlinePart2')}`}
         description={t('hero.description')}
-        align="center"
       >
         <BookingButton section="cuidare" variant="brand" />
       </PageHero>
@@ -123,7 +123,7 @@ export default async function CuidarePage({
         <div className="container-onkimia">
           <h2
             id="cuidare-benefits-title"
-            className="font-serif text-4xl md:text-5xl text-center mb-12 max-w-3xl mx-auto text-balance"
+            className="font-serif text-4xl md:text-5xl text-center mb-12 max-w-3xl mx-auto"
           >
             {t('benefits.title')}
           </h2>

@@ -34,26 +34,11 @@ function MobileCard({
   const blur = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
-    // scroll-snap-align on the card itself; width = 85vw so the next card peeks
     <div
-      className="relative rounded-3xl overflow-hidden bg-[#1a2420] flex-shrink-0"
+      className="relative rounded-3xl overflow-hidden flex-shrink-0"
       style={{ width: '85vw', height: '580px', scrollSnapAlign: 'center' }}
     >
-      {/* Layer 1 — blurred bg */}
-      {cardSrc && (
-        <Image
-          src={cardSrc}
-          alt=""
-          fill
-          sizes="85vw"
-          loading="lazy"
-          placeholder={blur ? 'blur' : 'empty'}
-          blurDataURL={blur}
-          className="object-cover scale-110 blur-xl opacity-60"
-          aria-hidden="true"
-        />
-      )}
-      {/* Layer 2 — full image */}
+      {/* Full-bleed background image */}
       {cardSrc && (
         <Image
           src={cardSrc}
@@ -63,44 +48,35 @@ function MobileCard({
           loading="lazy"
           placeholder={blur ? 'blur' : 'empty'}
           blurDataURL={blur}
-          className="object-contain"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       )}
-      {/* Scrim */}
+
+      {/* Gradient for legibility */}
       <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.60) 100%)' }}
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, transparent 40%, transparent 55%, rgba(0,0,0,0.70) 100%)' }}
         aria-hidden="true"
       />
-      {/* Header */}
-      <div className="absolute top-0 left-0 right-0 z-10">
-        {hasDuration ? (
-          <div className="grid grid-cols-2 divide-x divide-white/25">
-            <div className="px-5 pt-5 pb-4">
-              <div className="font-serif text-4xl text-white leading-none">{durationNum}</div>
-              {unitStr && <div className="text-[10px] text-white/55 mt-1 uppercase tracking-wider">{unitStr}</div>}
-            </div>
-            <div className="px-5 pt-5 pb-4">
-              <div className="text-sm font-medium text-white leading-snug">{name}</div>
-              <div className="text-[11px] text-white/55 mt-1">
-                {submark === 'Endos' ? categoryEndos : categoryCuidare}
-              </div>
-            </div>
+
+      {/* Overlaid content */}
+      <div className="relative z-20 h-full flex flex-col justify-between p-5">
+        {/* Top: name + category (+ optional duration) */}
+        <div>
+          {hasDuration && (
+            <div className="font-serif text-4xl text-white leading-none mb-1">{durationNum}</div>
+          )}
+          {hasDuration && unitStr && (
+            <div className="text-[10px] text-white/55 uppercase tracking-wider mb-2">{unitStr}</div>
+          )}
+          <div className="text-sm font-medium text-white leading-snug">{name}</div>
+          <div className="text-[11px] text-white/55 mt-1">
+            {submark === 'Endos' ? categoryEndos : categoryCuidare}
           </div>
-        ) : (
-          <div className="px-5 pt-5 pb-4">
-            <div className="text-sm font-medium text-white leading-snug">{name}</div>
-            <div className="text-[11px] text-white/55 mt-1">
-              {submark === 'Endos' ? categoryEndos : categoryCuidare}
-            </div>
-          </div>
-        )}
-        <div className="h-px bg-white/25" />
-      </div>
-      {/* Footer */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="h-px bg-white/25" />
-        <div className="px-5 py-4">
+        </div>
+
+        {/* Bottom: badge + description */}
+        <div className="pb-3">
           <span className="inline-flex items-center text-[9px] tracking-wider uppercase font-semibold text-white bg-teal/70 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
             {submark === 'Endos' ? badgeEndos : badgeCuidare}
           </span>

@@ -297,11 +297,6 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
             });
           })()}
 
-          {/* Bottom anchor dot — desktop only */}
-          {!isMobile && (
-            <circle cx="450" cy="420" r="5" fill="#2a9d8c" />
-          )}
-
           {/* Capa 2 — chevrons ‹ › flanqueando el nodo activo (mobile only)
                MOBILE_ACTIVE: x=450, y=140, r=54 → chevrons en y=148 */}
           {isMobile && (
@@ -342,38 +337,6 @@ export function OrbitDiagram({ eyebrow, title, items }: OrbitDiagramProps) {
               </g>
             </>
           )}
-
-          {/* Connector lines */}
-          {items.map((_, i) => {
-            const slot = getSlot(i);
-            if (!slot?.showLine) return null;
-
-            if (isMobile) {
-              // Short vertical stem below the active node on mobile
-              return (
-                <line
-                  key={`line-${i}`}
-                  x1={450} y1={slot.y + slot.r + 10}
-                  x2={450} y2={slot.y + slot.r + 75}
-                  stroke="rgba(255,255,255,0.35)"
-                  strokeWidth="1"
-                  className="transition-all duration-700 ease-out"
-                />
-              );
-            }
-
-            // Desktop: connector from bottom anchor up to node bottom
-            return (
-              <line
-                key={`line-${i}`}
-                x1={450} y1={420}
-                x2={slot.x} y2={slot.y + slot.r}
-                stroke="rgba(42,157,140,0.4)"
-                strokeWidth="1"
-                className="transition-all duration-700 ease-out"
-              />
-            );
-          })}
 
           {/* Active item text — name */}
           <text

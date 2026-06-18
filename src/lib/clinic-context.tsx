@@ -40,10 +40,18 @@ export function ClinicProvider({
   children: ReactNode;
   initialClinic: ClinicSlug | null;
 }) {
-  const [clinic, setClinicState] = useState<ClinicSlug | null>(initialClinic);
-  const [isInitialized, setIsInitialized] = useState(false);
+  // Lazy initializer: read document.cookie synchronously on the client so
+  // the correct clinic is available on the very first render — no useEffect
+  // delay, no "Select your clinic" flash on locale-switch remounts.
+  const [clinic, setClinicState] = useState<ClinicSlug | null>(() => {
+    if (typeof window === 'undefined') return initialClinic;
+    const match = document.cookie.match(/(?:^|;\s*)onkimia_clinic=([^;]+)/);
+    const cookieValue = match?.[1];
+    if (cookieValue === 'guadalajara' || cookieValue === 'colima') return cookieValue;
+    return initialClinic;
+  });
+  const [isInitialized, setIsInitialized] = useState(() => typeof window !== 'undefined');
 
-  // Hidratación: marcamos inicializado tras primer render cliente
   useEffect(() => {
     setIsInitialized(true);
   }, []);

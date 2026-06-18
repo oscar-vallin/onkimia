@@ -35,6 +35,8 @@ export interface PageHeroProps {
   eyebrow?: string;
   /** Supports *word* syntax → teal-soft italic emphasis */
   title: string;
+  /** Override the emphasis color class. Default: 'text-teal-soft' */
+  emphasisClassName?: string;
   description?: string;
 
   primaryCta?: Cta;
@@ -79,6 +81,7 @@ export function PageHero({
   imagePosition = 'md:object-[50%_25%]',
   eyebrow,
   title,
+  emphasisClassName,
   description,
   primaryCta,
   secondaryCta,
@@ -188,18 +191,18 @@ export function PageHero({
         {/* Mobile spacer — pushes content to lower third on small screens */}
         <div className="flex-1 md:hidden" aria-hidden="true" />
 
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] text-balance mb-5">
-          {parseEmphasis(title)}
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] mb-5 whitespace-pre-line">
+          {parseEmphasis(title, emphasisClassName)}
         </h1>
 
         {description && (
-          <p className={`text-base md:text-lg leading-relaxed text-white/75 ${isCenter ? 'max-w-2xl' : 'max-w-xl'} mb-8`}>
+          <p className={`text-base md:text-lg pt-6 leading-relaxed text-white/75 ${isCenter ? 'max-w-2xl' : 'max-w-xl'} mb-8`}>
             {description}
           </p>
         )}
 
         {(primaryCta || secondaryCta) && (
-          <div className={`flex flex-col sm:flex-row gap-3 mb-8 w-full sm:w-auto ${isCenter ? 'sm:justify-center' : ''}`}>
+          <div className={`flex flex-col sm:flex-row gap-3 mb-8 w-full sm:w-auto pt-8 ${isCenter ? 'sm:justify-center' : ''}`}>
             {primaryCta && !primaryCta.external && (
               <Link
                 href={primaryCta.href}

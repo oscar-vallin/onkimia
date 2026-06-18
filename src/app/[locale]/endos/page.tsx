@@ -66,7 +66,7 @@ export default async function EndosPage({
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[68%_45%]"
         eyebrow={t('hero.eyebrow')}
-        title={`${t('hero.headlinePart1')} *${t('hero.headlinePart2')}*`}
+        title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
         description={t('hero.description')}
       >
         <p className="text-white/45 text-sm italic mb-8">{t('hero.quote')}</p>

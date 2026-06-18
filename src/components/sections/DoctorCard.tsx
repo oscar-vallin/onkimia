@@ -10,6 +10,7 @@ interface DoctorCardProps {
 }
 
 export function DoctorCard({ doctor, locale }: DoctorCardProps) {
+  console.log(doctor)
   const hasPhoto = !!doctor.photo?.asset;
   const hasLqip = !!doctor.photo?.asset?.metadata?.lqip;
   const photoSrc = hasPhoto
@@ -39,7 +40,7 @@ export function DoctorCard({ doctor, locale }: DoctorCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
 
         {/* Name + specialty — anchored to bottom, always visible */}
-        <div className="absolute bottom-0 left-0 right-0 p-5">
+        <div className="absolute bottom-0 left-0 right-0 p-5 mb-8">
           <h3 className="font-serif text-xl text-white leading-tight mb-1">
             {doctor.fullName}
           </h3>

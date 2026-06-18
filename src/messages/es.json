@@ -290,7 +290,7 @@
     },
     "homeHero": {
       "eyebrow": "Oncología integral · Guadalajara",
-      "title": "Ver más allá. Cuidar *profundamente*.",
+      "title": "Ver más allá. *Cuidar*.",
       "description": "En Onkimia combinamos tecnología de diagnóstico de vanguardia con un acompañamiento profundamente humano. Porque detrás de cada estudio, hay una persona.",
       "cta": {
         "primary": {
@@ -331,7 +331,7 @@
   "about": {
     "hero": {
       "eyebrow": "NOSOTROS · ONCOLOGÍA INTEGRAL",
-      "title": "Expertos en Vida, Comprometidos con tu *Bienestar*",
+      "title": "Expertos en *Vida*",
       "description": "Un equipo multidisciplinario dedicado a transformar la experiencia oncológica a través de la ciencia avanzada y la calidez humana."
     },
     "moreThanMedicine": {
@@ -546,11 +546,12 @@
     },
     "hero": {
       "eyebrow": "Cuidare",
-      "headline": "Calidad hospitalaria, sin hospitalización",
+      "headlinePart1": "Calidad hospitalaria,",
+      "headlinePart2": "sin *hospitalización*",
       "description": "Procedimientos médicos ambulatorios seguros y personalizados, para cuidar tu salud sin necesidad de internamiento."
     },
     "availability": {
-      "banner": "La unidad Cuidare está disponible únicamente en nuestra sede de Guadalajara."
+      "banner": "Actualmente no está disponible en tu ubicación."
     },
     "benefits": {
       "title": "Tratamientos seguros, accesibles y con enfoque humano.",
@@ -650,7 +651,7 @@
       "quote": "\"Calidad hospitalaria sin hospitalización.\""
     },
     "availability": {
-      "banner": "La unidad Endos está disponible únicamente en nuestra sede de Guadalajara."
+      "banner": "Actualmente no está disponible en tu ubicación."
     },
     "procedures": {
       "title": "¿Qué hacemos en Endos?",

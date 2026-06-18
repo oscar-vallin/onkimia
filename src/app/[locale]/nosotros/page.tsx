@@ -70,7 +70,7 @@ export default async function NosotrosPage({
         eyebrow={t('mision.eyebrow')}
         title={t('mision.title')}
         description={t('mision.description')}
-      />
+      />x
 
       {/* ─── 1. MÁS QUE MEDICINA ─── */}
       <MoreThanMedicine

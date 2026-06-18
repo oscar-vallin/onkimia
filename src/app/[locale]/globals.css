@@ -157,9 +157,17 @@
     line-height: 1.6;
   }
 
+  /* text-wrap: balance — Chrome 114+, Firefox 121+, Safari 17.4+ (degrades gracefully on older) */
+  /* text-wrap: pretty  — Chrome 117+, no Safari support yet (degrades gracefully — no orphan prevention on Safari/Firefox) */
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   h1 {

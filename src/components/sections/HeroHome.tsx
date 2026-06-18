@@ -88,44 +88,38 @@ export function HeroHome({
         }}
       />
 
-      {/* Contenido */}
-      <div className="relative z-10 container-onkimia min-h-[100svh] flex flex-col pb-10">
+      {/* Content — split layout:
+          • Eyebrow is top-anchored (stable position in both locales)
+          • flex-1 spacer pushes the rest to the bottom
+          • Title + description + CTAs + trust strip share one left edge (max-w-2xl)
+            so spacing between them is content-driven, not viewport-height-driven */}
+      <div className="relative z-10 container-onkimia min-h-[100svh] flex flex-col pb-10 md:pb-14">
 
-        {/* Top block — eyebrow + title + description */}
-        <div className="pt-36 md:pt-44 max-w-3xl">
-          <p className="text-xs font-medium tracking-widest uppercase text-white/90 mb-8 md:mb-10">
+        {/* Eyebrow — top-anchored; padding matches the header height */}
+        <div className="pt-44">
+          <p className="text-[10px] md:text-xs font-medium tracking-widest uppercase text-white/70">
             {eyebrow}
-          </p>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] text-white text-balance">
-            {parseEmphasis(title)}
-          </h1>
-          <p className="hidden md:block text-lg md:text-xl text-white/80 leading-relaxed max-w-xl mt-6">
-            {description}
           </p>
         </div>
 
-        {/* Spacer — pushes bottom block to viewport bottom */}
+        {/* Spacer — fixed gap between eyebrow and bottom block */}
         <div className="flex-1" />
 
-        {/* Bottom block — trust strip + CTAs, shared across breakpoints */}
-        <div className="flex flex-col gap-6">
+        {/* Bottom block — all share max-w-2xl for a single left axis */}
+        <div className="max-w-2xl">
 
-          {/* Trust strip — desktop: inline labels separated by dots; mobile: hidden */}
-          <div className="hidden md:flex items-center gap-0 text-white/60">
-            {features.map((f, i) => (
-              <span key={i} className="flex items-center">
-                <span className="text-xs tracking-[0.18em] uppercase font-medium text-white/70">
-                  {f.title}
-                </span>
-                {i < features.length - 1 && (
-                  <span className="mx-5 w-px h-3 bg-white/25 inline-block" aria-hidden="true" />
-                )}
-              </span>
-            ))}
-          </div>
+          {/* Headline */}
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] text-white mb-5 md:mb-7 md:pt-10">
+            {parseEmphasis(title)}
+          </h1>
+
+          {/* Description — slightly smaller than before to absorb locale length variance */}
+          <p className="text-sm md:text-lg text-white/80 leading-relaxed max-w-lg mb-7 md:mb-9">
+            {description}
+          </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-5 md:mb-6">
             <Link
               href={primaryCta.href}
               className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full transition-all duration-200 ease-in-out hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
@@ -141,13 +135,21 @@ export function HeroHome({
             </Link>
           </div>
 
-          {/* Scroll cue — mobile only (desktop version is centered absolutely below) */}
-          <div className="flex justify-center md:hidden" aria-hidden="true">
-            <ChevronDown className="w-5 h-5 text-white/40 animate-bounce" />
+          {/* Trust strip — left-aligned with all other elements */}
+          <div className="hidden md:flex flex-wrap items-center gap-y-1">
+            {features.map((f, i) => (
+              <span key={i} className="flex items-center">
+                <span className="text-[10px] md:text-xs tracking-[0.18em] uppercase font-medium text-white/60">
+                  {f.title}
+                </span>
+                {i < features.length - 1 && (
+                  <span className="mx-4 w-px h-3 bg-white/25 inline-block" aria-hidden="true" />
+                )}
+              </span>
+            ))}
           </div>
 
         </div>
-
       </div>
 
       {/* Scroll cue — desktop only, pinned to horizontal center of hero */}
