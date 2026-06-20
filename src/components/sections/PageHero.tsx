@@ -77,8 +77,8 @@ export function PageHero({
   mobileImageSrc,
   imageAlt = '',
   blurDataURL,
-  mobileObjectPosition = 'object-[center_25%]',
-  imagePosition = 'md:object-[50%_25%]',
+  mobileObjectPosition = 'object-[center_10%]',
+  imagePosition = 'md:object-[50%_10%]',
   eyebrow,
   title,
   emphasisClassName,
@@ -94,7 +94,7 @@ export function PageHero({
   const isCenter = align === 'center';
 
   return (
-    <section className="relative w-full min-h-[75vh] md:min-h-[70vh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex flex-col">
+    <section className="relative w-full min-h-[75vh] md:min-h-[70vh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex flex-col ">
 
       {/* Desktop image — hidden on mobile when a mobile variant is provided */}
       {imageSrc && (

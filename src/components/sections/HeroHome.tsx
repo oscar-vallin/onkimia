@@ -40,7 +40,7 @@ export function HeroHome({
         alt="Médico oncólogo acompañando a un paciente en Onkimia"
         fetchPriority="high"
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover [object-position:65%_center] md:object-center z-0 hero-ken-burns origin-center"
+        className="absolute mt-10 inset-0 h-full w-full object-cover [object-position:center_20%] md:[object-position:62%_45%] z-0 hero-ken-burns origin-center"
       />
 
       {/* Primary overlay: radial gradient — lighter center, darker edges.
@@ -59,16 +59,18 @@ export function HeroHome({
         }}
         aria-hidden="true"
       />
-      {/* Mobile overlay: linear gradient — heavy dark on left where text lives,
-          lighter on right to let the doctor/patient scene breathe */}
+      {/* Mobile overlay: vertical gradient — light at top to reveal the hands,
+          heavy dark at bottom where the text block lives */}
       <div
         className="absolute inset-0 z-[2] md:hidden"
         style={{
           background: `linear-gradient(
-            to right,
-            rgba(26,26,31,0.92) 0%,
-            rgba(26,26,31,0.70) 45%,
-            rgba(26,26,31,0.40) 100%
+            to bottom,
+            rgba(26,26,31,0.15) 0%,
+            rgba(26,26,31,0.25) 35%,
+            rgba(26,26,31,0.65) 60%,
+            rgba(26,26,31,0.90) 80%,
+            rgba(26,26,31,0.97) 100%
           )`,
         }}
         aria-hidden="true"

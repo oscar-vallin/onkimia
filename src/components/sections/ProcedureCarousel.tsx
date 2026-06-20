@@ -54,18 +54,18 @@ function ProcedureCard({
   const blur = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
-    <div className="w-[450px] h-[580px] flex-shrink-0 relative rounded-3xl overflow-hidden">
+    <div className="w-[320px] h-[440px] flex-shrink-0 relative rounded-3xl overflow-hidden">
       {/* Full-bleed background image */}
       {cardSrc && (
         <Image
           src={cardSrc}
           alt={name}
           fill
-          sizes="380px"
+          sizes="320px"
           loading="lazy"
           placeholder={blur ? 'blur' : 'empty'}
           blurDataURL={blur}
-          className="absolute inset-0 w-full h-full  object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
       )}
 
@@ -93,7 +93,7 @@ function ProcedureCard({
         </div>
 
         {/* Bottom: badge + description */}
-        <div className="pb-6">
+        <div className="pb-4">
           <span className="inline-flex items-center text-[12px] tracking-wider uppercase font-semibold text-white bg-teal/70 backdrop-blur-sm rounded-full px-3 py-1 mb-2">
             {submark === 'Endos' ? badgeEndos : badgeCuidare}
           </span>
@@ -158,7 +158,7 @@ export function ProcedureCarousel({
         <ProcedureMarquee>
           <div
             className="marquee-track flex gap-5 w-max"
-            style={{ animation: 'marquee 35s linear infinite' }}
+            style={{ animation: 'marquee 45s linear infinite' }}
           >
             {/* Set A */}
             {procedures.map((p) => (

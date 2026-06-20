@@ -91,10 +91,12 @@ export default async function ServicesPage({
       <PageHero
         imageSrc={(() => { const img = settings.serviciosHeroImage ?? settings.homeHeroImage; return img ? urlFor(img).width(1920).quality(82).format('webp').url() : undefined; })()}
         blurDataURL={(settings.serviciosHeroImage ?? settings.homeHeroImage)?.asset?.metadata?.lqip ?? undefined}
+        imagePosition="md:object-[75%_10%]"
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
         primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
+        extraDim
       />
 
       {/* ─── 1. NUESTRO ENFOQUE — 3 feature cards ─── */}
