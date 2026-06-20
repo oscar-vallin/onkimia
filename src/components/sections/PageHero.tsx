@@ -108,7 +108,7 @@ export function PageHero({
           quality={82}
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
-          className={`object-cover  pl-24 ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0  origin-center`}
+          className={`object-cover mt-10 md:mt-0 md:pl-24 ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0  origin-center`}
           aria-hidden={imageAlt === ''}
         />
       )}
@@ -172,7 +172,7 @@ export function PageHero({
 
       {/* Top bar — eyebrow + optional top-right slot */}
       {(eyebrow || topSlot) && (
-        <div className={`relative z-10 container-onkimia pt-32 md:pt-44 flex ${topSlot ? 'items-center justify-between' : 'items-start'}`}>
+        <div className={`relative z-10 container-onkimia mt-3 md:mt-0  pt-32 md:pt-44 flex ${topSlot ? 'items-center justify-between' : 'items-start'}`}>
           {eyebrow && (
             <p className="text-[10px] tracking-[0.28em] uppercase text-white/60 font-medium">
               {eyebrow}
@@ -186,7 +186,7 @@ export function PageHero({
 
       {/* Main content */}
       <div
-        className={`relative z-10 container-onkimia flex flex-col flex-1 ${eyebrow || topSlot ? 'pt-8 md:pt-10' : 'pt-40 md:pt-52'} pb-16 md:pb-20 ${isCenter ? 'items-center text-center' : 'items-start'} max-w-3xl ${isCenter ? 'mx-auto' : ''}`}
+        className={`relative z-10  container-onkimia flex flex-col flex-1 ${eyebrow || topSlot ? 'pt-8 md:pt-10' : 'pt-40 md:pt-52'} pb-10 md:pb-20 ${isCenter ? 'items-center text-center' : 'items-start'} max-w-3xl ${isCenter ? 'mx-auto' : ''}`}
       >
         {/* Mobile spacer — pushes content to lower third on small screens */}
         <div className="flex-1 md:hidden" aria-hidden="true" />

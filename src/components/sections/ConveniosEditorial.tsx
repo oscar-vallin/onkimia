@@ -91,7 +91,7 @@ function InsuranceCard({ insurance }: { insurance: Insurance }) {
             alt={insurance.name}
             width={200}
             height={56}
-            className="h-12 w-auto max-w-[80%] object-contain opacity-75 transition-opacity duration-300 group-hover:opacity-100"
+            className="h-16 w-auto max-w-[80%] object-contain opacity-95 transition-opacity duration-300 group-hover:opacity-100"
           />
         ) : (
           <span className="font-medium text-gray-warm text-sm text-center leading-snug px-2">
