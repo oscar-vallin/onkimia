@@ -113,6 +113,7 @@ export default async function CuidarePage({
       <UnitAvailabilityBanner
         availableIn={['guadalajara']}
         messageKey="cuidare.availability.banner"
+        specializedUnit='Cuidare'
       />
 
       {/* ─── BENEFICIOS ─── */}

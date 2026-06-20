@@ -78,7 +78,7 @@ export function PageHero({
   imageAlt = '',
   blurDataURL,
   mobileObjectPosition = 'object-[center_10%]',
-  imagePosition = 'md:object-[50%_10%]',
+  imagePosition = 'md:object-[50%_-20%]',
   eyebrow,
   title,
   emphasisClassName,
@@ -108,7 +108,7 @@ export function PageHero({
           quality={82}
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
-          className={`object-cover ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0 hero-ken-burns origin-center`}
+          className={`object-cover  pl-24 ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0  origin-center`}
           aria-hidden={imageAlt === ''}
         />
       )}

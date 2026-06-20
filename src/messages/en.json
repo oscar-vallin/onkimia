@@ -551,7 +551,7 @@
       "description": "Safe, personalized ambulatory medical procedures to care for your health without hospital admission."
     },
     "availability": {
-      "banner": "Is currently unavailable in your location."
+      "banner": "is currently unavailable in your location."
     },
     "benefits": {
       "title": "Safe, accessible treatments with a human focus.",

@@ -74,7 +74,7 @@ export default async function EndosPage({
       </PageHero>
 
       {/* ─── AVAILABILITY BANNER ─── */}
-      <UnitAvailabilityBanner availableIn={['guadalajara']} messageKey="endos.availability.banner" />
+      <UnitAvailabilityBanner availableIn={['guadalajara']} messageKey="endos.availability.banner" specializedUnit='Endos'/>
 
       {/* ════════════════════════════════════════
           DIAGNÓSTICO AMBULATORIO — icon cards

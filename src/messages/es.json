@@ -551,7 +551,7 @@
       "description": "Procedimientos médicos ambulatorios seguros y personalizados, para cuidar tu salud sin necesidad de internamiento."
     },
     "availability": {
-      "banner": "Actualmente no está disponible en tu ubicación."
+      "banner": "actualmente no está disponible en tu ubicación."
     },
     "benefits": {
       "title": "Tratamientos seguros, accesibles y con enfoque humano.",

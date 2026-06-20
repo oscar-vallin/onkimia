@@ -7,11 +7,13 @@ import type { ClinicSlug } from '@/lib/clinic-context';
 interface UnitAvailabilityBannerProps {
   availableIn: ClinicSlug[];
   messageKey: string;
+  specializedUnit: string;
 }
 
 export function UnitAvailabilityBanner({
   availableIn,
   messageKey,
+  specializedUnit,
 }: UnitAvailabilityBannerProps) {
   const { clinic, isInitialized } = useClinic();
   const t = useTranslations();
@@ -26,7 +28,7 @@ export function UnitAvailabilityBanner({
       className="bg-teal/10 border-y border-teal/20 text-teal"
     >
       <div className="container-onkimia py-3 text-sm text-center">
-        {t(messageKey)}
+       {specializedUnit} {t(messageKey)}
       </div>
     </div>
   );
