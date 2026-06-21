@@ -73,7 +73,8 @@ export default async function OnkimiaDoctorsPage({
         mobileImageSrc={heroImage ? urlFor(heroImage).width(750).height(1200).fit('crop').crop('focalpoint').format('webp').quality(82).url() : undefined}
         blurDataURL={heroLqip ?? undefined}
         mobileObjectPosition="object-[70%_15%]"
-        imagePosition="md:object-[65%_-450%]"
+        imagePosition="md:object-[65%_0%]"
+        imageClassName="md:mt-20"
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
         emphasisClassName="text-doctors-blue"

@@ -60,7 +60,7 @@
   "services": {
     "hero": {
       "eyebrow": "SERVICIOS",
-      "title": "Atención Oncológica *Especializada*",
+      "title": "Atención\nOncológica *Especializada*",
       "description": "Abordamos cada caso desde un enfoque médico integral y humano."
     },
     "main": {

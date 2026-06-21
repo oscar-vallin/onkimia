@@ -70,6 +70,13 @@ export interface PageHeroProps {
    * lighting) that need dampening to match the site's darker hero mood.
    */
   extraDim?: boolean;
+
+  /**
+   * Extra Tailwind classes applied directly to the hero <img> element.
+   * Use to add per-page offsets (e.g. "md:mt-20") when the subject's head
+   * is clipped by the section's negative-margin overlap with the navbar.
+   */
+  imageClassName?: string;
 }
 
 export function PageHero({
@@ -90,6 +97,7 @@ export function PageHero({
   footerSlot,
   topSlot,
   extraDim = false,
+  imageClassName,
 }: PageHeroProps) {
   const isCenter = align === 'center';
 
@@ -108,7 +116,7 @@ export function PageHero({
           quality={82}
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
-          className={`object-cover mt-10 md:mt-0 md:pl-24 ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0  origin-center`}
+          className={`object-cover mt-10 md:mt-0 md:pl-24 ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0  origin-center ${imageClassName ?? ''}`}
           aria-hidden={imageAlt === ''}
         />
       )}
