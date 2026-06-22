@@ -60,13 +60,14 @@ export default async function NosotrosPage({
         title={t('hero.title')}
         description={t('hero.description')}
         primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
-        imageSrc={settings.aboutHeroImage ? urlFor(settings.aboutHeroImage).width(1920).quality(82).format('webp').url() : undefined}
+        imageSrc='/test-about/about-hero-right-hq.jpg'
+        //imageSrc={settings.aboutHeroImage ? urlFor(settings.aboutHeroImage).width(1920).quality(82).format('webp').url() : undefined}
         mobileImageSrc="/mobile-hero/about-hero.jpg"
         blurDataURL={settings.aboutHeroImage?.asset?.metadata?.lqip ?? undefined}
         imageAlt=""
         mobileObjectPosition="object-[center_25%]"
-        imagePosition="md:object-[85%_-120%]"
-        imageClassName="scale-165 object-[center_20%]"
+       
+        
         solidLeftBand
       />
 
