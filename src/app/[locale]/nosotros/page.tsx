@@ -66,7 +66,7 @@ export default async function NosotrosPage({
         imageAlt=""
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[85%_-120%]"
-        imageClassName="scale-165 xl:scale-125 2xl:scale-100 object-[center_20%]"
+        imageClassName="scale-165 object-[center_20%]"
         solidLeftBand
       />
 
