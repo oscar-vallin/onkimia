@@ -95,9 +95,7 @@ export default async function ServicesPage({
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
-        mobileObjectPosition="object-[center_25%]"
-        imagePosition="md:object-[85%_-120%]"
-        imageClassName="scale-165 object-[center_20%]"
+       
         primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
         extraDim
         solidLeftBand

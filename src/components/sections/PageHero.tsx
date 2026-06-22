@@ -141,7 +141,7 @@ export function PageHero({
           fetchPriority="high"
           sizes="100vw"
           quality={82}
-          className={`object-cover md:hidden ${mobileObjectPosition} z-0 origin-center`}
+          className={`object-cover md:hidden ${mobileObjectPosition} z-0 origin-center `}
           aria-hidden={imageAlt === ''}
         />
       )}

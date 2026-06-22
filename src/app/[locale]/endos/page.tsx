@@ -71,7 +71,7 @@ export default async function EndosPage({
         description={t('hero.description')}
         solidLeftBand
       >
-        <p className="text-white/45 text-sm italic mb-8">{t('hero.quote')}</p>
+        <p className="hidden md:block text-white/45 text-sm italic mb-8">{t('hero.quote')}</p>
         <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
       </PageHero>
 

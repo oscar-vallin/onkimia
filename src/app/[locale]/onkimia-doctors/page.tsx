@@ -69,7 +69,7 @@ export default async function OnkimiaDoctorsPage({
     <>
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
+        imageSrc="/test-about/doctors-right-hq.jpg"
         mobileImageSrc="/mobile-hero/onkimia-doctors-hero.jpg"
         blurDataURL={heroLqip ?? undefined}
         imagePosition="md:object-[65%_0%]"
@@ -88,10 +88,10 @@ export default async function OnkimiaDoctorsPage({
         }
         solidLeftBand
       >
-        <p className="text-white/75 text-base md:text-lg italic mb-6 max-w-xl leading-relaxed">
+        <p className="hidden md:block text-white/75 text-base md:text-lg italic mb-6 max-w-xl leading-relaxed">
           {t('hero.quote')}
         </p>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 mt-6 md:mt-0">
           <a
             href={buildWhatsApp(waCommercial, t('cta.message'))}
             target="_blank"
