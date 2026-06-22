@@ -70,6 +70,7 @@ export default async function EndosPage({
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
         description={t('hero.description')}
         solidLeftBand
+        mobileMinHeight="min-h-[90vh]"
       >
         <p className="hidden md:block text-white/45 text-sm italic mb-8">{t('hero.quote')}</p>
         <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />

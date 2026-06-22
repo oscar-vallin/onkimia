@@ -86,6 +86,9 @@ export interface PageHeroProps {
    * enough. Mobile keeps the standard bottom-up veil.
    */
   solidLeftBand?: boolean;
+
+  /** Override the mobile min-height. Default is 'min-h-[75vh]'. Example: 'min-h-[90vh]' */
+  mobileMinHeight?: string;
 }
 
 export function PageHero({
@@ -108,11 +111,12 @@ export function PageHero({
   extraDim = false,
   imageClassName,
   solidLeftBand = false,
+  mobileMinHeight = 'min-h-[75vh]',
 }: PageHeroProps) {
   const isCenter = align === 'center';
 
   return (
-    <section className="relative w-full min-h-[75vh] md:min-h-[70vh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex flex-col ">
+    <section className={`relative w-full ${mobileMinHeight} md:min-h-[70vh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex flex-col`}>
 
       {/* Desktop image — hidden on mobile when a mobile variant is provided */}
       {imageSrc && (
@@ -141,7 +145,7 @@ export function PageHero({
           fetchPriority="high"
           sizes="100vw"
           quality={82}
-          className={`object-cover md:hidden ${mobileObjectPosition} z-0 origin-center `}
+          className={`object-cover md:hidden ${mobileObjectPosition} z-0 origin-center`}
           aria-hidden={imageAlt === ''}
         />
       )}
@@ -229,12 +233,12 @@ export function PageHero({
 
       {/* Main content */}
       <div
-        className={`relative z-10  container-onkimia flex flex-col flex-1 ${eyebrow || topSlot ? 'pt-8 md:pt-10' : 'pt-40 md:pt-52'} pb-10 md:pb-20 ${isCenter ? 'items-center text-center' : 'items-start'} max-w-3xl ${isCenter ? 'mx-auto' : ''}`}
+        className={`relative z-10 t-10 container-onkimia flex flex-col flex-1 ${eyebrow || topSlot ? 'pt-8 md:pt-10' : 'pt-40 md:pt-52'} pb-10 md:pb-20 ${isCenter ? 'items-center text-center' : 'items-start'} max-w-3xl ${isCenter ? 'mx-auto' : ''}`}
       >
         {/* Mobile spacer — pushes content to lower third on small screens */}
         <div className="flex-1 md:hidden" aria-hidden="true" />
 
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] mb-5 whitespace-pre-line">
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05]  whitespace-pre-line">
           {parseEmphasis(title, emphasisClassName)}
         </h1>
 
