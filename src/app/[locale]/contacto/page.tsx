@@ -58,6 +58,7 @@ export default async function ContactPage({
         eyebrow={t('section.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
+        solidLeftBand
       />
 
       {/* ════════════════════════════════════════

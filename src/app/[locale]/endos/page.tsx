@@ -63,11 +63,13 @@ export default async function EndosPage({
       <PageHero
         imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
         blurDataURL={heroLqip ?? undefined}
+        mobileImageSrc="/mobile-hero/endos-hero.jpg"
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[88%_25%]"
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
         description={t('hero.description')}
+        solidLeftBand
       >
         <p className="text-white/45 text-sm italic mb-8">{t('hero.quote')}</p>
         <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />

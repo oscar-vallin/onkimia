@@ -70,9 +70,8 @@ export default async function OnkimiaDoctorsPage({
       {/* ─── HERO ─── */}
       <PageHero
         imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
-        mobileImageSrc={heroImage ? urlFor(heroImage).width(750).height(1200).fit('crop').crop('focalpoint').format('webp').quality(82).url() : undefined}
+        mobileImageSrc="/mobile-hero/onkimia-doctors-hero.jpg"
         blurDataURL={heroLqip ?? undefined}
-        mobileObjectPosition="object-[70%_15%]"
         imagePosition="md:object-[65%_0%]"
         imageClassName="md:mt-20"
         eyebrow={t('hero.eyebrow')}
@@ -87,6 +86,7 @@ export default async function OnkimiaDoctorsPage({
             <span className="text-[11px] tracking-[0.18em] uppercase text-white/80">{t('hero.badge')}</span>
           </div>
         }
+        solidLeftBand
       >
         <p className="text-white/75 text-base md:text-lg italic mb-6 max-w-xl leading-relaxed">
           {t('hero.quote')}

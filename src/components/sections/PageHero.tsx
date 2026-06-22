@@ -77,6 +77,15 @@ export interface PageHeroProps {
    * is clipped by the section's negative-margin overlap with the navbar.
    */
   imageClassName?: string;
+
+  /**
+   * When true, replaces the default desktop directional gradient with a
+   * solid-left-band overlay: #1a1a1f solid for the leftmost ~28%, fading
+   * to transparent by ~62%. Creates a seamless dark zone for text on photos
+   * where the subject is centered and the default gradient doesn't darken
+   * enough. Mobile keeps the standard bottom-up veil.
+   */
+  solidLeftBand?: boolean;
 }
 
 export function PageHero({
@@ -98,6 +107,7 @@ export function PageHero({
   topSlot,
   extraDim = false,
   imageClassName,
+  solidLeftBand = false,
 }: PageHeroProps) {
   const isCenter = align === 'center';
 
@@ -116,7 +126,7 @@ export function PageHero({
           quality={82}
           placeholder={blurDataURL ? 'blur' : 'empty'}
           blurDataURL={blurDataURL}
-          className={`object-cover mt-10 md:mt-0 md:pl-24 ${mobileImageSrc ? 'hidden md:block' : ''} ${mobileObjectPosition} ${imagePosition} z-0  origin-center ${imageClassName ?? ''}`}
+          className={`object-cover ${mobileImageSrc ? 'hidden md:block' : mobileObjectPosition} ${imagePosition} z-0 origin-center ${imageClassName ?? ''}`}
           aria-hidden={imageAlt === ''}
         />
       )}
@@ -137,22 +147,47 @@ export function PageHero({
       )}
 
       {/* Overlay — desktop: dark band on text side; mobile: dark veil at bottom */}
-      <div
-        className="absolute inset-0 z-[1] hidden md:block"
-        style={{
-          background: isCenter
-            ? 'linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.50) 50%, rgba(0,0,0,0.72) 100%)'
-            : 'linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.10) 72%, transparent 100%)',
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 z-[1] md:hidden"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0.78) 62%, rgba(0,0,0,0.92) 100%)',
-        }}
-        aria-hidden="true"
-      />
+      {solidLeftBand ? (
+        <>
+          {/* Layer 1: solid ink on the left third → invisible seam with bg-ink */}
+          <div
+            className="absolute inset-0 z-[1] hidden md:block pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #1a1a1f 0%, #1a1a1f 28%, transparent 62%)' }}
+            aria-hidden="true"
+          />
+          {/* Layer 2: soft scrim to feather the transition */}
+          <div
+            className="absolute inset-0 z-[1] hidden md:block pointer-events-none"
+            style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 42%, transparent 70%)' }}
+            aria-hidden="true"
+          />
+          {/* Mobile: bottom-up veil (subject stays visible) */}
+          <div
+            className="absolute inset-0 z-[1] md:hidden pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0.78) 62%, rgba(0,0,0,0.92) 100%)' }}
+            aria-hidden="true"
+          />
+        </>
+      ) : (
+        <>
+          <div
+            className="absolute inset-0 z-[1] hidden md:block"
+            style={{
+              background: isCenter
+                ? 'linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.50) 50%, rgba(0,0,0,0.72) 100%)'
+                : 'linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.10) 72%, transparent 100%)',
+            }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 z-[1] md:hidden"
+            style={{
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0.78) 62%, rgba(0,0,0,0.92) 100%)',
+            }}
+            aria-hidden="true"
+          />
+        </>
+      )}
 
       {/* Top fade — keeps logo/nav legible over any image brightness */}
       <div

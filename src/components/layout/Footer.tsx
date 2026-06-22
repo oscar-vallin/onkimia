@@ -41,7 +41,7 @@ export function Footer({ settings }: FooterProps) {
                 {/* Desktop: full logo */}
                 <div className="relative hidden md:block h-16 w-44">
                   <Image
-                    src="/logo-OD-clean.svg"
+                    src="/ONKIMIA-DOCTORS_Logo.png"
                     alt="Onkimia Doctors"
                     fill
                     sizes="176px"

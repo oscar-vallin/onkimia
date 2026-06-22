@@ -105,6 +105,7 @@ export default async function CuidarePage({
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')}\n${t('hero.headlinePart2')}`}
         description={t('hero.description')}
+        solidLeftBand
       >
         <BookingButton section="cuidare" variant="brand" />
       </PageHero>

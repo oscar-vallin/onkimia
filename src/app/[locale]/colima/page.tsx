@@ -68,6 +68,7 @@ export default async function ColimaPage({
         title={t('hero.title')}
         description={t('hero.description')}
         primaryCta={{ label: t('hero.cta'), href: '/contacto#contact-form' }}
+        solidLeftBand
       />
 
       {/* ─── CONTACT BLOCK ─── */}
