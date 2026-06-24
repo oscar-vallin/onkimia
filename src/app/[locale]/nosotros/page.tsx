@@ -55,7 +55,7 @@ export default async function NosotrosPage({
   return (
     <>
       {/* ─── HERO ─── */}
-      <PageHero
+      {/* <PageHero
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
@@ -69,14 +69,14 @@ export default async function NosotrosPage({
        
         
         solidLeftBand
-      />
+      /> */}
 
       {/* ─── NUESTRA MISIÓN ─── */}
       <MisionSection
         eyebrow={t('mision.eyebrow')}
         title={t('mision.title')}
         description={t('mision.description')}
-      />x
+      />
 
       {/* ─── 1. MÁS QUE MEDICINA ─── */}
       <MoreThanMedicine

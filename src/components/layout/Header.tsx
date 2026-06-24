@@ -60,6 +60,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   const { clinic, setClinic } = useClinic();
 
   const isDoctorsRoute = pathname.startsWith('/onkimia-doctors');
+  const isAboutRoute   = pathname === '/nosotros';
 
   const currentClinic = clinics.find((c) => c.slug === clinic) || null;
 
@@ -141,6 +142,8 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
             ? 'bg-doctors-ink backdrop-blur-md border-b border-white/10 shadow-sm'
             : scrolled
             ? 'bg-white/95 backdrop-blur-md border-b border-line shadow-sm'
+            : isAboutRoute
+            ? 'bg-ink'
             : 'bg-transparent'
         }`}
       >

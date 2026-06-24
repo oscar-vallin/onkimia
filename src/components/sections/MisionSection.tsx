@@ -27,8 +27,8 @@ export function MisionSection({ eyebrow, title, description }: MisionSectionProp
         </p>
       </div>
 
-      {/* Decorative animated waves */}
-      <div className="w-full overflow-hidden" style={{ height: '220px', marginTop: '-10px' }} aria-hidden="true">
+      {/* Decorative animated waves — revealed left→right on page load */}
+      <div className="waves-container w-full overflow-hidden" style={{ height: '220px', marginTop: '-10px' }} aria-hidden="true">
         <svg
           viewBox="0 0 1440 220"
           fill="none"
