@@ -1,167 +1,153 @@
-import { Link } from '@/i18n/navigation';
-import { ArrowRight, ChevronDown } from 'lucide-react';
-import { parseEmphasis } from '@/lib/parseEmphasis';
+import Image from 'next/image';
+import type { ReactNode } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { PillButton } from '@/components/ui/PillButton';
+import { urlFor } from '@/sanity/image';
+import type { SanityImageWithLQIP } from '@/sanity/types';
+import { HeroEyebrow } from './HeroEyebrow';
 
-const HERO_SRCSET = '/hero/hero-main-750.webp 750w, /hero/hero-main-1280.webp 1280w, /hero/hero-main-1920.webp 1920w';
-const HERO_SIZES = '100vw';
-
-type FeatureIcon = 'pulse' | 'heart' | 'shield';
-
-interface Feature {
-  icon: FeatureIcon;
-  title: string;
-  description: string;
+interface Stat {
+  number: string;
+  label: string;
 }
 
 export interface HeroHomeProps {
-  eyebrow: string;
+  eyebrowBase: string;
+  eyebrowDefaultCity: string;
+  eyebrowColimaCity: string;
   title: string;
   description: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
-  features: [Feature, Feature, Feature];
+  stats: [Stat, Stat, Stat];
+  heroImage?: SanityImageWithLQIP;
+}
+
+function parseHeroTitle(text: string): ReactNode[] {
+  return text.split(/(\*[^*]+\*)/g).map((part, i) =>
+    part.startsWith('*') && part.endsWith('*')
+      ? <em key={i} className="italic font-normal">{part.slice(1, -1)}</em>
+      : <span key={i}>{part}</span>
+  );
 }
 
 export function HeroHome({
-  eyebrow,
+  eyebrowBase,
+  eyebrowDefaultCity,
+  eyebrowColimaCity,
   title,
   description,
   primaryCta,
   secondaryCta,
-  features,
+  stats,
+  heroImage,
 }: HeroHomeProps) {
   return (
-    <section className="relative w-full min-h-[100svh] overflow-visible bg-ink text-white -mt-16 md:-mt-20">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/hero/hero-main-1920.webp"
-        srcSet={HERO_SRCSET}
-        sizes={HERO_SIZES}
-        alt="Médico oncólogo acompañando a un paciente en Onkimia"
-        fetchPriority="high"
-        decoding="async"
-        className="absolute mt-10 inset-0 h-full w-full object-cover [object-position:center_20%] md:[object-position:62%_45%] z-0 hero-ken-burns origin-center"
-      />
+    <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">
+        <picture className="absolute inset-0">
+          <source media="(min-width: 1280px)" srcSet="/hero/hero-main-1920.webp" type="image/webp" />
+          <source media="(min-width: 750px)"  srcSet="/hero/hero-main-1280.webp" type="image/webp" />
+          <img
+            src="/hero/hero-main-750.webp"
+            alt="Médico oncólogo acompañando a un paciente en Onkimia"
+            className="w-full h-full object-cover [object-position:center_20%] md:[object-position:62%_45%]"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
 
-      {/* Primary overlay: radial gradient — lighter center, darker edges.
-          On mobile the image is anchored right so we shift the radial center
-          leftward (35% 40%) to keep the subject area lighter while still
-          providing enough contrast for the left-aligned text. */}
+      {/* Overlay: gradient bottom-left → top-right for legibility of bottom-left content */}
       <div
-        className="absolute inset-0 z-[2] hidden md:block"
+        className="absolute inset-0 z-[1]"
         style={{
-          background: `radial-gradient(
-            ellipse 70% 60% at 50% 40%,
-            rgba(26,26,31,0.45) 0%,
-            rgba(26,26,31,0.72) 50%,
-            rgba(26,26,31,0.88) 100%
+          background: `linear-gradient(
+            to top right,
+            rgba(0,0,0,0.75) 0%,
+            rgba(0,0,0,0.45) 45%,
+            rgba(0,0,0,0.10) 100%
           )`,
         }}
         aria-hidden="true"
       />
-      {/* Mobile overlay: vertical gradient — light at top to reveal the hands,
-          heavy dark at bottom where the text block lives */}
+      {/* Bottom vignette — ensures text area always readable regardless of image */}
       <div
-        className="absolute inset-0 z-[2] md:hidden"
+        className="absolute inset-0 z-[1]"
         style={{
           background: `linear-gradient(
-            to bottom,
-            rgba(26,26,31,0.15) 0%,
-            rgba(26,26,31,0.25) 35%,
-            rgba(26,26,31,0.65) 60%,
-            rgba(26,26,31,0.90) 80%,
-            rgba(26,26,31,0.97) 100%
+            to top,
+            rgba(0,0,0,0.60) 0%,
+            transparent 40%
           )`,
         }}
         aria-hidden="true"
       />
 
-      {/* Secondary overlay: bottom vignette — softens lower portion */}
-      <div
-        className="absolute inset-0 z-[2]"
-        style={{
-          background: `linear-gradient(
-            to bottom,
-            transparent 0%,
-            transparent 45%,
-            rgba(26,26,31,0.65) 75%,
-            rgba(26,26,31,0.90) 100%
-          )`,
-        }}
-      />
+      {/* Content wrapper */}
+      <div className="relative z-10 container-onkimia min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] flex flex-col pb-12 md:pb-16">
 
-      {/* Content — split layout:
-          • Eyebrow is top-anchored (stable position in both locales)
-          • flex-1 spacer pushes the rest to the bottom
-          • Title + description + CTAs + trust strip share one left edge (max-w-2xl)
-            so spacing between them is content-driven, not viewport-height-driven */}
-      <div className="relative z-10 container-onkimia min-h-[100svh] flex flex-col pb-10 md:pb-14">
-
-        {/* Eyebrow — top-anchored; padding matches the header height */}
-        <div className="pt-44">
-          <p className="text-[10px] md:text-xs font-medium tracking-widest uppercase text-white/70">
-            {eyebrow}
-          </p>
+        {/* Eyebrow — top-anchored, updates when user picks a clinic */}
+        <div className="pt-36 md:pt-44">
+          <HeroEyebrow
+            base={eyebrowBase}
+            defaultCity={eyebrowDefaultCity}
+            colimaCity={eyebrowColimaCity}
+          />
         </div>
 
-        {/* Spacer — fixed gap between eyebrow and bottom block */}
+        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Bottom block — all share max-w-2xl for a single left axis */}
-        <div className="max-w-2xl">
+        {/* Bottom row: content left + stats right */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-16">
 
-          {/* Headline */}
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] text-white mb-5 md:mb-7 md:pt-10">
-            {parseEmphasis(title)}
-          </h1>
+          {/* LEFT — headline, subtitle, CTAs */}
+          <div className="max-w-xl">
+            <h1 className="font-serif text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5rem] leading-[1.05] tracking-[-0.02em] text-white mb-5 md:mb-6">
+              {parseHeroTitle(title)}
+            </h1>
 
-          {/* Description — slightly smaller than before to absorb locale length variance */}
-          <p className="text-sm md:text-lg text-white/80 leading-relaxed max-w-lg mb-7 md:mb-9">
-            {description}
-          </p>
+            <p className="hidden md:block font-sans text-sm md:text-base text-white/75 leading-relaxed max-w-md mb-8 md:mb-10">
+              {description}
+            </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-5 md:mb-6">
-            <Link
-              href={primaryCta.href}
-              className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full transition-all duration-200 ease-in-out hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
-            >
-              {primaryCta.label}
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </Link>
-            <Link
-              href={secondaryCta.href}
-              className="inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white text-white px-7 py-3.5 rounded-full transition-all duration-200 ease-in-out hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-            >
-              {secondaryCta.label}
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <PillButton
+                variant="solid-light"
+                href={primaryCta.href}
+                icon={<ArrowRight className="w-4 h-4" aria-hidden="true" />}
+              >
+                {primaryCta.label}
+              </PillButton>
+              <PillButton variant="outline-light" href={secondaryCta.href}>
+                {secondaryCta.label}
+              </PillButton>
+            </div>
           </div>
 
-          {/* Trust strip — left-aligned with all other elements */}
-          <div className="hidden md:flex flex-wrap items-center gap-y-1">
-            {features.map((f, i) => (
-              <span key={i} className="flex items-center">
-                <span className="text-[10px] md:text-xs tracking-[0.18em] uppercase font-medium text-white/60">
-                  {f.title}
-                </span>
-                {i < features.length - 1 && (
-                  <span className="mx-4 w-px h-3 bg-white/25 inline-block" aria-hidden="true" />
+          {/* RIGHT — stats bar (desktop only) */}
+          <div className="hidden md:flex flex-row lg:flex-row items-start lg:items-end gap-0 self-start lg:self-auto shrink-0">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex items-stretch">
+                {/* Divider before every item except the first */}
+                {i > 0 && (
+                  <div className="w-px self-stretch bg-white/20 mx-5 md:mx-7" aria-hidden="true" />
                 )}
-              </span>
+                <div className="flex flex-col gap-1">
+                  <span className="font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-none">
+                    {stat.number}
+                  </span>
+                  <span className="font-sans text-[9px] md:text-[10px] tracking-[0.18em] uppercase text-white/55 leading-snug max-w-[9ch] md:max-w-none">
+                    {stat.label}
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
 
         </div>
       </div>
 
-      {/* Scroll cue — desktop only, pinned to horizontal center of hero */}
-      <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10" aria-hidden="true">
-        <ChevronDown className="w-5 h-5 text-white/40 animate-bounce" />
-      </div>
-
-      {/* Header scroll sentinel — marks the real end of the hero so the
-          fixed nav knows exactly when to switch from transparent/white-text
-          to solid/dark-text, regardless of this hero's actual height. */}
+      {/* Header scroll sentinel */}
       <div id="hero-end-sentinel" className="absolute bottom-0 left-0 w-px h-px pointer-events-none" aria-hidden="true" />
 
     </section>

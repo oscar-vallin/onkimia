@@ -19,7 +19,15 @@ export const SITE_SETTINGS_QUERY = groq`
     cuidareHeroImage ${HERO_IMAGE_FRAGMENT},
     doctorsHeroImage ${HERO_IMAGE_FRAGMENT},
     contactHeroImage ${HERO_IMAGE_FRAGMENT},
+    // Wellbeing list
+    wellbeingList[] { _key, icon, title, description },
+    // Studies gallery
+    studiesGallery[] { _key, image ${HERO_IMAGE_FRAGMENT}, alt },
+    // Services + How it works
+    servicesList[] { _key, icon, title, description },
+    howItWorksSteps[] { _key, image ${HERO_IMAGE_FRAGMENT} },
     // Section images
+    wellnessImage ${HERO_IMAGE_FRAGMENT},
     processImage ${HERO_IMAGE_FRAGMENT},
     proceduresBgImage ${HERO_IMAGE_FRAGMENT},
     cuidareRadiologyImage ${HERO_IMAGE_FRAGMENT},

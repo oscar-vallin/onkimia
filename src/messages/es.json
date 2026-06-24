@@ -172,14 +172,14 @@
       "description": "Cada persona es única, por eso diseñamos tratamientos integrales que te acompañan antes, durante y después de cualquier proceso oncológico."
     },
     "doctors": {
-      "title": "Especialistas que *te acompañan*",
+      "eyebrow": "NUESTRO EQUIPO",
+      "title": "Conoce a nuestros especialistas",
       "description": "Forma parte de la familia Onkimia. Nuestro equipo multidisciplinario está conformado por médicos altamente capacitados y comprometidos con tu bienestar.",
-      "eyebrow": "Nuestro equipo",
       "viewDetail": "Ver detalle"
     },
     "wellness": {
+      "eyebrow": "CUÍDATE",
       "title": "Bienestar integral, en un solo lugar",
-      "subtitle": "Más que un centro médico, somos un espacio de contención, equilibrio y calidad de vida.",
       "relaxation": {
         "title": "Técnica de relajación",
         "description": "Terapia energética que reduce el estrés y promueve el equilibrio emocional durante el tratamiento."
@@ -203,7 +203,8 @@
       "genomics": {
         "title": "Pruebas Genómicas",
         "description": "Contamos con paneles genéticos que nos permiten prevenir, detectar distintos tipos de cáncer."
-      }
+      },
+      "intro": "Más que un centro médico, somos un espacio de contención, equilibrio y calidad de vida."
     },
     "appointment": {
       "title": "Agenda tu cita",
@@ -214,9 +215,10 @@
       "cta": "Agenda tu cita"
     },
     "insurances": {
-      "title": "Convenios",
-      "eyebrow": "Respaldo institucional",
-      "statLabel": "aseguradoras nacionales e internacionales que respaldan tu tratamiento."
+      "eyebrow": "ALIANZAS",
+      "title": "Convenios con Aseguradoras",
+      "intro": "Trabajamos con las principales aseguradoras del país para que tu atención esté cubierta.",
+      "statLabel": "CONVENIOS ACTIVOS"
     },
     "priorityCare": {
       "title": "Cuidarte es nuestra prioridad",
@@ -288,18 +290,105 @@
         }
       }
     },
+    "studies": {
+      "eyebrow": "NUESTROS ESTUDIOS",
+      "title": "La evaluación de salud más completa",
+      "intro": "Una sola prueba no cuenta la historia completa. Por eso reunimos IRM, biomarcadores en sangre, imagen cardíaca y mucho más, todo en un solo día.",
+      "mri": {
+        "title": "IRM",
+        "subtitle": "Resonancia magnética avanzada"
+      },
+      "bio": {
+        "title": "Biomarcadores",
+        "subtitle": "Análisis de sangre completo"
+      },
+      "cardio": {
+        "title": "Imagen cardíaca",
+        "subtitle": "Ecocardiografía y más"
+      },
+      "genomics": {
+        "title": "Genómica",
+        "subtitle": "Paneles genéticos personalizados"
+      }
+    },
+    "pillars": {
+      "eyebrow": "LO QUE EVALUAMOS",
+      "title": "Los cuatro pilares de la salud oncológica",
+      "intro": "Nuestra metodología abarca los cuatro dominios de riesgo crítico que determinan la salud a largo plazo, con protocolos diagnósticos diseñados para detectar lo que los chequeos convencionales no ven.",
+      "cta": "Ver más",
+      "cancer": {
+        "title": "Detección de cáncer",
+        "description": "Muchos cánceres crecen silenciosamente durante años. Utilizamos diagnósticos profundos para descubrir el riesgo temprano, cuando la intervención puede ser más efectiva."
+      },
+      "cardiovascular": {
+        "title": "Enfermedad cardiovascular",
+        "description": "Los ataques cardíacos y los accidentes cerebrovasculares son las principales causas de muerte. Nuestras imágenes avanzadas detectan la enfermedad arterial antes de los síntomas."
+      },
+      "metabolic": {
+        "title": "Disfunción metabólica",
+        "description": "La salud metabólica determina la energía y la esperanza de vida. Evaluamos resistencia a la insulina, composición corporal y marcadores clave."
+      },
+      "neurological": {
+        "title": "Bienestar neurológico",
+        "description": "La salud cognitiva y emocional es fundamental. Integramos evaluaciones neurológicas para detectar deterioro temprano y optimizar la función cerebral."
+      }
+    },
+    "services": {
+      "eyebrow": "NUESTROS SERVICIOS",
+      "title": "Cuidarte es nuestra prioridad",
+      "lead": "Cada persona es única, por eso diseñamos tratamientos integrales que te acompañan antes, durante y después de cualquier proceso oncológico.",
+      "cta": "Agendar Cita"
+    },
+    "howItWorks": {
+      "eyebrow": "CÓMO FUNCIONA",
+      "title": "Así trabaja Onkimia",
+      "intro": "Un proceso claro, riguroso y diseñado para ti. Desde la primera evaluación hasta el seguimiento continuo, cada paso está pensado para darte claridad y control sobre tu salud.",
+      "cta": "Ver más",
+      "step1": {
+        "number": "01",
+        "title": "Completa tu evaluación de salud",
+        "description": "No es un chequeo anual. Es la evaluación de salud más completa disponible, con más de 30 diagnósticos avanzados completados en un solo día."
+      },
+      "step2": {
+        "number": "02",
+        "title": "Revisa tus resultados",
+        "description": "Nuestro equipo traduce tus resultados en un perfil de riesgo detallado, que revisarás 1:1 con un médico de Onkimia semanas después de tu visita."
+      },
+      "step3": {
+        "number": "03",
+        "title": "Mejora tu salud",
+        "description": "Tu plan personalizado continúa virtualmente con guía experta en ejercicio, nutrición y pruebas de seguimiento adaptadas a tu perfil de riesgo."
+      }
+    },
     "homeHero": {
-      "eyebrow": "Oncología integral · Guadalajara",
-      "title": "Ver más allá. *Cuidar*.",
-      "description": "En Onkimia combinamos tecnología de diagnóstico de vanguardia con un acompañamiento profundamente humano. Porque detrás de cada estudio, hay una persona.",
+      "eyebrow": "ONCOLOGÍA PREMIUM · CIUDAD DE MÉXICO",
+      "eyebrowBase": "ONCOLOGÍA PREMIUM",
+      "eyebrowDefaultCity": "GUADALAJARA",
+      "eyebrowColimaCity": "COLIMA",
+      "title": "Tu bienestar oncológico *en manos expertas*",
+      "description": "En Onkimia combinamos diagnóstico de vanguardia con un acompañamiento profundamente humano. Porque detrás de cada estudio, hay una persona.",
       "cta": {
         "primary": {
-          "label": "Agendar una cita",
+          "label": "Agendar Cita",
           "href": "/contacto"
         },
         "secondary": {
-          "label": "Conocer servicios",
+          "label": "Conocer más",
           "href": "/servicios"
+        }
+      },
+      "stats": {
+        "specialists": {
+          "number": "30+",
+          "label": "ESPECIALISTAS"
+        },
+        "detection": {
+          "number": "1 de cada 5",
+          "label": "CASOS CRÍTICOS DETECTADOS"
+        },
+        "guide": {
+          "number": "Clínico",
+          "label": "GUÍA EXPERTA"
         }
       },
       "features": {
@@ -341,12 +430,36 @@
       "headingSuffix": "iso con tu vida",
       "description": "En Onkimia nuestro eje eres tú. Nuestra filosofía combina tratamientos innovadores, atención de calidad y los mejores especialistas.",
       "services": [
-        { "icon": "car", "title": "Valet parking", "description": "Servicio de valet parking disponible en todas nuestras sedes para que llegues sin preocupaciones." },
-        { "icon": "smartphone", "title": "App Onkimia", "description": "Accede a tu historial clínico, agenda citas y consulta resultados desde tu teléfono." },
-        { "icon": "sparkles", "title": "Hospitalidad premium", "description": "Sala de espera con amenidades de lujo para que tu experiencia sea cómoda desde el primer momento." },
-        { "icon": "shield-check", "title": "Concierge de seguros", "description": "Coordinamos directamente con tu aseguradora para autorizaciones, reembolsos y coberturas sin estrés." },
-        { "icon": "users", "title": "Acompañante bienvenido", "description": "Tu familia o acompañante es siempre bienvenido en consultas y durante los procedimientos." },
-        { "icon": "globe", "title": "Atención bilingüe", "description": "Nuestro equipo te atiende con la misma calidez en español e inglés." }
+        {
+          "icon": "car",
+          "title": "Valet parking",
+          "description": "Servicio de valet parking disponible en todas nuestras sedes para que llegues sin preocupaciones."
+        },
+        {
+          "icon": "smartphone",
+          "title": "App Onkimia",
+          "description": "Accede a tu historial clínico, agenda citas y consulta resultados desde tu teléfono."
+        },
+        {
+          "icon": "sparkles",
+          "title": "Hospitalidad premium",
+          "description": "Sala de espera con amenidades de lujo para que tu experiencia sea cómoda desde el primer momento."
+        },
+        {
+          "icon": "shield-check",
+          "title": "Concierge de seguros",
+          "description": "Coordinamos directamente con tu aseguradora para autorizaciones, reembolsos y coberturas sin estrés."
+        },
+        {
+          "icon": "users",
+          "title": "Acompañante bienvenido",
+          "description": "Tu familia o acompañante es siempre bienvenido en consultas y durante los procedimientos."
+        },
+        {
+          "icon": "globe",
+          "title": "Atención bilingüe",
+          "description": "Nuestro equipo te atiende con la misma calidez en español e inglés."
+        }
       ]
     },
     "bodyMind": {

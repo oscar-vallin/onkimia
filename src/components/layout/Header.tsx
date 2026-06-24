@@ -124,9 +124,9 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
     mobileOpen || !scrolled || isDoctorsRoute ? 'text-white' : 'text-ink';
   const hoverColor = isDoctorsRoute
     ? 'hover:text-doctors-blue'
-    : !scrolled || mobileOpen
-    ? 'hover:text-teal-soft'
-    : 'hover:text-teal';
+    : scrolled && !mobileOpen
+    ? 'hover:text-primary/60'
+    : 'hover:text-white/70';
 
   return (
     <>
@@ -207,7 +207,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                   {isActive(link.href) && (
                     <span
                       className={`absolute left-0 right-0 bottom-1 h-0.5 rounded-full ${
-                        isDoctorsRoute ? 'bg-doctors-blue' : 'bg-teal'
+                        isDoctorsRoute ? 'bg-doctors-blue' : scrolled ? 'bg-primary' : 'bg-white'
                       }`}
                       aria-hidden="true"
                     />
@@ -390,15 +390,15 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                         onClick={toggleMobileMenu}
                         className={`relative block font-serif text-xl md:text-2xl font-normal transition-colors py-1.5 ${
                           isActive(link.href)
-                            ? isDoctorsRoute ? 'text-doctors-blue' : 'text-teal-soft'
-                            : isDoctorsRoute ? 'text-white hover:text-doctors-blue' : 'text-white hover:text-teal-soft'
+                            ? isDoctorsRoute ? 'text-doctors-blue' : 'text-white'
+                            : isDoctorsRoute ? 'text-white hover:text-doctors-blue' : 'text-white/60 hover:text-white'
                         }`}
                       >
                         {link.label}
                         {isActive(link.href) && (
                           <span
                             className={`absolute left-0 right-0 -bottom-1 h-0.5 rounded-full ${
-                              isDoctorsRoute ? 'bg-doctors-blue' : 'bg-teal'
+                              isDoctorsRoute ? 'bg-doctors-blue' : 'bg-white'
                             }`}
                             aria-hidden="true"
                           />
@@ -419,9 +419,9 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                       onClick={toggleMobileMenu}
                       className={`flex items-center justify-center gap-2 mx-auto px-6 py-3 ${
                         isDoctorsRoute
-                          ? 'bg-doctors-blue hover:bg-doctors-ink'
-                          : 'bg-teal hover:bg-teal-soft'
-                      } text-white font-medium rounded-full transition-colors w-full max-w-[200px] text-sm`}
+                          ? 'bg-doctors-blue hover:bg-doctors-ink text-white'
+                          : 'border border-white/30 hover:border-white/70 text-white bg-transparent'
+                      } font-medium rounded-full transition-colors w-full max-w-[200px] text-sm`}
                     >
                       <svg
                         viewBox="0 0 24 24"
@@ -456,7 +456,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                             }}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                               isSelected
-                                ? isDoctorsRoute ? 'bg-doctors-blue text-white shadow-md border-transparent' : 'bg-teal text-white shadow-md border-transparent'
+                                ? isDoctorsRoute ? 'bg-doctors-blue text-white shadow-md border-transparent' : 'bg-white text-primary shadow-md border-transparent'
                                 : 'bg-white/10 text-white/70 border border-white/20 hover:bg-white/20'
                             }`}
                           >

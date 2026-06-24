@@ -1,28 +1,25 @@
 // app/fonts.ts
-// ─── Fase 1 · Tipografía v3 (Fraunces + DM Sans) ───
-// Reemplaza a Google Sans Flex + Montserrat.
+// ─── Tipografía v4 (Playfair Display + DM Sans) ───
 // next/font auto-hospeda las fuentes: sin request a Google en runtime,
 // sin FOUT/parpadeo, sin <link> bloqueante. Mejora directa de LCP.
 
-import { Fraunces, DM_Sans, Source_Code_Pro } from 'next/font/google';
+import { Playfair_Display, DM_Sans, Source_Code_Pro } from 'next/font/google';
 
-// Fraunces es fuente variable: incluye todos los pesos del rango.
-// La maqueta usa: 400, 500 e itálica 400, con el eje óptico (opsz)
-// que le da el carácter editorial en tamaños grandes.
-export const fraunces = Fraunces({
+// Playfair Display — pesos 400–700, normal + italic.
+// El diseño del hero usa italic para parte de los títulos.
+export const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500'], 
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
-  variable: '--font-fraunces',
-    //axes: ['opsz'],
+  variable: '--font-playfair',
 });
 
-// DM Sans — pesos usados en la maqueta: 400, 500, 600.
+// DM Sans — pesos usados en la maqueta: 300, 400, 500.
 export const dmSans = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500'],
   variable: '--font-dm-sans',
 });
 
@@ -30,6 +27,5 @@ export const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-mono',
-  preload: false,   // ← no es above-the-fold; libera ancho de banda para Fraunces
+  preload: false,
 });
-

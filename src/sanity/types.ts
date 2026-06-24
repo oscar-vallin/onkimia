@@ -26,7 +26,26 @@ export interface SiteSettings {
   cuidareHeroImage?: SanityImageWithLQIP;
   doctorsHeroImage?: SanityImageWithLQIP;
   contactHeroImage?: SanityImageWithLQIP;
+  // Wellbeing list
+  wellbeingList?: Array<{
+    _key: string;
+    icon: string;
+    title: LocalizedString;
+    description: LocalizedString;
+  }>;
+  // Studies gallery
+  studiesGallery?: Array<{ _key: string; image: SanityImageWithLQIP; alt?: string }>;
+  // Services list
+  servicesList?: Array<{
+    _key: string;
+    icon: string;
+    title: LocalizedString;
+    description: LocalizedString;
+  }>;
+  // How it works steps
+  howItWorksSteps?: Array<{ _key: string; image: SanityImageWithLQIP }>;
   // Section images
+  wellnessImage?: SanityImageWithLQIP;
   processImage?: SanityImageWithLQIP;
   proceduresBgImage?: SanityImageWithLQIP;
   cuidareRadiologyImage?: SanityImageWithLQIP;

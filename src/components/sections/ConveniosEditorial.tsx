@@ -1,119 +1,106 @@
 import Image from 'next/image';
 import { urlFor } from '@/sanity/image';
 import type { Insurance } from '@/sanity/types';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface ConveniosEditorialProps {
   insurances: Insurance[];
   eyebrow: string;
   title: string;
+  intro: string;
   statLabel: string;
 }
-
-const MAX_LOGOS = 8;
 
 export function ConveniosEditorial({
   insurances,
   eyebrow,
   title,
+  intro,
   statLabel,
 }: ConveniosEditorialProps) {
-  const visible = insurances.slice(0, MAX_LOGOS);
-  const overflow = insurances.length > MAX_LOGOS ? insurances.length - MAX_LOGOS : 0;
+  const count = insurances.length;
 
-  const words = title.trim().split(/\s+/);
-  const lastWord = words.pop() ?? '';
-  const headStart = words.join(' ');
+  // Filter out any entries without an uploadded logo
+  const withLogo = insurances.filter((ins) => !!ins.logo?.asset);
 
   return (
-    <section className="bg-cream py-20 md:py-28 overflow-hidden">
-      <div className="container-onkimia">
+    <section className="bg-gray-50 py-20 md:py-28 overflow-hidden">
+      <div className="container-onkimia max-w-6xl mx-auto">
 
-        {/* Eyebrow */}
-        <p className="text-teal uppercase tracking-[0.22em] font-medium text-xs mb-4">
-          {eyebrow}
-        </p>
+        <SectionHeader eyebrow={eyebrow} title={title} intro={intro} theme="light" align="center" />
 
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.2fr] gap-14 lg:gap-20 items-start">
+      </div>
 
-          {/* Left — title + stat */}
-          <div className="lg:sticky lg:top-32">
-            <h2 className="font-serif font-normal text-4xl md:text-5xl text-ink leading-tight mb-12">
-              {headStart}{' '}
-              <em className="not-italic text-teal-soft">{lastWord}</em>
-            </h2>
+      {/*
+        Marquee — full-width so the fade mask bleeds edge-to-edge.
+        CSS classes from globals.css:
+          .insurance-carousel-fade  → mask-image edge fade + hover-pause
+          .insurance-carousel-track → animation: insurance-marquee 40s linear infinite
+        Reduced-motion: global rule stops the animation; motion-reduce:hidden hides the
+        animated track and shows the static fallback below.
+      */}
 
-            {/* Stat */}
-            <div className="border-t-2 border-teal pt-6">
-              <span
-                className="font-serif text-ink leading-none block"
-                style={{ fontSize: 'clamp(4.5rem, 10vw, 7rem)' }}
-                aria-label={`${insurances.length} ${statLabel}`}
-              >
-                {insurances.length}
-              </span>
-              <p className="text-gray-warm text-sm leading-relaxed mt-3 max-w-[260px]">
-                {statLabel}
-              </p>
-            </div>
-          </div>
+      {/* Screen-reader list — always in DOM regardless of animation/motion state */}
+      <ul className="sr-only" aria-label="Convenios con aseguradoras">
+        {withLogo.map((ins) => (
+          <li key={ins._id}>{ins.name}</li>
+        ))}
+      </ul>
 
-          {/* Right — logo grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
-            {visible.map((ins) => (
-              <InsuranceCard key={ins._id} insurance={ins} />
-            ))}
-
-            {overflow > 0 && (
-              <div className="bg-cream-2 border border-line rounded-2xl min-h-[140px] flex items-center justify-center">
-                <span className="font-serif text-2xl text-gray-warm">
-                  +{overflow}
+      {/* Animated logo marquee */}
+      <div
+        className="insurance-carousel-fade relative motion-reduce:hidden py-4"
+        aria-hidden="true"
+      >
+        {/* Track: two identical sets for the seamless -50% loop */}
+        <div className="insurance-carousel-track flex items-center">
+          {[0, 1].map((dupe) => (
+            <span key={dupe} className="flex items-center shrink-0">
+              {withLogo.map((ins) => (
+                <span
+                  key={`${dupe}-${ins._id}`}
+                  className="flex items-center justify-center h-20 px-8 md:px-12 shrink-0"
+                >
+                  <Image
+                    src={urlFor(ins.logo).height(160).format('webp').url()}
+                    alt={ins.name}
+                    width={240}
+                    height={80}
+                    loading="lazy"
+                    className="h-14 md:h-16 w-auto object-contain opacity-60 hover:opacity-90 transition-opacity duration-200"
+                  />
                 </span>
-              </div>
-            )}
-          </div>
-
+              ))}
+            </span>
+          ))}
         </div>
       </div>
+
+      {/* Static fallback for prefers-reduced-motion */}
+      <div
+        className="hidden motion-reduce:flex flex-wrap justify-center items-center gap-x-10 gap-y-5 px-6 py-4"
+        aria-label="Convenios con aseguradoras"
+      >
+        {withLogo.map((ins) => (
+          <Image
+            key={ins._id}
+            src={urlFor(ins.logo).height(160).format('webp').url()}
+            alt={ins.name}
+            width={240}
+            height={80}
+            loading="lazy"
+            className="h-14 w-auto object-contain opacity-60"
+          />
+        ))}
+      </div>
+
+      {/* Stat line */}
+      <div className="container-onkimia max-w-6xl mx-auto">
+        <p className="text-center font-sans text-[10px] md:text-xs tracking-[0.22em] uppercase text-secondary/50 mt-10">
+          • {count} {statLabel} •
+        </p>
+      </div>
+
     </section>
   );
-}
-
-function InsuranceCard({ insurance }: { insurance: Insurance }) {
-  if (!insurance.logo?.asset && !insurance.name?.trim()) return null;
-
-  const inner = (
-    <div className="group bg-white border border-line rounded-2xl min-h-[140px] flex items-center justify-center relative overflow-hidden shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(26,122,110,0.13)] hover:border-teal/25">
-      <div className="px-8 py-6 flex items-center justify-center w-full">
-        {insurance.logo?.asset ? (
-          <Image
-            src={urlFor(insurance.logo).width(400).format('webp').quality(90).url()}
-            alt={insurance.name}
-            width={200}
-            height={56}
-            className="h-16 w-auto max-w-[80%] object-contain opacity-95 transition-opacity duration-300 group-hover:opacity-100"
-          />
-        ) : (
-          <span className="font-medium text-gray-warm text-sm text-center leading-snug px-2">
-            {insurance.name}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-
-  if (insurance.website) {
-    return (
-      <a
-        href={insurance.website}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 rounded-2xl"
-      >
-        {inner}
-      </a>
-    );
-  }
-
-  return inner;
 }

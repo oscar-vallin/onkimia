@@ -172,14 +172,14 @@
       "description": "Each person is unique, which is why we design comprehensive treatments that accompany you before, during, and after any oncological process."
     },
     "doctors": {
-      "title": "Specialists who *accompany you*",
+      "eyebrow": "OUR TEAM",
+      "title": "Meet our specialists",
       "description": "Be part of the Onkimia family. Our multidisciplinary team is made up of highly trained doctors committed to your well-being.",
-      "eyebrow": "Our team",
       "viewDetail": "View profile"
     },
     "wellness": {
+      "eyebrow": "TAKE CARE",
       "title": "Comprehensive wellness, all in one place",
-      "subtitle": "More than a medical center, we are a space of support, balance, and quality of life.",
       "relaxation": {
         "title": "Relaxation techniques",
         "description": "Energetic therapy that reduces stress and promotes emotional balance during treatment."
@@ -203,7 +203,8 @@
       "genomics": {
         "title": "Genomic Testing",
         "description": "Genetic panels that allow us to prevent and detect various types of cancer."
-      }
+      },
+      "intro": "More than a medical center, we are a space of support, balance, and quality of life."
     },
     "appointment": {
       "title": "Schedule your appointment",
@@ -214,9 +215,10 @@
       "cta": "Schedule appointment"
     },
     "insurances": {
-      "title": "Insurance Partners",
-      "eyebrow": "Institutional backing",
-      "statLabel": "national and international insurers that back your treatment."
+      "eyebrow": "PARTNERSHIPS",
+      "title": "Insurance Agreements",
+      "intro": "We work with the country's leading insurers so your care is covered.",
+      "statLabel": "ACTIVE AGREEMENTS"
     },
     "priorityCare": {
       "title": "Caring for you is our priority",
@@ -288,18 +290,105 @@
         }
       }
     },
+    "studies": {
+      "eyebrow": "OUR STUDIES",
+      "title": "The most complete health evaluation",
+      "intro": "A single test doesn't tell the whole story. That's why we bring together MRI, blood biomarkers, cardiac imaging and more — all in a single day.",
+      "mri": {
+        "title": "MRI",
+        "subtitle": "Advanced magnetic resonance imaging"
+      },
+      "bio": {
+        "title": "Biomarkers",
+        "subtitle": "Comprehensive blood analysis"
+      },
+      "cardio": {
+        "title": "Cardiac imaging",
+        "subtitle": "Echocardiography and more"
+      },
+      "genomics": {
+        "title": "Genomics",
+        "subtitle": "Personalized genetic panels"
+      }
+    },
+    "pillars": {
+      "eyebrow": "WHAT WE EVALUATE",
+      "title": "The four pillars of oncological health",
+      "intro": "Our methodology covers the four critical risk domains that determine long-term health, with diagnostic protocols designed to detect what conventional check-ups miss.",
+      "cta": "Learn more",
+      "cancer": {
+        "title": "Cancer detection",
+        "description": "Many cancers grow silently for years. We use deep diagnostics to uncover early risk, when intervention can be most effective."
+      },
+      "cardiovascular": {
+        "title": "Cardiovascular disease",
+        "description": "Heart attacks and strokes are the leading causes of death. Our advanced imaging detects arterial disease before symptoms appear."
+      },
+      "metabolic": {
+        "title": "Metabolic dysfunction",
+        "description": "Metabolic health determines energy and lifespan. We assess insulin resistance, body composition, and key biomarkers."
+      },
+      "neurological": {
+        "title": "Neurological wellbeing",
+        "description": "Cognitive and emotional health is fundamental. We integrate neurological evaluations to detect early decline and optimize brain function."
+      }
+    },
+    "services": {
+      "eyebrow": "OUR SERVICES",
+      "title": "Your care is our priority",
+      "lead": "Each person is unique, so we design comprehensive treatments that accompany you before, during, and after any oncological process.",
+      "cta": "Book Appointment"
+    },
+    "howItWorks": {
+      "eyebrow": "HOW IT WORKS",
+      "title": "How Onkimia works",
+      "intro": "A clear, rigorous process designed for you. From the first evaluation to ongoing follow-up, every step is designed to give you clarity and control over your health.",
+      "cta": "Learn more",
+      "step1": {
+        "number": "01",
+        "title": "Complete your health evaluation",
+        "description": "This is not an annual check-up. It is the most comprehensive health evaluation available, with over 30 advanced diagnostics completed in a single day."
+      },
+      "step2": {
+        "number": "02",
+        "title": "Review your results",
+        "description": "Our team translates your results into a detailed risk profile, which you will review 1:1 with an Onkimia physician weeks after your visit."
+      },
+      "step3": {
+        "number": "03",
+        "title": "Improve your health",
+        "description": "Your personalized plan continues virtually with expert guidance on exercise, nutrition, and follow-up tests tailored to your risk profile."
+      }
+    },
     "homeHero": {
-      "eyebrow": "Comprehensive oncology · Guadalajara",
-      "title": "See beyond. Care *deeply*.",
-      "description": "At Onkimia we combine cutting-edge diagnostic technology with profoundly human care. Because behind every study, there is a person.",
+      "eyebrow": "PREMIUM ONCOLOGY · MEXICO CITY",
+      "eyebrowBase": "PREMIUM ONCOLOGY",
+      "eyebrowDefaultCity": "GUADALAJARA",
+      "eyebrowColimaCity": "COLIMA",
+      "title": "Your oncological wellbeing *in expert hands*",
+      "description": "At Onkimia we combine cutting-edge diagnostics with profoundly human care. Because behind every study, there is a person.",
       "cta": {
         "primary": {
-          "label": "Book an appointment",
+          "label": "Book Appointment",
           "href": "/contacto"
         },
         "secondary": {
-          "label": "Explore services",
+          "label": "Learn more",
           "href": "/servicios"
+        }
+      },
+      "stats": {
+        "specialists": {
+          "number": "30+",
+          "label": "SPECIALISTS"
+        },
+        "detection": {
+          "number": "1 in 5",
+          "label": "CRITICAL CASES DETECTED"
+        },
+        "guide": {
+          "number": "Clinical",
+          "label": "EXPERT GUIDANCE"
         }
       },
       "features": {
@@ -341,12 +430,36 @@
       "headingSuffix": "ent to your life",
       "description": "At Onkimia, you are our focus. Our philosophy combines innovative treatments, quality care, and the best specialists.",
       "services": [
-        { "icon": "car", "title": "Valet parking", "description": "Valet parking available at all our locations so you can arrive without worries." },
-        { "icon": "smartphone", "title": "Onkimia App", "description": "Access your medical history, schedule appointments, and check results from your phone." },
-        { "icon": "sparkles", "title": "Premium hospitality", "description": "A luxury waiting room with amenities so your experience is comfortable from the very first moment." },
-        { "icon": "shield-check", "title": "Insurance concierge", "description": "We coordinate directly with your insurance provider for authorizations, reimbursements, and coverage — stress-free." },
-        { "icon": "users", "title": "Companion welcome", "description": "Your family or companion is always welcome during consultations and procedures." },
-        { "icon": "globe", "title": "Bilingual care", "description": "Our team serves you with the same warmth in Spanish and English." }
+        {
+          "icon": "car",
+          "title": "Valet parking",
+          "description": "Valet parking available at all our locations so you can arrive without worries."
+        },
+        {
+          "icon": "smartphone",
+          "title": "Onkimia App",
+          "description": "Access your medical history, schedule appointments, and check results from your phone."
+        },
+        {
+          "icon": "sparkles",
+          "title": "Premium hospitality",
+          "description": "A luxury waiting room with amenities so your experience is comfortable from the very first moment."
+        },
+        {
+          "icon": "shield-check",
+          "title": "Insurance concierge",
+          "description": "We coordinate directly with your insurance provider for authorizations, reimbursements, and coverage — stress-free."
+        },
+        {
+          "icon": "users",
+          "title": "Companion welcome",
+          "description": "Your family or companion is always welcome during consultations and procedures."
+        },
+        {
+          "icon": "globe",
+          "title": "Bilingual care",
+          "description": "Our team serves you with the same warmth in Spanish and English."
+        }
       ]
     },
     "bodyMind": {

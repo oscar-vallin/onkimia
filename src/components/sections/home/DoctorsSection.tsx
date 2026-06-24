@@ -23,7 +23,6 @@ export async function DoctorsSection({ locale }: DoctorsSectionProps) {
       eyebrow={t('doctors.eyebrow')}
       title={t('doctors.title')}
       description={t('doctors.description')}
-      viewProfileLabel={t('doctors.viewDetail')}
       locale={locale}
     />
   );

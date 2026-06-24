@@ -17,6 +17,7 @@ export async function InsurancesSection() {
       insurances={insurances}
       eyebrow={t('insurances.eyebrow')}
       title={t('insurances.title')}
+      intro={t('insurances.intro')}
       statLabel={t('insurances.statLabel')}
     />
   );

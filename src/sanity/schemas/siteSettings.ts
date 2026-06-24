@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { CogIcon } from '@sanity/icons';
-import { localizedString } from '../lib/localization';
+import { localizedString, localizedText } from '../lib/localization';
 
 export const siteSettings = defineType({
   name: 'siteSettings',
@@ -119,6 +119,159 @@ export const siteSettings = defineType({
     }),
 
     // ─── SECTION IMAGES ─────────────────────────────────────────────────────
+    defineField({
+      name: 'wellnessImage',
+      title: 'Imagen de fondo — Sección Wellness',
+      type: 'image',
+      group: 'sections',
+      description: 'Imagen a sangre completa detrás de la sección "Vive más sano, por más tiempo". Se muestra con overlay oscuro.',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'wellbeingList',
+      title: 'Lista de bienestar (Home)',
+      type: 'array',
+      group: 'sections',
+      description: 'Servicios de bienestar integral mostrados en la sección oscura del Home. Arrastra para reordenar.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'icon',
+              title: 'Ícono',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Sparkles (relajación)', value: 'sparkles' },
+                  { title: 'Zap (fisioterapia)',    value: 'zap' },
+                  { title: 'Corazón (psicología)',  value: 'heart' },
+                  { title: 'Bolsa (boutique)',      value: 'shopping-bag' },
+                  { title: 'Gráfica (nutrición)',   value: 'bar-chart' },
+                  { title: 'Bombilla (genómica)',   value: 'lightbulb' },
+                  { title: 'ADN',                   value: 'dna' },
+                  { title: 'Actividad',             value: 'activity' },
+                ],
+                layout: 'dropdown',
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+            localizedString({ name: 'title', title: 'Título', required: true }),
+            localizedText({ name: 'description', title: 'Descripción', rows: 3, required: true }),
+          ],
+          preview: {
+            select: { title: 'title.es', subtitle: 'icon' },
+            prepare({ title, subtitle }) {
+              return { title: title || 'Servicio de bienestar', subtitle };
+            },
+          },
+        },
+      ],
+      validation: (Rule) => Rule.max(9),
+    }),
+    defineField({
+      name: 'servicesList',
+      title: 'Lista de servicios (Home)',
+      type: 'array',
+      group: 'sections',
+      description: 'Servicios mostrados en la sección "Cuidarte es nuestra prioridad". Arrastra para reordenar.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'icon',
+              title: 'Ícono',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Corazón (heart)', value: 'heart' },
+                  { title: 'Portapapeles (clipboard)', value: 'clipboard' },
+                  { title: 'Sol (sun)', value: 'sun' },
+                  { title: 'Búsqueda (search)', value: 'search' },
+                  { title: 'Usuario (user)', value: 'user' },
+                  { title: 'Actividad (activity)', value: 'activity' },
+                  { title: 'Microscopio (microscope)', value: 'microscope' },
+                  { title: 'Escudo (shield)', value: 'shield' },
+                ],
+                layout: 'dropdown',
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+            localizedString({ name: 'title', title: 'Título', required: true }),
+            localizedText({ name: 'description', title: 'Descripción', rows: 3, required: true }),
+          ],
+          preview: {
+            select: { title: 'title.es', subtitle: 'icon' },
+            prepare({ title, subtitle }) {
+              return { title: title || 'Servicio', subtitle };
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: 'studiesGallery',
+      title: 'Galería — Estudios (Home)',
+      type: 'array',
+      group: 'sections',
+      description: 'Imágenes flotantes de la sección "La evaluación de salud más completa". 5 imágenes cuadradas recomendadas.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'image',
+              title: 'Imagen',
+              type: 'image',
+              options: { hotspot: true },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'alt',
+              title: 'Texto alternativo',
+              type: 'string',
+              validation: (Rule) => Rule.required().error('Describe la imagen para lectores de pantalla'),
+            }),
+          ],
+          preview: {
+            select: { media: 'image', title: 'alt' },
+            prepare({ media, title }) {
+              return { title: title || 'Imagen estudio', media };
+            },
+          },
+        },
+      ],
+      validation: (Rule) => Rule.max(7),
+    }),
+    defineField({
+      name: 'howItWorksSteps',
+      title: 'Pasos — Cómo funciona (Home)',
+      type: 'array',
+      group: 'sections',
+      description: 'Exactamente 3 imágenes, una por paso. El texto de cada paso se gestiona en i18n.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'image',
+              title: 'Imagen del paso',
+              type: 'image',
+              options: { hotspot: true },
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { media: 'image' },
+            prepare({ media }) {
+              return { title: 'Paso', media };
+            },
+          },
+        },
+      ],
+      validation: (Rule) => Rule.max(3),
+    }),
     defineField({
       name: 'processImage',
       title: 'Imagen del Proceso de Evaluación',
