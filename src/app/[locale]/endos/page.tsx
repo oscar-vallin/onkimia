@@ -12,6 +12,7 @@ import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, User
 import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
 import { FAQPageLd, MedicalProcedureLd } from '@/components/seo/JsonLd';
+import { FAQAccordionItem } from '@/components/ui/FAQAccordionItem';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -292,31 +293,37 @@ export default async function EndosPage({
       {/* ════════════════════════════════════════
           PREGUNTAS FRECUENTES
       ════════════════════════════════════════ */}
-      {faqs.length > 0 && (
-        <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-faq-title">
-          <div className="container-onkimia">
-            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5 text-center">
-              {t('faq.eyebrow')}
-            </p>
-            <h2 id="endos-faq-title" className="font-serif text-4xl md:text-5xl text-primary text-center mb-14">
-              {t('faq.title')}
-            </h2>
-            <div className="max-w-3xl mx-auto space-y-3">
-              {faqs.map((faq) => (
-                <EndosFAQItem
-                  key={faq._id}
-                  question={getLocalized(faq.question, locale)}
-                  answer={getLocalized(faq.answer, locale)}
-                />
-              ))}
-            </div>
-            <FAQPageLd faqs={faqs.map((faq) => ({
+      {(endosPageData?.faqItems?.length || faqs.length) > 0 && (() => {
+        const inlineFaqs = endosPageData?.faqItems?.length
+          ? endosPageData.faqItems.map((item) => ({
+              id: item._key,
+              question: getLocalized(item.question, locale),
+              answer: getLocalized(item.answer, locale),
+            }))
+          : faqs.map((faq) => ({
+              id: faq._id,
               question: getLocalized(faq.question, locale),
               answer: getLocalized(faq.answer, locale),
-            }))}/>
-          </div>
-        </section>
-      )}
+            }));
+        return (
+          <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-faq-title">
+            <div className="container-onkimia">
+              <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5 text-center">
+                {t('faq.eyebrow')}
+              </p>
+              <h2 id="endos-faq-title" className="font-serif text-4xl md:text-5xl text-primary text-center mb-14">
+                {t('faq.title')}
+              </h2>
+              <div className="max-w-3xl mx-auto space-y-3">
+                {inlineFaqs.map((faq) => (
+                  <FAQAccordionItem key={faq.id} question={faq.question} answer={faq.answer} />
+                ))}
+              </div>
+              <FAQPageLd faqs={inlineFaqs.map((faq) => ({ question: faq.question, answer: faq.answer }))} />
+            </div>
+          </section>
+        );
+      })()}
 
       {/* ════════════════════════════════════════
           CTA
@@ -339,21 +346,3 @@ export default async function EndosPage({
   );
 }
 
-/* ─── FAQ accordion (native HTML details/summary, no JS state) ─── */
-function EndosFAQItem({ question, answer }: { question: string; answer: string }) {
-  return (
-    <details className="group bg-white border border-black/[0.07] rounded-2xl overflow-hidden open:border-l-4 open:border-l-primary">
-      <summary className="flex items-center justify-between gap-4 px-7 py-5 cursor-pointer list-none select-none">
-        <span className="font-medium text-primary text-sm leading-snug">{question}</span>
-        <span className="w-7 h-7 rounded-full border border-black/[0.07] flex items-center justify-center flex-shrink-0 group-open:bg-primary group-open:border-primary transition-colors">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-secondary group-open:text-white group-open:rotate-45 transition-all" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            <path d="M6 1v10M1 6h10"/>
-          </svg>
-        </span>
-      </summary>
-      <div className="px-7 pb-6 text-secondary text-sm leading-relaxed border-t border-black/[0.07] pt-4">
-        {answer}
-      </div>
-    </details>
-  );
-}

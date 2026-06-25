@@ -175,6 +175,11 @@ export interface ServiciosPage {
 export interface EndosPage {
   _id: string;
   safetyImage?: SanityImageWithLQIP;
+  faqItems?: Array<{
+    _key: string;
+    question: LocalizedString;
+    answer: LocalizedString;
+  }>;
 }
 
 

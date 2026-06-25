@@ -336,11 +336,12 @@ export const CUIDARE_PROCEDURES_QUERY = groq`
   }
 `;
 
-/** Singleton página Endos — solo imágenes de sección. */
+/** Singleton página Endos — imágenes de sección + FAQ inline. */
 export const ENDOS_PAGE_QUERY = groq`
   *[_type == "endosPage" && _id == "endosPage"][0] {
     _id,
-    safetyImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop }
+    safetyImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    faqItems[] { _key, question, answer }
   }
 `;
 
