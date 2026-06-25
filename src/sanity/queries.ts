@@ -292,6 +292,13 @@ export const ABOUT_PAGE_QUERY = groq`
     testimonialsTitle,
     testimonialsSubtitle,
     reikyImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+    aboutTestimonials[] {
+      _key,
+      photo { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
+      name,
+      role,
+      testimonial
+    },
     "faqItems": faqItems[]{
       _key,
       "question": question[$locale],

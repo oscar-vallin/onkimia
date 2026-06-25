@@ -134,7 +134,19 @@ export default async function NosotrosPage({
         eyebrow={t('testimonials.eyebrow')}
         title={getLocalized(aboutPage?.testimonialsTitle, locale) || t('testimonials.title')}
         subtitle={getLocalized(aboutPage?.testimonialsSubtitle, locale) || t('testimonials.subtitle')}
-        testimonials={testimonials}
+        testimonials={
+          aboutPage?.aboutTestimonials?.length
+            ? aboutPage.aboutTestimonials.map((item) => ({
+                _id: item._key,
+                _type: 'testimonial' as const,
+                name: item.name,
+                photo: item.photo,
+                testimonial: item.testimonial,
+                role: item.role,
+                isActive: true,
+              }))
+            : testimonials
+        }
         locale={locale}
         reikyImage={aboutPage?.reikyImage}
       />

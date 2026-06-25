@@ -45,23 +45,6 @@ export function TestimonialsSection({
 
       </div>
 
-      {/* Wide image below carousel */}
-      {reikyImage && (
-        <div className="container-onkimia mt-16">
-          <div className="relative aspect-[22/9] rounded-2xl overflow-hidden">
-            <Image
-              src={urlFor(reikyImage).width(1400).height(788).format('webp').quality(82).url()}
-              alt="Terapia de bienestar Onkimia"
-              fill
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              loading="lazy"
-              placeholder={reikyImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-              blurDataURL={reikyImage?.asset?.metadata?.lqip ?? undefined}
-              className="object-cover object-[center_10%]"
-            />
-          </div>
-        </div>
-      )}
     </section>
   );
 }

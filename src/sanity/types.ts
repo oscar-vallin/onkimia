@@ -305,5 +305,12 @@ export interface AboutPage {
   testimonialsTitle?: LocalizedString;
   testimonialsSubtitle?: LocalizedString;
   reikyImage?: SanityImageWithLQIP;
+  aboutTestimonials?: Array<{
+    _key: string;
+    photo: SanityImageWithLQIP;
+    name: string;
+    role?: LocalizedString;
+    testimonial: LocalizedString;
+  }>;
   faqItems?: FAQItem[];
 }
