@@ -209,9 +209,9 @@
     "appointment": {
       "title": "Agenda tu cita",
       "description": "Tres simples pasos para comenzar tu tratamiento",
-      "step1": "Elige lo que necesitas",
-      "step2": "Selecciona a tu especialista",
+      "step1": "Describe lo que necesitas",
       "step3": "Agenda tu cita en Onkimia",
+      "tagline": "Vive más sano, por más tiempo.",
       "cta": "Agenda tu cita"
     },
     "insurances": {

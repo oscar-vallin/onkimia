@@ -209,9 +209,9 @@
     "appointment": {
       "title": "Schedule your appointment",
       "description": "Three simple steps to start your treatment",
-      "step1": "Choose what you need",
-      "step2": "Select your specialist",
+      "step1": "Describe what you need",
       "step3": "Schedule your visit at Onkimia",
+      "tagline": "Live healthier, for longer.",
       "cta": "Schedule appointment"
     },
     "insurances": {

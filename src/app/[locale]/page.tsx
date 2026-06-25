@@ -211,10 +211,9 @@ export default async function HomePage({
        {/* ─── AGENDA TU CITA ─── */}
       <AppointmentCta
         title={t('appointment.title')}
-        description={t('appointment.description')}
         step1={t('appointment.step1')}
-        step2={t('appointment.step2')}
         step3={t('appointment.step3')}
+        tagline={t('appointment.tagline')}
         cta={t('appointment.cta')}
         ctaHref={ROUTES.contactForm}
         backgroundImage={settings.appointmentCtaBgImage}
