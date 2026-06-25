@@ -48,15 +48,15 @@ export function TreatmentAccordion({ treatments }: TreatmentAccordionProps) {
           return (
             <article
               key={id}
-              className="bg-cream border border-line rounded-2xl p-6 hover:border-teal-soft transition-colors transition-shadow"
+              className="bg-white border border-black/[0.07] rounded-2xl p-6 hover:border-primary/20 hover:shadow-sm transition-all duration-200"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-teal/10 text-teal flex items-center justify-center">
+                <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-primary/10 text-primary/60 flex items-center justify-center">
                   {Icon && <Icon className="w-6 h-6" aria-hidden="true" />}
                 </div>
                 <div>
-                  <h3 className="font-serif text-xl mb-2">{title}</h3>
-                  <p className="text-gray-warm text-sm leading-relaxed">
+                  <h3 className="font-serif text-xl text-primary mb-2">{title}</h3>
+                  <p className="text-secondary text-sm leading-relaxed">
                     {description}
                   </p>
                 </div>
@@ -74,7 +74,7 @@ export function TreatmentAccordion({ treatments }: TreatmentAccordionProps) {
           return (
             <article
               key={id}
-              className="bg-cream border border-line rounded-2xl overflow-hidden"
+              className="bg-white border border-black/[0.07] rounded-2xl overflow-hidden"
             >
               <button
                 type="button"
@@ -83,12 +83,12 @@ export function TreatmentAccordion({ treatments }: TreatmentAccordionProps) {
                 aria-controls={`treatment-content-${id}`}
                 className="w-full p-4 flex items-center gap-3 text-left"
               >
-                <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-teal/10 text-teal flex items-center justify-center">
+                <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-primary/10 text-primary/60 flex items-center justify-center">
                   {Icon && <Icon className="w-5 h-5" aria-hidden="true" />}
                 </div>
-                <h3 className="flex-1 font-serif text-base">{title}</h3>
+                <h3 className="flex-1 font-serif text-base text-primary">{title}</h3>
                 <ChevronDown
-                  className={`w-5 h-5 text-gray-soft transition-transform flex-shrink-0 ${
+                  className={`w-5 h-5 text-secondary/50 transition-transform flex-shrink-0 ${
                     isOpen ? 'rotate-180' : ''
                   }`}
                   aria-hidden="true"
@@ -99,7 +99,7 @@ export function TreatmentAccordion({ treatments }: TreatmentAccordionProps) {
                   id={`treatment-content-${id}`}
                   className="px-4 pb-4 pl-[3.75rem]"
                 >
-                  <p className="text-gray-warm text-sm leading-relaxed">
+                  <p className="text-secondary text-sm leading-relaxed">
                     {description}
                   </p>
                 </div>

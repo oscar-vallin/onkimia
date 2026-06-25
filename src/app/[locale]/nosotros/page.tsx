@@ -88,6 +88,14 @@ export default async function NosotrosPage({
         services={differentialServices}
       />
 
+            {/* ─── APP ONKIMIA ─── */}
+      <AppBanner
+        title={t('appBanner.title')}
+        description={t('appBanner.description')}
+        appStoreLabel={t('appBanner.appStore')}
+        googlePlayLabel={t('appBanner.googlePlay')}
+      />
+
       {/* ─── 2. CUERPO, MENTE Y CUIDADO INTEGRAL ─── */}
       <Enfoque360Section
         eyebrow={t('enfoque360.eyebrow')}
@@ -123,6 +131,7 @@ export default async function NosotrosPage({
 
       {/* ─── 5. CARRUSEL DE TESTIMONIALES ─── */}
       <TestimonialsSection
+        eyebrow={t('testimonials.eyebrow')}
         title={getLocalized(aboutPage?.testimonialsTitle, locale) || t('testimonials.title')}
         subtitle={getLocalized(aboutPage?.testimonialsSubtitle, locale) || t('testimonials.subtitle')}
         testimonials={testimonials}
@@ -148,13 +157,6 @@ export default async function NosotrosPage({
         buttonHref="/contacto"
       />
 
-      {/* ─── APP ONKIMIA ─── */}
-      <AppBanner
-        title={t('appBanner.title')}
-        description={t('appBanner.description')}
-        appStoreLabel={t('appBanner.appStore')}
-        googlePlayLabel={t('appBanner.googlePlay')}
-      />
     </>
   );
 }

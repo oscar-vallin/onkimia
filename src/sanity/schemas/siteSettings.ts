@@ -296,6 +296,14 @@ export const siteSettings = defineType({
       description: 'Imagen de fondo oscura para la sección de procedimientos guiados por ultrasonido en /cuidare.',
       options: { hotspot: true },
     }),
+    defineField({
+      name: 'appointmentCtaBgImage',
+      title: 'Fondo — Sección Agenda tu Cita (Home)',
+      type: 'image',
+      group: 'sections',
+      description: 'Imagen de fondo para la sección "Agenda tu Cita" del Home. Se muestra con overlay oscuro. 1920×1080px recomendado.',
+      options: { hotspot: true },
+    }),
 
     // ─── CONTACT & SOCIAL ───────────────────────────────────────────────────
     defineField({

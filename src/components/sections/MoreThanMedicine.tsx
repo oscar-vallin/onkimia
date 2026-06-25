@@ -43,15 +43,15 @@ export function MoreThanMedicine({
 
         {/* Centered header */}
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-          <p className="text-xs font-medium tracking-[0.25em] uppercase text-teal mb-5">
+          <p className="text-xs font-medium tracking-[0.25em] uppercase text-secondary mb-5">
             {eyebrow}
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-ink leading-tight mb-6">
+          <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
             {titleLine1}{' '}
-            <em className="not-italic text-teal-soft">{titleUnderlined}</em>
+            <em className="not-italic text-secondary">{titleUnderlined}</em>
             {titleSuffix && titleSuffix}
           </h2>
-          <p className="text-gray-warm text-lg leading-relaxed">{description}</p>
+          <p className="text-secondary text-lg leading-relaxed">{description}</p>
         </div>
 
         {/* 3×2 service card grid */}
@@ -62,19 +62,19 @@ export function MoreThanMedicine({
               return (
                 <div
                   key={i}
-                  className="bg-white border border-gray-200 rounded-2xl p-7 flex flex-col gap-6 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                  className="bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-col gap-6 hover:border-black/[0.14] hover:shadow-sm transition-all duration-200"
                 >
                   {/* Icon badge */}
-                  <div className="w-11 h-11 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center flex-shrink-0 text-ink/50">
+                  <div className="w-11 h-11 rounded-xl bg-gray-50 border border-black/[0.07] flex items-center justify-center flex-shrink-0 text-primary/50">
                     <Icon className="w-5 h-5" strokeWidth={1.5} aria-hidden="true" />
                   </div>
 
                   {/* Text */}
                   <div>
-                    <h3 className="font-semibold text-ink text-base mb-2 leading-snug">
+                    <h3 className="font-semibold text-primary text-base mb-2 leading-snug">
                       {service.title}
                     </h3>
-                    <p className="text-gray-warm text-sm leading-relaxed">
+                    <p className="text-secondary text-sm leading-relaxed">
                       {service.description}
                     </p>
                   </div>

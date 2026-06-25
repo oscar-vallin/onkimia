@@ -203,7 +203,12 @@ export default async function HomePage({
         }
       />
 
-      {/* ─── AGENDA TU CITA ─── */}
+      {/* ─── INSURANCES — streamed ─── */}
+      <Suspense fallback={<InsurancesSkeleton />}>
+        <InsurancesSection />
+      </Suspense>
+
+       {/* ─── AGENDA TU CITA ─── */}
       <AppointmentCta
         title={t('appointment.title')}
         description={t('appointment.description')}
@@ -212,12 +217,8 @@ export default async function HomePage({
         step3={t('appointment.step3')}
         cta={t('appointment.cta')}
         ctaHref={ROUTES.contactForm}
+        backgroundImage={settings.appointmentCtaBgImage}
       />
-
-      {/* ─── INSURANCES — streamed ─── */}
-      <Suspense fallback={<InsurancesSkeleton />}>
-        <InsurancesSection />
-      </Suspense>
     </>
   );
 }

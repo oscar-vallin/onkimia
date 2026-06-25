@@ -119,13 +119,13 @@ export default async function CuidarePage({
 
       {/* ─── BENEFICIOS ─── */}
       <section
-        className="bg-cream py-16 md:py-24"
+        className="bg-gray-50 py-16 md:py-24"
         aria-labelledby="cuidare-benefits-title"
       >
         <div className="container-onkimia">
           <h2
             id="cuidare-benefits-title"
-            className="font-serif text-4xl md:text-5xl text-center mb-12 max-w-3xl mx-auto"
+            className="font-serif text-4xl md:text-5xl text-primary text-center mb-12 max-w-3xl mx-auto"
           >
             {t('benefits.title')}
           </h2>
@@ -133,12 +133,12 @@ export default async function CuidarePage({
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
               <li
                 key={key}
-                className="flex items-start gap-3 bg-white p-6 rounded-2xl border border-line transition-all duration-300 ease-out hover:border-gray-300 hover:shadow-sm hover:-translate-y-0.5"
+                className="flex items-start gap-3 bg-white p-6 rounded-2xl border border-black/[0.07] transition-all duration-300 ease-out hover:border-primary/10 hover:shadow-sm hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 flex-shrink-0 rounded-full bg-teal/10 text-teal flex items-center justify-center">
+                <div className="w-10 h-10 flex-shrink-0 rounded-full bg-primary/10 text-primary/60 flex items-center justify-center">
                   <Icon className="w-5 h-5" aria-hidden="true" />
                 </div>
-                <p className="text-sm text-gray-warm leading-snug pt-2">
+                <p className="text-sm text-secondary leading-snug pt-2">
                   {t(`benefits.items.${key}`)}
                 </p>
               </li>
@@ -149,19 +149,19 @@ export default async function CuidarePage({
 
       {/* ─── TRATAMIENTOS AMBULATORIOS ─── */}
       <section
-        className="container-onkimia py-16 md:py-24"
+        className="bg-white py-16 md:py-24"
         aria-labelledby="cuidare-treatments-title"
       >
+      <div className="container-onkimia">
         <h2
           id="cuidare-treatments-title"
-          className="font-serif text-4xl md:text-5xl text-center mb-12"
+          className="font-serif text-4xl md:text-5xl text-primary text-center mb-12"
         >
           {t('treatments.title')}
         </h2>
 
         <TreatmentAccordion treatments={treatments} />
 
-        {/* JSON-LD por cada tratamiento */}
         {treatments.map((tr) => (
           <MedicalProcedureLd
             key={tr.id}
@@ -169,6 +169,7 @@ export default async function CuidarePage({
             description={tr.description}
           />
         ))}
+      </div>
       </section>
 
       {/* ─── PROCEDIMIENTOS CUIDARE — fotos prominentes ─── */}
@@ -199,7 +200,7 @@ export default async function CuidarePage({
                         blurDataURL={proc.image?.asset?.metadata?.lqip ?? undefined}
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-ink/10" />
+                      <div className="absolute inset-0 bg-primary/10" />
                     )}
                     <div
                       className="absolute inset-0"
@@ -225,7 +226,6 @@ export default async function CuidarePage({
 
       {/* ─── RADIOLOGÍA INTERVENCIONISTA ─── */}
       <section className="relative overflow-hidden py-20 md:py-28" aria-labelledby="cuidare-radiology-title">
-        {/* Background image */}
         {settings.cuidareRadiologyImage?.asset && (
           <Image
             src={urlFor(settings.cuidareRadiologyImage).width(1920).height(1080).format('webp').quality(80).url()}
@@ -237,9 +237,8 @@ export default async function CuidarePage({
             blurDataURL={settings.cuidareRadiologyImage?.asset?.metadata?.lqip ?? undefined}
           />
         )}
-        {/* Dark overlay — always present, deeper when no image */}
         <div
-          className="absolute inset-0 bg-ink"
+          className="absolute inset-0 bg-primary"
           style={{ opacity: settings.cuidareRadiologyImage?.asset ? 0.82 : 1 }}
           aria-hidden="true"
         />
@@ -258,7 +257,6 @@ export default async function CuidarePage({
               <p className="text-white/60 text-base md:text-lg leading-relaxed mb-10">
                 {t('radiology.description')}
               </p>
-              {/* Stat pills */}
               <div className="flex flex-wrap gap-3">
                 <div className="bg-white/[0.07] border border-white/[0.10] rounded-2xl px-7 py-5 text-center min-w-[130px]">
                   <p className="font-serif text-2xl text-white leading-none mb-1">{t('radiology.stat1Value')}</p>
@@ -271,7 +269,7 @@ export default async function CuidarePage({
               </div>
             </div>
 
-            {/* Right — items with icon + name + description */}
+            {/* Right — items */}
             <ul className="space-y-3">
               {RADIOLOGY_KEYS.map((key, i) => {
                 const icons = ['⚡', '📋', '↔', '🧪', '🎯'];
@@ -294,13 +292,11 @@ export default async function CuidarePage({
       </section>
 
       {/* ─── CUIDADOS PALIATIVOS ─── */}
-      {/* TODO Cliente: confirmar contenido real de Cuidados Paliativos.
-          El texto actual parece testimonio/diferenciador, no descripción técnica del servicio. */}
       <section
         className="container-onkimia py-16 md:py-24"
         aria-labelledby="cuidare-palliative-title"
       >
-        <div className="max-w-3xl mx-auto bg-ink text-white rounded-2xl p-8 md:p-12 relative">
+        <div className="max-w-3xl mx-auto bg-primary text-white rounded-2xl p-8 md:p-12 relative">
           <span
             className="absolute top-4 left-6 text-6xl font-serif text-white/40 opacity-50"
             aria-hidden="true"
@@ -322,13 +318,13 @@ export default async function CuidarePage({
       {/* ─── FAQs ─── */}
       {faqs.length > 0 && (
         <section
-          className="bg-cream py-16 md:py-24"
+          className="bg-gray-50 py-16 md:py-24"
           aria-labelledby="cuidare-faq-title"
         >
           <div className="container-onkimia">
             <h2
               id="cuidare-faq-title"
-              className="font-serif text-4xl md:text-5xl text-center mb-12"
+              className="font-serif text-4xl md:text-5xl text-primary text-center mb-12"
             >
               {t('faq.title')}
             </h2>
@@ -345,18 +341,20 @@ export default async function CuidarePage({
 
       {/* ─── CTA FINAL ─── */}
       <section
-        className="container-onkimia py-16 md:py-24"
+        className="bg-white py-16 md:py-24"
         aria-labelledby="cuidare-cta-title"
       >
+      <div className="container-onkimia">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 id="cuidare-cta-title" className="font-serif text-4xl md:text-5xl mb-6">
+          <h2 id="cuidare-cta-title" className="font-serif text-4xl md:text-5xl text-primary mb-6">
             {t('cta.title')}
           </h2>
-          <p className="text-lg text-gray-warm leading-relaxed mb-8 text-pretty">
+          <p className="text-lg text-secondary leading-relaxed mb-8 text-pretty">
             {t('cta.description')}
           </p>
           <BookingButton section="cuidare" variant="primary" />
         </div>
+      </div>
       </section>
     </>
   );

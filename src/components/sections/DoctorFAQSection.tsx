@@ -16,10 +16,10 @@ export function DoctorFAQSection({ eyebrow, title, items }: DoctorFAQSectionProp
     <section className="bg-white py-20 md:py-28">
       <div className="container-onkimia">
         <div className="text-center mb-12 md:mb-16">
-          <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5">
+          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
             {eyebrow}
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">
             {titleLines.map((line, i) => (
               <span key={i}>
                 {line}

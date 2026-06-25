@@ -9,12 +9,12 @@ export function MisionSection({ eyebrow, title, description }: MisionSectionProp
   const titleLines = title.split('\n');
 
   return (
-    <section className="bg-white overflow-hidden">
+    <section className="bg-white overflow-hidden mt-18">
       <div className="max-w-4xl mx-auto px-6 text-center pt-24 md:pt-28 pb-8">
-        <p className="text-xs tracking-[0.25em] uppercase text-gray-warm mb-5">
+        <p className="text-xs tracking-[0.25em] uppercase text-secondary mb-5">
           {eyebrow}
         </p>
-        <h2 className="font-serif text-5xl lg:text-7xl text-ink font-medium leading-tight mb-6">
+        <h2 className="font-serif text-5xl lg:text-7xl text-primary font-normal leading-tight mb-6">
           {titleLines.map((line, i) => (
             <span key={i}>
               {line}
@@ -22,7 +22,7 @@ export function MisionSection({ eyebrow, title, description }: MisionSectionProp
             </span>
           ))}
         </h2>
-        <p className="text-gray-warm text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto">
+        <p className="text-secondary text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto">
           {description}
         </p>
       </div>

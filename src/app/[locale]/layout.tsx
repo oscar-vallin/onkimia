@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
 import { Source_Code_Pro } from 'next/font/google';
-import { playfairDisplay, dmSans } from '@/app/fonts';
+import { fraunces, dmSans } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { CLINICS_QUERY, SITE_SETTINGS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
@@ -83,7 +83,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${sourceCodePro.variable} ${playfairDisplay.variable} ${dmSans.variable}`}
+      className={`${sourceCodePro.variable} ${fraunces.variable} ${dmSans.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
@@ -91,10 +91,10 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <MedicalOrganizationJsonLd settings={settings} clinics={clinics} />
       </head>
-      <body className="font-sans antialiased min-h-screen flex flex-col bg-cream">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-white">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-teal focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium"
         >
           Saltar al contenido principal
         </a>

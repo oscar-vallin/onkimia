@@ -68,6 +68,7 @@ export default async function EndosPage({
         imagePosition="md:object-[88%_25%]"
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
+        emphasisClassName="italic text-white/85"
         description={t('hero.description')}
         solidLeftBand
         mobileMinHeight="min-h-[90vh]"
@@ -82,16 +83,16 @@ export default async function EndosPage({
       {/* ════════════════════════════════════════
           DIAGNÓSTICO AMBULATORIO — icon cards
       ════════════════════════════════════════ */}
-      <section className="bg-cream py-20 md:py-28" aria-labelledby="endos-procedures-title">
+      <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-procedures-title">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5">
+          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
             {t('procedures.eyebrow')}
           </p>
-          <h2 id="endos-procedures-title" className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight mb-5">
+          <h2 id="endos-procedures-title" className="font-serif text-4xl md:text-5xl lg:text-6xl text-primary leading-tight mb-5">
             {t('procedures.headlinePart1')}{' '}
-            <em className="not-italic italic text-teal">{t('procedures.headlinePart2')}</em>
+            <em className="not-italic italic text-secondary">{t('procedures.headlinePart2')}</em>
           </h2>
-          <p className="text-gray-warm text-lg leading-relaxed max-w-2xl mb-14">
+          <p className="text-secondary text-lg leading-relaxed max-w-2xl mb-14">
             {t('procedures.intro')}
           </p>
 
@@ -99,30 +100,30 @@ export default async function EndosPage({
             {PROCEDURE_ITEM_KEYS.map((key, i) => {
               const Icon = PROCEDURE_ICONS[i];
               return (
-                <article key={key} className="bg-white border border-line rounded-2xl p-7 hover:border-teal/25 hover:shadow-sm transition-all duration-200">
-                  <div className="w-11 h-11 rounded-xl bg-teal/10 flex items-center justify-center mb-5">
-                    <Icon className="w-5 h-5 text-teal" aria-hidden="true"/>
+                <article key={key} className="bg-white border border-black/[0.07] rounded-2xl p-7 hover:border-primary/20 hover:shadow-sm transition-all duration-200">
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
+                    <Icon className="w-5 h-5 text-primary/60" aria-hidden="true"/>
                   </div>
-                  <h3 className="font-serif text-xl text-ink mb-2">{t(`procedures.items.${key}.name`)}</h3>
-                  <p className="text-sm text-gray-warm leading-relaxed">{t(`procedures.items.${key}.shortDescription`)}</p>
+                  <h3 className="font-serif text-xl text-primary mb-2">{t(`procedures.items.${key}.name`)}</h3>
+                  <p className="text-sm text-secondary leading-relaxed">{t(`procedures.items.${key}.shortDescription`)}</p>
                 </article>
               );
             })}
           </div>
 
           {/* Others */}
-          <div className="bg-white border border-line rounded-2xl p-7 flex items-start gap-4">
-            <ShieldCheck className="w-5 h-5 text-teal flex-shrink-0 mt-0.5" aria-hidden="true"/>
+          <div className="bg-white border border-black/[0.07] rounded-2xl p-7 flex items-start gap-4">
+            <ShieldCheck className="w-5 h-5 text-primary/50 flex-shrink-0 mt-0.5" aria-hidden="true"/>
             <div>
-              <h3 className="font-serif text-xl text-ink mb-1">{t('procedures.others')}</h3>
-              <p className="text-sm text-gray-warm leading-relaxed">{t('procedures.othersDescription')}</p>
+              <h3 className="font-serif text-xl text-primary mb-1">{t('procedures.others')}</h3>
+              <p className="text-sm text-secondary leading-relaxed">{t('procedures.othersDescription')}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════
-          PROCEDURES WITH IMAGES — Sanity photos (prominent, not a carousel)
+          PROCEDURES WITH IMAGES — Sanity photos
       ════════════════════════════════════════ */}
       {procedures.length > 0 && (
         <section className="bg-white py-20 md:py-28" aria-label={t('procedures.title')}>
@@ -154,7 +155,7 @@ export default async function EndosPage({
                         blurDataURL={proc.image?.asset?.metadata?.lqip ?? undefined}
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-ink/10" />
+                      <div className="absolute inset-0 bg-primary/10" />
                     )}
                     <div
                       className="absolute inset-0"
@@ -182,26 +183,26 @@ export default async function EndosPage({
       {/* ════════════════════════════════════════
           CALIDAD HOSPITALARIA — benefits
       ════════════════════════════════════════ */}
-      <section className="bg-ink py-20 md:py-28" aria-labelledby="endos-benefits-title">
+      <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-benefits-title">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-teal-soft font-medium mb-5">
-            {t('benefits.eyebrow')}
-          </p>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-            <h2 id="endos-benefits-title" className="font-serif text-4xl md:text-5xl text-white leading-tight">
+          <div className="text-center mb-14 max-w-2xl mx-auto">
+            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
+              {t('benefits.eyebrow')}
+            </p>
+            <h2 id="endos-benefits-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-5">
               {t('benefits.title')}
             </h2>
-            <p className="text-white/50 text-base leading-relaxed max-w-sm md:text-right">
+            <p className="text-secondary text-base leading-relaxed">
               {t('benefits.description')}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
-              <div key={key} className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6 flex flex-col gap-4 hover:bg-white/[0.07] transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-teal/15 flex items-center justify-center">
-                  <Icon className="w-5 h-5 text-teal-soft" aria-hidden="true"/>
+              <div key={key} className="bg-white border border-black/[0.07] rounded-2xl p-6 flex flex-col items-center text-center gap-4 hover:shadow-sm hover:border-primary/10 transition-all duration-200">
+                <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-5 h-5 text-white" aria-hidden="true"/>
                 </div>
-                <p className="text-sm text-white/70 leading-snug">{t(`benefits.items.${key}`)}</p>
+                <p className="font-medium text-primary text-sm leading-snug">{t(`benefits.items.${key}`)}</p>
               </div>
             ))}
           </div>
@@ -211,12 +212,12 @@ export default async function EndosPage({
       {/* ════════════════════════════════════════
           SEGURIDAD Y CONFIANZA
       ════════════════════════════════════════ */}
-      <section className="bg-ink py-20 md:py-28 border-t border-white/[0.06]" aria-labelledby="endos-safety-title">
+      <section className="bg-primary py-20 md:py-28 border-t border-white/[0.06]" aria-labelledby="endos-safety-title">
         <div className="container-onkimia">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-stretch">
             {/* Left */}
             <div>
-              <p className="text-xs tracking-[0.25em] uppercase text-teal-soft font-medium mb-5">
+              <p className="text-xs tracking-[0.25em] uppercase text-white/50 font-medium mb-5">
                 {t('safety.eyebrow')}
               </p>
               <h2 id="endos-safety-title" className="font-serif text-4xl md:text-5xl text-white leading-tight mb-8">
@@ -228,8 +229,8 @@ export default async function EndosPage({
               <ul className="space-y-7 mb-10">
                 {SAFETY_CHECKLIST.map((key) => (
                   <li key={key} className="flex gap-4">
-                    <div className="w-6 h-6 rounded-full bg-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3.5 h-3.5 text-teal-soft" aria-hidden="true"/>
+                    <div className="w-6 h-6 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-white/70" aria-hidden="true"/>
                     </div>
                     <div>
                       <p className="font-medium text-white text-mx mb-1">{t(`safety.checklistItems.${key}.title`)}</p>
@@ -238,8 +239,8 @@ export default async function EndosPage({
                   </li>
                 ))}
               </ul>
-              <blockquote className="border-l-2 border-teal-soft/60 pl-5">
-                <p className="text-teal-soft/100 text-mx italic leading-relaxed">{t('safety.quote')}</p>
+              <blockquote className="border-l-2 border-white/30 pl-5">
+                <p className="text-white/80 text-mx italic leading-relaxed">{t('safety.quote')}</p>
               </blockquote>
             </div>
 
@@ -248,8 +249,6 @@ export default async function EndosPage({
               <div className="relative w-full h-full rounded-3xl overflow-hidden bg-white/[0.03]">
                 {endosPageData?.safetyImage?.asset ? (
                   <>
-                    {/* Background fill — blurred cover, prevents jarring empty letterbox
-                        space around the contained image while keeping the premium dark feel */}
                     <Image
                       src={urlFor(endosPageData.safetyImage).width(900).format('webp').quality(85).url()}
                       alt=""
@@ -258,9 +257,6 @@ export default async function EndosPage({
                       className="object-cover scale-110 blur-xl opacity-30"
                       aria-hidden="true"
                     />
-                    {/* Foreground — object-contain shows the full image, never cropped.
-                        Centers automatically within the box (matches text column height
-                        via h-full on the parent), no further alignment markup needed. */}
                     <Image
                       src={urlFor(endosPageData.safetyImage).width(900).format('webp').quality(85).url()}
                       alt={t('safety.title')}
@@ -280,12 +276,12 @@ export default async function EndosPage({
               </div>
               {/* Floating badge */}
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 min-w-[220px]">
-                <div className="w-8 h-8 rounded-full bg-teal/15 flex items-center justify-center flex-shrink-0">
-                  <ShieldCheck className="w-4 h-4 text-teal" aria-hidden="true"/>
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="w-4 h-4 text-primary" aria-hidden="true"/>
                 </div>
                 <div>
-                  <p className="font-medium text-ink text-sm leading-none mb-1">{t('safety.badge')}</p>
-                  <p className="text-gray-warm text-xs">{t('safety.badgeSub')}</p>
+                  <p className="font-medium text-primary text-sm leading-none mb-1">{t('safety.badge')}</p>
+                  <p className="text-secondary text-xs">{t('safety.badgeSub')}</p>
                 </div>
               </div>
             </div>
@@ -297,12 +293,12 @@ export default async function EndosPage({
           PREGUNTAS FRECUENTES
       ════════════════════════════════════════ */}
       {faqs.length > 0 && (
-        <section className="bg-cream py-20 md:py-28" aria-labelledby="endos-faq-title">
+        <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-faq-title">
           <div className="container-onkimia">
-            <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5 text-center">
+            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5 text-center">
               {t('faq.eyebrow')}
             </p>
-            <h2 id="endos-faq-title" className="font-serif text-4xl md:text-5xl text-ink text-center mb-14">
+            <h2 id="endos-faq-title" className="font-serif text-4xl md:text-5xl text-primary text-center mb-14">
               {t('faq.title')}
             </h2>
             <div className="max-w-3xl mx-auto space-y-3">
@@ -327,13 +323,13 @@ export default async function EndosPage({
       ════════════════════════════════════════ */}
       <section className="bg-white py-20 md:py-28" aria-labelledby="endos-cta-title">
         <div className="container-onkimia max-w-3xl mx-auto text-center">
-          <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-6">
+          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-6">
             {t('cta.eyebrow')}
           </p>
-          <h2 id="endos-cta-title" className="font-serif text-4xl md:text-5xl text-ink leading-tight mb-6">
+          <h2 id="endos-cta-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
             {t('cta.title')}
           </h2>
-          <p className="text-gray-warm text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+          <p className="text-secondary text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             {t('cta.description')}
           </p>
           <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
@@ -346,16 +342,16 @@ export default async function EndosPage({
 /* ─── FAQ accordion (native HTML details/summary, no JS state) ─── */
 function EndosFAQItem({ question, answer }: { question: string; answer: string }) {
   return (
-    <details className="group bg-white border border-line rounded-2xl overflow-hidden open:border-l-4 open:border-l-teal">
+    <details className="group bg-white border border-black/[0.07] rounded-2xl overflow-hidden open:border-l-4 open:border-l-primary">
       <summary className="flex items-center justify-between gap-4 px-7 py-5 cursor-pointer list-none select-none">
-        <span className="font-medium text-ink text-sm leading-snug">{question}</span>
-        <span className="w-7 h-7 rounded-full border border-line flex items-center justify-center flex-shrink-0 group-open:bg-teal group-open:border-teal transition-colors">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-gray-warm group-open:text-white group-open:rotate-45 transition-all" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+        <span className="font-medium text-primary text-sm leading-snug">{question}</span>
+        <span className="w-7 h-7 rounded-full border border-black/[0.07] flex items-center justify-center flex-shrink-0 group-open:bg-primary group-open:border-primary transition-colors">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-secondary group-open:text-white group-open:rotate-45 transition-all" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
             <path d="M6 1v10M1 6h10"/>
           </svg>
         </span>
       </summary>
-      <div className="px-7 pb-6 text-gray-warm text-sm leading-relaxed border-t border-line pt-4">
+      <div className="px-7 pb-6 text-secondary text-sm leading-relaxed border-t border-black/[0.07] pt-4">
         {answer}
       </div>
     </details>

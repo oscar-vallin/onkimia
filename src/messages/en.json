@@ -484,7 +484,8 @@
       "description": "A wellness ecosystem that connects you with others and drives you toward a fuller life."
     },
     "testimonials": {
-      "title": "Testimonials",
+      "eyebrow": "PATIENTS",
+      "title": "Stories that inspire",
       "subtitle": "Real stories from people who trusted us"
     },
     "doubts": {

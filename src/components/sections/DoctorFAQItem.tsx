@@ -21,25 +21,25 @@ export function DoctorFAQItem({ item, defaultOpen = false }: DoctorFAQItemProps)
   return (
     <div
       className={`rounded-2xl border bg-white transition-all duration-200 mb-3 overflow-hidden ${
-        open ? 'border-teal shadow-sm' : 'border-line'
+        open ? 'border-primary/30 shadow-sm' : 'border-black/[0.07]'
       }`}
     >
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className={`w-full flex items-center justify-between gap-6 px-7 py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-inset ${
-          open ? 'border-l-4 border-l-teal' : 'border-l-4 border-l-transparent'
+        className={`w-full flex items-center justify-between gap-6 px-7 py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset ${
+          open ? 'border-l-4 border-l-primary' : 'border-l-4 border-l-transparent'
         }`}
         aria-expanded={open}
       >
-        <span className="font-sans text-base md:text-lg text-ink leading-snug font-normal">
+        <span className="font-sans text-base md:text-lg text-primary leading-snug font-normal">
           {item.question}
         </span>
         <span
           className={`flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-200 ${
             open
-              ? 'border-teal bg-teal text-white rotate-45'
-              : 'border-line bg-white text-ink group-hover:border-teal group-hover:text-teal'
+              ? 'border-primary bg-primary text-white rotate-45'
+              : 'border-black/[0.07] bg-white text-primary group-hover:border-primary group-hover:text-primary'
           }`}
           aria-hidden="true"
         >
@@ -54,10 +54,10 @@ export function DoctorFAQItem({ item, defaultOpen = false }: DoctorFAQItemProps)
           open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-7 pb-7 border-l-4 border-l-teal">
-          <p className="text-gray-warm text-base leading-relaxed mb-6">{item.answer}</p>
+        <div className="px-7 pb-7 border-l-4 border-l-primary">
+          <p className="text-secondary text-base leading-relaxed mb-6">{item.answer}</p>
 
-          <div className="flex items-center gap-3 pt-4 border-t border-line">
+          <div className="flex items-center gap-3 pt-4 border-t border-black/[0.07]">
             {photoSrc ? (
               <Image
                 src={photoSrc}
@@ -69,16 +69,16 @@ export function DoctorFAQItem({ item, defaultOpen = false }: DoctorFAQItemProps)
                 blurDataURL={item.doctor.photo?.asset?.metadata?.lqip ?? undefined}
               />
             ) : (
-              <div className="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-teal text-xs font-medium">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span className="text-primary text-xs font-medium">
                   {item.doctor.fullName.charAt(0)}
                 </span>
               </div>
             )}
             <div>
-              <p className="text-ink text-sm font-medium">{item.doctor.fullName}</p>
+              <p className="text-primary text-sm font-medium">{item.doctor.fullName}</p>
               {item.doctor.specialty && (
-                <p className="text-teal text-xs">{item.doctor.specialty}</p>
+                <p className="text-secondary text-xs">{item.doctor.specialty}</p>
               )}
             </div>
           </div>

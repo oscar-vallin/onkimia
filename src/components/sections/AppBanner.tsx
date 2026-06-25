@@ -7,12 +7,12 @@ interface AppBannerProps {
 
 export function AppBanner({ title, description, appStoreLabel, googlePlayLabel }: AppBannerProps) {
   return (
-    <section className="bg-cream py-10 md:py-14">
+    <section className="bg-gray-50 py-10 md:py-14">
       <div className="container-onkimia">
-        <div className="bg-white border border-line rounded-3xl px-8 py-7 md:px-10 md:py-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+        <div className="bg-white border border-black/[0.07] rounded-3xl px-8 py-7 md:px-10 md:py-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
 
           {/* Icon */}
-          <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ink flex items-center justify-center">
+          <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary flex items-center justify-center">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
               <line x1="12" y1="18" x2="12.01" y2="18"/>
@@ -21,8 +21,8 @@ export function AppBanner({ title, description, appStoreLabel, googlePlayLabel }
 
           {/* Text */}
           <div className="flex-1 min-w-0">
-            <p className="font-serif text-xl text-ink mb-1">{title}</p>
-            <p className="text-gray-warm text-sm leading-relaxed max-w-xl">{description}</p>
+            <p className="font-serif text-xl text-primary mb-1">{title}</p>
+            <p className="text-secondary text-sm leading-relaxed max-w-xl">{description}</p>
           </div>
 
           {/* Buttons */}
@@ -31,7 +31,7 @@ export function AppBanner({ title, description, appStoreLabel, googlePlayLabel }
               href="https://apps.apple.com/mx/app/onkimia/id6446001299"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-ink text-white text-sm font-medium px-5 py-3 rounded-xl hover:bg-ink-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2.5 bg-primary text-white text-sm font-medium px-5 py-3 rounded-xl hover:bg-primary/85 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               aria-label={`Onkimia en ${appStoreLabel}`}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -43,7 +43,7 @@ export function AppBanner({ title, description, appStoreLabel, googlePlayLabel }
               href="https://play.google.com/store/apps/details?id=mx.com.center_onkimia&pcampaignid=web_share"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-ink text-white text-sm font-medium px-5 py-3 rounded-xl hover:bg-ink-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2.5 bg-primary text-white text-sm font-medium px-5 py-3 rounded-xl hover:bg-primary/85 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               aria-label={`Onkimia en ${googlePlayLabel}`}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

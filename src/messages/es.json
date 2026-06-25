@@ -484,7 +484,8 @@
       "description": "Un ecosistema de bienestar que te conecta con otros y te impulsa a una vida más plena."
     },
     "testimonials": {
-      "title": "Testimonios",
+      "eyebrow": "PACIENTES",
+      "title": "Historias que inspiran",
       "subtitle": "Historias reales de personas que confiaron en nosotros"
     },
     "doubts": {

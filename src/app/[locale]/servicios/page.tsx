@@ -9,6 +9,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/image';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { PillButton } from '@/components/ui/PillButton';
+import { ArrowRight } from 'lucide-react';
 
 export async function generateMetadata({
   params,
@@ -95,27 +97,27 @@ export default async function ServicesPage({
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
-       
         primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
         extraDim
         solidLeftBand
+        bottomFade
       />
 
       {/* ─── 1. NUESTRO ENFOQUE — 3 feature cards ─── */}
       <section className="bg-white py-20 md:py-28">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5">
+          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
             {t('main.eyebrow')}
           </p>
-          <p className="text-gray-warm text-lg md:text-xl leading-relaxed max-w-2xl mb-14">
+          <p className="text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mb-14">
             {t('main.lead')}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {features.map((f, i) => (
-              <article key={i} className="bg-white border border-line rounded-2xl p-8 flex flex-col gap-6 shadow-xs hover:shadow-md hover:border-teal/20 transition-all duration-300">
+              <article key={i} className="bg-white border border-black/[0.07] rounded-2xl p-8 flex flex-col gap-6 shadow-xs hover:shadow-md hover:border-primary/20 transition-all duration-300">
                 {/* Icon */}
-                <div className="w-12 h-12 rounded-2xl bg-ink flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-white" aria-hidden="true">
                     {f.icon === 'hospital' && <path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 3v5m0 0v5m0-5H7m5 0h5" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>}
                     {f.icon === 'heart' && <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="white" strokeWidth="1.6" strokeLinejoin="round"/>}
@@ -124,13 +126,13 @@ export default async function ServicesPage({
                 </div>
                 {/* Content */}
                 <div className="flex-1">
-                  <h3 className="font-serif text-xl text-ink leading-snug mb-3">{f.title}</h3>
-                  <p className="text-gray-warm text-sm leading-relaxed">{f.description}</p>
+                  <h3 className="font-serif text-xl text-primary leading-snug mb-3">{f.title}</h3>
+                  <p className="text-secondary text-sm leading-relaxed">{f.description}</p>
                 </div>
                 {/* Stat */}
-                <div className="flex items-center gap-2 pt-4 border-t border-line">
-                  <span className="w-2 h-2 rounded-full bg-gray-soft flex-shrink-0" aria-hidden="true"/>
-                  <span className="text-sm text-gray-warm">{f.stat}</span>
+                <div className="flex items-center gap-2 pt-4 border-t border-black/[0.07]">
+                  <span className="w-2 h-2 rounded-full bg-secondary/30 flex-shrink-0" aria-hidden="true"/>
+                  <span className="text-sm text-secondary">{f.stat}</span>
                 </div>
               </article>
             ))}
@@ -158,16 +160,16 @@ export default async function ServicesPage({
       )}
 
       {/* ─── 2. CLÍNICAS — specialty grid ─── */}
-      <section className="bg-cream py-20 md:py-28">
+      <section className="bg-gray-50 py-20 md:py-28">
         <div className="container-onkimia">
           <div className="text-center mb-14 md:mb-18">
-            <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5">
+            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
               {t('clinics.eyebrow')}
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-primary leading-tight mb-6">
               {t('clinics.title')}
             </h2>
-            <p className="text-gray-warm text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-secondary text-lg leading-relaxed max-w-2xl mx-auto">
               {t('clinics.description')}
             </p>
           </div>
@@ -176,19 +178,24 @@ export default async function ServicesPage({
             {clinics.map((name, i) => (
               <div
                 key={i}
-                className="bg-white border border-line rounded-2xl p-5 flex flex-col gap-3 hover:border-teal/25 hover:shadow-sm transition-all duration-200"
+                className="group relative bg-white border border-black/[0.07] rounded-2xl p-5 flex flex-col gap-3 hover:border-primary/10 hover:-translate-y-1.5 hover:shadow-[-3px_8px_24px_rgba(0,0,0,0.10)] transition-all duration-300 cursor-default overflow-hidden"
               >
+                {/* Left accent line — grows top→bottom on hover */}
+                <div
+                  className="absolute left-0 top-0 w-0.5 h-0 group-hover:h-full bg-primary/25 rounded-l-2xl transition-all duration-300 ease-out"
+                  aria-hidden="true"
+                />
                 <div className="flex items-start justify-between">
-                  <div className="w-10 h-10 text-gray-soft">
+                  <div className="w-10 h-10 text-secondary/50">
                     <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
                       {clinicIcons[i]}
                     </svg>
                   </div>
-                  <span className="font-serif text-2xl text-line leading-none select-none">
+                  <span className="font-serif text-2xl text-black/10 leading-none select-none">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </div>
-                <p className="font-sans text-sm font-medium text-ink leading-snug">{name}</p>
+                <p className="font-sans text-sm font-medium text-primary leading-snug">{name}</p>
               </div>
             ))}
           </div>
@@ -197,7 +204,7 @@ export default async function ServicesPage({
 
       {/* ─── IMAGE BREAK 2 — Clínicas ─── */}
       {services?.clinicsSectionImage?.asset && (
-        <div className="bg-cream pb-20 md:pb-28">
+        <div className="bg-gray-50 pb-20 md:pb-28">
           <div className="container-onkimia">
             <div className="relative w-full aspect-[16/6] rounded-3xl overflow-hidden">
               <Image
@@ -215,9 +222,9 @@ export default async function ServicesPage({
       )}
 
       {/* ─── 3. UNIDADES COMPLEMENTARIAS — dark cards with links ─── */}
-      <section className="bg-ink py-20 md:py-28">
+      <section className="bg-primary py-20 md:py-28">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-teal-soft font-medium mb-5">
+          <p className="text-xs tracking-[0.25em] uppercase text-white/50 font-medium mb-5">
             {t('complementary.eyebrow')}
           </p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
@@ -234,17 +241,23 @@ export default async function ServicesPage({
               <Link
                 key={unit.name}
                 href={unit.link as `/${string}`}
-                className="group bg-white/[0.04] border border-white/[0.08] rounded-2xl p-7 flex flex-col gap-5 hover:bg-white/[0.08] hover:border-teal/30 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                className="group relative bg-white/[0.04] border border-white/[0.08] rounded-2xl p-7 flex flex-col gap-5 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 overflow-hidden"
               >
-                <div>
+                {/* Decorative circle — starts small + fully visible bottom-right, scales out on hover */}
+                <div
+                  className="absolute bottom-5 right-5 w-14 h-14 rounded-full bg-white/[0.07] group-hover:bg-white/[0.12] group-hover:scale-[3.5] origin-bottom-right transition-all duration-500 ease-out pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                <div className="relative">
                   <p className="text-[10px] tracking-[0.2em] uppercase text-white/40 mb-3">
                     {t('complementary.unitLabel')}
                   </p>
                   <h3 className="font-serif text-3xl text-white leading-none">{unit.name}</h3>
                 </div>
                 <div className="h-px bg-white/10" aria-hidden="true" />
-                <p className="text-white/60 text-sm leading-relaxed flex-1">{unit.description}</p>
-                <span className="inline-flex items-center gap-2 text-white/50 group-hover:text-teal-soft transition-colors text-sm">
+                <p className="text-white/60 text-sm leading-relaxed flex-1 relative">{unit.description}</p>
+                <span className="relative inline-flex items-center gap-2 text-white/50 group-hover:text-white transition-colors text-sm">
                   {t('complementary.knowMore')}
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4"/>
@@ -257,12 +270,12 @@ export default async function ServicesPage({
       </section>
 
       {/* ─── 4. SOCIOS COMERCIALES ─── */}
-      <section className="bg-cream py-20 md:py-28">
+      <section className="bg-gray-50 py-20 md:py-28">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5">
+          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
             {t('partners.eyebrow')}
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-ink leading-tight mb-14">
+          <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-14">
             {t('partners.title')}
           </h2>
 
@@ -270,20 +283,20 @@ export default async function ServicesPage({
             {commercialPartners.map((partner) => (
               <article
                 key={partner.name}
-                className="bg-white border border-line rounded-2xl p-7 flex flex-col gap-4 hover:border-teal/25 hover:shadow-sm transition-all duration-200"
+                className="bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-col gap-4 hover:border-primary/20 hover:shadow-sm transition-all duration-200"
               >
                 {/* Name as wordmark placeholder */}
                 <div className="h-12 flex items-center">
-                  <span className="font-serif text-2xl text-ink">{partner.name}</span>
+                  <span className="font-serif text-2xl text-primary">{partner.name}</span>
                 </div>
-                <div className="h-px bg-line" aria-hidden="true"/>
-                <p className="text-gray-warm text-sm leading-relaxed flex-1">{partner.description}</p>
+                <div className="h-px bg-black/[0.05]" aria-hidden="true"/>
+                <p className="text-secondary text-sm leading-relaxed flex-1">{partner.description}</p>
                 {partner.link && partner.link !== '#' ? (
                   <a
                     href={partner.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-teal text-sm font-medium hover:text-teal-soft transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-sm"
+                    className="inline-flex items-center gap-1.5 text-primary text-sm font-medium hover:text-primary/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
                   >
                     {t('partners.visitWebsite')}
                     <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -291,7 +304,7 @@ export default async function ServicesPage({
                     </svg>
                   </a>
                 ) : (
-                  <span className="text-gray-soft text-sm">{t('partners.visitWebsite')}</span>
+                  <span className="text-secondary/50 text-sm">{t('partners.visitWebsite')}</span>
                 )}
               </article>
             ))}
@@ -317,10 +330,10 @@ export default async function ServicesPage({
       </section>
 
       {/* ─── 5. CTA ─── */}
-      <section className="bg-ink py-20 md:py-28 grow">
+      <section className="bg-primary py-20 md:py-28 grow">
         <div className="container-onkimia">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-xs tracking-[0.25em] uppercase text-teal-soft font-medium mb-6">
+            <p className="text-xs tracking-[0.25em] uppercase text-white/50 font-medium mb-6">
               {t('cta.eyebrow')}
             </p>
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
@@ -329,15 +342,13 @@ export default async function ServicesPage({
             <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
               {t('cta.description')}
             </p>
-            <Link
+            <PillButton
+              variant="solid-light"
               href="/contacto#contact-form"
-              className="inline-flex items-center gap-2 bg-teal hover:bg-teal-soft text-white font-medium px-8 py-4 rounded-xl transition-colors text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              icon={<ArrowRight className="w-4 h-4" aria-hidden="true" />}
             >
               {t('cta.button')}
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </Link>
+            </PillButton>
           </div>
         </div>
       </section>

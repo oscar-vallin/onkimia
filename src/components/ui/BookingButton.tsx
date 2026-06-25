@@ -61,7 +61,7 @@ export async function BookingButton({
   };
 
   const primaryColorClasses =
-    sectionColorMap[section] ?? 'bg-teal hover:bg-teal-soft';
+    sectionColorMap[section] ?? 'bg-primary hover:bg-primary/85';
 
   const baseClasses =
     variant === 'brand'
@@ -69,7 +69,7 @@ export async function BookingButton({
       : 'inline-flex items-center justify-center gap-2 font-medium px-6 py-3 rounded-md transition-colors';
   const variantClasses =
     variant === 'brand'
-      ? 'bg-teal hover:bg-teal-soft text-white hover:shadow-lg hover:shadow-teal/30'
+      ? 'bg-primary hover:bg-primary/85 text-white hover:shadow-lg hover:shadow-primary/20'
       : variant === 'primary'
       ? `${primaryColorClasses} text-white shadow-sm hover:shadow-md`
       : 'border border-white text-white hover:bg-white/10';

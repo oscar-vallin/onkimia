@@ -61,7 +61,7 @@ function InitiativeCard({ title, description, category, linkText, linkHref, icon
 
   return (
     <article className="flex flex-col">
-      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-cream-2 mb-6">
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gray-100 mb-6">
         {imgSrc ? (
           <Image
             src={imgSrc}
@@ -73,25 +73,25 @@ function InitiativeCard({ title, description, category, linkText, linkHref, icon
             blurDataURL={blur}
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-cream-2" />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" />
         )}
       </div>
 
       <div className="flex items-center gap-2.5 mb-4">
-        <div className="w-8 h-8 rounded-full bg-cream-2 flex items-center justify-center text-gray-warm flex-shrink-0">
+        <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-secondary flex-shrink-0">
           {icon}
         </div>
-        <span className="text-xs tracking-[0.18em] uppercase font-medium text-gray-warm">
+        <span className="text-xs tracking-[0.18em] uppercase font-medium text-secondary">
           {category}
         </span>
       </div>
 
-      <h3 className="font-serif text-3xl text-ink mb-4 leading-tight">{title}</h3>
-      <p className="text-gray-warm text-base leading-relaxed flex-1">{description}</p>
+      <h3 className="font-serif text-3xl text-primary mb-4 leading-tight">{title}</h3>
+      <p className="text-secondary text-base leading-relaxed flex-1">{description}</p>
 
       <Link
         href={linkHref}
-        className="inline-flex items-center gap-1.5 text-ink text-sm font-medium mt-6 border-b border-ink pb-0.5 w-fit hover:text-teal hover:border-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 rounded-sm"
+        className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-6 border-b border-primary pb-0.5 w-fit hover:text-primary/60 hover:border-primary/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
       >
         {linkText}
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -120,10 +120,10 @@ export function InitiativeCards({
     <section className="bg-white py-20 md:py-28">
       <div className="container-onkimia">
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <h2 className="font-serif text-4xl md:text-5xl text-ink leading-tight mb-4">
+          <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-4">
             {eyebrow}
           </h2>
-          <p className="text-gray-warm text-lg leading-relaxed">{description}</p>
+          <p className="text-secondary text-lg leading-relaxed">{description}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">

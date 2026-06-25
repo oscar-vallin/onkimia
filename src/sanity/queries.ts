@@ -31,6 +31,7 @@ export const SITE_SETTINGS_QUERY = groq`
     processImage ${HERO_IMAGE_FRAGMENT},
     proceduresBgImage ${HERO_IMAGE_FRAGMENT},
     cuidareRadiologyImage ${HERO_IMAGE_FRAGMENT},
+    appointmentCtaBgImage ${HERO_IMAGE_FRAGMENT},
     socialMedia,
     whatsappCommercial,
     jobBoardEmail
@@ -180,7 +181,7 @@ export const TESTIMONIALS_QUERY = groq`
   *[_type == "testimonial" && isActive == true] | order(order asc, _createdAt desc) {
     _id,
     name,
-    photo,
+    photo { ..., asset->{ ..., metadata { lqip } } },
     testimonial,
     role,
     order,

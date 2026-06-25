@@ -89,6 +89,14 @@ export interface PageHeroProps {
 
   /** Override the mobile min-height. Default is 'min-h-[75vh]'. Example: 'min-h-[90vh]' */
   mobileMinHeight?: string;
+
+  /**
+   * Adds a bottom-up gradient that fades the hero image to the given CSS color
+   * (default white). Use when the section immediately below has a solid background
+   * and you want a seamless bleed instead of a hard cut.
+   * Example: bottomFade="#f9fafb" for bg-gray-50.
+   */
+  bottomFade?: boolean | string;
 }
 
 export function PageHero({
@@ -112,7 +120,9 @@ export function PageHero({
   imageClassName,
   solidLeftBand = false,
   mobileMinHeight = 'min-h-[75vh]',
+  bottomFade = false,
 }: PageHeroProps) {
+  const bottomFadeColor = typeof bottomFade === 'string' ? bottomFade : 'white';
   const isCenter = align === 'center';
 
   return (
@@ -293,6 +303,15 @@ export function PageHero({
       {/* Header scroll sentinel — marks the real end of the hero so the
           fixed nav knows exactly when to switch from transparent/white-text
           to solid/dark-text, regardless of this hero's actual height. */}
+      {/* Bottom fade — blends hero into the next section's background color */}
+      {bottomFade && (
+        <div
+          className="absolute inset-x-0 bottom-0 h-40 z-[2] pointer-events-none"
+          style={{ background: `linear-gradient(to bottom, transparent 0%, ${bottomFadeColor} 100%)` }}
+          aria-hidden="true"
+        />
+      )}
+
       <div id="hero-end-sentinel" className="absolute bottom-0 left-0 w-px h-px pointer-events-none" aria-hidden="true" />
 
     </section>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { urlFor } from '@/sanity/image';
@@ -17,115 +17,107 @@ export function TestimonialCarousel({ testimonials, locale }: TestimonialCarouse
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
+
+  const goToPrevious = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, [testimonials.length]);
+
   useEffect(() => {
     if (!isAutoPlaying || testimonials.length <= 1) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
+    const interval = setInterval(goToNext, 5000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying, testimonials.length]);
+  }, [isAutoPlaying, testimonials.length, goToNext]);
 
-  const goToPrevious = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const goToNext = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setIsAutoPlaying(false);
-    setCurrentIndex(index);
-  };
+  const stop = () => setIsAutoPlaying(false);
 
   if (testimonials.length === 0) return null;
 
-  const currentTestimonial = testimonials[currentIndex];
+  const t = testimonials[currentIndex];
+  const photoSrc = t.photo
+    ? urlFor(t.photo).width(160).height(160).format('webp').url()
+    : null;
+  const lqip = t.photo?.asset?.metadata?.lqip;
 
   return (
-    <div className="relative max-w-4xl mx-auto">
-      {/* Testimonial Card */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="grid md:grid-cols-5 gap-6 p-8 md:p-12">
-          {/* Photo */}
-          <div className="md:col-span-2 flex justify-center items-start">
-            <div className="relative w-48 h-48 md:w-full md:h-64 rounded-xl overflow-hidden">
+    <div className="relative">
+      {/* Arrow — left */}
+      {testimonials.length > 1 && (
+        <button
+          onClick={() => { stop(); goToPrevious(); }}
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:-translate-x-14 z-10 w-10 h-10 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white flex items-center justify-center transition-colors"
+          aria-label="Testimonio anterior"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+      )}
+
+      {/* Quote + content */}
+      <div className="text-center px-2">
+        {/* Opening quote mark */}
+        <div className="font-serif text-7xl text-white/20 leading-none mb-2 select-none" aria-hidden="true">
+          &ldquo;
+        </div>
+
+        {/* Quote text */}
+        <p className="font-serif text-xl md:text-2xl lg:text-3xl text-white/90 italic leading-relaxed mb-10 max-w-3xl mx-auto">
+          {getLocalized(t.testimonial, locale)}
+        </p>
+
+        {/* Avatar */}
+        <div className="flex flex-col items-center gap-3">
+          {photoSrc && (
+            <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-white/20">
               <Image
-                src={urlFor(currentTestimonial.photo).width(400).height(400).url()}
-                alt={currentTestimonial.name}
+                src={photoSrc}
+                alt={t.name}
                 fill
-                sizes="(max-width: 768px) 192px, 256px"
+                sizes="56px"
                 className="object-cover"
+                placeholder={lqip ? 'blur' : 'empty'}
+                blurDataURL={lqip ?? undefined}
               />
             </div>
-          </div>
-
-          {/* Content */}
-          <div className="md:col-span-3 flex flex-col justify-center">
-            <div className="mb-6">
-              <svg
-                className="w-10 h-10 text-teal mb-4"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p className="text-lg text-gray-warm leading-relaxed mb-6">
-                {getLocalized(currentTestimonial.testimonial, locale)}
+          )}
+          <div>
+            <p className="font-sans font-medium text-white text-sm">
+              {t.name}
+            </p>
+            {t.role && (
+              <p className="font-sans text-xs text-white/50 mt-0.5">
+                {getLocalized(t.role, locale)}
               </p>
-            </div>
-            
-            <div>
-              <p className="font-medium text-ink text-lg">
-                {currentTestimonial.name}
-              </p>
-              {currentTestimonial.role && (
-                <p className="text-sm text-gray-warm">
-                  {getLocalized(currentTestimonial.role, locale)}
-                </p>
-              )}
-            </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Arrow — right */}
       {testimonials.length > 1 && (
-        <>
-          <button
-            onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white hover:bg-cream text-ink p-3 rounded-full shadow-lg transition-colors"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white hover:bg-cream text-ink p-3 rounded-full shadow-lg transition-colors"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </>
+        <button
+          onClick={() => { stop(); goToNext(); }}
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-14 z-10 w-10 h-10 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white flex items-center justify-center transition-colors"
+          aria-label="Siguiente testimonio"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
       )}
 
-      {/* Dots Indicator */}
+      {/* Dots */}
       {testimonials.length > 1 && (
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-2 mt-10">
           {testimonials.map((_, index) => (
             <button
               key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${
+              onClick={() => { stop(); setCurrentIndex(index); }}
+              className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? 'bg-teal w-8'
-                  : 'bg-line hover:bg-gray-soft'
+                  ? 'bg-white w-7'
+                  : 'bg-white/25 hover:bg-white/40 w-2'
               }`}
-              aria-label={`Go to testimonial ${index + 1}`}
+              aria-label={`Ir al testimonio ${index + 1}`}
             />
           ))}
         </div>
@@ -133,5 +125,3 @@ export function TestimonialCarousel({ testimonials, locale }: TestimonialCarouse
     </div>
   );
 }
-
-// Made with Bob

@@ -49,6 +49,7 @@ export interface SiteSettings {
   processImage?: SanityImageWithLQIP;
   proceduresBgImage?: SanityImageWithLQIP;
   cuidareRadiologyImage?: SanityImageWithLQIP;
+  appointmentCtaBgImage?: SanityImageWithLQIP;
   socialMedia?: {
     instagram?: string;
     facebook?: string;
@@ -143,7 +144,7 @@ export interface Testimonial {
   _id: string;
   _type: 'testimonial';
   name: string;
-  photo: Image;
+  photo: SanityImageWithLQIP;
   testimonial: LocalizedString;
   role?: LocalizedString;
   order?: number;
