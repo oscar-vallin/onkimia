@@ -27,9 +27,10 @@ export function buildMetadata({
 }: BuildMetadataParams): Metadata {
   const siteUrl = env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '');
 
-  // Canonical: ES sin prefijo, EN con /en
-  const canonicalPath = locale === 'es' ? pathname : `/en${pathname}`;
-  const canonicalUrl = `${siteUrl}${canonicalPath}` || siteUrl;
+  // Canonical: ES sin prefijo (/), EN con /en.
+  // pathname vacío ('') = home → fuerza '/' para consistencia con alternates.languages['es-MX'].
+  const canonicalPath = locale === 'es' ? (pathname || '/') : `/en${pathname || ''}`;
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
   const esPath = pathname || '/';
   const enPath = `/en${pathname || ''}` || '/en';

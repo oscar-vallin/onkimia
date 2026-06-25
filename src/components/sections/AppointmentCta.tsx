@@ -41,6 +41,7 @@ export function AppointmentCta({
           className="object-cover"
           placeholder={backgroundImage.asset?.metadata?.lqip ? 'blur' : 'empty'}
           blurDataURL={backgroundImage.asset?.metadata?.lqip ?? undefined}
+          aria-hidden="true"
         />
       )}
       <div

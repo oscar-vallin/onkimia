@@ -52,7 +52,7 @@ export function HeroHome({
             alt="Médico oncólogo acompañando a un paciente en Onkimia"
             className="w-full h-full object-cover [object-position:center_20%] md:[object-position:62%_45%]"
             fetchPriority="high"
-            decoding="async"
+            decoding="sync"
           />
         </picture>
 
