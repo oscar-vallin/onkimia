@@ -56,7 +56,7 @@ export function AppointmentCta({
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-xl mx-auto mb-10">
             {STEPS.map(({ Icon, key }, index) => (
-              <div key={key} className="text-center">
+              <div key={key} className="text-center mt-5">
                 <div className="relative w-20 h-20 mx-auto mb-5">
                   <div className="absolute inset-0 rounded-full bg-white/10 flex items-center justify-center">
                     <Icon className="w-8 h-8 text-white/80" aria-hidden="true" />

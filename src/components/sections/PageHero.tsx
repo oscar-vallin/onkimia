@@ -39,8 +39,8 @@ export interface PageHeroProps {
   emphasisClassName?: string;
   description?: string;
 
-  primaryCta?: Cta;
-  secondaryCta?: Cta;
+  primaryCta?: Cta | boolean;
+  secondaryCta?: Cta | boolean;
 
   /** 'left' = text left-aligned (default). 'center' = centered layout. */
   align?: 'left' | 'center';

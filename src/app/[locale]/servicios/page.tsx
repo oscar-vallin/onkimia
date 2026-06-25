@@ -74,11 +74,11 @@ export default async function ServicesPage({
   ];
 
   const commercialPartners = [
-    { name: t('partners.sanvite.name'), description: t('partners.sanvite.description'), link: t('partners.sanvite.link') },
-    { name: t('partners.aster.name'), description: t('partners.aster.description'), link: t('partners.aster.link') },
+    { name: t('partners.sanvite.name'), description: t('partners.sanvite.description'), link: "https://sanvite.com/" },
+    { name: t('partners.aster.name'), description: t('partners.aster.description'), link: "https://asterclinic.mx/" },
     { name: t('partners.sedi.name'), description: t('partners.sedi.description'), link: t('partners.sedi.link') },
-    { name: t('partners.breeze.name'), description: t('partners.breeze.description'), link: t('partners.breeze.link') },
-    { name: t('partners.vocalia.name'), description: t('partners.vocalia.description'), link: t('partners.vocalia.link') },
+    { name: t('partners.breeze.name'), description: t('partners.breeze.description'), link: "https://www.instagram.com/breezeandbluee/" },
+    { name: t('partners.vocalia.name'), description: t('partners.vocalia.description'), link: "https://www.otorrinolaringologos.com/" },
   ];
 
   const features = [
@@ -97,7 +97,6 @@ export default async function ServicesPage({
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
-        primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
         extraDim
         solidLeftBand
         bottomFade
