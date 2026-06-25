@@ -96,7 +96,7 @@ export default async function CuidarePage({
   }));
 
   return (
-    <>
+    <div className="cuidare-page">
       {/* ─── HERO ─── */}
       <PageHero
         imageSrc={heroImage ? urlFor(heroImage).width(1920).quality(82).format('webp').url() : undefined}
@@ -133,9 +133,9 @@ export default async function CuidarePage({
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
               <li
                 key={key}
-                className="flex items-start gap-3 bg-white p-6 rounded-2xl border border-black/[0.07] transition-all duration-300 ease-out hover:border-primary/10 hover:shadow-sm hover:-translate-y-0.5"
+                className="flex items-start gap-3 bg-white p-6 rounded-2xl border border-black/[0.07] transition-all duration-300 ease-out hover:border-cuidare-blue-700/10 hover:shadow-sm hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 flex-shrink-0 rounded-full bg-primary/10 text-primary/60 flex items-center justify-center">
+                <div className="w-10 h-10 flex-shrink-0 rounded-full bg-cuidare-blue-100 text-cuidare-blue-700 flex items-center justify-center">
                   <Icon className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <p className="text-sm text-secondary leading-snug pt-2">
@@ -200,7 +200,7 @@ export default async function CuidarePage({
                         blurDataURL={proc.image?.asset?.metadata?.lqip ?? undefined}
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-primary/10" />
+                      <div className="absolute inset-0 bg-cuidare-blue-900" />
                     )}
                     <div
                       className="absolute inset-0"
@@ -238,8 +238,8 @@ export default async function CuidarePage({
           />
         )}
         <div
-          className="absolute inset-0 bg-primary"
-          style={{ opacity: settings.cuidareRadiologyImage?.asset ? 0.82 : 1 }}
+          className="absolute inset-0 bg-cuidare-blue-900"
+          style={{ opacity: settings.cuidareRadiologyImage?.asset ? 0.88 : 1 }}
           aria-hidden="true"
         />
 
@@ -296,7 +296,7 @@ export default async function CuidarePage({
         className="container-onkimia py-16 md:py-24"
         aria-labelledby="cuidare-palliative-title"
       >
-        <div className="max-w-3xl mx-auto bg-primary text-white rounded-2xl p-8 md:p-12 relative">
+        <div className="max-w-3xl mx-auto bg-cuidare-blue-900 text-white rounded-2xl p-8 md:p-12 relative">
           <span
             className="absolute top-4 left-6 text-6xl font-serif text-white/40 opacity-50"
             aria-hidden="true"
@@ -356,6 +356,6 @@ export default async function CuidarePage({
         </div>
       </div>
       </section>
-    </>
+    </div>
   );
 }

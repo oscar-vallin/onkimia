@@ -59,7 +59,7 @@ export default async function EndosPage({
   const heroLqip = settings.endosHeroImage?.asset?.metadata?.lqip ?? settings.homeHeroImage?.asset?.metadata?.lqip;
 
   return (
-    <>
+    <div className="endos-page">
       {/* ─── HERO ─── */}
       <PageHero
         imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
@@ -101,9 +101,9 @@ export default async function EndosPage({
             {PROCEDURE_ITEM_KEYS.map((key, i) => {
               const Icon = PROCEDURE_ICONS[i];
               return (
-                <article key={key} className="bg-white border border-black/[0.07] rounded-2xl p-7 hover:border-primary/20 hover:shadow-sm transition-all duration-200">
-                  <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                    <Icon className="w-5 h-5 text-primary/60" aria-hidden="true"/>
+                <article key={key} className="bg-white border border-black/[0.07] rounded-2xl p-7 hover:border-endos-teal-700/20 hover:shadow-sm transition-all duration-200">
+                  <div className="w-11 h-11 rounded-xl bg-endos-teal-700/10 flex items-center justify-center mb-5">
+                    <Icon className="w-5 h-5 text-endos-teal-700" aria-hidden="true"/>
                   </div>
                   <h3 className="font-serif text-xl text-primary mb-2">{t(`procedures.items.${key}.name`)}</h3>
                   <p className="text-sm text-secondary leading-relaxed">{t(`procedures.items.${key}.shortDescription`)}</p>
@@ -114,7 +114,7 @@ export default async function EndosPage({
 
           {/* Others */}
           <div className="bg-white border border-black/[0.07] rounded-2xl p-7 flex items-start gap-4">
-            <ShieldCheck className="w-5 h-5 text-primary/50 flex-shrink-0 mt-0.5" aria-hidden="true"/>
+            <ShieldCheck className="w-5 h-5 text-endos-teal-700 flex-shrink-0 mt-0.5" aria-hidden="true"/>
             <div>
               <h3 className="font-serif text-xl text-primary mb-1">{t('procedures.others')}</h3>
               <p className="text-sm text-secondary leading-relaxed">{t('procedures.othersDescription')}</p>
@@ -156,7 +156,7 @@ export default async function EndosPage({
                         blurDataURL={proc.image?.asset?.metadata?.lqip ?? undefined}
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-primary/10" />
+                      <div className="absolute inset-0 bg-endos-teal-700/10" />
                     )}
                     <div
                       className="absolute inset-0"
@@ -199,8 +199,8 @@ export default async function EndosPage({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
-              <div key={key} className="bg-white border border-black/[0.07] rounded-2xl p-6 flex flex-col items-center text-center gap-4 hover:shadow-sm hover:border-primary/10 transition-all duration-200">
-                <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0">
+              <div key={key} className="bg-white border border-black/[0.07] rounded-2xl p-6 flex flex-col items-center text-center gap-4 hover:shadow-sm hover:border-endos-teal-700/10 transition-all duration-200">
+                <div className="w-12 h-12 rounded-2xl bg-endos-teal-700 flex items-center justify-center flex-shrink-0">
                   <Icon className="w-5 h-5 text-white" aria-hidden="true"/>
                 </div>
                 <p className="font-medium text-primary text-sm leading-snug">{t(`benefits.items.${key}`)}</p>
@@ -213,7 +213,7 @@ export default async function EndosPage({
       {/* ════════════════════════════════════════
           SEGURIDAD Y CONFIANZA
       ════════════════════════════════════════ */}
-      <section className="bg-primary py-20 md:py-28 border-t border-white/[0.06]" aria-labelledby="endos-safety-title">
+      <section className="bg-endos-teal-900 py-20 md:py-28 border-t border-white/[0.06]" aria-labelledby="endos-safety-title">
         <div className="container-onkimia">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-stretch">
             {/* Left */}
@@ -277,8 +277,8 @@ export default async function EndosPage({
               </div>
               {/* Floating badge */}
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 min-w-[220px]">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <ShieldCheck className="w-4 h-4 text-primary" aria-hidden="true"/>
+                <div className="w-8 h-8 rounded-full bg-endos-teal-700/10 flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="w-4 h-4 text-endos-teal-700" aria-hidden="true"/>
                 </div>
                 <div>
                   <p className="font-medium text-primary text-sm leading-none mb-1">{t('safety.badge')}</p>
@@ -316,7 +316,7 @@ export default async function EndosPage({
               </h2>
               <div className="max-w-3xl mx-auto space-y-3">
                 {inlineFaqs.map((faq) => (
-                  <FAQAccordionItem key={faq.id} question={faq.question} answer={faq.answer} />
+                  <FAQAccordionItem key={faq.id} question={faq.question} answer={faq.answer} accent="endos" />
                 ))}
               </div>
               <FAQPageLd faqs={inlineFaqs.map((faq) => ({ question: faq.question, answer: faq.answer }))} />
@@ -342,7 +342,6 @@ export default async function EndosPage({
           <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
         </div>
       </section>
-    </>
+    </div>
   );
 }
-

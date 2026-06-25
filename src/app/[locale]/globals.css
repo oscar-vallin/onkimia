@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@source inline("bg-endos-teal-900 hover:bg-endos-teal-900 bg-endos-teal-700 hover:bg-endos-teal-700 bg-endos-tint-50 bg-endos-mint-500 text-endos-teal-700 text-endos-mint-500 border-endos-mint-500 hover:border-endos-mint-500 from-endos-teal-900/85 via-endos-teal-900/60");
-@source inline("bg-cuidare-blue-900 hover:bg-cuidare-blue-900 bg-cuidare-blue-700 hover:bg-cuidare-blue-700 bg-cuidare-blue-300 bg-cuidare-blue-100 text-cuidare-blue-700 text-cuidare-blue-300 border-cuidare-blue-700 from-cuidare-blue-900/85 via-cuidare-blue-900/60");
-@source inline("bg-doctors-blue text-doctors-blue border-doctors-blue hover:bg-doctors-blue hover:bg-doctors-ink bg-doctors-surface text-doctors-surface bg-doctors-ink text-doctors-ink");
+@source inline("bg-endos-teal-900 hover:bg-endos-teal-900 bg-endos-teal-700 hover:bg-endos-teal-700 bg-endos-teal-700/10 bg-endos-tint-50 bg-endos-mint-500 text-endos-teal-700 text-endos-mint-500 border-endos-teal-700 border-endos-mint-500 hover:border-endos-mint-500 hover:border-endos-teal-700/20 hover:border-endos-teal-700/10 open:border-l-endos-teal-700 group-open:bg-endos-teal-700 group-open:border-endos-teal-700 from-endos-teal-900/85 via-endos-teal-900/60");
+@source inline("bg-cuidare-blue-900 hover:bg-cuidare-blue-900 bg-cuidare-blue-700 hover:bg-cuidare-blue-700 bg-cuidare-blue-300 bg-cuidare-blue-100 text-cuidare-blue-700 text-cuidare-blue-300 border-cuidare-blue-700 hover:border-cuidare-blue-700/10 hover:border-cuidare-blue-700/20 from-cuidare-blue-700 from-cuidare-blue-900/85 via-cuidare-blue-900/60");
+@source inline("bg-doctors-blue text-doctors-blue border-doctors-blue hover:bg-doctors-blue hover:bg-doctors-ink bg-doctors-surface text-doctors-surface bg-doctors-ink text-doctors-ink border-doctors-blue/20");
 
 
 /* ============================================
@@ -207,15 +207,45 @@
 
   /* Selección de texto */
   ::selection {
-    background-color: color-mix(in srgb, var(--color-teal) 20%, transparent);
-    color: var(--color-ink);
+    background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
+    color: var(--color-primary);
   }
 
   /* Focus visible (WCAG 2.1 AA) */
   :focus-visible {
-    outline: 2px solid var(--color-teal);
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* ─── Endos — acento de sub-marca en estados interactivos ─── */
+  .endos-page :focus-visible {
+    outline-color: var(--color-endos-teal-900);
+  }
+
+  .endos-page ::selection {
+    background-color: color-mix(in srgb, var(--color-endos-teal-900) 18%, transparent);
+    /* color: inherit — texto conserva su color; evita riesgos de contraste */
+  }
+
+  /* ─── Cuidare — acento de sub-marca en estados interactivos ─── */
+  .cuidare-page :focus-visible {
+    outline-color: var(--color-cuidare-blue-700);
+  }
+
+  .cuidare-page ::selection {
+    background-color: color-mix(in srgb, var(--color-cuidare-blue-700) 18%, transparent);
+    /* color: inherit — texto conserva su color; blue-300/100 nunca son texto */
+  }
+
+  /* ─── Onkimia Doctors — acento de sub-marca en estados interactivos ─── */
+  .doctors-page :focus-visible {
+    outline-color: var(--color-doctors-blue);
+  }
+
+  .doctors-page ::selection {
+    background-color: color-mix(in srgb, var(--color-doctors-blue) 18%, transparent);
+    color: var(--color-doctors-ink);
   }
 
   /* Reduce motion para accesibilidad */

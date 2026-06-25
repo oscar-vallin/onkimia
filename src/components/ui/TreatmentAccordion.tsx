@@ -48,10 +48,10 @@ export function TreatmentAccordion({ treatments }: TreatmentAccordionProps) {
           return (
             <article
               key={id}
-              className="bg-white border border-black/[0.07] rounded-2xl p-6 hover:border-primary/20 hover:shadow-sm transition-all duration-200"
+              className="bg-white border border-black/[0.07] rounded-2xl p-6 hover:border-cuidare-blue-700/20 hover:shadow-sm transition-all duration-200"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-primary/10 text-primary/60 flex items-center justify-center">
+                <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-cuidare-blue-100 text-cuidare-blue-700 flex items-center justify-center">
                   {Icon && <Icon className="w-6 h-6" aria-hidden="true" />}
                 </div>
                 <div>
@@ -83,7 +83,7 @@ export function TreatmentAccordion({ treatments }: TreatmentAccordionProps) {
                 aria-controls={`treatment-content-${id}`}
                 className="w-full p-4 flex items-center gap-3 text-left"
               >
-                <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-primary/10 text-primary/60 flex items-center justify-center">
+                <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-cuidare-blue-100 text-cuidare-blue-700 flex items-center justify-center">
                   {Icon && <Icon className="w-5 h-5" aria-hidden="true" />}
                 </div>
                 <h3 className="flex-1 font-serif text-base text-primary">{title}</h3>

@@ -40,7 +40,7 @@ export function FAQCarousel({ faqs, locale }: FAQCarouselProps) {
         {currentFAQs.map((faq) => (
           <article
             key={faq._id}
-            className="bg-[#3d5a80] rounded-2xl overflow-hidden hover:shadow-xl transition-shadow"
+            className="bg-cuidare-blue-700 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow"
           >
             {faq.doctor && (
               <div className="relative w-full h-64">
@@ -51,7 +51,7 @@ export function FAQCarousel({ faqs, locale }: FAQCarouselProps) {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#3d5a80] to-transparent p-6">
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-cuidare-blue-700 to-transparent p-6">
                   <p className="font-medium text-white text-lg">
                     {faq.doctor.fullName}
                   </p>
@@ -78,20 +78,20 @@ export function FAQCarousel({ faqs, locale }: FAQCarouselProps) {
         <div className="flex justify-center items-center gap-4 mt-8">
           <button
             onClick={goToPrevious}
-            className="bg-ink hover:bg-ink-2 text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-cuidare-blue-900 hover:bg-cuidare-blue-700 text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous FAQs"
             disabled={currentIndex === 0}
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          
-          <span className="text-sm text-gray-warm">
+
+          <span className="text-sm text-secondary">
             {currentIndex + 1} / {totalPages}
           </span>
-          
+
           <button
             onClick={goToNext}
-            className="bg-teal hover:bg-teal-soft text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-cuidare-blue-700 hover:bg-cuidare-blue-900 text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next FAQs"
             disabled={currentIndex === totalPages - 1}
           >
@@ -102,5 +102,3 @@ export function FAQCarousel({ faqs, locale }: FAQCarouselProps) {
     </div>
   );
 }
-
-// Made with Bob
