@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { PageTheme } from '@/components/layout/PageTheme';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { SITE_SETTINGS_QUERY } from '@/sanity/queries';
@@ -55,6 +56,7 @@ export default async function ColimaPage({
 
   return (
     <>
+      <PageTheme headerTheme="dark" />
       {/* Auto-syncs the global clinic context to 'colima' on load, so the
           Header selector, Footer, and Contact page all reflect this clinic
           without the user manually switching. */}

@@ -10,10 +10,11 @@ import type { SiteSettings, Clinic, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { LazyMotion, m, AnimatePresence, type Variants } from 'framer-motion';
+import { useHeaderAppearance } from '@/hooks/useHeaderAppearance';
+import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsapp';
 
 const loadFeatures = () =>
   import('framer-motion').then((mod) => mod.domAnimation);
-import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsapp';
 
 interface HeaderProps {
   settings: SiteSettings;
@@ -44,23 +45,32 @@ const mobileLinkVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
-export function Header({ settings, clinics, odSettings }: HeaderProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
+export function Header({ settings, clinics }: HeaderProps) {
+  const [mobileOpen, setMobileOpen]         = useState(false);
   const [clinicMenuOpen, setClinicMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(() =>
-    typeof window !== 'undefined' ? window.scrollY > 150 : false
+  const [scrolled, setScrolled]             = useState(() =>
+    typeof window !== 'undefined' ? window.scrollY > 80 : false
   );
   const [mounted, setMounted] = useState(false);
+
   const pathname = usePathname();
-  const router = useRouter();
-  const locale = useLocale() as Locale;
-  const tNav = useTranslations('navigation');
-  const tClinic = useTranslations('clinics');
-  const tCommon = useTranslations('common');
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  // Reset scroll state synchronously during the render caused by a route change,
+  // before the browser paints — prevents the header from briefly showing the
+  // wrong background when navigating between pages.
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setScrolled(typeof window !== 'undefined' ? window.scrollY > 80 : false);
+  }
+  const router   = useRouter();
+  const locale   = useLocale() as Locale;
+  const tNav     = useTranslations('navigation');
+  const tClinic  = useTranslations('clinics');
+  const tCommon  = useTranslations('common');
   const { clinic, setClinic } = useClinic();
 
-  const isDoctorsRoute   = pathname.startsWith('/onkimia-doctors');
-  const isDarkPageRoute  = pathname === '/nosotros' || pathname === '/colima';
+  const appearance = useHeaderAppearance({ scrolled, mobileOpen, mounted });
 
   const currentClinic = clinics.find((c) => c.slug === clinic) || null;
 
@@ -73,38 +83,31 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   const whatsappUrl = whatsappNumber ? buildWhatsAppUrl(whatsappNumber) : null;
 
   const navLinks = [
-    { href: '/', label: tNav('home') },
-    { href: '/nosotros', label: tNav('about') },
-    { href: '/servicios', label: tNav('services') },
-    { href: '/endos', label: tNav('endos') },
-    { href: '/cuidare', label: tNav('cuidare') },
-    { href: '/onkimia-doctors', label: tNav('doctors') },
-    { href: '/contacto', label: tNav('contact') },
+    { href: '/',                label: tNav('home')     },
+    { href: '/nosotros',        label: tNav('about')    },
+    { href: '/servicios',       label: tNav('services') },
+    { href: '/endos',           label: tNav('endos')    },
+    { href: '/cuidare',         label: tNav('cuidare')  },
+    { href: '/onkimia-doctors', label: tNav('doctors')  },
+    { href: '/contacto',        label: tNav('contact')  },
   ];
 
-  const otherLocale = locale === 'es' ? 'en' : 'es';
+  const otherLocale  = locale === 'es' ? 'en' : 'es';
+  const switchLocale = () => router.replace(pathname, { locale: otherLocale, scroll: false });
 
-  const switchLocale = () => {
-    router.replace(pathname, { locale: otherLocale, scroll: false });
-  };
-
-  const isActive = (href: string) => {
-    if (href === '/') return pathname === '/' || pathname === '';
-    return pathname.startsWith(href);
-  };
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' || pathname === '' : pathname.startsWith(href);
 
   const toggleMobileMenu = useCallback(() => {
     setMobileOpen((prev) => {
-      const newState = !prev;
-      document.body.style.overflow = newState ? 'hidden' : '';
-      return newState;
+      const next = !prev;
+      document.body.style.overflow = next ? 'hidden' : '';
+      return next;
     });
   }, []);
 
   useEffect(() => {
-    startTransition(() => {
-      setMounted(true);
-    });
+    startTransition(() => setMounted(true));
   }, []);
 
   useEffect(() => {
@@ -114,57 +117,40 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
     return () => window.removeEventListener('scroll', onScroll);
   }, [pathname]);
 
-  // Derived text/hover color based on header state
-  const textColor =
-    mobileOpen || !scrolled || isDoctorsRoute ? 'text-white' : 'text-ink';
-  const hoverColor = isDoctorsRoute
-    ? 'hover:text-doctors-blue'
-    : scrolled && !mobileOpen
-    ? 'hover:text-primary/60'
-    : 'hover:text-white/70';
-
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          mobileOpen
-            ? 'bg-ink'
-            : isDoctorsRoute && scrolled
-            ? 'bg-doctors-ink backdrop-blur-md border-b border-white/10 shadow-sm'
-            : scrolled
-            ? 'bg-white/95 backdrop-blur-md border-b border-line shadow-sm'
-            : isDarkPageRoute
-            ? 'bg-primary'
-            : 'bg-transparent'
-        }`}
+        className={`site-header fixed top-0 left-0 w-full z-50 ${mounted ? 'transition-colors duration-350' : ''} ${appearance.headerBg}`}
+        data-scrolled={scrolled ? 'true' : 'false'}
       >
         <div className="container-onkimia">
           <div className="flex items-center justify-between py-4 md:py-5">
+
             {/* ─── Logo ─── */}
             <Link href="/" className="relative flex items-center gap-2">
-              {isDoctorsRoute ? (
+              {appearance.showDoctorsLogo ? (
                 <>
-                  {/* Desktop: full OD logo — always visible */}
+                  {/* Desktop: full OD logo */}
                   <span className="relative hidden md:block w-[150px] h-[56px] lg:w-[170px] lg:h-[64px]">
-                      <Image
-                        src="/ONKIMIA-DOCTORS_Logo.webp"
-                        alt="Onkimia Doctors"
-                        fill
-                        sizes="(max-width: 1024px) 150px, 170px"
-                        priority
-                        className="object-contain object-left"
-                      />
+                    <Image
+                      src="/ONKIMIA-DOCTORS_Logo.webp"
+                      alt="Onkimia Doctors"
+                      fill
+                      sizes="(max-width: 1024px) 150px, 170px"
+                      priority
+                      className="object-contain object-left"
+                    />
                   </span>
-                  {/* Mobile: symbol — always visible */}
+                  {/* Mobile: symbol */}
                   <span className="relative block md:hidden w-[35px] h-[35px]">
-                      <Image
-                        src="/simbolo-OD-clean.svg"
-                        alt="Onkimia Doctors"
-                        fill
-                        sizes="40px"
-                        priority
-                        className="object-contain object-left"
-                      />
+                    <Image
+                      src="/simbolo-OD-clean.svg"
+                      alt="Onkimia Doctors"
+                      fill
+                      sizes="40px"
+                      priority
+                      className="object-contain object-left"
+                    />
                   </span>
                 </>
               ) : (
@@ -175,9 +161,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                     fill
                     sizes="(max-width: 768px) 142px, 170px"
                     priority
-                    className={`object-contain object-left ${
-                      scrolled && !mobileOpen ? '' : 'brightness-0 invert'
-                    }`}
+                    className={`object-contain object-left ${appearance.logoFilter}`}
                   />
                 </span>
               )}
@@ -189,16 +173,14 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-sm font-medium transition-colors py-2 ${textColor} ${
-                    isActive(link.href) ? '' : hoverColor
+                  className={`relative text-sm font-medium transition-colors py-2 ${appearance.textColor} ${
+                    isActive(link.href) ? '' : appearance.hoverColor
                   }`}
                 >
                   {link.label}
                   {isActive(link.href) && (
                     <span
-                      className={`absolute left-0 right-0 bottom-1 h-0.5 rounded-full ${
-                        isDoctorsRoute ? 'bg-doctors-blue' : scrolled ? 'bg-primary' : 'bg-white'
-                      }`}
+                      className={`absolute left-0 right-0 bottom-1 h-0.5 rounded-full ${appearance.activeLinkUnderline}`}
                       aria-hidden="true"
                     />
                   )}
@@ -208,12 +190,13 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
 
             {/* ─── Actions ─── */}
             <div className="flex items-center gap-3">
+
               {/* Clinic selector */}
               <div className="hidden md:block relative">
                 <button
                   type="button"
                   onClick={() => setClinicMenuOpen(!clinicMenuOpen)}
-                  className={`flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-300 cursor-pointer ${textColor} ${hoverColor}`}
+                  className={`flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-300 cursor-pointer ${appearance.textColor} ${appearance.hoverColor}`}
                   aria-label={tClinic('selectClinic')}
                 >
                   <MapPin className="w-4 h-4" />
@@ -223,9 +206,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                       : tClinic('selectClinic')}
                   </span>
                   <svg
-                    className={`w-3 h-3 transition-transform ${
-                      clinicMenuOpen ? 'rotate-180' : ''
-                    }`}
+                    className={`w-3 h-3 transition-transform ${clinicMenuOpen ? 'rotate-180' : ''}`}
                     viewBox="0 0 12 12"
                     fill="none"
                   >
@@ -237,8 +218,9 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                     />
                   </svg>
                 </button>
+
                 {clinicMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-line rounded-md shadow-lg overflow-hidden">
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-primary/10 rounded-md shadow-lg overflow-hidden">
                     {clinics.map((c) => {
                       const isSelected = clinic === c.slug;
                       return (
@@ -248,14 +230,10 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                           onClick={() => {
                             setClinic(c.slug as 'guadalajara' | 'colima');
                             setClinicMenuOpen(false);
-                            if (c.slug === 'colima') {
-                              router.push('/colima');
-                            }
+                            if (c.slug === 'colima') router.push('/colima');
                           }}
-                          className={`w-full text-left cursor-pointer px-4 py-2 text-sm hover:bg-cream transition-colors ${
-                            isSelected
-                              ? 'bg-teal/10 text-teal font-medium'
-                              : 'text-ink'
+                          className={`w-full text-left cursor-pointer px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
+                            isSelected ? 'bg-primary/10 text-primary font-medium' : 'text-primary'
                           }`}
                         >
                           {getLocalized(c.name, locale)}
@@ -270,46 +248,31 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
               <button
                 type="button"
                 onClick={switchLocale}
-                className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-300 cursor-pointer ${textColor} ${hoverColor}`}
+                className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-300 cursor-pointer ${appearance.textColor} ${appearance.hoverColor}`}
                 aria-label={`Switch to ${otherLocale.toUpperCase()}`}
               >
                 <Globe className="w-4 h-4" />
                 <span>{otherLocale.toUpperCase()}</span>
               </button>
 
-              {/* Hamburger / morphing X — w-11 h-11 hit-area, w-5 h-[18px] visual icon */}
+              {/* Hamburger — w-11 h-11 hit area, w-5 h-[18px] visual icon */}
               <button
                 type="button"
                 onClick={toggleMobileMenu}
-                className={`lg:hidden -mr-2 w-11 h-11 flex items-center justify-center ${
-                  scrolled && !mobileOpen && !isDoctorsRoute ? 'text-ink' : 'text-white'
-                }`}
+                className={`lg:hidden -mr-2 w-11 h-11 flex items-center justify-center ${appearance.hamburgerColor}`}
                 aria-label="Toggle menu"
                 aria-expanded={mobileOpen}
               >
                 <span className="relative w-5 h-[18px] flex flex-col justify-between">
-                  <span
-                    className={`block h-0.5 w-full bg-current transition-all duration-400 ${
-                      mobileOpen ? 'rotate-45 translate-y-[8px]' : ''
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-full bg-current transition-opacity duration-300 ${
-                      mobileOpen ? 'opacity-0' : 'opacity-100'
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-full bg-current transition-all duration-400 ${
-                      mobileOpen ? '-rotate-45 -translate-y-[8px]' : ''
-                    }`}
-                  />
+                  <span className={`block h-0.5 w-full bg-current transition-all duration-400 ${mobileOpen ? 'rotate-45 translate-y-[8px]' : ''}`} />
+                  <span className={`block h-0.5 w-full bg-current transition-opacity duration-300 ${mobileOpen ? 'opacity-0' : 'opacity-100'}`} />
+                  <span className={`block h-0.5 w-full bg-current transition-all duration-400 ${mobileOpen ? '-rotate-45 -translate-y-[8px]' : ''}`} />
                 </span>
               </button>
             </div>
           </div>
         </div>
       </header>
-
 
       {/* ─── Full-Screen Mobile Menu ─── */}
       <LazyMotion features={loadFeatures} strict>
@@ -320,14 +283,13 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
               animate="visible"
               exit="exit"
               variants={mobileMenuVariants}
-              className={`fixed inset-0 lg:hidden ${
-                isDoctorsRoute ? 'bg-doctors-ink' : 'bg-ink'
-              } z-60 flex flex-col overflow-y-auto will-change-transform-opacity`}
+              className={`fixed inset-0 lg:hidden ${appearance.mobileMenuBg} z-60 flex flex-col overflow-y-auto will-change-transform-opacity`}
             >
               <div className="container-onkimia flex flex-col min-h-full">
+
                 {/* Logo + close */}
                 <div className="flex justify-between items-center py-2">
-                  {isDoctorsRoute ? (
+                  {appearance.showDoctorsLogo ? (
                     <Link
                       href="/"
                       onClick={() => setMobileOpen(false)}
@@ -345,18 +307,17 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                     <Link
                       href="/"
                       onClick={() => setMobileOpen(false)}
-                      className="relative block w-[160px] h-[54px]"
+                      className="relative block w-[142px] h-[45px]"
                     >
                       <Image
                         src="/logos/onkimia-logo.webp"
                         alt="Onkimia"
                         fill
-                        sizes="160px"
+                        sizes="142px"
                         className="object-contain object-left brightness-0 invert"
                       />
                     </Link>
                   )}
-                  {/* Morphing close button */}
                   <button
                     type="button"
                     onClick={toggleMobileMenu}
@@ -378,16 +339,14 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                         onClick={toggleMobileMenu}
                         className={`relative block font-serif text-xl md:text-2xl font-normal transition-colors py-1.5 ${
                           isActive(link.href)
-                            ? isDoctorsRoute ? 'text-doctors-blue' : 'text-white'
-                            : isDoctorsRoute ? 'text-white hover:text-doctors-blue' : 'text-white/60 hover:text-white'
+                            ? appearance.mobileActiveLinkColor
+                            : appearance.mobileInactiveLinkColor
                         }`}
                       >
                         {link.label}
                         {isActive(link.href) && (
                           <span
-                            className={`absolute left-0 right-0 -bottom-1 h-0.5 rounded-full ${
-                              isDoctorsRoute ? 'bg-doctors-blue' : 'bg-white'
-                            }`}
+                            className={`absolute left-0 right-0 -bottom-1 h-0.5 rounded-full ${appearance.mobileActiveUnderline}`}
                             aria-hidden="true"
                           />
                         )}
@@ -398,6 +357,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
 
                 {/* Bottom panel */}
                 <div className="mt-6 py-4 text-center space-y-3">
+
                   {/* WhatsApp CTA */}
                   {whatsappUrl && (
                     <a
@@ -405,18 +365,9 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={toggleMobileMenu}
-                      className={`flex items-center justify-center gap-2 mx-auto px-6 py-3 ${
-                        isDoctorsRoute
-                          ? 'bg-doctors-blue hover:bg-doctors-ink text-white'
-                          : 'border border-white/30 hover:border-white/70 text-white bg-transparent'
-                      } font-medium rounded-full transition-colors w-full max-w-[200px] text-sm`}
+                      className={`flex items-center justify-center gap-2 mx-auto px-6 py-3 ${appearance.mobileWhatsAppClass} font-medium rounded-full transition-colors w-full max-w-[200px] text-sm`}
                     >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="w-5 h-5"
-                        aria-hidden="true"
-                      >
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
                       </svg>
                       <span className="text-sm">{tCommon('scheduleAppointmentWhatsApp')}</span>
@@ -438,13 +389,11 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                             onClick={() => {
                               setClinic(c.slug as 'guadalajara' | 'colima');
                               toggleMobileMenu();
-                              if (c.slug === 'colima') {
-                                router.push('/colima');
-                              }
+                              if (c.slug === 'colima') router.push('/colima');
                             }}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                               isSelected
-                                ? isDoctorsRoute ? 'bg-doctors-blue text-white shadow-md border-transparent' : 'bg-white text-primary shadow-md border-transparent'
+                                ? appearance.mobileClinicSelectedClass
                                 : 'bg-white/10 text-white/70 border border-white/20 hover:bg-white/20'
                             }`}
                           >

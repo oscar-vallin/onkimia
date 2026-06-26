@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { PageTheme } from '@/components/layout/PageTheme';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
@@ -54,6 +55,7 @@ export default async function NosotrosPage({
 
   return (
     <>
+      <PageTheme headerTheme="dark" />
       {/* ─── HERO ─── */}
       {/* <PageHero
         eyebrow={t('hero.eyebrow')}

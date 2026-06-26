@@ -249,6 +249,15 @@
     color: var(--color-doctors-ink);
   }
 
+  /* ── Header initial background — CSS-first, no JS required ──────────────
+     Applies bg-primary to .site-header immediately when the browser parses
+     data-header-theme="dark" on <body>, before any JavaScript runs.
+     The [data-scrolled="true"] exclusion lets the scroll-driven Tailwind
+     classes take over once the user scrolls. */
+  body[data-header-theme="dark"] header.site-header:not([data-scrolled="true"]) {
+    background-color: var(--color-primary);
+  }
+
   /* Reduce motion para accesibilidad */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
