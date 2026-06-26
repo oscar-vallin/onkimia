@@ -76,6 +76,7 @@ export default async function OnkimiaDoctorsPage({
         imageClassName="md:mt-20"
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
+        accent="doctors"
         emphasisClassName="text-doctors-blue"
         description={t('hero.description')}
         topSlot={

@@ -69,6 +69,7 @@ export default async function EndosPage({
         imagePosition="md:object-[88%_25%]"
         eyebrow={t('hero.eyebrow')}
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
+        accent="endos"
         emphasisClassName="italic text-white/85"
         description={t('hero.description')}
         solidLeftBand

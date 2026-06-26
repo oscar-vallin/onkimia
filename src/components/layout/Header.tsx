@@ -59,8 +59,8 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   const tCommon = useTranslations('common');
   const { clinic, setClinic } = useClinic();
 
-  const isDoctorsRoute = pathname.startsWith('/onkimia-doctors');
-  const isAboutRoute   = pathname === '/nosotros';
+  const isDoctorsRoute   = pathname.startsWith('/onkimia-doctors');
+  const isDarkPageRoute  = pathname === '/nosotros' || pathname === '/colima';
 
   const currentClinic = clinics.find((c) => c.slug === clinic) || null;
 
@@ -133,8 +133,8 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
             ? 'bg-doctors-ink backdrop-blur-md border-b border-white/10 shadow-sm'
             : scrolled
             ? 'bg-white/95 backdrop-blur-md border-b border-line shadow-sm'
-            : isAboutRoute
-            ? 'bg-ink'
+            : isDarkPageRoute
+            ? 'bg-primary'
             : 'bg-transparent'
         }`}
       >

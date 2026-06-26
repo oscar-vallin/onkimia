@@ -3,6 +3,23 @@ import { Link } from '@/i18n/navigation';
 import { ArrowRight } from 'lucide-react';
 import { parseEmphasis } from '@/lib/parseEmphasis';
 
+export type PageHeroAccent = 'primary' | 'endos' | 'cuidare' | 'doctors';
+
+const ACCENT: Record<PageHeroAccent, { primaryBtn: string }> = {
+  primary: {
+    primaryBtn: 'bg-primary hover:bg-primary/85 hover:shadow-primary/20 focus-visible:ring-offset-primary',
+  },
+  endos: {
+    primaryBtn: 'bg-endos-teal-700 hover:bg-endos-teal-900 hover:shadow-endos-teal-700/20 focus-visible:ring-offset-endos-teal-700',
+  },
+  cuidare: {
+    primaryBtn: 'bg-cuidare-blue-700 hover:bg-cuidare-blue-900 hover:shadow-cuidare-blue-700/20 focus-visible:ring-offset-cuidare-blue-700',
+  },
+  doctors: {
+    primaryBtn: 'bg-doctors-blue hover:bg-doctors-blue/85 hover:shadow-doctors-blue/20 focus-visible:ring-offset-doctors-blue',
+  },
+};
+
 interface Cta {
   label: string;
   href: string;
@@ -32,10 +49,13 @@ export interface PageHeroProps {
    */
   imagePosition?: string;
 
+  /** Sub-brand accent for the primary CTA button. Default: 'primary' (monochromatic). */
+  accent?: PageHeroAccent;
+
   eyebrow?: string;
-  /** Supports *word* syntax → teal-soft italic emphasis */
+  /** Supports *word* syntax → italic emphasis (Fraunces italic, default). Override via emphasisClassName. */
   title: string;
-  /** Override the emphasis color class. Default: 'text-teal-soft' */
+  /** Override the emphasis class. Default: 'italic' (Fraunces italic). Sub-brands can pass e.g. 'italic text-white/85' or 'text-doctors-blue'. */
   emphasisClassName?: string;
   description?: string;
 
@@ -105,6 +125,7 @@ export function PageHero({
   blurDataURL,
   mobileObjectPosition = 'object-[center_10%]',
   imagePosition = 'md:object-[50%_-20%]',
+  accent = 'primary',
   eyebrow,
   title,
   emphasisClassName,
@@ -123,7 +144,7 @@ export function PageHero({
   const isCenter = align === 'center';
 
   return (
-    <section className={`relative w-full ${mobileMinHeight} md:min-h-[70vh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex flex-col`}>
+    <section className={`relative w-full ${mobileMinHeight} md:min-h-[70vh] overflow-hidden bg-primary text-white -mt-16 md:-mt-20 flex flex-col`}>
 
       {/* Desktop image — hidden on mobile when a mobile variant is provided */}
       {imageSrc && (
@@ -160,10 +181,10 @@ export function PageHero({
       {/* Overlay — desktop: dark band on text side; mobile: dark veil at bottom */}
       {solidLeftBand ? (
         <>
-          {/* Layer 1: solid ink on the left third → invisible seam with bg-ink */}
+          {/* Layer 1: solid primary on the left third → seamless blend with section bg-primary */}
           <div
             className="absolute inset-0 z-[1] hidden md:block pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #1a1a1f 0%, #1a1a1f 28%, transparent 62%)' }}
+            style={{ background: 'linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) 28%, transparent 62%)' }}
             aria-hidden="true"
           />
           {/* Layer 2: soft scrim to feather the transition */}
@@ -260,7 +281,7 @@ export function PageHero({
             {primaryCta && !primaryCta.external && (
               <Link
                 href={primaryCta.href}
-                className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full font-medium transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30 w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
+                className={`inline-flex items-center justify-center gap-2 text-white px-7 py-3.5 rounded-full font-medium transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 ${ACCENT[accent].primaryBtn}`}
               >
                 {primaryCta.label}
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -271,7 +292,7 @@ export function PageHero({
                 href={primaryCta.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-soft text-white px-7 py-3.5 rounded-full font-medium transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30 w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-teal"
+                className={`inline-flex items-center justify-center gap-2 text-white px-7 py-3.5 rounded-full font-medium transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 ${ACCENT[accent].primaryBtn}`}
               >
                 {primaryCta.label}
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -280,7 +301,7 @@ export function PageHero({
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
-                className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 font-medium text-white transition-all duration-300 ease-out hover:border-white/60 hover:bg-white/5 hover:-translate-y-0.5 w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 font-medium text-white transition-all duration-300 ease-out hover:border-white/60 hover:bg-white/5 hover:-translate-y-0.5 w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
                 {secondaryCta.label}
               </Link>

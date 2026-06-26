@@ -60,31 +60,20 @@ export default async function ColimaPage({
           without the user manually switching. */}
       <SetClinicOnMount clinic="colima" />
 
-      {/* ─── HERO ─── */}
-      <PageHero
-        imageSrc={heroImage ? urlFor(heroImage).width(1920).quality(82).format('webp').url() : undefined}
-        blurDataURL={heroImage?.asset?.metadata?.lqip ?? undefined}
-        eyebrow={t('hero.eyebrow')}
-        title={t('hero.title')}
-        description={t('hero.description')}
-        primaryCta={{ label: t('hero.cta'), href: '/contacto#contact-form' }}
-        solidLeftBand
-      />
-
       {/* ─── CONTACT BLOCK ─── */}
-      <section className="bg-cream py-20 md:py-28">
+      <section className="bg-white py-20 md:py-28  mt-18">
         <div className="container-onkimia">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
             {/* Left: headline */}
             <div>
-              <p className="text-xs font-medium tracking-widest uppercase text-teal mb-4">
+              <p className="text-xs font-medium tracking-widest uppercase text-primary/50 mb-4">
                 {t('contact.eyebrow')}
               </p>
-              <h2 className="font-serif text-4xl md:text-5xl text-ink leading-tight mb-6">
+              <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
                 {t('contact.title')}
               </h2>
-              <p className="text-gray-warm text-lg leading-relaxed">
+              <p className="text-secondary text-lg leading-relaxed">
                 {t('contact.description')}
               </p>
 
@@ -92,7 +81,7 @@ export default async function ColimaPage({
                 href={clinic.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-8 text-teal hover:text-teal-soft font-medium transition-colors"
+                className="inline-flex items-center gap-2 mt-8 text-primary hover:text-primary/70 font-medium transition-colors"
               >
                 <MapPin className="w-4 h-4" aria-hidden="true" />
                 {t('contact.viewMap')}
@@ -103,31 +92,31 @@ export default async function ColimaPage({
             {/* Right: contact details */}
             <div className="space-y-6">
               {/* Address */}
-              <div className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-line">
-                <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-teal" aria-hidden="true" />
+              <div className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-black/[0.07]">
+                <div className="w-10 h-10 rounded-xl bg-primary/[0.07] flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium tracking-wider uppercase text-gray-warm mb-1">
+                  <p className="text-xs font-medium tracking-wider uppercase text-secondary mb-1">
                     {t('contact.addressLabel')}
                   </p>
-                  <p className="text-ink font-medium">{clinic.address}</p>
+                  <p className="text-primary font-medium">{clinic.address}</p>
                 </div>
               </div>
 
               {/* Phone */}
               <a
                 href={clinic.phoneHref}
-                className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-line hover:border-teal/40 hover:-translate-y-0.5 transition-all duration-300 group"
+                className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-black/[0.07] hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-teal" aria-hidden="true" />
+                <div className="w-10 h-10 rounded-xl bg-primary/[0.07] flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium tracking-wider uppercase text-gray-warm mb-1">
+                  <p className="text-xs font-medium tracking-wider uppercase text-secondary mb-1">
                     {t('contact.phoneLabel')}
                   </p>
-                  <p className="text-ink font-medium group-hover:text-teal transition-colors">
+                  <p className="text-primary font-medium group-hover:text-primary/70 transition-colors">
                     {clinic.phone}
                   </p>
                 </div>
@@ -139,16 +128,16 @@ export default async function ColimaPage({
                   href={clinic.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-line hover:border-teal/40 hover:-translate-y-0.5 transition-all duration-300 group"
+                  className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-black/[0.07] hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="w-5 h-5 text-teal" aria-hidden="true" />
+                  <div className="w-10 h-10 rounded-xl bg-primary/[0.07] flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="w-5 h-5 text-primary" aria-hidden="true" />
                   </div>
                   <div>
-                    <p className="text-xs font-medium tracking-wider uppercase text-gray-warm mb-1">
+                    <p className="text-xs font-medium tracking-wider uppercase text-secondary mb-1">
                       WhatsApp
                     </p>
-                    <p className="text-ink font-medium group-hover:text-teal transition-colors">
+                    <p className="text-primary font-medium group-hover:text-primary/70 transition-colors">
                       {clinic.whatsapp}
                     </p>
                   </div>
@@ -158,16 +147,16 @@ export default async function ColimaPage({
               {/* Email */}
               <a
                 href={`mailto:${clinic.email}`}
-                className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-line hover:border-teal/40 hover:-translate-y-0.5 transition-all duration-300 group"
+                className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-black/[0.07] hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-teal" aria-hidden="true" />
+                <div className="w-10 h-10 rounded-xl bg-primary/[0.07] flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium tracking-wider uppercase text-gray-warm mb-1">
+                  <p className="text-xs font-medium tracking-wider uppercase text-secondary mb-1">
                     {t('contact.emailLabel')}
                   </p>
-                  <p className="text-ink font-medium group-hover:text-teal transition-colors">
+                  <p className="text-primary font-medium group-hover:text-primary/70 transition-colors">
                     {clinic.email}
                   </p>
                 </div>
@@ -178,9 +167,9 @@ export default async function ColimaPage({
       </section>
 
       {/* ─── SERVICES — brief mention ─── */}
-      <section className="bg-ink py-16 md:py-20">
+      <section className="bg-primary py-16 md:py-20">
         <div className="container-onkimia text-center max-w-3xl mx-auto">
-          <p className="text-xs font-medium tracking-widest uppercase text-teal-soft mb-4">
+          <p className="text-xs font-medium tracking-widest uppercase text-white/50 mb-4">
             {t('services.eyebrow')}
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-white mb-6">
@@ -201,7 +190,7 @@ export default async function ColimaPage({
           </div>
           <Link
             href="/servicios"
-            className="inline-flex items-center gap-2 bg-teal hover:bg-teal-soft text-white font-medium px-8 py-4 rounded-full transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30"
+            className="inline-flex items-center gap-2 bg-white text-primary hover:bg-white/90 font-medium px-8 py-4 rounded-full transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20"
           >
             {t('services.cta')}
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -210,17 +199,17 @@ export default async function ColimaPage({
       </section>
 
       {/* ─── FINAL CTA ─── */}
-      <section className="bg-cream py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="container-onkimia text-center max-w-2xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl text-ink mb-4">
+          <h2 className="font-serif text-3xl md:text-4xl text-primary mb-4">
             {t('cta.title')}
           </h2>
-          <p className="text-gray-warm text-lg leading-relaxed mb-8">
+          <p className="text-secondary text-lg leading-relaxed mb-8">
             {t('cta.description')}
           </p>
           <Link
             href="/contacto"
-            className="inline-flex items-center gap-2 bg-teal hover:bg-teal-soft text-white font-medium px-8 py-4 rounded-full transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/85 text-white font-medium px-8 py-4 rounded-full transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20"
           >
             {t('cta.button')}
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
