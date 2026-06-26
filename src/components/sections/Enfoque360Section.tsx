@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
 import type { SanityImageWithLQIP } from '@/sanity/types';
 

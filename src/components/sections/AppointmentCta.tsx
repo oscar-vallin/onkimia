@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { ClipboardCheck, CalendarCheck } from 'lucide-react';
 import { PillButton } from '@/components/ui/PillButton';
 import type { SanityImageWithLQIP } from '@/sanity/types';

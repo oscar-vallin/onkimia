@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
     // Removing 2048 and 3840 prevents over-serving on retina displays beyond 1920px.
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 64, 96, 128, 256, 384],
-    qualities: [75, 80, 85],
+    qualities: [75, 80, 82, 85],
     // Cache optimized images for 30 days (default is 60 s).
     minimumCacheTTL: 2592000,
     formats: ['image/webp'],

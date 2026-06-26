@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';

@@ -5,8 +5,7 @@ import { headers } from 'next/headers';
 import { contactFormSchema, type ContactFormState } from '@/lib/schemas/contact';
 import { contactRatelimit, getClientIp } from '@/lib/ratelimit';
 import { verifyTurnstile } from '@/lib/turnstile';
-import { sendContactEmail } from '@/lib/email/resend';
-import { createLead } from '@/lib/odoo/contact'; // ← única línea nueva en imports
+import { createLead } from '@/lib/odoo/contact';
 
 export async function submitContactForm(
   _prevState: ContactFormState | null,
@@ -34,12 +33,12 @@ export async function submitContactForm(
     return { ok: false, errors, message: 'validation.failed' };
   }
 
-  // Honeypot → silently succeed
-  if (parsed.data._honeypot && parsed.data._honeypot.length > 0) {
+  // ─── 2. Honeypot — silently succeed to confuse bots ──
+  if (parsed.data._honeypot) {
     return { ok: true, message: 'success.sent' };
   }
 
-  // ─── 2. Rate limit ────────────────────────────────
+  // ─── 3. Rate limit ────────────────────────────────
   const reqHeaders = await headers();
   const ip = getClientIp(reqHeaders);
   const { success: rateLimitOk } = await contactRatelimit.limit(ip);
@@ -49,7 +48,7 @@ export async function submitContactForm(
     return { ok: false, message: 'error.rateLimit' };
   }
 
-  // ─── 3. Turnstile ─────────────────────────────────
+  // ─── 4. Turnstile ─────────────────────────────────
   const turnstileToken = formData.get('cf-turnstile-response')?.toString() ?? '';
   const turnstileOk    = await verifyTurnstile(turnstileToken, ip);
 
@@ -57,38 +56,23 @@ export async function submitContactForm(
     return { ok: false, message: 'error.turnstile' };
   }
 
-  // ─── 4. Email ─────────────────────────────────────
+  // ─── 5. Odoo CRM — bloqueante ─────────────────────
+  // Odoo es el destino único. Si falla, el usuario es notificado.
   try {
-    const emailResult = await sendContactEmail({
+    await createLead({
       name:    parsed.data.name,
       email:   parsed.data.email,
       phone:   parsed.data.phone,
       comment: parsed.data.comment,
     });
-
-    if (!emailResult.ok) {
-      return { ok: false, message: 'error.email' };
-    }
   } catch (err) {
-    console.error('[Contact] Email error:', err);
-    return { ok: false, message: 'error.unexpected' };
-  }
-
-  // ─── 5. Odoo CRM — fire and forget ───────────────
-  // Si Odoo falla el usuario NO se entera: el email ya fue enviado.
-  // El ID del lead queda en los logs del servidor para auditoría.
-  createLead({
-    name:    parsed.data.name,
-    email:   parsed.data.email,
-    phone:   parsed.data.phone,
-    comment: parsed.data.comment,
-  })
-    .then((leadId) => {
-      console.info('[Odoo] Lead creado, ID:', leadId);
-    })
-    .catch((err) => {
-      console.error('[Odoo] Error al crear lead (no bloqueante):', err);
+    console.error('[Odoo] Error al crear lead de contacto:', {
+      error: err instanceof Error ? err.message : String(err),
+      name:  parsed.data.name,
+      email: parsed.data.email,
     });
+    return { ok: false, message: 'error.submit' };
+  }
 
   return { ok: true, message: 'success.sent' };
 }

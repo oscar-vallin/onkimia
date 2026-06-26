@@ -1,5 +1,3 @@
-import Image from 'next/image';
-import { urlFor } from '@/sanity/image';
 import type { SanityImageWithLQIP, Testimonial } from '@/sanity/types';
 import { TestimonialCarousel } from '@/components/ui/TestimonialCarousel';
 import type { Locale } from '@/i18n/routing';

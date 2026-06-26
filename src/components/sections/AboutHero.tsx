@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';

@@ -21,7 +21,7 @@ export const contactFormSchema = z.object({
   acceptPrivacy: z
     .boolean()
     .refine((v) => v === true, { message: 'privacy.required' }),
-  _honeypot: z.string().max(0, { message: 'spam.detected' }).optional(),
+  _honeypot: z.string().optional(),
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;

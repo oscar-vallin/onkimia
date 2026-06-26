@@ -6,7 +6,7 @@ import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, FAQ, Procedure } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
 import {
   UserCheck,

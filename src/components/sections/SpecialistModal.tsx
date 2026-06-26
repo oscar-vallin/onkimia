@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { X } from 'lucide-react';
 import { urlFor } from '@/sanity/image';
 import { getLocalized, type Locale } from '@/sanity/lib/localization';

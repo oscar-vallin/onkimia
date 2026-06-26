@@ -1,30 +1,44 @@
-// lib/ratelimit.ts
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
-import { env } from './env';
+import 'server-only';
 
-function makeRatelimiter(prefix: string, limiter: Ratelimit['limiter']) {
-  return new Ratelimit({
-    redis: new Redis({
-      url:   env.UPSTASH_REDIS_REST_URL,
-      token: env.UPSTASH_REDIS_REST_TOKEN,
-    }),
-    limiter,
-    analytics: true,
-    prefix,
-  });
+/**
+ * In-memory sliding window rate limiter.
+ * Stores per-IP timestamps; entries outside the window are discarded on each
+ * check. Resets on server restart and is not shared across processes — fine
+ * for this site's single-process deployment.
+ */
+
+interface RateLimiter {
+  limit(key: string): { success: boolean };
 }
 
-// Estos se crean la primera vez que el módulo se importa DENTRO de un request,
-// no durante el bundle/compile step.
-export const contactRatelimit        = makeRatelimiter('ratelimit:contact', Ratelimit.slidingWindow(5, '1 h'));
-export const jobApplicationRatelimit = makeRatelimiter('ratelimit:jobapp',  Ratelimit.slidingWindow(3, '1 d'));
+function createSlidingWindowLimiter(max: number, windowMs: number): RateLimiter {
+  const store = new Map<string, number[]>();
+
+  return {
+    limit(key: string) {
+      const now = Date.now();
+      const windowStart = now - windowMs;
+
+      const timestamps = (store.get(key) ?? []).filter((t) => t > windowStart);
+      timestamps.push(now);
+      store.set(key, timestamps);
+
+      return { success: timestamps.length <= max };
+    },
+  };
+}
+
+// 5 requests per hour — contact form
+export const contactRatelimit = createSlidingWindowLimiter(5, 60 * 60 * 1_000);
+
+// 3 requests per day — job application form
+export const jobApplicationRatelimit = createSlidingWindowLimiter(3, 24 * 60 * 60 * 1_000);
 
 export function getClientIp(headers: Headers): string {
   return (
-    headers.get('cf-connecting-ip') ||
-    headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    headers.get('x-real-ip') ||
+    headers.get('cf-connecting-ip') ??
+    headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    headers.get('x-real-ip') ??
     '127.0.0.1'
   );
 }

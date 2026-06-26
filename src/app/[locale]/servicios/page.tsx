@@ -6,7 +6,7 @@ import { PageHero } from '@/components/sections/PageHero';
 import type { ServiciosPage, SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { PillButton } from '@/components/ui/PillButton';

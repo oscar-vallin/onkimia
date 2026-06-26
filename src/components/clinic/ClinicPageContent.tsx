@@ -2,7 +2,7 @@
 
 import { MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import type { Clinic, Doctor, Service } from '@/sanity/types';

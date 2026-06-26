@@ -1,10 +1,12 @@
 // lib/odoo/client.ts
+import 'server-only';
+import { env } from '../env';
 export { jsonRpc as jsonRpcRaw };
 
-const ODOO_URL      = process.env.ODOO_URL!;
-const ODOO_DATABASE = process.env.ODOO_DATABASE!;
-const ODOO_USERNAME = process.env.ODOO_USERNAME!;
-const ODOO_API_KEY  = process.env.ODOO_API_KEY!;
+const ODOO_URL      = env.ODOO_URL;
+const ODOO_DATABASE = env.ODOO_DATABASE;
+const ODOO_USERNAME = env.ODOO_USERNAME;
+const ODOO_API_KEY  = env.ODOO_API_KEY;
 
 interface JsonRpcResponse<T = unknown> {
   jsonrpc: string;

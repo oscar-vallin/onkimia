@@ -130,8 +130,7 @@ export function ContactForm() {
       }
 
       if (result.ok) {
-        const form = document.getElementById('contact-form') as HTMLFormElement | null;
-        form?.reset();
+        formRef.current?.reset();
       }
     });
   };

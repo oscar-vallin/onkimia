@@ -6,7 +6,7 @@ import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, FAQ, Procedure, EndosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
 import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, UserCheck, Cpu, Zap, Clock, Heart, Check } from 'lucide-react';
 import { BookingButton } from '@/components/ui/BookingButton';

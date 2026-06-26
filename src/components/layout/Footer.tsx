@@ -11,6 +11,7 @@ import { getClinicConfig } from '@/config/clinicConfig';
 import type { SiteSettings, Clinic } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
+import { SanityImage } from '@/components/ui/SanityImage';
 
 interface FooterProps {
   settings: SiteSettings;
@@ -41,7 +42,7 @@ export function Footer({ settings }: FooterProps) {
                 {/* Desktop: full logo */}
                 <div className="relative hidden md:block h-16 w-44">
                   <Image
-                    src="/ONKIMIA-DOCTORS_Logo.png"
+                    src="/ONKIMIA-DOCTORS_Logo.webp"
                     alt="Onkimia Doctors"
                     fill
                     sizes="176px"
@@ -61,7 +62,7 @@ export function Footer({ settings }: FooterProps) {
               </>
             ) : settings.logo ? (
               <div className="relative w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
-                <Image
+                <SanityImage
                   src={urlFor(settings.logo).height(110).url()}
                   alt={settings.title}
                   fill

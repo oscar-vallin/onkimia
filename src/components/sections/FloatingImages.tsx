@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const FLOAT_CONFIG = [

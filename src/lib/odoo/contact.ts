@@ -1,5 +1,5 @@
 // lib/odoo/contact.ts
-
+import 'server-only';
 import { odooCreate } from './client';
 
 export interface ContactPayload {

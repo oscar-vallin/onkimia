@@ -8,7 +8,7 @@ import {
 } from '@/lib/schemas/jobApplication';
 import { jobApplicationRatelimit, getClientIp } from '@/lib/ratelimit';
 import { verifyTurnstile } from '@/lib/turnstile';
-import { sendJobApplicationEmail } from '@/lib/email/resend';
+import { sendJobApplicationEmail } from '@/lib/email/smtp';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { groq } from 'next-sanity';
 import { getLocalized } from '@/sanity/lib/localization';

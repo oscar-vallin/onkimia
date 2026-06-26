@@ -147,7 +147,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                   {/* Desktop: full OD logo — always visible */}
                   <span className="relative hidden md:block w-[150px] h-[56px] lg:w-[170px] lg:h-[64px]">
                       <Image
-                        src="/ONKIMIA-DOCTORS_Logo.png"
+                        src="/ONKIMIA-DOCTORS_Logo.webp"
                         alt="Onkimia Doctors"
                         fill
                         sizes="(max-width: 1024px) 150px, 170px"

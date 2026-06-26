@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { SanityImage } from '@/components/ui/SanityImage';
 import { Link } from '@/i18n/navigation';
 import { ArrowRight } from 'lucide-react';
 import { parseEmphasis } from '@/lib/parseEmphasis';
@@ -148,11 +149,10 @@ export function PageHero({
 
       {/* Desktop image — hidden on mobile when a mobile variant is provided */}
       {imageSrc && (
-        <Image
+        <SanityImage
           src={imageSrc}
           alt={imageAlt}
           fill
-          priority
           fetchPriority="high"
           sizes="100vw"
           quality={82}

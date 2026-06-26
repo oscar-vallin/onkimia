@@ -5,7 +5,7 @@ import { SITE_SETTINGS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queri
 import { urlFor } from '@/sanity/image';
 import type { SiteSettings, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import Image from 'next/image';
+import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
 import { Activity, HeartPulse, Flower2, Target, Users, Sparkles, Shield, Check } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
