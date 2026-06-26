@@ -57,8 +57,6 @@ function InitiativeCard({ title, description, category, linkText, linkHref, icon
   const imgSrc = image
     ? urlFor(image).width(760).height(480).format('webp').quality(82).url()
     : null;
-  const blur = image?.asset?.metadata?.lqip ?? undefined;
-
   return (
     <article className="flex flex-col">
       <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gray-100 mb-6">
@@ -69,8 +67,6 @@ function InitiativeCard({ title, description, category, linkText, linkHref, icon
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
-            placeholder={blur ? 'blur' : 'empty'}
-            blurDataURL={blur}
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" />

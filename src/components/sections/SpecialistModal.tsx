@@ -41,7 +41,6 @@ export function SpecialistModal({ doctor, locale, open, onClose }: SpecialistMod
   if (!open) return null;
 
   const specialty = getLocalized(doctor.specialty, locale);
-  const hasLqip = !!doctor.photo?.asset?.metadata?.lqip;
 
   return createPortal(
     <div className="fixed inset-0 z-[1200] flex items-end md:items-center justify-center md:p-6">
@@ -88,8 +87,6 @@ export function SpecialistModal({ doctor, locale, open, onClose }: SpecialistMod
               fill
               sizes="(max-width: 768px) 100vw, 620px"
               className="object-cover"
-              placeholder={hasLqip ? 'blur' : 'empty'}
-              blurDataURL={doctor.photo.asset?.metadata?.lqip}
             />
           )}
         </div>

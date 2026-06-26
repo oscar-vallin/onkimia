@@ -51,7 +51,6 @@ function ProcedureCard({
   const cardSrc = image
     ? urlFor(image).width(800).format('webp').quality(82).url()!
     : undefined;
-  const blur = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
     <div className="w-[320px] h-[440px] flex-shrink-0 relative rounded-3xl overflow-hidden">
@@ -63,8 +62,6 @@ function ProcedureCard({
           fill
           sizes="320px"
           loading="lazy"
-          placeholder={blur ? 'blur' : 'empty'}
-          blurDataURL={blur}
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
       )}

@@ -69,8 +69,6 @@ export function HeroSection({
   const imageSrc = image
     ? urlFor(image).width(1920).quality(80).format('webp').url()
     : null;
-  const blurDataURL = image?.asset?.metadata?.lqip ?? undefined;
-
   return (
     <section className={`relative flex ${HEIGHTS[height]} bg-ink overflow-hidden`}>
 
@@ -84,8 +82,6 @@ export function HeroSection({
           sizes="100vw"
           quality={80}
           className={`object-cover ${mobileObjectPosition} md:object-center`}
-          placeholder={blurDataURL ? 'blur' : 'empty'}
-          blurDataURL={blurDataURL}
         />
       )}
 

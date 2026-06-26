@@ -44,8 +44,6 @@ export function AboutHero({
   const imageSrc = image
     ? urlFor(image).width(1920).quality(80).format('webp').url()
     : null;
-  const blur = image?.asset?.metadata?.lqip ?? undefined;
-
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden bg-ink text-white -mt-16 md:-mt-20 flex items-end md:items-center">
 
@@ -58,8 +56,6 @@ export function AboutHero({
           priority
           sizes="100vw"
           quality={80}
-          placeholder={blur ? 'blur' : 'empty'}
-          blurDataURL={blur}
           className="object-cover object-[center_20%] md:object-center z-0"
           aria-hidden="true"
         />

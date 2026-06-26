@@ -33,8 +33,6 @@ export function Enfoque360Section({
   const imgSrc = image
     ? urlFor(image).width(1200).format('webp').quality(85).url()
     : null;
-  const blur = image?.asset?.metadata?.lqip ?? undefined;
-
   const titleLines = title.split('\n');
 
   return (
@@ -100,8 +98,6 @@ export function Enfoque360Section({
                     style={{ width: '100%', height: 'auto', display: 'block' }}
                     className="relative z-10"
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    placeholder={blur ? 'blur' : 'empty'}
-                    blurDataURL={blur}
                   />
                 </>
               ) : (

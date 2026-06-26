@@ -39,7 +39,6 @@ export function TestimonialCarousel({ testimonials, locale }: TestimonialCarouse
   const photoSrc = t.photo
     ? urlFor(t.photo).width(160).height(160).format('webp').url()
     : null;
-  const lqip = t.photo?.asset?.metadata?.lqip;
 
   return (
     <div className="relative">
@@ -76,8 +75,6 @@ export function TestimonialCarousel({ testimonials, locale }: TestimonialCarouse
                 fill
                 sizes="56px"
                 className="object-cover"
-                placeholder={lqip ? 'blur' : 'empty'}
-                blurDataURL={lqip ?? undefined}
               />
             </div>
           )}

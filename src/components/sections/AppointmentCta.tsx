@@ -39,8 +39,6 @@ export function AppointmentCta({
           fill
           sizes="100vw"
           className="object-cover"
-          placeholder={backgroundImage.asset?.metadata?.lqip ? 'blur' : 'empty'}
-          blurDataURL={backgroundImage.asset?.metadata?.lqip ?? undefined}
           aria-hidden="true"
         />
       )}

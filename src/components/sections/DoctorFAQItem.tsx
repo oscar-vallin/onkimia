@@ -65,8 +65,6 @@ export function DoctorFAQItem({ item, defaultOpen = false }: DoctorFAQItemProps)
                 width={40}
                 height={40}
                 className="rounded-full object-cover object-top flex-shrink-0"
-                placeholder={item.doctor.photo?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                blurDataURL={item.doctor.photo?.asset?.metadata?.lqip ?? undefined}
               />
             ) : (
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">

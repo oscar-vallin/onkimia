@@ -31,7 +31,6 @@ function MobileCard({
   const cardSrc = image
     ? urlFor(image).width(800).format('webp').quality(82).url()!
     : undefined;
-  const blur = image?.asset?.metadata?.lqip ?? undefined;
 
   return (
     <div
@@ -46,8 +45,6 @@ function MobileCard({
           fill
           sizes="85vw"
           loading="lazy"
-          placeholder={blur ? 'blur' : 'empty'}
-          blurDataURL={blur}
           className="absolute inset-0 w-full h-full object-cover"
         />
       )}

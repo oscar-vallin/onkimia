@@ -156,8 +156,6 @@ export function PageHero({
           fetchPriority="high"
           sizes="100vw"
           quality={82}
-          placeholder={blurDataURL ? 'blur' : 'empty'}
-          blurDataURL={blurDataURL}
           className={`object-cover ${mobileImageSrc ? 'hidden md:block' : mobileObjectPosition} ${imagePosition} z-0 origin-center ${imageClassName ?? ''}`}
           aria-hidden={imageAlt === ''}
         />

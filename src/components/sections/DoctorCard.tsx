@@ -10,7 +10,6 @@ interface DoctorCardProps {
 
 export function DoctorCard({ doctor, locale }: DoctorCardProps) {
   const hasPhoto = !!doctor.photo?.asset;
-  const hasLqip  = !!doctor.photo?.asset?.metadata?.lqip;
   const photoSrc  = hasPhoto
     ? urlFor(doctor.photo).width(600).height(520).format('webp').quality(85).url()
     : undefined;
@@ -31,8 +30,6 @@ export function DoctorCard({ doctor, locale }: DoctorCardProps) {
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
             loading="lazy"
-            placeholder={hasLqip ? 'blur' : 'empty'}
-            blurDataURL={hasLqip ? doctor.photo.asset?.metadata?.lqip : undefined}
             className={[
               'object-cover object-top',
               // Desktop (hover-capable devices): start greyscale, reveal on group-hover

@@ -16,7 +16,6 @@ interface SpecialistRowProps {
 
 export function SpecialistRow({ doctor, locale, ctaLabel }: SpecialistRowProps) {
   const [open, setOpen] = useState(false);
-  const hasLqip = !!doctor.photo?.asset?.metadata?.lqip;
 
   return (
     <>
@@ -34,8 +33,6 @@ export function SpecialistRow({ doctor, locale, ctaLabel }: SpecialistRowProps) 
               fill
               sizes="76px"
               className="object-cover group-hover:scale-105 transition-transform duration-[400ms]"
-              placeholder={hasLqip ? 'blur' : 'empty'}
-              blurDataURL={doctor.photo.asset?.metadata?.lqip}
             />
           )}
         </div>

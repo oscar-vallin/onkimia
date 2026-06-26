@@ -38,7 +38,6 @@ export function FloatingImages({ count, srcs, alts, lqips }: FloatingImagesProps
             key={i}
             src={srcs[i]}
             alt={alts[i]}
-            lqip={lqips[i]}
             placeholder={PLACEHOLDER_GRADIENTS[i]}
             className="w-full"
           />
@@ -82,7 +81,6 @@ export function FloatingImages({ count, srcs, alts, lqips }: FloatingImagesProps
                 <FloatImage
                   src={srcs[i]}
                   alt={alts[i]}
-                  lqip={lqips[i]}
                   placeholder={PLACEHOLDER_GRADIENTS[i]}
                   className="w-full h-full"
                 />
@@ -98,12 +96,11 @@ export function FloatingImages({ count, srcs, alts, lqips }: FloatingImagesProps
 interface FloatImageProps {
   src: string | null;
   alt: string;
-  lqip?: string;
   placeholder: string;
   className?: string;
 }
 
-function FloatImage({ src, alt, lqip, placeholder, className = '' }: FloatImageProps) {
+function FloatImage({ src, alt, placeholder, className = '' }: FloatImageProps) {
   return (
     /*
       Hover translateY on the inner wrapper keeps the transform independent
@@ -125,8 +122,6 @@ function FloatImage({ src, alt, lqip, placeholder, className = '' }: FloatImageP
           fill
           sizes="(max-width: 768px) 45vw, 200px"
           className="object-cover"
-          placeholder={lqip ? 'blur' : 'empty'}
-          blurDataURL={lqip}
         />
       ) : (
         <div

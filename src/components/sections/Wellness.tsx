@@ -25,7 +25,6 @@ export function Wellness({ eyebrow, title, intro, items, backgroundImage }: Well
   const bgSrc = backgroundImage
     ? urlFor(backgroundImage).width(1920).height(1080).format('webp').url()
     : null;
-  const lqip = backgroundImage?.asset?.metadata?.lqip;
 
   return (
     <section className="relative py-20 md:py-28 bg-primary overflow-hidden">
@@ -39,8 +38,6 @@ export function Wellness({ eyebrow, title, intro, items, backgroundImage }: Well
             fill
             sizes="100vw"
             className="object-cover"
-            placeholder={lqip ? 'blur' : 'empty'}
-            blurDataURL={lqip}
             aria-hidden="true"
           />
           <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
