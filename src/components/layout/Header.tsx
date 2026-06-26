@@ -48,9 +48,7 @@ const mobileLinkVariants: Variants = {
 export function Header({ settings, clinics }: HeaderProps) {
   const [mobileOpen, setMobileOpen]         = useState(false);
   const [clinicMenuOpen, setClinicMenuOpen] = useState(false);
-  const [scrolled, setScrolled]             = useState(() =>
-    typeof window !== 'undefined' ? window.scrollY > 80 : false
-  );
+  const [scrolled, setScrolled]             = useState(false);
   const [mounted, setMounted] = useState(false);
 
   const pathname = usePathname();
@@ -61,7 +59,7 @@ export function Header({ settings, clinics }: HeaderProps) {
   // wrong background when navigating between pages.
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
-    setScrolled(typeof window !== 'undefined' ? window.scrollY > 80 : false);
+    setScrolled(false);
   }
   const router   = useRouter();
   const locale   = useLocale() as Locale;
@@ -111,10 +109,13 @@ export function Header({ settings, clinics }: HeaderProps) {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    onScroll();
+    const onScroll = () => setScrolled(window.scrollY > 150);
+    const timer = setTimeout(() => onScroll(), 50);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(timer);
+    };
   }, [pathname]);
 
   return (
