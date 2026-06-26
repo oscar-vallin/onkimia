@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, startTransition } from 'react';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Globe, MapPin } from 'lucide-react';
@@ -51,6 +51,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   const [scrolled, setScrolled] = useState(() =>
     typeof window !== 'undefined' ? window.scrollY > 150 : false
   );
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale() as Locale;
@@ -101,18 +102,12 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
     });
   }, []);
 
-  // Scroll detection — plain scrollY check against a per-page threshold.
-  // Deliberately NOT IntersectionObserver: its callback can report a stale
-  // isIntersecting read during the initial hydration/paint race, flipping
-  // `scrolled` true for a frame on load (the white-flash bug). A direct
-  // scrollY comparison is synchronous and deterministic — no race window.
-  //
-  // Threshold: defaults to 150px (never trigger on a trivial scroll), but
-  // when this page has a real hero (#hero-end-sentinel marker at its bottom
-  // edge), we read the marker's actual page position so the white state
-  // only kicks in once the user has scrolled past THAT hero — short hero,
-  // short threshold; tall hero, tall threshold. Prevents the white nav from
-  // popping in early over a still-visible dark hero image.
+  useEffect(() => {
+    startTransition(() => {
+      setMounted(true);
+    });
+  }, []);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
@@ -132,9 +127,6 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
   return (
     <>
       <header
-        // Base state is always transparent — `scrolled` (and its derived
-        // background classes below) only ever ADDS the white/dark solid
-        // look on top of this default; it never starts any other way.
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           mobileOpen
             ? 'bg-ink'
@@ -231,8 +223,8 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                 >
                   <MapPin className="w-4 h-4" />
                   <span>
-                    {currentClinic
-                      ? getLocalized(currentClinic.name, locale)
+                    {mounted
+                      ? (currentClinic ? getLocalized(currentClinic.name, locale) : tClinic('selectClinic'))
                       : tClinic('selectClinic')}
                   </span>
                   <svg

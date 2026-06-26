@@ -27,3 +27,10 @@ export const env = envSchema.parse({
   JOB_BOARD_EMAIL: process.env.JOB_BOARD_EMAIL,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
 });
+
+if (typeof window !== 'undefined') {
+  throw new Error(
+    '[env] Este módulo solo debe importarse en el servidor. ' +
+    'Asegúrate de que no sea importado desde un Client Component.'
+  );
+}
