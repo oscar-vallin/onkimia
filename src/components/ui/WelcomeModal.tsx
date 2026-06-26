@@ -96,7 +96,7 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
       aria-labelledby="welcome-modal-title"
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" aria-hidden="true" />
+      <div className="absolute inset-0 bg-primary/60 backdrop-blur-sm" aria-hidden="true" />
 
       {/* Panel */}
       <div
@@ -109,7 +109,7 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
           ref={closeBtnRef}
           type="button"
           onClick={dismiss}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-cream hover:bg-cream-2 text-gray-warm flex items-center justify-center transition-colors cursor-pointer"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-secondary flex items-center justify-center transition-colors cursor-pointer"
           aria-label={t('close')}
         >
           <X className="w-4 h-4" aria-hidden="true" />
@@ -117,16 +117,16 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
 
         {/* Header */}
         <div className="px-8 pt-10 pb-6 text-center">
-          <h2 id="welcome-modal-title" className="font-serif text-2xl md:text-3xl text-ink mb-3">
+          <h2 id="welcome-modal-title" className="font-serif text-2xl md:text-3xl text-primary mb-3">
             {t('title')}
           </h2>
-          <p className="text-gray-warm text-sm md:text-base">{t('subtitle')}</p>
+          <p className="text-secondary text-sm md:text-base">{t('subtitle')}</p>
         </div>
 
         {/* Clínica */}
         <div className="px-8 pb-6">
-          <p className="text-sm font-medium text-gray-warm mb-3 flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-teal" aria-hidden="true" />
+          <p className="text-sm font-medium text-secondary mb-3 flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-primary" aria-hidden="true" />
             {t('clinicLabel')}
           </p>
           <div className="grid grid-cols-2 gap-3">
@@ -138,12 +138,12 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
                 aria-pressed={selectedClinic === slug}
                 className={`p-4 rounded-lg border-2 transition-all text-left cursor-pointer ${
                   selectedClinic === slug
-                    ? 'border-teal bg-teal/10'
-                    : 'border-line hover:border-gray-soft'
+                    ? 'border-primary bg-primary/10'
+                    : 'border-black/[0.07] hover:border-black/[0.15]'
                 }`}
               >
-                <p className="font-medium text-ink capitalize">{slug}</p>
-                <p className="text-xs text-gray-soft mt-1">
+                <p className="font-medium text-primary capitalize">{slug}</p>
+                <p className="text-xs text-secondary mt-1">
                   {slug === 'guadalajara' ? t('clinicPrimary') : t('clinicSecondary')}
                 </p>
               </button>
@@ -153,8 +153,8 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
 
         {/* Idioma */}
         <div className="px-8 pb-8">
-          <p className="text-sm font-medium text-gray-warm mb-3 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-teal" aria-hidden="true" />
+          <p className="text-sm font-medium text-secondary mb-3 flex items-center gap-2">
+            <Globe className="w-4 h-4 text-primary" aria-hidden="true" />
             {t('languageLabel')}
           </p>
           <div className="grid grid-cols-2 gap-3">
@@ -169,8 +169,8 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
                 aria-pressed={selectedLanguage === value}
                 className={`p-3 rounded-lg border-2 transition-all font-medium cursor-pointer ${
                   selectedLanguage === value
-                    ? 'border-teal bg-teal/10 text-ink'
-                    : 'border-line hover:border-gray-soft text-gray-warm'
+                    ? 'border-primary bg-primary/10 text-primary'
+                    : 'border-black/[0.07] hover:border-black/[0.15] text-secondary'
                 }`}
               >
                 {label}
@@ -184,7 +184,7 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
           <button
             type="button"
             onClick={handleConfirm}
-            className="w-full bg-teal hover:bg-teal-soft text-white font-medium px-6 py-3.5 rounded-lg transition-colors inline-flex items-center justify-center gap-2 group cursor-pointer"
+            className="w-full bg-primary hover:bg-primary/80 text-white font-medium px-6 py-3.5 rounded-lg transition-colors inline-flex items-center justify-center gap-2 group cursor-pointer"
           >
             {t('confirm')}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
