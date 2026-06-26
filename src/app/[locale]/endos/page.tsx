@@ -55,8 +55,8 @@ export default async function EndosPage({
     getTranslations('endos'),
   ]);
 
-  const heroImage = settings.endosHeroImage ?? settings.homeHeroImage;
-  const heroLqip = settings.endosHeroImage?.asset?.metadata?.lqip ?? settings.homeHeroImage?.asset?.metadata?.lqip;
+  const heroImage = settings.endosHeroImage;
+  const heroLqip = settings.endosHeroImage?.asset?.metadata?.lqip;
 
   return (
     <div className="endos-page">

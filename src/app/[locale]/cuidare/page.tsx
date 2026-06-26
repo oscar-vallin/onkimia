@@ -86,7 +86,7 @@ export default async function CuidarePage({
     getTranslations('cuidare'),
   ]);
 
-  const heroImage = settings.cuidareHeroImage || settings.homeHeroImage;
+  const heroImage = settings.cuidareHeroImage;
 
   const treatments: Treatment[] = TREATMENT_KEYS.map(({ key, iconKey }) => ({
     id: key,
@@ -230,6 +230,7 @@ export default async function CuidarePage({
           <Image
             src={urlFor(settings.cuidareRadiologyImage).width(1920).height(1080).format('webp').quality(80).url()}
             alt=""
+            aria-hidden="true"
             fill
             sizes="100vw"
             className="object-cover"

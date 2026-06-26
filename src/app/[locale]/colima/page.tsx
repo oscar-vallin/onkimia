@@ -51,7 +51,7 @@ export default async function ColimaPage({
   ]);
 
   const clinic = clinicConfig.colima;
-  const heroImage = settings.cuidareHeroImage ?? settings.aboutHeroImage ?? settings.homeHeroImage;
+  const heroImage = settings.cuidareHeroImage ?? settings.aboutHeroImage;
 
   return (
     <>

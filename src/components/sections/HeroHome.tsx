@@ -2,8 +2,6 @@ import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { PillButton } from '@/components/ui/PillButton';
-import { urlFor } from '@/sanity/image';
-import type { SanityImageWithLQIP } from '@/sanity/types';
 import { HeroEyebrow } from './HeroEyebrow';
 
 interface Stat {
@@ -20,7 +18,6 @@ export interface HeroHomeProps {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   stats: [Stat, Stat, Stat];
-  heroImage?: SanityImageWithLQIP;
 }
 
 function parseHeroTitle(text: string): ReactNode[] {
@@ -40,7 +37,6 @@ export function HeroHome({
   primaryCta,
   secondaryCta,
   stats,
-  heroImage,
 }: HeroHomeProps) {
   return (
     <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">

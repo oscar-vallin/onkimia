@@ -91,15 +91,14 @@ export default async function ServicesPage({
     <div className="flex flex-col flex-1">
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc={(() => { const img = settings.serviciosHeroImage ?? settings.homeHeroImage; return img ? urlFor(img).width(1920).quality(82).format('webp').url() : undefined; })()}
-        blurDataURL={(settings.serviciosHeroImage ?? settings.homeHeroImage)?.asset?.metadata?.lqip ?? undefined}
+        imageSrc={settings.serviciosHeroImage ? urlFor(settings.serviciosHeroImage).width(1920).quality(82).format('webp').url() : undefined}
+        blurDataURL={settings.serviciosHeroImage?.asset?.metadata?.lqip ?? undefined}
         mobileImageSrc="/mobile-hero/services-hero.jpg"
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
         extraDim
         solidLeftBand
-        bottomFade
       />
 
       {/* ─── 1. NUESTRO ENFOQUE — 3 feature cards ─── */}

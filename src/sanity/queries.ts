@@ -11,7 +11,6 @@ export const SITE_SETTINGS_QUERY = groq`
     logo,
     logoDark,
     // Hero images — one per page
-    homeHeroImage ${HERO_IMAGE_FRAGMENT},
     homeHeroDescription,
     aboutHeroImage ${HERO_IMAGE_FRAGMENT},
     serviciosHeroImage ${HERO_IMAGE_FRAGMENT},

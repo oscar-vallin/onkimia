@@ -3,8 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
-import { Source_Code_Pro } from 'next/font/google';
-import { fraunces, dmSans } from '@/app/fonts';
+import { fraunces, dmSans, sourceCodePro } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { CLINICS_QUERY, SITE_SETTINGS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
@@ -18,14 +17,6 @@ import { WelcomeModalProvider } from '@/components/providers/WelcomeModalProvide
 import type { Clinic, SiteSettings, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import './globals.css';
-
-const sourceCodePro = Source_Code_Pro({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-mono',
-  display: 'swap',
-});
-
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

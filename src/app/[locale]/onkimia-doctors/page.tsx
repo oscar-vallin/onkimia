@@ -57,7 +57,7 @@ export default async function OnkimiaDoctorsPage({
     getTranslations('doctors'),
   ]);
 
-  const heroImage = settings.doctorsHeroImage ?? settings.homeHeroImage;
+  const heroImage = settings.doctorsHeroImage;
   const heroLqip = heroImage?.asset?.metadata?.lqip;
   const waCommercial = settings.whatsappCommercial;
   const waEndos = od?.whatsappEndos ?? waCommercial;
@@ -171,6 +171,7 @@ export default async function OnkimiaDoctorsPage({
               <Image
                 src={urlFor(od.improvementsImage).width(1920).height(720).format('webp').quality(85).url()}
                 alt=""
+                aria-hidden="true"
                 fill
                 sizes="(max-width: 1440px) 100vw, 1440px"
                 className="object-cover"

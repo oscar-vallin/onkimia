@@ -52,8 +52,8 @@ export default async function ContactPage({
     <>
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc={(() => { const img = settings?.contactHeroImage ?? settings?.homeHeroImage; return img ? urlFor(img).width(1920).quality(82).format('webp').url() : undefined; })()}
-        blurDataURL={(settings?.contactHeroImage ?? settings?.homeHeroImage)?.asset?.metadata?.lqip ?? undefined}
+        imageSrc={settings?.contactHeroImage ? urlFor(settings.contactHeroImage).width(1920).quality(82).format('webp').url() : undefined}
+        blurDataURL={settings?.contactHeroImage?.asset?.metadata?.lqip ?? undefined}
         extraDim
         eyebrow={t('section.eyebrow')}
         title={t('hero.title')}

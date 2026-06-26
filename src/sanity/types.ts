@@ -17,8 +17,7 @@ export interface SiteSettings {
   tagline: LocalizedString;
   logo?: Image;
   logoDark?: Image;
-  // Hero images — one per page, all fall back to homeHeroImage
-  homeHeroImage?: SanityImageWithLQIP;
+  // Hero images — one per page
   homeHeroDescription: LocalizedString;
   aboutHeroImage?: SanityImageWithLQIP;
   serviciosHeroImage?: SanityImageWithLQIP;

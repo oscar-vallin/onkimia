@@ -348,7 +348,7 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                       className="relative block w-[160px] h-[54px]"
                     >
                       <Image
-                        src="/logos/onkimia-logo.svg"
+                        src="/logos/onkimia-logo.webp"
                         alt="Onkimia"
                         fill
                         sizes="160px"

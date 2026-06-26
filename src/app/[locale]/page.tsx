@@ -80,7 +80,6 @@ export default async function HomePage({
           { number: t('homeHero.stats.detection.number'), label: t('homeHero.stats.detection.label') },
           { number: t('homeHero.stats.guide.number'), label: t('homeHero.stats.guide.label') },
         ]}
-        heroImage={settings.homeHeroImage}
       />
 
       {/* ─── HOW IT WORKS — static ─── */}
