@@ -5,7 +5,6 @@ import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Globe, MapPin } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
-import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
 import type { SiteSettings, Clinic, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
@@ -168,22 +167,18 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                       />
                   </span>
                 </>
-              ) : settings.logo ? (
+              ) : (
                 <span className="relative block w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
                   <Image
-                    src={urlFor(settings.logo).width(600).url()}
-                    alt={settings.title}
+                    src="/logos/onkimia-logo.webp"
+                    alt="Onkimia"
                     fill
                     sizes="(max-width: 768px) 142px, 170px"
                     priority
                     className={`object-contain object-left ${
-                      scrolled && !mobileOpen && !isDoctorsRoute ? 'invert' : ''
+                      scrolled && !mobileOpen ? '' : 'brightness-0 invert'
                     }`}
                   />
-                </span>
-              ) : (
-                <span className={`font-serif text-2xl ${textColor}`}>
-                  {settings.title}
                 </span>
               )}
             </Link>
@@ -346,23 +341,21 @@ export function Header({ settings, clinics, odSettings }: HeaderProps) {
                         className="object-contain object-left"
                       />
                     </Link>
-                  ) : settings.logo ? (
+                  ) : (
                     <Link
                       href="/"
                       onClick={() => setMobileOpen(false)}
                       className="relative block w-[160px] h-[54px]"
                     >
-                      {/* brightness-0 + invert = white silhouette over dark bg.
-                          Ideal: replace with a dedicated /logo-blanco.svg asset. */}
                       <Image
-                        src={urlFor(settings.logo).width(400).url()}
-                        alt={settings.title}
+                        src="/logos/onkimia-logo.svg"
+                        alt="Onkimia"
                         fill
                         sizes="160px"
                         className="object-contain object-left brightness-0 invert"
                       />
                     </Link>
-                  ) : null}
+                  )}
                   {/* Morphing close button */}
                   <button
                     type="button"

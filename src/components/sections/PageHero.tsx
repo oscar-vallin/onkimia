@@ -96,7 +96,6 @@ export interface PageHeroProps {
    * and you want a seamless bleed instead of a hard cut.
    * Example: bottomFade="#f9fafb" for bg-gray-50.
    */
-  bottomFade?: boolean | string;
 }
 
 export function PageHero({
@@ -120,9 +119,7 @@ export function PageHero({
   imageClassName,
   solidLeftBand = false,
   mobileMinHeight = 'min-h-[75vh]',
-  bottomFade = false,
 }: PageHeroProps) {
-  const bottomFadeColor = typeof bottomFade === 'string' ? bottomFade : 'white';
   const isCenter = align === 'center';
 
   return (
@@ -304,13 +301,7 @@ export function PageHero({
           fixed nav knows exactly when to switch from transparent/white-text
           to solid/dark-text, regardless of this hero's actual height. */}
       {/* Bottom fade — blends hero into the next section's background color */}
-      {bottomFade && (
-        <div
-          className="absolute inset-x-0 bottom-0 h-40 z-[2] pointer-events-none"
-          style={{ background: `linear-gradient(to bottom, transparent 0%, ${bottomFadeColor} 100%)` }}
-          aria-hidden="true"
-        />
-      )}
+
 
       <div id="hero-end-sentinel" className="absolute bottom-0 left-0 w-px h-px pointer-events-none" aria-hidden="true" />
 
