@@ -1,10 +1,8 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageTheme } from '@/components/layout/PageTheme';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { TESTIMONIALS_QUERY, SITE_SETTINGS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
+import { TESTIMONIALS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
-import { PageHero } from '@/components/sections/PageHero';
-import { urlFor } from '@/sanity/image';
 import { MisionSection } from '@/components/sections/MisionSection';
 import { MoreThanMedicine } from '@/components/sections/MoreThanMedicine';
 import { Enfoque360Section } from '@/components/sections/Enfoque360Section';
@@ -15,7 +13,7 @@ import { DoctorFAQSection } from '@/components/sections/DoctorFAQSection';
 import { AppBanner } from '@/components/sections/AppBanner';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
-import type { Testimonial, SiteSettings, AboutPage } from '@/sanity/types';
+import type { Testimonial, AboutPage } from '@/sanity/types';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -44,8 +42,7 @@ export default async function NosotrosPage({
 
   const t = await getTranslations('about');
 
-  const [settings, testimonials, aboutPage] = await Promise.all([
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+  const [testimonials, aboutPage] = await Promise.all([
     sanityFetch<Testimonial[]>({ query: TESTIMONIALS_QUERY, tags: ['testimonial'] }),
     sanityFetch<AboutPage | null>({ query: ABOUT_PAGE_QUERY, params: { locale }, tags: ['aboutPage'] }),
   ]);
@@ -56,23 +53,6 @@ export default async function NosotrosPage({
   return (
     <>
       <PageTheme headerTheme="dark" />
-      {/* ─── HERO ─── */}
-      {/* <PageHero
-        eyebrow={t('hero.eyebrow')}
-        title={t('hero.title')}
-        description={t('hero.description')}
-        primaryCta={{ label: t('cta.button'), href: '/contacto#contact-form' }}
-        imageSrc='/test-about/about-hero-right-hq.jpg'
-        //imageSrc={settings.aboutHeroImage ? urlFor(settings.aboutHeroImage).width(1920).quality(82).format('webp').url() : undefined}
-        mobileImageSrc="/mobile-hero/about-hero.jpg"
-        blurDataURL={settings.aboutHeroImage?.asset?.metadata?.lqip ?? undefined}
-        imageAlt=""
-        mobileObjectPosition="object-[center_25%]"
-       
-        
-        solidLeftBand
-      /> */}
-
       {/* ─── NUESTRA MISIÓN ─── */}
       <MisionSection
         eyebrow={t('mision.eyebrow')}

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:odoo": "tsx --require ./src/lib/scripts/server-only-shim.cjs --env-file=.env.local ./src/lib/scripts/test-odoo.ts"
+    "test:odoo": "tsx --require ./scripts/server-only-shim.cjs --env-file=.env.local ./scripts/test-odoo.ts"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",

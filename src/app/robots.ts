@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
-import { env } from '@/lib/env';
 
-const SITE_URL = env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '');
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onkimia.com').replace(/\/$/, '');
 
 export default function robots(): MetadataRoute.Robots {
   return {

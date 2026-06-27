@@ -31,6 +31,7 @@ export function WhatsAppButton({ settings, clinics }: WhatsAppButtonProps) {
 
   return (
     <a
+      suppressHydrationWarning
       href={url}
       target="_blank"
       rel="noopener noreferrer"

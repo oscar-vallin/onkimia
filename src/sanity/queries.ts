@@ -10,14 +10,7 @@ export const SITE_SETTINGS_QUERY = groq`
     tagline,
     logo,
     logoDark,
-    // Hero images — one per page
     homeHeroDescription,
-    aboutHeroImage ${HERO_IMAGE_FRAGMENT},
-    serviciosHeroImage ${HERO_IMAGE_FRAGMENT},
-    endosHeroImage ${HERO_IMAGE_FRAGMENT},
-    cuidareHeroImage ${HERO_IMAGE_FRAGMENT},
-    doctorsHeroImage ${HERO_IMAGE_FRAGMENT},
-    contactHeroImage ${HERO_IMAGE_FRAGMENT},
     // Wellbeing list
     wellbeingList[] { _key, icon, title, description },
     // Studies gallery
@@ -57,73 +50,6 @@ export const CLINICS_QUERY = groq`
   }
 `;
 
-/**
- * Sede primaria (isPrimary: true) con todos los datos necesarios para contacto.
- * Usado en /contacto.
- */
-export const PRIMARY_CLINIC_QUERY = groq`
-  *[_type == "clinic" && isPrimary == true][0] {
-    _id,
-    _type,
-    slug,
-    name,
-    address,
-    geo,
-    phone,
-    whatsapp,
-    email,
-    hours,
-    isPrimary
-  }
-`;
-
-export const CLINIC_BY_SLUG_QUERY = groq`
-  *[_type == "clinic" && slug == $slug][0] {
-    _id,
-    _type,
-    slug,
-    name,
-    shortDescription,
-    description,
-    address,
-    geo,
-    phone,
-    whatsapp,
-    whatsappEndos,
-    whatsappCuidare,
-    email,
-    hours,
-    heroImage,
-    isPrimary
-  }
-`;
-
-/**
- * Servicios disponibles en una sede.
- * Si availableAt está vacío o no definido, el servicio está en todas las sedes.
- */
-export const SERVICES_BY_CLINIC_QUERY = groq`
-  *[
-    _type == "service"
-    && isActive == true
-    && (!defined(availableAt) || count(availableAt) == 0 || references($clinicId))
-  ] | order(order asc, name.es asc) {
-    _id,
-    _type,
-    name,
-    description,
-    icon,
-    category,
-    order,
-    isActive,
-    heroImage,
-    clinicsSectionImage,
-    "availableAt": availableAt[]->{
-      _id,
-      "slug": slug.current
-    }
-  }
-`;
 
 export const DOCTORS_QUERY = groq`
   *[_type == "doctor"] | order(order asc, fullName asc) {
@@ -154,27 +80,6 @@ export const DOCTORS_QUERY = groq`
   }
 `;
 
-export const DOCTORS_BY_CLINIC_QUERY = groq`
-  *[_type == "doctor" && isActive == true && $clinicSlug in clinics[]->slug] 
-    | order(order asc, fullName asc) {
-    _id,
-    _type,
-    fullName,
-    slug,
-    photo,
-    specialty,
-    medicalSpecialties,
-    bio,
-    "clinics": clinics[]-> {
-      _id,
-      slug,
-      name
-    },
-    credentials,
-    order,
-    isActive
-  }
-`;
 
 export const TESTIMONIALS_QUERY = groq`
   *[_type == "testimonial" && isActive == true] | order(order asc, _createdAt desc) {
@@ -220,20 +125,6 @@ export const SERVICIOS_PAGE_QUERY = groq`
   }
 `;
 
-/** Servicios complementarios activos. Usado en Home sección "Bienestar integral". */
-export const WELLNESS_SERVICES_QUERY = groq`
-  *[_type == "service" && category == "wellness" && isActive == true]
-    | order(order asc) {
-    _id,
-    _type,
-    name,
-    description,
-    icon,
-    category,
-    order,
-    isActive
-  }
-`;
 
 // ============================================
 // INSURANCES
@@ -369,8 +260,6 @@ export const ENDOS_PROCEDURES_QUERY = groq`
   }
 `;
 
-/** @deprecated Use allProceduresQuery */
-export const PROCEDURES_QUERY = groq`*[_type == "procedure"] | order(order asc) { _id }`;
 
 export const allProceduresQuery = groq`
   *[_type == "procedure"] | order(order asc) {

@@ -41,10 +41,10 @@ export function HeroHome({
   return (
     <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">
         <picture className="absolute inset-0">
-          <source media="(min-width: 1280px)" srcSet="/hero/hero-main-1920.webp" type="image/webp" />
-          <source media="(min-width: 750px)"  srcSet="/hero/hero-main-1280.webp" type="image/webp" />
+          <source media="(min-width: 1280px)" srcSet="/heros/hero-main-1920.webp" type="image/webp" />
+          <source media="(min-width: 750px)"  srcSet="/heros/hero-main-1280.webp" type="image/webp" />
           <img
-            src="/hero/hero-main-750.webp"
+            src="/heros/hero-main-750.webp"
             alt="Médico oncólogo acompañando a un paciente en Onkimia"
             className="w-full h-full object-cover [object-position:center_20%] md:[object-position:62%_45%]"
             fetchPriority="high"

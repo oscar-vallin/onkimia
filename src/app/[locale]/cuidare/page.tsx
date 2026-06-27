@@ -86,8 +86,6 @@ export default async function CuidarePage({
     getTranslations('cuidare'),
   ]);
 
-  const heroImage = settings.cuidareHeroImage;
-
   const treatments: Treatment[] = TREATMENT_KEYS.map(({ key, iconKey }) => ({
     id: key,
     iconKey,
@@ -96,10 +94,12 @@ export default async function CuidarePage({
   }));
 
   return (
+    <>
+      <link rel="preload" as="image" href="/heros/cuidare-hero-desktop.webp" type="image/webp" fetchPriority="high" />
     <div className="cuidare-page">
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc={heroImage ? urlFor(heroImage).width(1920).quality(82).format('webp').url() : undefined}
+        imageSrc="/heros/cuidare-hero-desktop.webp"
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[65%_55%]"
         eyebrow={t('hero.eyebrow')}
@@ -359,5 +359,6 @@ export default async function CuidarePage({
       </div>
       </section>
     </div>
+    </>
   );
 }

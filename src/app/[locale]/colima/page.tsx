@@ -1,16 +1,11 @@
 import type { Metadata } from 'next';
 import { PageTheme } from '@/components/layout/PageTheme';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY } from '@/sanity/queries';
-import { urlFor } from '@/sanity/image';
 import { buildMetadata } from '@/lib/seo/metadata';
-import type { SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { Link } from '@/i18n/navigation';
 import { Phone, MessageCircle, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { SetClinicOnMount } from '@/components/clinic/SetClinicOnMount';
-import { PageHero } from '@/components/sections/PageHero';
 import { clinicConfig } from '@/config/clinicConfig';
 
 export async function generateMetadata({
@@ -46,13 +41,9 @@ export default async function ColimaPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [t, settings] = await Promise.all([
-    getTranslations('colima'),
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
-  ]);
+  const t = await getTranslations('colima');
 
   const clinic = clinicConfig.colima;
-  const heroImage = settings.cuidareHeroImage ?? settings.aboutHeroImage;
 
   return (
     <>

@@ -1,16 +1,15 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { CLINICS_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/queries';
+import { CLINICS_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { Clinic, SiteSettings } from '@/sanity/types';
+import type { Clinic } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { MapPin } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { ContactInfo } from '@/components/sections/ContactInfo';
 import { GoogleMapsEmbed } from '@/components/ui/GoogleMapsEmbed';
 import { PageHero } from '@/components/sections/PageHero';
-import { urlFor } from '@/sanity/image';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -31,9 +30,8 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [clinics, settings, t] = await Promise.all([
+  const [clinics, t] = await Promise.all([
     sanityFetch<Clinic[]>({ query: CLINICS_QUERY, tags: ['clinic'] }),
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
     getTranslations('contact'),
   ]);
 
@@ -50,10 +48,12 @@ export default async function ContactPage({
 
   return (
     <>
+      <link rel="preload" as="image" href="/heros/contact-hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/contact-hero-mobile.webp"  type="image/webp" media="(max-width: 768px)" fetchPriority="high" />
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc={settings?.contactHeroImage ? urlFor(settings.contactHeroImage).width(1920).quality(82).format('webp').url() : undefined}
-        blurDataURL={settings?.contactHeroImage?.asset?.metadata?.lqip ?? undefined}
+        imageSrc="/heros/contact-hero-desktop.webp"
+        mobileImageSrc="/heros/contact-hero-mobile.webp"
         extraDim
         eyebrow={t('section.eyebrow')}
         title={t('hero.title')}

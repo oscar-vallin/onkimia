@@ -16,8 +16,8 @@ export function HeroEyebrow({ base, defaultCity, colimaCity }: HeroEyebrowProps)
   const city = clinic === 'colima' ? colimaCity : defaultCity;
 
   return (
-    <p className="text-[10px] md:text-xs font-sans font-medium tracking-[0.22em] uppercase text-white/65">
-      {base} · {city}
+    <p suppressHydrationWarning className="text-[10px] md:text-xs font-sans font-medium tracking-[0.22em] uppercase text-white/65">
+      <span suppressHydrationWarning>{base} · {city}</span>
     </p>
   );
 }

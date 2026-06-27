@@ -1,9 +1,9 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, SERVICIOS_PAGE_QUERY } from '@/sanity/queries';
+import { SERVICIOS_PAGE_QUERY } from '@/sanity/queries';
 import { PageHero } from '@/components/sections/PageHero';
-import type { ServiciosPage, SiteSettings } from '@/sanity/types';
+import type { ServiciosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
@@ -53,8 +53,7 @@ export default async function ServicesPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [settings, services, t] = await Promise.all([
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+  const [services, t] = await Promise.all([
     sanityFetch<ServiciosPage | null>({ query: SERVICIOS_PAGE_QUERY, tags: ['serviciosPage'] }),
     getTranslations({ locale, namespace: 'services' }),
   ]);
@@ -88,12 +87,14 @@ export default async function ServicesPage({
   ];
 
   return (
+    <>
+      <link rel="preload" as="image" href="/heros/services-hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/services-hero-mobile.webp"  type="image/webp" media="(max-width: 768px)" fetchPriority="high" />
     <div className="flex flex-col flex-1">
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc={settings.serviciosHeroImage ? urlFor(settings.serviciosHeroImage).width(1920).quality(82).format('webp').url() : undefined}
-        blurDataURL={settings.serviciosHeroImage?.asset?.metadata?.lqip ?? undefined}
-        mobileImageSrc="/mobile-hero/services-hero.jpg"
+        imageSrc="/heros/services-hero-desktop.webp"
+        mobileImageSrc="/heros/services-hero-mobile.webp"
         eyebrow={t('hero.eyebrow')}
         title={t('hero.title')}
         description={t('hero.description')}
@@ -351,5 +352,6 @@ export default async function ServicesPage({
         </div>
       </section>
     </div>
+    </>
   );
 }

@@ -62,9 +62,9 @@ export default async function HomePage({
           Next.js App Router hoists <link> RSC elements to <head>.
           media attrs mirror the <picture> in HeroHome.tsx exactly so
           the browser downloads only the variant it will display. ─── */}
-      <link rel="preload" as="image" href="/hero/hero-main-750.webp"  type="image/webp" media="(max-width: 749px)"                          fetchPriority="high" />
-      <link rel="preload" as="image" href="/hero/hero-main-1280.webp" type="image/webp" media="(min-width: 750px) and (max-width: 1279px)"  fetchPriority="high" />
-      <link rel="preload" as="image" href="/hero/hero-main-1920.webp" type="image/webp" media="(min-width: 1280px)"                         fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/hero-main-750.webp"  type="image/webp" media="(max-width: 749px)"                          fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/hero-main-1280.webp" type="image/webp" media="(min-width: 750px) and (max-width: 1279px)"  fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/hero-main-1920.webp" type="image/webp" media="(min-width: 1280px)"                         fetchPriority="high" />
 
       {/* ─── HERO — above the fold, renders immediately ─── */}
       <HeroHome

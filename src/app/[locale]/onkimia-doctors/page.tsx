@@ -57,8 +57,6 @@ export default async function OnkimiaDoctorsPage({
     getTranslations('doctors'),
   ]);
 
-  const heroImage = settings.doctorsHeroImage;
-  const heroLqip = heroImage?.asset?.metadata?.lqip;
   const waCommercial = settings.whatsappCommercial;
   const waEndos = od?.whatsappEndos ?? waCommercial;
   const waCuidare = od?.whatsappCuidare ?? waCommercial;
@@ -66,12 +64,14 @@ export default async function OnkimiaDoctorsPage({
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onkimia.com';
 
   return (
+    <>
+      <link rel="preload" as="image" href="/heros/doctors-hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/doctors-hero-mobile.webp"  type="image/webp" media="(max-width: 768px)" fetchPriority="high" />
     <div className="doctors-page">
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc="/test-about/doctors-right-hq.jpg"
-        mobileImageSrc="/mobile-hero/onkimia-doctors-hero.jpg"
-        blurDataURL={heroLqip ?? undefined}
+        imageSrc="/heros/doctors-hero-desktop.webp"
+        mobileImageSrc="/heros/doctors-hero-mobile.webp"
         imagePosition="md:object-[65%_0%]"
         imageClassName="md:mt-20"
         eyebrow={t('hero.eyebrow')}
@@ -317,5 +317,6 @@ export default async function OnkimiaDoctorsPage({
         url={`${siteUrl}/${locale === 'es' ? '' : 'en/'}onkimia-doctors`}
       />
     </div>
+    </>
   );
 }

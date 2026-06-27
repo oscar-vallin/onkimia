@@ -2,6 +2,7 @@ import { sanityFetch } from '@/sanity/lib/fetch';
 import { DOCTORS_QUERY } from '@/sanity/queries';
 import type { Doctor } from '@/sanity/types';
 import { DoctorsGrid } from '@/components/sections/DoctorsGrid';
+import { PhysicianJsonLd } from '@/components/seo/JsonLd';
 import { getTranslations } from 'next-intl/server';
 import type { Locale } from '@/i18n/routing';
 
@@ -18,12 +19,17 @@ export async function DoctorsSection({ locale }: DoctorsSectionProps) {
   if (!doctors.length) return null;
 
   return (
-    <DoctorsGrid
-      doctors={doctors}
-      eyebrow={t('doctors.eyebrow')}
-      title={t('doctors.title')}
-      description={t('doctors.description')}
-      locale={locale}
-    />
+    <>
+      {doctors.map((doctor) => (
+        <PhysicianJsonLd key={doctor._id} doctor={doctor} />
+      ))}
+      <DoctorsGrid
+        doctors={doctors}
+        eyebrow={t('doctors.eyebrow')}
+        title={t('doctors.title')}
+        description={t('doctors.description')}
+        locale={locale}
+      />
+    </>
   );
 }

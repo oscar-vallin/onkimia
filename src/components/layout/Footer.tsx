@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { usePathname } from '@/i18n/navigation';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
@@ -25,9 +24,6 @@ export function Footer({ settings }: FooterProps) {
   const tFooter = useTranslations('footer');
   const pathname = usePathname();
   const { clinic } = useClinic();
-
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
 
   const isDoctorsRoute = pathname.startsWith('/onkimia-doctors');
 
@@ -213,46 +209,36 @@ export function Footer({ settings }: FooterProps) {
             <h3 className="text-base font-semibold text-white mb-4">
               {tNav('contact')}
             </h3>
-            {/* Reflects the globally selected clinic (useClinic()), not a
-                fixed "primary" location — switching clinics in the Header
-                updates this immediately. Rendered only after mount to avoid
-                server/client hydration mismatch (cookie vs. default clinic). */}
+            {/* suppressHydrationWarning on clinic-data elements: server renders
+                the default clinic, client corrects via cookie. Intentional
+                server/client difference — not a bug. */}
             <div className="text-sm text-white/60 space-y-2">
-              {mounted ? (
-                <>
-                  <a
-                    href={clinicData.phoneHref}
-                    className="block hover:text-white transition-colors"
-                  >
-                    {clinicData.phone}
-                  </a>
-                  {clinicData.whatsappHref && (
-                    <a
-                      href={clinicData.whatsappHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 hover:text-white transition-colors"
-                    >
-                      <MessageCircle className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
-                      <span>{clinicData.whatsapp}</span>
-                    </a>
-                  )}
-                  <a
-                    href={clinicData.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block mt-2 hover:text-white transition-colors"
-                  >
-                    {clinicData.address}
-                  </a>
-                </>
-              ) : (
-                <div className="space-y-2">
-                  <span className="block h-4 w-32 rounded bg-white/10" aria-hidden="true" />
-                  <span className="block h-4 w-24 rounded bg-white/10" aria-hidden="true" />
-                  <span className="block h-4 w-40 rounded bg-white/10 mt-2" aria-hidden="true" />
-                </div>
-              )}
+              <a
+                suppressHydrationWarning
+                href={clinicData.phoneHref}
+                className="block hover:text-white transition-colors"
+              >
+                <span suppressHydrationWarning>{clinicData.phone}</span>
+              </a>
+              <a
+                suppressHydrationWarning
+                href={clinicData.whatsappHref ?? '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-2 hover:text-white transition-colors${clinicData.whatsappHref ? '' : ' hidden'}`}
+              >
+                <MessageCircle suppressHydrationWarning className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+                <span suppressHydrationWarning>{clinicData.whatsapp}</span>
+              </a>
+              <a
+                suppressHydrationWarning
+                href={clinicData.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mt-2 hover:text-white transition-colors"
+              >
+                <span suppressHydrationWarning>{clinicData.address}</span>
+              </a>
             </div>
           </div>
 

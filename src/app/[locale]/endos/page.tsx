@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, ENDOS_PROCEDURES_QUERY, ENDOS_PAGE_QUERY } from '@/sanity/queries';
+import { FAQS_BY_PAGE_QUERY, ENDOS_PROCEDURES_QUERY, ENDOS_PAGE_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { SiteSettings, FAQ, Procedure, EndosPage } from '@/sanity/types';
+import type { FAQ, Procedure, EndosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
@@ -47,24 +47,22 @@ export default async function EndosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [settings, endosPageData, faqs, procedures, t] = await Promise.all([
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+  const [endosPageData, faqs, procedures, t] = await Promise.all([
     sanityFetch<EndosPage | null>({ query: ENDOS_PAGE_QUERY, tags: ['endosPage'] }),
     sanityFetch<FAQ[]>({ query: FAQS_BY_PAGE_QUERY, params: { page: 'endos' }, tags: ['faq'] }),
     sanityFetch<Procedure[]>({ query: ENDOS_PROCEDURES_QUERY, params: { locale }, tags: ['procedure'] }),
     getTranslations('endos'),
   ]);
 
-  const heroImage = settings.endosHeroImage;
-  const heroLqip = settings.endosHeroImage?.asset?.metadata?.lqip;
-
   return (
+    <>
+      <link rel="preload" as="image" href="/heros/endos-hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/endos-hero-mobile.webp"  type="image/webp" media="(max-width: 768px)" fetchPriority="high" />
     <div className="endos-page">
       {/* ─── HERO ─── */}
       <PageHero
-        imageSrc={heroImage ? urlFor(heroImage).width(1920).height(1080).format('webp').quality(82).url() : undefined}
-        blurDataURL={heroLqip ?? undefined}
-        mobileImageSrc="/mobile-hero/endos-hero.jpg"
+        imageSrc="/heros/endos-hero-desktop.webp"
+        mobileImageSrc="/heros/endos-hero-mobile.webp"
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[88%_25%]"
         eyebrow={t('hero.eyebrow')}
@@ -344,5 +342,6 @@ export default async function EndosPage({
         </div>
       </section>
     </div>
+    </>
   );
 }

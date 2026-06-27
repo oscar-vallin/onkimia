@@ -51,16 +51,15 @@ export function MedicalOrganizationJsonLd({ settings, clinics }: MedicalOrganiza
 
 interface PhysicianProps {
   doctor: Doctor;
-  clinics: Clinic[];
 }
 
-export function PhysicianJsonLd({ doctor, clinics }: PhysicianProps) {
+export function PhysicianJsonLd({ doctor }: PhysicianProps) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Physician',
     name: doctor.fullName,
     medicalSpecialty: doctor.medicalSpecialties ?? [],
-    worksFor: clinics.map((c) => ({
+    worksFor: (doctor.clinics ?? []).map((c) => ({
       '@type': 'MedicalOrganization',
       name: c.name.es,
     })),
