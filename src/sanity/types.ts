@@ -192,17 +192,6 @@ export interface PrivacyPolicy {
 }
 
 
-// ============================================
-// ONKIMIA DOCTORS SETTINGS
-// ============================================
-
-export interface OnkimiaDocsSettings {
-  whatIsImage?: SanityImageWithLQIP;
-  improvementsImage?: SanityImageWithLQIP;
-  benefitsImage?: SanityImageWithLQIP;
-  whatsappEndos?: string;
-  whatsappCuidare?: string;
-}
 
 // ============================================
 // ABOUT PAGE

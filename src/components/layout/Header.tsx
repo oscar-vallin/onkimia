@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Globe, MapPin } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { OnkimiaDocsSettings } from '@/sanity/types';
 import { CLINICS } from '@/config/clinicConfig';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
@@ -17,9 +16,7 @@ import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsap
 const loadFeatures = () =>
   import('framer-motion').then((mod) => mod.domAnimation);
 
-interface HeaderProps {
-  odSettings?: OnkimiaDocsSettings;
-}
+interface HeaderProps {}
 
 const mobileMenuVariants: Variants = {
   hidden: { opacity: 0, x: '100%' },

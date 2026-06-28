@@ -1,11 +1,6 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { sanityFetch } from '@/sanity/lib/fetch';
-import { ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
-import { urlFor } from '@/sanity/image';
-import type { OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
 import { Activity, HeartPulse, Flower2, Target, Users, Sparkles, Shield, Check } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -51,14 +46,11 @@ export default async function OnkimiaDoctorsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [od, t] = await Promise.all([
-    sanityFetch<OnkimiaDocsSettings>({ query: ONKIMIA_DOCS_SETTINGS_QUERY, tags: ['onkimiaDocsSettings'] }),
-    getTranslations('doctors'),
-  ]);
+  const t = await getTranslations('doctors');
 
   const waCommercial = '5213320331257';
-  const waEndos = od?.whatsappEndos ?? waCommercial;
-  const waCuidare = od?.whatsappCuidare ?? waCommercial;
+  const waEndos = waCommercial;
+  const waCuidare = waCommercial;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onkimia.com';
 
@@ -115,7 +107,7 @@ export default async function OnkimiaDoctorsPage({
       ════════════════════════════════════════ */}
       <section className="bg-white py-20 md:py-28" aria-labelledby="od-about-title">
         <div className="container-onkimia">
-          <div className={`grid gap-12 md:gap-16 ${od?.whatIsImage?.asset ? 'md:grid-cols-2 items-center' : 'max-w-3xl mx-auto'}`}>
+          <div className="max-w-3xl mx-auto">
             <div>
               <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">ONKIMIA DOCTORS</p>
               <h2 id="od-about-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
@@ -144,44 +136,10 @@ export default async function OnkimiaDoctorsPage({
                 </p>
               </div>
             </div>
-            {od?.whatIsImage?.asset && (
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden">
-                <Image
-                  src={urlFor(od.whatIsImage).width(900).height(1125).format('webp').quality(85).url()}
-                  alt={t('about.title')}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                  placeholder={od.whatIsImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                  blurDataURL={od.whatIsImage?.asset?.metadata?.lqip ?? undefined}
-                />
-              </div>
-            )}
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          IMAGE BREAK — Improvements (optional)
-      ════════════════════════════════════════ */}
-      {od?.improvementsImage?.asset && (
-        <div className="bg-white pb-20 md:pb-28">
-          <div className="container-onkimia">
-            <div className="relative w-full aspect-[16/6] rounded-3xl overflow-hidden">
-              <Image
-                src={urlFor(od.improvementsImage).width(1920).height(720).format('webp').quality(85).url()}
-                alt=""
-                aria-hidden="true"
-                fill
-                sizes="(max-width: 1440px) 100vw, 1440px"
-                className="object-cover"
-                placeholder={od.improvementsImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                blurDataURL={od.improvementsImage?.asset?.metadata?.lqip ?? undefined}
-              />
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* ════════════════════════════════════════
           UNIDADES DE NEGOCIO
@@ -238,7 +196,7 @@ export default async function OnkimiaDoctorsPage({
       ════════════════════════════════════════ */}
       <section id="beneficios" className="bg-gray-50 py-20 md:py-28" aria-labelledby="od-benefits-title">
         <div className="container-onkimia">
-          <div className={`grid gap-12 md:gap-16 ${od?.benefitsImage?.asset ? 'md:grid-cols-[1fr_1.1fr] items-start' : ''}`}>
+          <div className="grid gap-12 md:gap-16">
             <div>
               <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">MÉDICOS</p>
               <h2 id="od-benefits-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-12">
@@ -266,19 +224,6 @@ export default async function OnkimiaDoctorsPage({
               </div>
             </div>
 
-            {od?.benefitsImage?.asset && (
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden sticky top-24">
-                <Image
-                  src={urlFor(od.benefitsImage).width(900).height(1200).format('webp').quality(85).url()}
-                  alt={t('benefits.title')}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 45vw"
-                  className="object-cover"
-                  placeholder={od.benefitsImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                  blurDataURL={od.benefitsImage?.asset?.metadata?.lqip ?? undefined}
-                />
-              </div>
-            )}
           </div>
         </div>
       </section>

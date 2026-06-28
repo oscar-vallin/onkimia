@@ -5,8 +5,6 @@ import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
 import { fraunces, dmSans, sourceCodePro } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
-import { sanityFetch } from '@/sanity/lib/fetch';
-import { ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
 import { ClinicProvider } from '@/lib/clinic-context';
 import { getClinicCookie } from '@/lib/cookies';
 import { Header } from '@/components/layout/Header';
@@ -16,7 +14,6 @@ import { MedicalOrganizationJsonLd } from '@/components/seo/JsonLd';
 import { WelcomeModalProvider } from '@/components/providers/WelcomeModalProvider';
 import { ScrollToTop } from '@/components/layout/ScrollToTop';
 import { CLINICS } from '@/config/clinicConfig';
-import type { OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import './globals.css';
 
@@ -56,13 +53,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const [odSettings, initialClinic] = await Promise.all([
-    sanityFetch<OnkimiaDocsSettings>({
-      query: ONKIMIA_DOCS_SETTINGS_QUERY,
-      tags: ['onkimiaDocsSettings'],
-    }),
-    getClinicCookie(),
-  ]);
+  const initialClinic = await getClinicCookie();
 
   return (
     <html
@@ -85,7 +76,7 @@ export default async function LocaleLayout({
         </a>
         <NextIntlClientProvider>
           <ClinicProvider initialClinic={initialClinic}>
-            <Header odSettings={odSettings} />
+            <Header />
             <main id="main-content" className="flex-1">{children}</main>
             <Footer locale={locale as 'es' | 'en'} />
             <WhatsAppButton />

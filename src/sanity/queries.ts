@@ -247,16 +247,6 @@ export const allProceduresQuery = groq`
   }
 `;
 
-/** Singleton Onkimia Doctors — imágenes de sección. */
-export const ONKIMIA_DOCS_SETTINGS_QUERY = groq`
-  *[_type == "onkimiaDocsSettings"][0] {
-    whatIsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
-    improvementsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
-    benefitsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
-    whatsappEndos,
-    whatsappCuidare
-  }
-`;
 
 /** Singleton aviso de privacidad. */
 export const PRIVACY_POLICY_QUERY = groq`

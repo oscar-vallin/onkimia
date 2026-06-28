@@ -9,7 +9,6 @@ import { jobPosting } from './jobPosting';
 import { privacyPolicy } from './privacyPolicy';
 import { aboutPage } from './aboutPage';
 import { procedure } from './procedure';
-import { onkimiaDocsSettings } from './onkimiaDocsSettings';
 import { serviciosPage } from './serviciosPage';
 import { endosPage } from './endosPage';
 import { socioComercial } from './socioComercial';
@@ -19,7 +18,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   siteSettings,
   privacyPolicy,
   aboutPage,
-  onkimiaDocsSettings,
   serviciosPage,
   endosPage,
   // Document types
