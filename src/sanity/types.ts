@@ -13,43 +13,13 @@ export interface SanityImageWithLQIP extends Image {
 export interface SiteSettings {
   _id: string;
   _type: 'siteSettings';
-  title: string;
-  tagline: LocalizedString;
-  logo?: Image;
-  logoDark?: Image;
-  homeHeroDescription: LocalizedString;
-  // Wellbeing list
-  wellbeingList?: Array<{
-    _key: string;
-    icon: string;
-    title: LocalizedString;
-    description: LocalizedString;
-  }>;
   // Studies gallery
   studiesGallery?: Array<{ _key: string; image: SanityImageWithLQIP; alt?: string }>;
-  // Services list
-  servicesList?: Array<{
-    _key: string;
-    icon: string;
-    title: LocalizedString;
-    description: LocalizedString;
-  }>;
   // How it works steps
   howItWorksSteps?: Array<{ _key: string; image: SanityImageWithLQIP }>;
   // Section images
-  wellnessImage?: SanityImageWithLQIP;
-  processImage?: SanityImageWithLQIP;
-  proceduresBgImage?: SanityImageWithLQIP;
   cuidareRadiologyImage?: SanityImageWithLQIP;
   appointmentCtaBgImage?: SanityImageWithLQIP;
-  socialMedia?: {
-    instagram?: string;
-    facebook?: string;
-    twitter?: string;
-  };
-  jobBoardEmail?: string;
-  whatsappCommercial?: string;
-  appDownloadUrl?: string;
 }
 
 
@@ -269,8 +239,6 @@ export interface PrivacyPolicy {
 // ============================================
 
 export interface OnkimiaDocsSettings {
-  logo?: SanityImageWithLQIP;
-  symbol?: SanityImageWithLQIP;
   whatIsImage?: SanityImageWithLQIP;
   improvementsImage?: SanityImageWithLQIP;
   benefitsImage?: SanityImageWithLQIP;

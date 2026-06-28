@@ -13,6 +13,7 @@ import { procedure } from './procedure';
 import { onkimiaDocsSettings } from './onkimiaDocsSettings';
 import { serviciosPage } from './serviciosPage';
 import { endosPage } from './endosPage';
+import { socioComercial } from './socioComercial';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Singletons
@@ -31,4 +32,5 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   insurance,
   jobPosting,
   procedure,
+  socioComercial,
 ];

@@ -32,7 +32,7 @@ export function DoctorFAQItem({ item, defaultOpen = false }: DoctorFAQItemProps)
         }`}
         aria-expanded={open}
       >
-        <span className="font-sans text-base md:text-lg text-primary leading-snug font-normal">
+        <span className="font-sans text-[1rem] md:text-[1.125rem] text-primary leading-snug font-normal">
           {item.question}
         </span>
         <span
@@ -51,11 +51,11 @@ export function DoctorFAQItem({ item, defaultOpen = false }: DoctorFAQItemProps)
 
       <div
         className={`transition-all duration-300 ease-in-out overflow-hidden ${
-          open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          open ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="px-7 pb-7 border-l-4 border-l-primary">
-          <p className="text-secondary text-base leading-relaxed mb-6">{item.answer}</p>
+          <p className="text-secondary text-[1rem] leading-relaxed mb-6">{item.answer}</p>
 
           <div className="flex items-center gap-3 pt-4 border-t border-black/[0.07]">
             {photoSrc ? (

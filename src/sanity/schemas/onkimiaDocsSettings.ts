@@ -5,21 +5,6 @@ export const onkimiaDocsSettings = defineType({
   title: 'Onkimia Doctors — Ajustes',
   type: 'document',
   fields: [
-    // ─── Branding ───
-    defineField({
-      name: 'logo',
-      title: 'Logo (desktop)',
-      description: 'Logo completo "Onkimia Doctors" — se muestra en pantallas md+ dentro del hero.',
-      type: 'image',
-      options: { hotspot: false },
-    }),
-    defineField({
-      name: 'symbol',
-      title: 'Símbolo (mobile)',
-      description: 'Ícono / símbolo OD — se muestra en pantallas pequeñas dentro del hero.',
-      type: 'image',
-      options: { hotspot: false },
-    }),
     // ─── Imágenes de sección ───
     defineField({
       name: 'whatIsImage',

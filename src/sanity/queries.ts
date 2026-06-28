@@ -6,27 +6,13 @@ export const SITE_SETTINGS_QUERY = groq`
   *[_type == "siteSettings"][0] {
     _id,
     _type,
-    title,
-    tagline,
-    logo,
-    logoDark,
-    homeHeroDescription,
-    // Wellbeing list
-    wellbeingList[] { _key, icon, title, description },
     // Studies gallery
     studiesGallery[] { _key, image ${HERO_IMAGE_FRAGMENT}, alt },
-    // Services + How it works
-    servicesList[] { _key, icon, title, description },
+    // How it works
     howItWorksSteps[] { _key, image ${HERO_IMAGE_FRAGMENT} },
     // Section images
-    wellnessImage ${HERO_IMAGE_FRAGMENT},
-    processImage ${HERO_IMAGE_FRAGMENT},
-    proceduresBgImage ${HERO_IMAGE_FRAGMENT},
     cuidareRadiologyImage ${HERO_IMAGE_FRAGMENT},
-    appointmentCtaBgImage ${HERO_IMAGE_FRAGMENT},
-    socialMedia,
-    whatsappCommercial,
-    jobBoardEmail
+    appointmentCtaBgImage ${HERO_IMAGE_FRAGMENT}
   }
 `;
 
@@ -285,12 +271,9 @@ export const allProceduresQuery = groq`
   }
 `;
 
-/** Singleton Onkimia Doctors — branding + imágenes de sección. */
+/** Singleton Onkimia Doctors — imágenes de sección. */
 export const ONKIMIA_DOCS_SETTINGS_QUERY = groq`
   *[_type == "onkimiaDocsSettings"][0] {
-    logo { asset->{ _id, url, metadata { dimensions } } },
-    symbol { asset->{ _id, url, metadata { dimensions } } },
-    heroImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     whatIsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     improvementsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },
     benefitsImage { asset->{ _id, url, metadata { lqip, dimensions } }, hotspot, crop },

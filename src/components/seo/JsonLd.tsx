@@ -1,21 +1,20 @@
-import type { SiteSettings, Clinic, Doctor } from '@/sanity/types';
+import type { Clinic, Doctor } from '@/sanity/types';
 
 interface MedicalOrganizationProps {
-  settings: SiteSettings;
   clinics: Clinic[];
 }
 
-export function MedicalOrganizationJsonLd({ settings, clinics }: MedicalOrganizationProps) {
+export function MedicalOrganizationJsonLd({ clinics }: MedicalOrganizationProps) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'MedicalOrganization',
-    name: settings.title,
+    name: 'Onkimia',
     url: 'https://onkimia.com',
     logo: 'https://onkimia.com/og-image.png',
     sameAs: [
-      settings.socialMedia?.instagram,
-      settings.socialMedia?.facebook,
-    ].filter(Boolean),
+      'https://www.instagram.com/onkimia/',
+      'https://www.facebook.com/people/Onkimia/100083572627923/',
+    ],
     medicalSpecialty: 'Oncology',
     location: clinics.map((clinic) => ({
       '@type': 'MedicalClinic',

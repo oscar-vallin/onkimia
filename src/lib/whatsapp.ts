@@ -11,7 +11,7 @@
  * usa la marcada como isPrimary (Guadalajara).
  */
 
-import type { Clinic, SiteSettings } from '@/sanity/types';
+import type { Clinic } from '@/sanity/types';
 
 export type Section =
   | 'home'
@@ -28,18 +28,16 @@ interface GetWhatsAppNumberOptions {
   section: Section;
   clinic: Clinic | null;
   clinics: Clinic[];
-  settings: SiteSettings;
 }
 
 export function getWhatsAppNumber({
   section,
   clinic,
   clinics,
-  settings,
 }: GetWhatsAppNumberOptions): string | null {
   // Onkimia Doctors siempre usa comercial global
   if (section === 'onkimia-doctors') {
-    return settings.whatsappCommercial || null;
+    return '5213320331257';
   }
 
   // Fallback: clínica seleccionada → principal → primera

@@ -6,7 +6,7 @@ import { hasLocale } from 'next-intl';
 import { fraunces, dmSans, sourceCodePro } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { CLINICS_QUERY, SITE_SETTINGS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
+import { CLINICS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
 import { ClinicProvider } from '@/lib/clinic-context';
 import { getClinicCookie } from '@/lib/cookies';
 import { Header } from '@/components/layout/Header';
@@ -14,7 +14,7 @@ import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
 import { MedicalOrganizationJsonLd } from '@/components/seo/JsonLd';
 import { WelcomeModalProvider } from '@/components/providers/WelcomeModalProvider';
-import type { Clinic, SiteSettings, OnkimiaDocsSettings } from '@/sanity/types';
+import type { Clinic, OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import './globals.css';
 
@@ -55,11 +55,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   // Fetch global data (cached con ISR)
-  const [settings, clinics, odSettings, initialClinic] = await Promise.all([
-    sanityFetch<SiteSettings>({
-      query: SITE_SETTINGS_QUERY,
-      tags: ['siteSettings'],
-    }),
+  const [clinics, odSettings, initialClinic] = await Promise.all([
     sanityFetch<Clinic[]>({
       query: CLINICS_QUERY,
       tags: ['clinic'],
@@ -80,7 +76,7 @@ export default async function LocaleLayout({
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-<MedicalOrganizationJsonLd settings={settings} clinics={clinics} />
+<MedicalOrganizationJsonLd clinics={clinics} />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col bg-white">
         <a
@@ -91,10 +87,10 @@ export default async function LocaleLayout({
         </a>
         <NextIntlClientProvider>
           <ClinicProvider initialClinic={initialClinic}>
-            <Header settings={settings} clinics={clinics} odSettings={odSettings} />
+            <Header clinics={clinics} odSettings={odSettings} />
             <main id="main-content" className="flex-1">{children}</main>
-            <Footer settings={settings} clinics={clinics} locale={locale as 'es' | 'en'} />
-            <WhatsAppButton settings={settings} clinics={clinics} />
+            <Footer clinics={clinics} locale={locale as 'es' | 'en'} />
+            <WhatsAppButton clinics={clinics} />
             <WelcomeModalProvider locale={locale as Locale} />
           </ClinicProvider>
         </NextIntlClientProvider>

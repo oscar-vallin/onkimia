@@ -4,14 +4,13 @@ import { usePathname } from '@/i18n/navigation';
 import { useClinic } from '@/lib/clinic-context';
 import { getWhatsAppNumber, buildWhatsAppUrl } from '@/lib/whatsapp';
 import { getSectionFromPath } from '@/lib/get-section';
-import type { Clinic, SiteSettings } from '@/sanity/types';
+import type { Clinic } from '@/sanity/types';
 
 interface WhatsAppButtonProps {
-  settings: SiteSettings;
   clinics: Clinic[];
 }
 
-export function WhatsAppButton({ settings, clinics }: WhatsAppButtonProps) {
+export function WhatsAppButton({ clinics }: WhatsAppButtonProps) {
   const pathname = usePathname();
   const { clinic: clinicSlug } = useClinic();
 
@@ -21,8 +20,7 @@ export function WhatsAppButton({ settings, clinics }: WhatsAppButtonProps) {
   const number = getWhatsAppNumber({
     section,
     clinic: currentClinic,
-    clinics,          
-    settings,
+    clinics,
   });
 
   if (!number) return null;

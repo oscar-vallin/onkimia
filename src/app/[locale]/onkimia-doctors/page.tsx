@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
+import { ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
-import type { SiteSettings, OnkimiaDocsSettings } from '@/sanity/types';
+import type { OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
@@ -51,13 +51,12 @@ export default async function OnkimiaDoctorsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [settings, od, t] = await Promise.all([
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+  const [od, t] = await Promise.all([
     sanityFetch<OnkimiaDocsSettings>({ query: ONKIMIA_DOCS_SETTINGS_QUERY, tags: ['onkimiaDocsSettings'] }),
     getTranslations('doctors'),
   ]);
 
-  const waCommercial = settings.whatsappCommercial;
+  const waCommercial = '5213320331257';
   const waEndos = od?.whatsappEndos ?? waCommercial;
   const waCuidare = od?.whatsappCuidare ?? waCommercial;
 

@@ -11,7 +11,6 @@ import { Studies } from '@/components/sections/Studies';
 import { Wellness } from '@/components/sections/Wellness';
 import type { SiteSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import { getLocalized } from '@/sanity/lib/localization';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { FALLBACK_WELLNESS, FALLBACK_SERVICES } from '@/content/fallbacks';
 import { StickyStages } from '@/components/sections/StickyStages';
@@ -170,22 +169,14 @@ export default async function HomePage({
         ]}
       /> */}
 
-      {/* ─── SERVICES — uses Sanity servicesList; fallback to hardcoded items ─── */}
+      {/* ─── SERVICES ─── */}
       <StickyStages
         eyebrow={t('services.eyebrow')}
         title={t('services.title')}
         lead={t('services.lead')}
         ctaLabel={t('services.cta')}
         ctaHref={ROUTES.contact}
-        items={
-          settings.servicesList?.length
-            ? settings.servicesList.map((s) => ({
-                icon: s.icon,
-                title: getLocalized(s.title, locale as 'es' | 'en'),
-                description: getLocalized(s.description, locale as 'es' | 'en'),
-              }))
-            : FALLBACK_SERVICES[locale as 'es' | 'en'] ?? FALLBACK_SERVICES.es
-        }
+        items={FALLBACK_SERVICES[locale as 'es' | 'en'] ?? FALLBACK_SERVICES.es}
       />
 
       {/* ─── DOCTORS — streamed ─── */}
@@ -193,21 +184,12 @@ export default async function HomePage({
         <DoctorsSection locale={locale} />
       </Suspense>
 
-      {/* ─── WELLNESS — static, items from Sanity or i18n fallback ─── */}
+      {/* ─── WELLNESS ─── */}
       <Wellness
         eyebrow={t('wellness.eyebrow')}
         title={t('wellness.title')}
         intro={t('wellness.intro')}
-        backgroundImage={settings.wellnessImage}
-        items={
-          settings.wellbeingList?.length
-            ? settings.wellbeingList.map((w) => ({
-                icon: w.icon,
-                title: getLocalized(w.title, locale as 'es' | 'en'),
-                description: getLocalized(w.description, locale as 'es' | 'en'),
-              }))
-            : FALLBACK_WELLNESS[locale as 'es' | 'en'] ?? FALLBACK_WELLNESS.es
-        }
+        items={FALLBACK_WELLNESS[locale as 'es' | 'en'] ?? FALLBACK_WELLNESS.es}
       />
 
       {/* ─── INSURANCES — streamed ─── */}

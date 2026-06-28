@@ -3,23 +3,20 @@
 import { usePathname } from '@/i18n/navigation';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { urlFor } from '@/sanity/image';
-import { InstagramIcon, FacebookIcon, XIcon } from '@/components/icons/SocialIcons';
+import { InstagramIcon, FacebookIcon } from '@/components/icons/SocialIcons';
 import { MessageCircle } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
 import { getClinicConfig } from '@/config/clinicConfig';
-import type { SiteSettings, Clinic } from '@/sanity/types';
+import type { Clinic } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
-import { SanityImage } from '@/components/ui/SanityImage';
 
 interface FooterProps {
-  settings: SiteSettings;
   clinics: Clinic[];
   locale: Locale;
 }
 
-export function Footer({ settings }: FooterProps) {
+export function Footer({}: FooterProps) {
   const tNav = useTranslations('navigation');
   const tFooter = useTranslations('footer');
   const pathname = usePathname();
@@ -60,18 +57,16 @@ export function Footer({ settings }: FooterProps) {
                   />
                 </div>
               </>
-            ) : settings.logo ? (
+            ) : (
               <div className="relative w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
-                <SanityImage
-                  src={urlFor(settings.logo).height(110).url()}
-                  alt={settings.title}
+                <Image
+                  src="/logos/onkimia-logo.webp"
+                  alt="Onkimia"
                   fill
                   sizes="(max-width: 768px) 142px, 170px"
                   className="object-contain object-left invert brightness-0"
                 />
               </div>
-            ) : (
-              <h2 className="text-4xl font-serif">{settings.title}</h2>
             )}
           </div>
 
@@ -138,39 +133,24 @@ export function Footer({ settings }: FooterProps) {
               {tFooter('followUs')}
             </h3>
             <div className="flex items-center gap-3 mb-8">
-              {settings.socialMedia?.facebook && (
-                <a
-                  href={settings.socialMedia.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors"
-                  aria-label="Facebook"
-                >
-                  <FacebookIcon className="w-5 h-5" />
-                </a>
-              )}
-              {settings.socialMedia?.instagram && (
-                <a
-                  href={settings.socialMedia.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors"
-                  aria-label="Instagram"
-                >
-                  <InstagramIcon className="w-5 h-5" />
-                </a>
-              )}
-              {settings.socialMedia?.twitter && (
-                <a
-                  href={settings.socialMedia.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/60 hover:text-white transition-colors"
-                  aria-label="X (Twitter)"
-                >
-                  <XIcon className="w-5 h-5" />
-                </a>
-              )}
+              <a
+                href="https://www.facebook.com/people/Onkimia/100083572627923/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <FacebookIcon className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/onkimia/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-5 h-5" />
+              </a>
             </div>
 
             {/* ─── App Onkimia ─── */}
