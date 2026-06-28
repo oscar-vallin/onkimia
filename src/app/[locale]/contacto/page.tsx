@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { sanityFetch } from '@/sanity/lib/fetch';
-import { CLINICS_QUERY } from '@/sanity/queries';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { Clinic } from '@/sanity/types';
+import { CLINICS } from '@/config/clinicConfig';
 import type { Locale } from '@/i18n/routing';
 import { MapPin } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
@@ -30,12 +28,9 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [clinics, t] = await Promise.all([
-    sanityFetch<Clinic[]>({ query: CLINICS_QUERY, tags: ['clinic'] }),
-    getTranslations('contact'),
-  ]);
+  const t = await getTranslations('contact');
 
-  const primaryClinic = clinics?.find((c) => c.isPrimary) ?? clinics?.[0];
+  const primaryClinic = CLINICS.find((c) => c.isPrimary) ?? CLINICS[0];
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -82,7 +77,7 @@ export default async function ContactPage({
               </p>
 
               {/* Contact methods — follows the globally selected clinic
-                  (useClinic()); switching clinics in the Header updates
+                  (useClinic()); switching CLINICS in the Header updates
                   this list immediately. See src/config/clinicConfig.ts. */}
               <ContactInfo />
             </div>
@@ -98,7 +93,7 @@ export default async function ContactPage({
       {/* ════════════════════════════════════════
           SEDES
       ════════════════════════════════════════ */}
-      {clinics && clinics.length > 0 && (
+      {CLINICS && CLINICS.length > 0 && (
         <section className="bg-white py-20 md:py-28">
           <div className="container-onkimia">
             <div className="text-center mb-14">
@@ -112,11 +107,11 @@ export default async function ContactPage({
             </div>
 
             <div className={`grid gap-4 max-w-4xl mx-auto ${
-              clinics.length === 1 ? 'grid-cols-1 max-w-md' :
-              clinics.length === 2 ? 'grid-cols-1 md:grid-cols-2' :
+              CLINICS.length === 1 ? 'grid-cols-1 max-w-md' :
+              CLINICS.length === 2 ? 'grid-cols-1 md:grid-cols-2' :
               'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
             }`}>
-              {clinics.map((clinic) => {
+              {CLINICS.map((clinic) => {
                 const name = getLocalized(clinic.name, locale);
                 const mapsQuery = [
                   clinic.address.street,

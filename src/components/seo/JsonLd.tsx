@@ -1,7 +1,9 @@
-import type { Clinic, Doctor } from '@/sanity/types';
+import type { Doctor } from '@/sanity/types';
+import type { StaticClinic } from '@/config/clinicConfig';
+import { CLINICS } from '@/config/clinicConfig';
 
 interface MedicalOrganizationProps {
-  clinics: Clinic[];
+  clinics: StaticClinic[];
 }
 
 export function MedicalOrganizationJsonLd({ clinics }: MedicalOrganizationProps) {
@@ -53,15 +55,18 @@ interface PhysicianProps {
 }
 
 export function PhysicianJsonLd({ doctor }: PhysicianProps) {
+  const validSlugs = (doctor.clinics ?? []).filter((c): c is string => typeof c === 'string');
+  const effectiveSlugs = validSlugs.length > 0 ? validSlugs : CLINICS.map((c) => c.slug);
+
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Physician',
     name: doctor.fullName,
     medicalSpecialty: doctor.medicalSpecialties ?? [],
-    worksFor: (doctor.clinics ?? []).map((c) => ({
-      '@type': 'MedicalOrganization',
-      name: c.name.es,
-    })),
+    worksFor: effectiveSlugs.map((slug) => {
+      const clinic = CLINICS.find((c) => c.slug === slug);
+      return { '@type': 'MedicalOrganization', name: clinic?.name.es ?? slug };
+    }),
   };
 
   return (
@@ -89,7 +94,7 @@ export function MedicalBusinessLd({
     name,
     description,
     url,
-    medicalSpecialty: 'Oncologic',
+    medicalSpecialty: 'Oncology',
   };
 
   return (

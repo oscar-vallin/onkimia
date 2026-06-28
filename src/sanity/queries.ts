@@ -16,26 +16,6 @@ export const SITE_SETTINGS_QUERY = groq`
   }
 `;
 
-export const CLINICS_QUERY = groq`
-  *[_type == "clinic"] | order(isPrimary desc, name.es asc) {
-    _id,
-    _type,
-    slug,
-    name,
-    shortDescription,
-    address,
-    geo,
-    phone,
-    whatsapp,
-    whatsappEndos,
-    whatsappCuidare,
-    email,
-    hours,
-    heroImage,
-    isPrimary
-  }
-`;
-
 
 export const DOCTORS_QUERY = groq`
   *[_type == "doctor"] | order(order asc, fullName asc) {
@@ -55,11 +35,7 @@ export const DOCTORS_QUERY = groq`
     specialty,
     medicalSpecialties,
     bio,
-    "clinics": clinics[]-> {
-      _id,
-      slug,
-      name
-    },
+    clinics,
     credentials,
     order,
     isActive

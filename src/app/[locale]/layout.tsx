@@ -6,7 +6,7 @@ import { hasLocale } from 'next-intl';
 import { fraunces, dmSans, sourceCodePro } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { CLINICS_QUERY, ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
+import { ONKIMIA_DOCS_SETTINGS_QUERY } from '@/sanity/queries';
 import { ClinicProvider } from '@/lib/clinic-context';
 import { getClinicCookie } from '@/lib/cookies';
 import { Header } from '@/components/layout/Header';
@@ -14,7 +14,9 @@ import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
 import { MedicalOrganizationJsonLd } from '@/components/seo/JsonLd';
 import { WelcomeModalProvider } from '@/components/providers/WelcomeModalProvider';
-import type { Clinic, OnkimiaDocsSettings } from '@/sanity/types';
+import { ScrollToTop } from '@/components/layout/ScrollToTop';
+import { CLINICS } from '@/config/clinicConfig';
+import type { OnkimiaDocsSettings } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import './globals.css';
 
@@ -54,12 +56,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  // Fetch global data (cached con ISR)
-  const [clinics, odSettings, initialClinic] = await Promise.all([
-    sanityFetch<Clinic[]>({
-      query: CLINICS_QUERY,
-      tags: ['clinic'],
-    }),
+  const [odSettings, initialClinic] = await Promise.all([
     sanityFetch<OnkimiaDocsSettings>({
       query: ONKIMIA_DOCS_SETTINGS_QUERY,
       tags: ['onkimiaDocsSettings'],
@@ -76,9 +73,10 @@ export default async function LocaleLayout({
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-<MedicalOrganizationJsonLd clinics={clinics} />
+        <MedicalOrganizationJsonLd clinics={CLINICS} />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col bg-white">
+        <ScrollToTop />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium"
@@ -87,10 +85,10 @@ export default async function LocaleLayout({
         </a>
         <NextIntlClientProvider>
           <ClinicProvider initialClinic={initialClinic}>
-            <Header clinics={clinics} odSettings={odSettings} />
+            <Header odSettings={odSettings} />
             <main id="main-content" className="flex-1">{children}</main>
-            <Footer clinics={clinics} locale={locale as 'es' | 'en'} />
-            <WhatsAppButton clinics={clinics} />
+            <Footer locale={locale as 'es' | 'en'} />
+            <WhatsAppButton />
             <WelcomeModalProvider locale={locale as Locale} />
           </ClinicProvider>
         </NextIntlClientProvider>

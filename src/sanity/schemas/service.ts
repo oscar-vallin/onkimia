@@ -70,7 +70,13 @@ export const service = defineType({
       description:
         'Sedes donde se ofrece este servicio. Si está vacío, se asume disponible en todas.',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'clinic' }] }],
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Guadalajara', value: 'guadalajara' },
+          { title: 'Colima', value: 'colima' },
+        ],
+      },
     }),
   ],
   preview: {

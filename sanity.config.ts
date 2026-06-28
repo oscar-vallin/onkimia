@@ -58,11 +58,6 @@ export default defineConfig({
                   .views([S.view.form()])
               ),
             S.divider(),
-            // Clínicas (filtradas)
-            S.listItem()
-              .title('Clínicas')
-              .schemaType('clinic')
-              .child(S.documentTypeList('clinic').title('Clínicas')),
             S.listItem()
               .title('Doctores')
               .schemaType('doctor')

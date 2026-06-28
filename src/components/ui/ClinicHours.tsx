@@ -4,10 +4,14 @@ import { Clock } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { Locale } from '@/i18n/routing';
 import { formatDayLabel, formatHourRange } from '@/lib/clinic-hours';
-import type { ClinicHours as ClinicHoursType } from '@/sanity/types';
+interface ClinicHoursEntry {
+  days: string;
+  opens: string;
+  closes: string;
+}
 
 interface ClinicHoursProps {
-  hours: ClinicHoursType[];
+  hours: ClinicHoursEntry[];
   locale: Locale;
 }
 

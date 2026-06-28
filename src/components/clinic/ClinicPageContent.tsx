@@ -5,7 +5,8 @@ import { useTranslations } from 'next-intl';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
-import type { Clinic, Doctor, Service } from '@/sanity/types';
+import type { Doctor, Service } from '@/sanity/types';
+import type { StaticClinic } from '@/config/clinicConfig';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/sanity/lib/localization';
 import { GoogleMapsEmbed } from '@/components/ui/GoogleMapsEmbed';
@@ -14,7 +15,7 @@ import { DecorativeBubbles } from '@/components/ui/DecorativeBubbles';
 import { buildWhatsAppUrl } from '@/lib/whatsapp';
 
 interface ClinicPageContentProps {
-  clinic: Clinic;
+  clinic: StaticClinic;
   doctors: Doctor[];
   services: Service[];
   locale: Locale;

@@ -39,44 +39,6 @@ export interface Procedure {
   duration?: string;
 }
 
-export interface ClinicAddress {
-  street: string;
-  neighborhood?: string;
-  city: string;
-  state: string;
-  postalCode?: string;
-  country?: string;
-}
-
-export interface ClinicHours {
-  days: string;
-  opens: string;
-  closes: string;
-}
-
-export interface ClinicGeo {
-  lat: number;
-  lng: number;
-}
-
-export interface Clinic {
-  _id: string;
-  _type: 'clinic';
-  slug: string;
-  name: LocalizedString;
-  shortDescription?: LocalizedString;
-  address: ClinicAddress;
-  geo?: ClinicGeo;
-  phone?: string;
-  whatsapp?: string;
-  whatsappEndos?: string;
-  whatsappCuidare?: string;
-  email?: string;
-  hours?: ClinicHours[];
-  description?: { es: string; en: string };
-  heroImage?: Image;
-  isPrimary?: boolean;
-}
 
 export interface DoctorSlug {
   _type: 'slug';
@@ -92,11 +54,7 @@ export interface Doctor {
   specialty: LocalizedString;
   medicalSpecialties?: string[];
   bio?: LocalizedString;
-  clinics: Array<{
-    _id: string;
-    slug: string;
-    name: LocalizedString;
-  }>;
+  clinics: string[];
   credentials?: string[];
   order?: number;
   isActive: boolean;
@@ -124,7 +82,7 @@ export interface Service {
   category: ServiceCategory;
   order?: number;
   isActive: boolean;
-  availableAt?: Array<{ _id: string; slug: string }>;
+  availableAt?: string[];
 }
 
 export interface ServiciosPage {

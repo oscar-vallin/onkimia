@@ -83,7 +83,7 @@ function InitiativeCard({ title, description, category, linkText, linkHref, icon
       </div>
 
       <h3 className="font-serif text-3xl text-primary mb-4 leading-tight">{title}</h3>
-      <p className="text-secondary text-base leading-relaxed flex-1">{description}</p>
+      <p className="text-secondary  leading-relaxed flex-1">{description}</p>
 
       <Link
         href={linkHref}

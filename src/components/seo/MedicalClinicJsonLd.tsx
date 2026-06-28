@@ -1,9 +1,9 @@
-import type { Clinic } from '@/sanity/types';
+import type { StaticClinic } from '@/config/clinicConfig';
 import { toSchemaOrgOpeningHours } from '@/lib/clinic-hours';
 import { env } from '@/lib/env';
 
 interface MedicalClinicJsonLdProps {
-  clinic: Clinic;
+  clinic: StaticClinic;
   clinicName: string;
   url: string;
 }

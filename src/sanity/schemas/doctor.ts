@@ -68,7 +68,13 @@ export const doctor = defineType({
       title: 'Sedes donde atiende',
       description: 'Selecciona en qué clínicas trabaja este doctor.',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'clinic' }] }],
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Guadalajara', value: 'guadalajara' },
+          { title: 'Colima', value: 'colima' },
+        ],
+      },
       validation: (Rule) => Rule.min(1).error('Debe atender en al menos una sede'),
     }),
     defineField({

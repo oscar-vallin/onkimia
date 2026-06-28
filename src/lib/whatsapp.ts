@@ -11,7 +11,7 @@
  * usa la marcada como isPrimary (Guadalajara).
  */
 
-import type { Clinic } from '@/sanity/types';
+import type { StaticClinic } from '@/config/clinicConfig';
 
 export type Section =
   | 'home'
@@ -26,8 +26,8 @@ export type Section =
 
 interface GetWhatsAppNumberOptions {
   section: Section;
-  clinic: Clinic | null;
-  clinics: Clinic[];
+  clinic: StaticClinic | null;
+  clinics: StaticClinic[];
 }
 
 export function getWhatsAppNumber({

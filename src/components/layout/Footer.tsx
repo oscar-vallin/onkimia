@@ -7,12 +7,10 @@ import { InstagramIcon, FacebookIcon } from '@/components/icons/SocialIcons';
 import { MessageCircle } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
 import { getClinicConfig } from '@/config/clinicConfig';
-import type { Clinic } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 
 interface FooterProps {
-  clinics: Clinic[];
   locale: Locale;
 }
 

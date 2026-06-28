@@ -6,7 +6,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Globe, MapPin } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
 import { getLocalized } from '@/sanity/lib/localization';
-import type { Clinic, OnkimiaDocsSettings } from '@/sanity/types';
+import type { OnkimiaDocsSettings } from '@/sanity/types';
+import { CLINICS } from '@/config/clinicConfig';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { LazyMotion, m, AnimatePresence, type Variants } from 'framer-motion';
@@ -17,7 +18,6 @@ const loadFeatures = () =>
   import('framer-motion').then((mod) => mod.domAnimation);
 
 interface HeaderProps {
-  clinics: Clinic[];
   odSettings?: OnkimiaDocsSettings;
 }
 
@@ -44,7 +44,7 @@ const mobileLinkVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
-export function Header({ clinics }: HeaderProps) {
+export function Header({}: HeaderProps) {
   const [mobileOpen, setMobileOpen]         = useState(false);
   const [clinicMenuOpen, setClinicMenuOpen] = useState(false);
   const [scrolled, setScrolled]             = useState(false);
@@ -69,12 +69,12 @@ export function Header({ clinics }: HeaderProps) {
 
   const appearance = useHeaderAppearance({ scrolled, mobileOpen, mounted });
 
-  const currentClinic = clinics.find((c) => c.slug === clinic) || null;
+  const currentClinic = CLINICS.find((c) => c.slug === clinic) || null;
 
   const whatsappNumber = getWhatsAppNumber({
     section: 'home' as Section,
     clinic: currentClinic,
-    clinics,
+    clinics: CLINICS,
   });
   const whatsappUrl = whatsappNumber ? buildWhatsAppUrl(whatsappNumber) : null;
 
@@ -220,7 +220,7 @@ export function Header({ clinics }: HeaderProps) {
 
                 {clinicMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-primary/10 rounded-md shadow-lg overflow-hidden">
-                    {clinics.map((c) => {
+                    {CLINICS.map((c) => {
                       const isSelected = clinic === c.slug;
                       return (
                         <button
@@ -379,7 +379,7 @@ export function Header({ clinics }: HeaderProps) {
                       {tClinic('selectClinic')}
                     </p>
                     <div className="flex justify-center gap-4">
-                      {clinics.map((c) => {
+                      {CLINICS.map((c) => {
                         const isSelected = clinic === c.slug;
                         return (
                           <button

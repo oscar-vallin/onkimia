@@ -1,9 +1,7 @@
 import { getTranslations } from 'next-intl/server';
-import { sanityFetch } from '@/sanity/lib/fetch';
-import { CLINICS_QUERY } from '@/sanity/queries';
 import { getClinicCookie } from '@/lib/cookies';
 import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsapp';
-import type { Clinic } from '@/sanity/types';
+import { CLINICS } from '@/config/clinicConfig';
 
 interface BookingButtonProps {
   section: Section;
@@ -27,21 +25,17 @@ export async function BookingButton({
   customMessage,
   className = '',
 }: BookingButtonProps) {
-  const [clinics, clinicSlug, t] = await Promise.all([
-    sanityFetch<Clinic[]>({
-      query: CLINICS_QUERY,
-      tags: ['clinic'],
-    }),
+  const [clinicSlug, t] = await Promise.all([
     getClinicCookie(),
     getTranslations('common'),
   ]);
 
-  const currentClinic = clinics.find((c) => c.slug === clinicSlug) || null;
+  const currentClinic = CLINICS.find((c) => c.slug === clinicSlug) || null;
 
   const number = getWhatsAppNumber({
     section,
     clinic: currentClinic,
-    clinics,
+    clinics: CLINICS,
   });
 
   if (!number) return null;

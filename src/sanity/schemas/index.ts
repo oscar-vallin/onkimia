@@ -1,6 +1,5 @@
 import { type SchemaTypeDefinition } from 'sanity';
 import { siteSettings } from './siteSettings';
-import { clinic } from './clinic';
 import { doctor } from './doctor';
 import { testimonial } from './testimonial';
 import { faq } from './faq';
@@ -24,7 +23,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   serviciosPage,
   endosPage,
   // Document types
-  clinic,
   doctor,
   testimonial,
   faq,
