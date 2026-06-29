@@ -4,7 +4,8 @@
 import { headers } from 'next/headers';
 import { contactFormSchema, type ContactFormState } from '@/lib/schemas/contact';
 import { contactRatelimit, getClientIp } from '@/lib/ratelimit';
-import { verifyTurnstile } from '@/lib/turnstile';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { verifyTurnstile } from '@/lib/turnstile'; // TODO: re-enable with Turnstile block
 import { createLead } from '@/lib/odoo/contact';
 
 export async function submitContactForm(
@@ -49,12 +50,14 @@ export async function submitContactForm(
   }
 
   // ─── 4. Turnstile ─────────────────────────────────
-  const turnstileToken = formData.get('cf-turnstile-response')?.toString() ?? '';
-  const turnstileOk    = await verifyTurnstile(turnstileToken, ip);
-
-  if (!turnstileOk) {
-    return { ok: false, message: 'error.turnstile' };
-  }
+  // DESHABILITADO TEMPORALMENTE — 2026-06-29
+  // Motivo: pruebas de integración en entornos sin dominio registrado
+  // TODO: RE-HABILITAR ANTES DEL GO-LIVE
+  // const turnstileToken = formData.get('cf-turnstile-response')?.toString() ?? '';
+  // const turnstileOk    = await verifyTurnstile(turnstileToken, ip);
+  // if (!turnstileOk) {
+  //   return { ok: false, message: 'error.turnstile' };
+  // }
 
   // ─── 5. Odoo CRM — bloqueante ─────────────────────
   // Odoo es el destino único. Si falla, el usuario es notificado.

@@ -7,8 +7,9 @@ import {
   type JobApplicationFormState,
 } from '@/lib/schemas/jobApplication';
 import { jobApplicationRatelimit, getClientIp } from '@/lib/ratelimit';
-import { verifyTurnstile } from '@/lib/turnstile';
-import { sendJobApplicationEmail } from '@/lib/email/smtp';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { verifyTurnstile } from '@/lib/turnstile'; // TODO: re-enable with Turnstile block
+import { sendJobApplicationEmail } from '@/lib/email/resend';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { groq } from 'next-sanity';
 import { getLocalized } from '@/sanity/lib/localization';
@@ -109,11 +110,14 @@ export async function submitJobApplication(
   }
 
   // ─── 4. Verificar Turnstile ─────────────────────────
-  const turnstileToken = formData.get('cf-turnstile-response')?.toString() ?? '';
-  const turnstileOk = await verifyTurnstile(turnstileToken, ip);
-  if (!turnstileOk) {
-    return { ok: false, message: 'error.turnstile' };
-  }
+  // DESHABILITADO TEMPORALMENTE — 2026-06-29
+  // Motivo: pruebas de integración de email (Resend + CV adjunto)
+  // TODO: RE-HABILITAR ANTES DEL GO-LIVE
+  // const turnstileToken = formData.get('cf-turnstile-response')?.toString() ?? '';
+  // const turnstileOk = await verifyTurnstile(turnstileToken, ip);
+  // if (!turnstileOk) {
+  //   return { ok: false, message: 'error.turnstile' };
+  // }
 
   // ─── 5. Obtener título de vacante ───────────────────
   let vacancyTitle = 'Aplicación espontánea';

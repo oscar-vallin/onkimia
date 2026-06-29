@@ -2,15 +2,10 @@ import 'server-only';
 import { z } from 'zod';
 
 const envSchema = z.object({
-  // ── SMTP (correo de candidatos / bolsa de trabajo) ──────────────────────────
+  // ── Resend (correo de candidatos / bolsa de trabajo) ─────────────────────────
   // Optional at startup — required only when the job application form is used.
-  // If any var is missing, sendJobApplicationEmail throws a descriptive error.
-  SMTP_HOST:     z.string().optional(),
-  SMTP_PORT:     z.preprocess((v) => (v === '' || v == null ? undefined : Number(v)), z.number().int().positive().optional()),
-  SMTP_SECURE:   z.enum(['true', 'false']).transform((v) => v === 'true').optional(),
-  SMTP_USER:     z.string().optional(),
-  SMTP_PASSWORD: z.string().optional(),
-  SMTP_FROM:     z.string().optional(),
+  RESEND_API_KEY:    z.string().min(1).optional(),
+  RESEND_FROM_EMAIL: z.string().email().optional(),
 
   // ── Odoo CRM ─────────────────────────────────────────────────────────────────
   ODOO_URL:      z.string().url({ message: 'ODOO_URL must be a valid URL' }),
@@ -34,12 +29,8 @@ const envSchema = z.object({
  * so misconfigurations are caught on boot, not in production at request time.
  */
 export const env = envSchema.parse({
-  SMTP_HOST:     process.env.SMTP_HOST ?? '',
-  SMTP_PORT:     process.env.SMTP_PORT ?? '',
-  SMTP_SECURE:   process.env.SMTP_SECURE ?? 'false',
-  SMTP_USER:     process.env.SMTP_USER ?? '',
-  SMTP_PASSWORD: process.env.SMTP_PASSWORD ?? '',
-  SMTP_FROM:     process.env.SMTP_FROM ?? '',
+  RESEND_API_KEY:    process.env.RESEND_API_KEY,
+  RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL,
 
   ODOO_URL:      process.env.ODOO_URL,
   ODOO_DATABASE: process.env.ODOO_DATABASE,
