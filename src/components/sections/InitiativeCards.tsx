@@ -1,5 +1,4 @@
 import { SanityImage as Image } from '@/components/ui/SanityImage';
-import Link from 'next/link';
 import { urlFor } from '@/sanity/image';
 import type { SanityImageWithLQIP } from '@/sanity/types';
 
@@ -47,13 +46,11 @@ interface CardProps {
   title: string;
   description: string;
   category: string;
-  linkText: string;
-  linkHref: string;
   icon: React.ReactNode;
   image?: SanityImageWithLQIP;
 }
 
-function InitiativeCard({ title, description, category, linkText, linkHref, icon, image }: CardProps) {
+function InitiativeCard({ title, description, category, icon, image }: CardProps) {
   const imgSrc = image
     ? urlFor(image).width(760).height(480).format('webp').quality(82).url()
     : null;
@@ -94,12 +91,10 @@ export function InitiativeCards({
   supportGroupTitle,
   supportGroupDescription,
   supportGroupCategory,
-  supportGroupLink,
   supportGroupImage,
   awareTitle,
   awareDescription,
   awareCategory,
-  awareLink,
   awareImage,
 }: InitiativeCardsProps) {
   return (
@@ -117,8 +112,6 @@ export function InitiativeCards({
             title={supportGroupTitle}
             description={supportGroupDescription}
             category={supportGroupCategory}
-            linkText={supportGroupLink}
-            linkHref="/nosotros#grupo-apoyo"
             icon={<CommunityIcon />}
             image={supportGroupImage}
           />
@@ -126,8 +119,6 @@ export function InitiativeCards({
             title={awareTitle}
             description={awareDescription}
             category={awareCategory}
-            linkText={awareLink}
-            linkHref="/nosotros#onkimia-aware"
             icon={<PreventionIcon />}
             image={awareImage}
           />
