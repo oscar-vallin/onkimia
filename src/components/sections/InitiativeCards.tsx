@@ -84,16 +84,6 @@ function InitiativeCard({ title, description, category, linkText, linkHref, icon
 
       <h3 className="font-serif text-3xl text-primary mb-4 leading-tight">{title}</h3>
       <p className="text-secondary  leading-relaxed flex-1">{description}</p>
-
-      <Link
-        href={linkHref}
-        className="inline-flex items-center gap-1.5 text-primary text-sm font-medium mt-6 border-b border-primary pb-0.5 w-fit hover:text-primary/60 hover:border-primary/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
-      >
-        {linkText}
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4"/>
-        </svg>
-      </Link>
     </article>
   );
 }
