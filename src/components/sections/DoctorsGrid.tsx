@@ -1,6 +1,6 @@
 import type { Doctor } from '@/sanity/types';
 import type { Locale } from '@/sanity/lib/localization';
-import { DoctorCard } from './DoctorCard';
+import { DoctorsCarousel } from './DoctorsCarousel';
 import { Section } from '@/components/ui/Section';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
@@ -24,16 +24,7 @@ export function DoctorsGrid({
 
       <SectionHeader eyebrow={eyebrow} title={title} intro={description} theme="light" align="center" />
 
-      {/* Doctor grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-        {doctors.map((doctor) => (
-          <DoctorCard
-            key={doctor._id}
-            doctor={doctor}
-            locale={locale}
-          />
-        ))}
-      </div>
+      <DoctorsCarousel doctors={doctors} locale={locale} />
 
     </Section>
   );
