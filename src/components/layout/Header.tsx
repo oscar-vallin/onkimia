@@ -86,7 +86,12 @@ export function Header({}: HeaderProps) {
   ];
 
   const otherLocale  = locale === 'es' ? 'en' : 'es';
-  const switchLocale = () => router.replace(pathname, { locale: otherLocale, scroll: false });
+  const switchLocale = () => {
+    sessionStorage.setItem('__onkimia_locale_scroll', String(window.scrollY));
+    startTransition(() => {
+      router.replace(pathname, { locale: otherLocale, scroll: false });
+    });
+  };
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' || pathname === '' : pathname.startsWith(href);
