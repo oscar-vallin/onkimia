@@ -1,6 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback, startTransition } from 'react';
+
+// Survives component remounts (e.g. locale switches that re-key the layout).
+// False only during SSR and the very first hydration — correct for both.
+// After that, the Header never renders in its unmounted (invisible) state again.
+let _headerWasMounted = false;
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Globe, MapPin } from 'lucide-react';
@@ -44,8 +49,14 @@ const mobileLinkVariants: Variants = {
 export function Header({}: HeaderProps) {
   const [mobileOpen, setMobileOpen]         = useState(false);
   const [clinicMenuOpen, setClinicMenuOpen] = useState(false);
-  const [scrolled, setScrolled]             = useState(false);
-  const [mounted, setMounted] = useState(false);
+  // On SSR / first hydration: false (matches server HTML).
+  // On remount (locale switch): read real scroll position immediately — no flash.
+  const [scrolled, setScrolled] = useState(() =>
+    _headerWasMounted && typeof window !== 'undefined'
+      ? window.scrollY > 150
+      : false
+  );
+  const [mounted, setMounted] = useState(_headerWasMounted);
 
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -105,6 +116,7 @@ export function Header({}: HeaderProps) {
   }, []);
 
   useEffect(() => {
+    _headerWasMounted = true;
     startTransition(() => setMounted(true));
   }, []);
 
