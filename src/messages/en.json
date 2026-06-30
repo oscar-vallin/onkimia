@@ -495,7 +495,9 @@
     },
     "faq": {
       "eyebrow": "WE ANSWER YOUR QUESTIONS",
-      "title": "Have questions?\nOur experts respond"
+      "title": "Have questions?\nOur experts respond",
+      "seeMore": "See {count} more",
+      "seeLess": "See less"
     },
     "appBanner": {
       "title": "Onkimia App",
