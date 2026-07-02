@@ -8,7 +8,7 @@ import type { FAQ, Procedure, EndosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
-import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, UserCheck, Cpu, Zap, Clock, Heart, Check } from 'lucide-react';
+import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, UserCheck, Cpu, Zap, Clock, Heart, Check, Syringe, Target, Droplets, Cable } from 'lucide-react';
 import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
 import { FAQPageLd, MedicalProcedureLd } from '@/components/seo/JsonLd';
@@ -28,6 +28,7 @@ export async function generateMetadata({
 /* ─── Static data ─── */
 const PROCEDURE_ICONS = [Microscope, Search, Activity, FlaskConical, ScanLine] as const;
 const PROCEDURE_ITEM_KEYS = ['endoscopy', 'colonoscopy', 'bronchoscopy', 'biopsy', 'ultrasoundGuided'] as const;
+const OTHERS_ICONS = [Syringe, Target, Droplets, Cable] as const;
 
 const BENEFIT_KEYS = [
   { key: 'specializedTeam', icon: UserCheck },
@@ -112,11 +113,30 @@ export default async function EndosPage({
           </div>
 
           {/* Others */}
-          <div className="bg-white border border-black/[0.07] rounded-2xl p-7 flex items-start gap-4">
-            <ShieldCheck className="w-5 h-5 text-endos-teal-700 flex-shrink-0 mt-0.5" aria-hidden="true"/>
-            <div>
-              <h3 className="font-serif text-xl text-primary mb-1">{t('procedures.others')}</h3>
-              <p className="text-sm text-secondary leading-relaxed">{t('procedures.othersDescription')}</p>
+          <div className="bg-white border border-black/[0.07] rounded-2xl p-7">
+            <div className="flex items-start gap-4 mb-6">
+              <ShieldCheck className="w-5 h-5 text-endos-teal-700 flex-shrink-0 mt-0.5" aria-hidden="true"/>
+              <div>
+                <h3 className="font-serif text-xl text-primary mb-1">{t('procedures.others')}</h3>
+                <p className="text-sm text-secondary leading-relaxed">{t('procedures.othersDescription')}</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-0 sm:pl-9">
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {(t.raw('procedures.othersItems') as any[]).map((item, i) => {
+                const Icon = OTHERS_ICONS[i];
+                return (
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 bg-endos-teal-900 rounded-xl p-4"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-4 h-4 text-endos-mint-500" aria-hidden="true"/>
+                    </div>
+                    <p className="text-sm text-white leading-snug font-medium">{item}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

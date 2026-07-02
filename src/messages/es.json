@@ -817,7 +817,13 @@
       "headlinePart1": "Diagnóstico",
       "headlinePart2": "ambulatorio",
       "others": "Otros procedimientos",
-      "othersDescription": "Contamos con un amplio catálogo de procedimientos diagnósticos y terapéuticos adaptados a las necesidades de cada paciente."
+      "othersDescription": "Contamos con un amplio catálogo de procedimientos diagnósticos y terapéuticos adaptados a las necesidades de cada paciente.",
+      "othersItems": [
+        "Biopsia trucut guiada por imagen (mama, tiroides, ganglio, hepática, renal, partes blandas)",
+        "Biopsia por aspiración aguja fina (BAAF)",
+        "Drenaje guiado por ultrasonido (paracentesis y toracocentesis)",
+        "Colocación de catéter PICC"
+      ]
     },
     "benefits": {
       "title": "Calidad hospitalaria sin hospitalización",

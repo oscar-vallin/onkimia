@@ -817,7 +817,13 @@
       "headlinePart1": "Ambulatory",
       "headlinePart2": "diagnosis",
       "others": "Other procedures",
-      "othersDescription": "We offer a wide catalog of diagnostic and therapeutic procedures tailored to each patient's needs."
+      "othersDescription": "We offer a wide catalog of diagnostic and therapeutic procedures tailored to each patient's needs.",
+      "othersItems": [
+        "Image-guided core needle (trucut) biopsy (breast, thyroid, lymph node, liver, kidney, soft tissue)",
+        "Fine needle aspiration biopsy (FNAB)",
+        "Ultrasound-guided drainage (paracentesis and thoracentesis)",
+        "PICC line placement"
+      ]
     },
     "benefits": {
       "title": "Hospital quality without hospitalization",
