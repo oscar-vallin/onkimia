@@ -11,7 +11,7 @@ interface DoctorFAQSectionProps {
   items: FAQItem[];
 }
 
-const PAGE_SIZE = 7;
+const PAGE_SIZE = 2;
 
 export function DoctorFAQSection({ eyebrow, title, items }: DoctorFAQSectionProps) {
   const t = useTranslations('about.faq');
