@@ -825,6 +825,30 @@
         "PICC line placement"
       ]
     },
+    "specialties": {
+      "eyebrow": "SPECIALTIES",
+      "title": "Hospital quality without hospitalization",
+      "intro": "Specialized medical care, advanced technology, and agile, safe procedures with no hospitalization required — including ultrasound-guided options.",
+      "flipHint": "Tap for more information",
+      "items": {
+        "endodigestive": {
+          "name": "Endodigestive Procedures",
+          "description": "Diagnostic and therapeutic endoscopies, colonoscopies, sigmoidoscopies, and rectoscopies, with biopsy sampling and specialized procedures."
+        },
+        "urology": {
+          "name": "Urology Procedures",
+          "description": "Outpatient urology procedures such as cystoscopy, intravesical Botox, JJ stent removal, no-scalpel vasectomy, urethrotomy, and biopsies."
+        },
+        "ent": {
+          "name": "ENT Procedures",
+          "description": "Specialized evaluation via rigid or flexible laryngoscopy for the diagnosis of conditions affecting the throat, larynx, and upper airway."
+        },
+        "pulmonology": {
+          "name": "Pulmonology Procedures",
+          "description": "Diagnostic bronchoscopic procedures with biopsy sampling for the specialized evaluation of the airways and pulmonary conditions."
+        }
+      }
+    },
     "benefits": {
       "title": "Hospital quality without hospitalization",
       "items": {
@@ -991,6 +1015,28 @@
       "eyebrow": "OUR LOCATIONS",
       "headlinePart1": "Where to",
       "headlinePart2": "find us"
+    }
+  },
+  "clinicSections": {
+    "contact": {
+      "eyebrow": "Find us",
+      "title": "We are in *{city}*",
+      "description": "Visit our facilities or reach us through whichever channel works best for you. We're here to support you every step of the way.",
+      "viewMap": "View on Google Maps",
+      "addressLabel": "Address",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email"
+    },
+    "services": {
+      "eyebrow": "Our services",
+      "title": "Everything you need, in one place",
+      "description": "In {city} we offer the same full range of specialized oncology services.",
+      "cta": "See all services"
+    },
+    "cta": {
+      "title": "Have questions?",
+      "description": "We're here to support you. Reach out and we'll gladly guide you.",
+      "button": "Contact us"
     }
   },
   "colima": {

@@ -1,18 +1,21 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { FAQS_BY_PAGE_QUERY, ENDOS_PROCEDURES_QUERY, ENDOS_PAGE_QUERY } from '@/sanity/queries';
+import { FAQS_BY_PAGE_QUERY, ENDOS_PAGE_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/lib/localization';
-import type { FAQ, Procedure, EndosPage } from '@/sanity/types';
+import type { FAQ, EndosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
+import NextImage from 'next/image';
 import { PageHero } from '@/components/sections/PageHero';
 import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, UserCheck, Cpu, Zap, Clock, Heart, Check, Syringe, Target, Droplets, Cable } from 'lucide-react';
+
 import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
 import { FAQPageLd, MedicalProcedureLd } from '@/components/seo/JsonLd';
 import { FAQAccordionItem } from '@/components/ui/FAQAccordionItem';
+import { FlipCard } from '@/components/ui/FlipCard';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -29,6 +32,13 @@ export async function generateMetadata({
 const PROCEDURE_ICONS = [Microscope, Search, Activity, FlaskConical, ScanLine] as const;
 const PROCEDURE_ITEM_KEYS = ['endoscopy', 'colonoscopy', 'bronchoscopy', 'biopsy', 'ultrasoundGuided'] as const;
 const OTHERS_ICONS = [Syringe, Target, Droplets, Cable] as const;
+
+const SPECIALTY_KEYS = [
+  { key: 'endodigestive', image: '/endos-procedures/endos_procedure_1.jpg' },
+  { key: 'urology',       image: '/endos-procedures/endos_procedure_2.jpg' },
+  { key: 'ent',           image: '/endos-procedures/endos_procedure_3.jpg' },
+  { key: 'pulmonology',   image: '/endos-procedures/endos_procedure_4.jpg' },
+] as const;
 
 const BENEFIT_KEYS = [
   { key: 'specializedTeam', icon: UserCheck },
@@ -48,10 +58,9 @@ export default async function EndosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [endosPageData, faqs, procedures, t] = await Promise.all([
+  const [endosPageData, faqs, t] = await Promise.all([
     sanityFetch<EndosPage | null>({ query: ENDOS_PAGE_QUERY, tags: ['endosPage'] }),
     sanityFetch<FAQ[]>({ query: FAQS_BY_PAGE_QUERY, params: { page: 'endos' }, tags: ['faq'] }),
-    sanityFetch<Procedure[]>({ query: ENDOS_PROCEDURES_QUERY, params: { locale }, tags: ['procedure'] }),
     getTranslations('endos'),
   ]);
 
@@ -66,7 +75,18 @@ export default async function EndosPage({
         mobileImageSrc="/heros/endos-hero-mobile.webp"
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[88%_25%]"
-        eyebrow={t('hero.eyebrow')}
+        eyebrow={
+          <div className="inline-flex items-center bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-lg">
+            <NextImage
+              src="/endos-procedures/endos-logo.webp"
+              alt={t('hero.eyebrow')}
+              width={180}
+              height={60}
+              className="h-18  md:h-18 w-auto object-contain"
+              priority
+            />
+          </div>
+        }
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
         accent="endos"
         emphasisClassName="italic text-white/85"
@@ -143,62 +163,42 @@ export default async function EndosPage({
       </section>
 
       {/* ════════════════════════════════════════
-          PROCEDURES WITH IMAGES — Sanity photos
+          SPECIALTIES — flip cards (front: title, back: description)
       ════════════════════════════════════════ */}
-      {procedures.length > 0 && (
-        <section className="bg-white py-20 md:py-28" aria-label={t('procedures.title')}>
-          <div className="container-onkimia">
-            <div className={`grid gap-4 ${
-              procedures.length === 1 ? 'grid-cols-1 max-w-lg mx-auto' :
-              procedures.length === 2 ? 'grid-cols-1 md:grid-cols-2' :
-              procedures.length >= 3 && procedures.length <= 4 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' :
-              'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-            }`}>
-              {procedures.map((proc, i) => (
-                <article
-                  key={proc._id}
-                  className={`relative rounded-3xl overflow-hidden group ${
-                    procedures.length >= 5 && i === 0 ? 'sm:col-span-2' : ''
-                  }`}
-                >
-                  <div className={`relative w-full ${
-                    procedures.length >= 5 && i === 0 ? 'aspect-[16/10]' : 'aspect-[3/4]'
-                  }`}>
-                    {proc.image?.asset ? (
-                      <Image
-                        src={urlFor(proc.image).width(900).height(1200).format('webp').quality(85).url()}
-                        alt={proc.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                        placeholder={proc.image?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                        blurDataURL={proc.image?.asset?.metadata?.lqip ?? undefined}
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-endos-teal-700/10" />
-                    )}
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 35%, transparent 45%, rgba(0,0,0,0.80) 70%, rgba(0,0,0,0.92) 100%)' }}
-                      aria-hidden="true"
-                    />
-                    <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-                      <div>
-                        <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-white/60 bg-white/[0.12] rounded-full px-3 py-1.5 backdrop-blur-sm">
-                          ENDOS
-                        </span>
-                        <h3 className="font-serif text-2xl md:text-3xl text-white mt-3 leading-tight">{proc.name}</h3>
-                      </div>
-                      <p className="text-white/95 text-mx leading-relaxed">{proc.shortDescription}</p>
-                    </div>
-                  </div>
-                  <MedicalProcedureLd name={proc.name} description={proc.shortDescription} />
-                </article>
-              ))}
-            </div>
+      <section className="bg-white py-20 md:py-28" aria-labelledby="endos-specialties-title">
+        <div className="container-onkimia">
+          <div className="max-w-2xl mb-14">
+            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
+              {t('specialties.eyebrow')}
+            </p>
+            <h2 id="endos-specialties-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-5">
+              {t('specialties.title')}
+            </h2>
+            <p className="text-secondary text-lg leading-relaxed">
+              {t('specialties.intro')}
+            </p>
           </div>
-        </section>
-      )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {SPECIALTY_KEYS.map(({ key, image }) => (
+              <FlipCard
+                key={key}
+                image={image}
+                title={t(`specialties.items.${key}.name`)}
+                description={t(`specialties.items.${key}.description`)}
+                flipHint={t('specialties.flipHint')}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+      {SPECIALTY_KEYS.map(({ key }) => (
+        <MedicalProcedureLd
+          key={key}
+          name={t(`specialties.items.${key}.name`)}
+          description={t(`specialties.items.${key}.description`)}
+        />
+      ))}
 
       {/* ════════════════════════════════════════
           CALIDAD HOSPITALARIA — benefits

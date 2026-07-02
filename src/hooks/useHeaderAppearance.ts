@@ -6,7 +6,9 @@ import { usePathname } from '@/i18n/navigation';
 // These pages have no hero image — without this the header floats
 // over a dark page background with no visible background of its own.
 // To add a new page of this type: add its path here.
-const DARK_BG_ROUTES = ['/nosotros', '/colima'] as const;
+// Note: clinic pages (e.g. /colima) are handled dynamically via <PageTheme>
+// based on whether their section config includes a hero — don't list them here.
+const DARK_BG_ROUTES = ['/nosotros'] as const;
 
 interface HeaderState {
   scrolled: boolean;

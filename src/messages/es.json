@@ -825,6 +825,30 @@
         "Colocación de catéter PICC"
       ]
     },
+    "specialties": {
+      "eyebrow": "ESPECIALIDADES",
+      "title": "Calidad hospitalaria sin hospitalización",
+      "intro": "Atención médica especializada, tecnología avanzada y procedimientos ágiles, seguros y sin requerir hospitalización; incluyendo opciones guiadas por ultrasonido.",
+      "flipHint": "Toca para más información",
+      "items": {
+        "endodigestive": {
+          "name": "Procedimientos de Endodigestivos",
+          "description": "Endoscopías, colonoscopías, sigmoidoscopías y rectoscopías diagnósticas y terapéuticas, con toma de biopsias y procedimientos especializados."
+        },
+        "urology": {
+          "name": "Procedimientos de Urología",
+          "description": "Procedimientos urológicos ambulatorios como cistoscopias, Botox intravesical, retiro de catéter JJ, vasectomía sin bisturí, uretrotomías y biopsias."
+        },
+        "ent": {
+          "name": "Procedimientos de Otorrino",
+          "description": "Evaluación especializada mediante laringoscopía rígida o flexible para diagnóstico de condiciones relacionadas con garganta, laringe y vías respiratorias superiores."
+        },
+        "pulmonology": {
+          "name": "Procedimientos de Neumología",
+          "description": "Procedimientos broncoscópicos diagnósticos y con toma de biopsia para la evaluación especializada de vías respiratorias y condiciones pulmonares."
+        }
+      }
+    },
     "benefits": {
       "title": "Calidad hospitalaria sin hospitalización",
       "items": {
@@ -992,6 +1016,28 @@
       "eyebrow": "NUESTRAS SEDES",
       "headlinePart1": "Dónde",
       "headlinePart2": "encontrarnos"
+    }
+  },
+  "clinicSections": {
+    "contact": {
+      "eyebrow": "Encuéntranos",
+      "title": "Estamos en *{city}*",
+      "description": "Visítanos en nuestras instalaciones o contáctanos por el medio que prefieras. Estamos para acompañarte en cada paso.",
+      "viewMap": "Ver en Google Maps",
+      "addressLabel": "Dirección",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Correo electrónico"
+    },
+    "services": {
+      "eyebrow": "Nuestros servicios",
+      "title": "Todo lo que necesitas, en un solo lugar",
+      "description": "En {city} ofrecemos la misma gama completa de servicios oncológicos especializados.",
+      "cta": "Ver todos los servicios"
+    },
+    "cta": {
+      "title": "¿Tienes dudas?",
+      "description": "Estamos aquí para acompañarte. Contáctanos y con gusto te orientamos.",
+      "button": "Contáctanos"
     }
   },
   "colima": {

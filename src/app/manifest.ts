@@ -7,13 +7,24 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Centro oncológico integral. Tratamiento, acompañamiento y bienestar para pacientes con cáncer en Guadalajara y Colima.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#1E1739',
-    theme_color: '#1E1739',
+    // --color-ink del sistema de tokens v4 (globals.css)
+    background_color: '#1a1a1f',
+    theme_color: '#1a1a1f',
     icons: [
       {
         src: '/favicon.ico',
         sizes: 'any',
         type: 'image/x-icon',
+      },
+      {
+        src: '/icons/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: '/icons/icon-256.png',
+        sizes: '256x256',
+        type: 'image/png',
       },
     ],
   };

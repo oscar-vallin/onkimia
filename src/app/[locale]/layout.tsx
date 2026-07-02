@@ -34,6 +34,20 @@ export async function generateMetadata({
     metadataBase: new URL(
       process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onkimia.com'
     ),
+    // Iconos servidos desde /public y declarados aquí — NO usar los archivos
+    // de convención (app/icon.png, app/favicon.ico): al vivir junto al
+    // segmento [locale], next-intl los resuelve como locale inválido y el
+    // layout responde 404 (verificado en el prerender: status 404 con
+    // cache tags de [locale]/layout).
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/icons/icon-256.png', type: 'image/png', sizes: '256x256' },
+      ],
+      apple: [
+        { url: '/icons/apple-icon-180.png', type: 'image/png', sizes: '180x180' },
+      ],
+    },
   };
 }
 

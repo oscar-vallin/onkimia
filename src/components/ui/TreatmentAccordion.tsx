@@ -86,7 +86,7 @@ export function TreatmentAccordion({ treatments }: TreatmentAccordionProps) {
                 <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-cuidare-blue-100 text-cuidare-blue-700 flex items-center justify-center">
                   {Icon && <Icon className="w-5 h-5" aria-hidden="true" />}
                 </div>
-                <h3 className="flex-1 font-serif text-base text-primary">{title}</h3>
+                <h3 className="flex-1 font-serif text-sm font-medium leading-snug text-primary">{title}</h3>
                 <ChevronDown
                   className={`w-5 h-5 text-secondary/50 transition-transform flex-shrink-0 ${
                     isOpen ? 'rotate-180' : ''

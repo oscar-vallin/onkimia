@@ -52,7 +52,8 @@ export interface PageHeroProps {
   /** Sub-brand accent for the primary CTA button. Default: 'primary' (monochromatic). */
   accent?: PageHeroAccent;
 
-  eyebrow?: string;
+  /** Plain text label (default) or custom content (e.g. a sub-brand logo) rendered top-left. */
+  eyebrow?: React.ReactNode;
   /** Supports *word* syntax → italic emphasis (Fraunces italic, default). Override via emphasisClassName. */
   title: string;
   /** Override the emphasis class. Default: 'italic' (Fraunces italic). Sub-brands can pass e.g. 'italic text-white/85' or 'text-doctors-blue'. */
@@ -255,9 +256,9 @@ export function PageHero({
       {(eyebrow || topSlot) && (
         <div className={`relative z-10 container-onkimia mt-3 md:mt-0  pt-32 md:pt-44 flex ${topSlot ? 'items-center justify-between' : 'items-start'}`}>
           {eyebrow && (
-            <p className="text-[10px] tracking-[0.28em] uppercase text-white/60 font-medium">
+            <div className="text-[10px] tracking-[0.28em] uppercase text-white/60 font-medium">
               {eyebrow}
-            </p>
+            </div>
           )}
           {topSlot && (
             <div className="ml-auto">{topSlot}</div>
