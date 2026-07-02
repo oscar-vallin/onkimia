@@ -6,13 +6,19 @@ interface MedicalOrganizationProps {
   clinics: StaticClinic[];
 }
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onkimia.com').replace(/\/$/, '');
+
 export function MedicalOrganizationJsonLd({ clinics }: MedicalOrganizationProps) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'MedicalOrganization',
     name: 'Onkimia',
-    url: 'https://onkimia.com',
-    logo: 'https://onkimia.com/og-image.png',
+    url: SITE_URL,
+    // Mismo wordmark que usa el Header (oscuro sobre transparente — se ve
+    // bien en blanco, como pide Google). El archivo actual mide 200×67 px;
+    // Google recomienda ≥112 px de alto: al tener un export más grande,
+    // basta reemplazar el .webp sin tocar este código.
+    logo: `${SITE_URL}/logos/onkimia-logo.webp`,
     sameAs: [
       'https://www.instagram.com/onkimia/',
       'https://www.facebook.com/people/Onkimia/100083572627923/',

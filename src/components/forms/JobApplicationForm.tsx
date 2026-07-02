@@ -5,7 +5,7 @@ import Script from 'next/script';
 import { useTranslations, useLocale } from 'next-intl';
 import { Loader2, CheckCircle2, AlertCircle, X, Upload, FileText } from 'lucide-react';
 import { submitJobApplication } from '@/lib/actions/jobApplication';
-import { getLocalized } from '@/sanity/lib/localization';
+import { getLocalized } from '@/lib/localization';
 import { MAX_FILE_SIZE_BYTES, jobApplicationFormSchema, validateCvFile } from '@/lib/schemas/jobApplication';
 import type { JobApplicationFormState } from '@/lib/schemas/jobApplication';
 import type { JobPosting } from '@/sanity/types';

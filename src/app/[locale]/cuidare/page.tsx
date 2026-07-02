@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY, CUIDARE_PROCEDURES_QUERY } from '@/sanity/queries';
+import { SITE_SETTINGS_QUERY, FAQS_BY_PAGE_QUERY } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
-import { getLocalized } from '@/sanity/lib/localization';
-import type { SiteSettings, FAQ, Procedure } from '@/sanity/types';
+import { getLocalized } from '@/lib/localization';
+import type { SiteSettings, FAQ } from '@/sanity/types';
+import NextImage from 'next/image';
 import type { Locale } from '@/i18n/routing';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { PageHero } from '@/components/sections/PageHero';
@@ -68,7 +69,7 @@ export default async function CuidarePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [settings, faqs, procedures, t] = await Promise.all([
+  const [settings, faqs, t] = await Promise.all([
     sanityFetch<SiteSettings>({
       query: SITE_SETTINGS_QUERY,
       tags: ['siteSettings'],
@@ -77,11 +78,6 @@ export default async function CuidarePage({
       query: FAQS_BY_PAGE_QUERY,
       params: { page: 'cuidare' },
       tags: ['faq'],
-    }),
-    sanityFetch<Procedure[]>({
-      query: CUIDARE_PROCEDURES_QUERY,
-      params: { locale },
-      tags: ['procedure'],
     }),
     getTranslations('cuidare'),
   ]);
@@ -174,56 +170,42 @@ export default async function CuidarePage({
       </section>
 
       {/* ─── PROCEDIMIENTOS CUIDARE — fotos prominentes ─── */}
-      {procedures.length > 0 && (
-        <section className="bg-white py-20 md:py-28" aria-label="Procedimientos Cuidare">
-          <div className="container-onkimia">
-            <div className={`grid gap-4 ${
-              procedures.length === 1 ? 'grid-cols-1 max-w-2xl mx-auto' :
-              procedures.length === 2 ? 'grid-cols-1 md:grid-cols-2' :
-              'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-            }`}>
-              {procedures.map((proc, i) => (
-                <article
-                  key={proc._id}
-                  className={`relative rounded-3xl overflow-hidden group ${
-                    procedures.length >= 3 && i === 0 ? 'sm:col-span-2 lg:col-span-1' : ''
-                  }`}
-                >
-                  <div className="relative w-full aspect-[4/3]">
-                    {proc.image?.asset ? (
-                      <Image
-                        src={urlFor(proc.image).width(1400).height(1050).format('webp').quality(85).url()}
-                        alt={proc.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                        placeholder={proc.image?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                        blurDataURL={proc.image?.asset?.metadata?.lqip ?? undefined}
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-cuidare-blue-900" />
-                    )}
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 45%, rgba(0,0,0,0.85) 100%)' }}
-                      aria-hidden="true"
-                    />
-                    <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
-                      <div>
-                        <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-white/60 bg-white/[0.12] rounded-full px-3 py-1.5 backdrop-blur-sm">
-                          CUIDARE
-                        </span>
-                        <h3 className="font-serif text-2xl md:text-3xl text-white mt-3 leading-tight">{proc.name}</h3>
-                      </div>
-                      <p className="text-white/70 text-sm leading-relaxed">{proc.shortDescription}</p>
+      <section className="bg-white py-20 md:py-28" aria-label="Procedimientos Cuidare">
+        <div className="container-onkimia">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {([
+              { src: '/cuidare/image_1.jpg', statValue: t('radiology.stat1Value'), statLabel: t('radiology.stat1Label') },
+              { src: '/cuidare/image_2.jpg', statValue: t('radiology.stat2Value'), statLabel: t('radiology.stat2Label') },
+            ] as const).map(({ src, statValue, statLabel }) => (
+              <article key={src} className="relative rounded-3xl overflow-hidden group">
+                <div className="relative w-full aspect-[4/3]">
+                  <NextImage
+                    src={src}
+                    alt={`${statValue} ${statLabel}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 40%, rgba(0,0,0,0.80) 100%)' }}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+                    <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-white/60 bg-white/[0.12] rounded-full px-3 py-1.5 backdrop-blur-sm self-start">
+                      CUIDARE
+                    </span>
+                    <div>
+                      <p className="font-serif text-4xl md:text-5xl text-white leading-none">{statValue}</p>
+                      <p className="text-[11px] tracking-[0.18em] uppercase text-white/50 mt-5">{statLabel}</p>
                     </div>
                   </div>
-                </article>
-              ))}
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ─── RADIOLOGÍA INTERVENCIONISTA ─── */}
       <section className="relative overflow-hidden py-20 md:py-28" aria-labelledby="cuidare-radiology-title">
@@ -256,19 +238,9 @@ export default async function CuidarePage({
                 {t('radiology.headlinePart1')}<br/>
                 <em className="not-italic italic">{t('radiology.headlinePart2')}</em>
               </h2>
-              <p className="text-white/60 text-base md:text-lg leading-relaxed mb-10">
+              <p className="text-white/60 text-base md:text-lg leading-relaxed">
                 {t('radiology.description')}
               </p>
-              <div className="flex flex-wrap gap-3">
-                <div className="bg-white/[0.07] border border-white/[0.10] rounded-2xl px-7 py-5 text-center min-w-[130px]">
-                  <p className="font-serif text-2xl text-white leading-none mb-1">{t('radiology.stat1Value')}</p>
-                  <p className="text-[11px] tracking-[0.15em] uppercase text-white/40">{t('radiology.stat1Label')}</p>
-                </div>
-                <div className="bg-white/[0.07] border border-white/[0.10] rounded-2xl px-7 py-5 text-center min-w-[130px]">
-                  <p className="font-serif text-2xl text-white leading-none mb-1">{t('radiology.stat2Value')}</p>
-                  <p className="text-[11px] tracking-[0.15em] uppercase text-white/40">{t('radiology.stat2Label')}</p>
-                </div>
-              </div>
             </div>
 
             {/* Right — items */}

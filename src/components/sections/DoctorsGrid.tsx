@@ -1,5 +1,5 @@
 import type { Doctor } from '@/sanity/types';
-import type { Locale } from '@/sanity/lib/localization';
+import type { Locale } from '@/lib/localization';
 import { DoctorsCarousel } from './DoctorsCarousel';
 import { Section } from '@/components/ui/Section';
 import { SectionHeader } from '@/components/ui/SectionHeader';

@@ -1,5 +1,7 @@
-import { getTranslations } from 'next-intl/server';
-import { getClinicCookie } from '@/lib/cookies';
+'use client';
+
+import { useTranslations } from 'next-intl';
+import { useClinic } from '@/lib/clinic-context';
 import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsapp';
 import { CLINICS } from '@/config/clinicConfig';
 
@@ -18,19 +20,22 @@ interface BookingButtonProps {
   className?: string;
 }
 
-export async function BookingButton({
+// Client component on purpose: the selected clinic lives in a cookie, and
+// reading it server-side (cookies()) would force dynamic rendering on every
+// page that renders this button. SSR/first paint uses the primary-clinic
+// fallback from getWhatsAppNumber; the href updates after hydration if the
+// visitor had selected another clinic.
+export function BookingButton({
   section,
   variant = 'primary',
   customLabel,
   customMessage,
   className = '',
 }: BookingButtonProps) {
-  const [clinicSlug, t] = await Promise.all([
-    getClinicCookie(),
-    getTranslations('common'),
-  ]);
+  const t = useTranslations('common');
+  const { clinic } = useClinic();
 
-  const currentClinic = CLINICS.find((c) => c.slug === clinicSlug) || null;
+  const currentClinic = CLINICS.find((c) => c.slug === clinic) || null;
 
   const number = getWhatsAppNumber({
     section,

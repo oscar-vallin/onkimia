@@ -14,14 +14,17 @@ export function MisionSection({ eyebrow, title, description }: MisionSectionProp
         <p className="text-xs tracking-[0.25em] uppercase text-secondary mb-5">
           {eyebrow}
         </p>
-        <h2 className="font-serif text-5xl lg:text-7xl text-primary font-normal leading-tight mb-6">
+        {/* h1: this section opens /nosotros, which has no PageHero — it owns
+            the page's single h1. If this component is ever reused mid-page,
+            add a headingLevel prop instead of demoting this back to h2. */}
+        <h1 className="font-serif text-5xl lg:text-7xl text-primary font-normal leading-tight mb-6">
           {titleLines.map((line, i) => (
             <span key={i}>
               {line}
               {i < titleLines.length - 1 && <br />}
             </span>
           ))}
-        </h2>
+        </h1>
         <p className="text-secondary text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto">
           {description}
         </p>

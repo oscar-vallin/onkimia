@@ -63,9 +63,9 @@ export default async function ColimaPage({
               <p className="text-xs font-medium tracking-widest uppercase text-primary/50 mb-4">
                 {t('contact.eyebrow')}
               </p>
-              <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
+              <h1 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
                 {t('contact.title')}
-              </h2>
+              </h1>
               <p className="text-secondary text-lg leading-relaxed">
                 {t('contact.description')}
               </p>

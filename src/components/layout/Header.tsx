@@ -10,16 +10,14 @@ import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Globe, MapPin } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
-import { getLocalized } from '@/sanity/lib/localization';
+import { getLocalized } from '@/lib/localization';
 import { CLINICS } from '@/config/clinicConfig';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 import { LazyMotion, m, AnimatePresence, type Variants } from 'framer-motion';
 import { useHeaderAppearance } from '@/hooks/useHeaderAppearance';
 import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsapp';
-
-const loadFeatures = () =>
-  import('framer-motion').then((mod) => mod.domAnimation);
+import { loadMotionFeatures } from '@/lib/motion';
 
 interface HeaderProps {}
 
@@ -288,7 +286,7 @@ export function Header({}: HeaderProps) {
       </header>
 
       {/* ─── Full-Screen Mobile Menu ─── */}
-      <LazyMotion features={loadFeatures} strict>
+      <LazyMotion features={loadMotionFeatures} strict>
         <AnimatePresence>
           {mobileOpen && (
             <m.nav

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { SanityImage } from '@/components/ui/SanityImage';
 import { Link } from '@/i18n/navigation';
 import { ArrowRight } from 'lucide-react';
@@ -147,12 +146,21 @@ export function PageHero({
   return (
     <section className={`relative w-full ${mobileMinHeight} md:min-h-[70vh] overflow-hidden bg-primary text-white -mt-16 md:-mt-20 flex flex-col`}>
 
+      {/* Hero images are the LCP element. They're pre-optimized per-breakpoint
+          files in /public/heros served as-is (SanityImage's loader passes local
+          paths through), preloaded from each page.tsx with media queries so each
+          viewport downloads only its variant. loading="eager" + fetchPriority
+          (instead of `priority`) keeps them out of lazy loading WITHOUT injecting
+          next/image's unconditional preload, which would ignore those media
+          queries and make every viewport download both variants. */}
+
       {/* Desktop image — hidden on mobile when a mobile variant is provided */}
       {imageSrc && (
         <SanityImage
           src={imageSrc}
           alt={imageAlt}
           fill
+          loading="eager"
           fetchPriority="high"
           sizes="100vw"
           quality={82}
@@ -163,11 +171,11 @@ export function PageHero({
 
       {/* Mobile image — portrait crop, only shown below md */}
       {mobileImageSrc && (
-        <Image
+        <SanityImage
           src={mobileImageSrc}
           alt={imageAlt}
           fill
-          priority
+          loading="eager"
           fetchPriority="high"
           sizes="100vw"
           quality={82}

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { getLocalized } from '@/sanity/lib/localization';
+import { getLocalized } from '@/lib/localization';
 import { CLINICS } from '@/config/clinicConfig';
 import type { Locale } from '@/i18n/routing';
 import { MapPin } from 'lucide-react';

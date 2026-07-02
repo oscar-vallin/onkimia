@@ -609,6 +609,15 @@
           "boutique": "Boutique oncológica"
         },
         "tourMessage": "Hola, quisiera agendar un recorrido por la unidad de Bienestar Integral."
+      },
+      "vocalia": {
+        "name": "Vocalia",
+        "visitWebsite": "Visitar sitio web",
+        "items": {
+          "expertise": "Experiencia especializada",
+          "technology": "Tecnología de punta",
+          "personalizedCare": "Enfoque personalizado"
+        }
       }
     },
     "benefits": {

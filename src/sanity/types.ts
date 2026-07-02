@@ -1,5 +1,5 @@
 import type { Image } from 'sanity';
-import type { LocalizedString, LocalizedText } from './lib/localization';
+import type { LocalizedString, LocalizedText } from '@/lib/localization';
 
 export interface SanityImageWithLQIP extends Image {
   asset?: Image['asset'] & {

@@ -6,7 +6,6 @@ import { hasLocale } from 'next-intl';
 import { fraunces, dmSans, sourceCodePro } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { ClinicProvider } from '@/lib/clinic-context';
-import { getClinicCookie } from '@/lib/cookies';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
@@ -53,8 +52,6 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const initialClinic = await getClinicCookie();
-
   return (
     <html
       lang={locale}
@@ -75,7 +72,7 @@ export default async function LocaleLayout({
         </a>
         <NextIntlClientProvider>
           <ScrollToTop />
-          <ClinicProvider initialClinic={initialClinic}>
+          <ClinicProvider>
             <Header />
             <main id="main-content" className="flex-1">{children}</main>
             <Footer locale={locale as 'es' | 'en'} />

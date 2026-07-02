@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineField } from 'sanity';
 
 export const localizedString = (config: {
   name: string;
@@ -105,26 +105,6 @@ export const localizedPortableText = (config: {
     ],
   });
 
-/**
- * Tipos TypeScript inferidos para usar en componentes.
- */
-export type LocalizedString = {
-  es: string;
-  en: string;
-};
-
-export type LocalizedText = LocalizedString;
-
-export type Locale = 'es' | 'en';
-
-/**
- * Helper para extraer el valor en el locale activo,
- * con fallback al otro idioma si está vacío.
- */
-export function getLocalized(
-  field: LocalizedString | undefined,
-  locale: Locale
-): string {
-  if (!field) return '';
-  return field[locale] || field[locale === 'es' ? 'en' : 'es'] || '';
-}
+// Los helpers de runtime (getLocalized, LocalizedString, LocalizedText,
+// Locale) viven en src/lib/localization.ts. Este módulo importa el paquete
+// `sanity` (Studio completo) — solo deben consumirlo los schemas.

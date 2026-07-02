@@ -14,14 +14,9 @@ import type { Locale } from '@/i18n/routing';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { FALLBACK_WELLNESS, FALLBACK_SERVICES } from '@/content/fallbacks';
 import { StickyStages } from '@/components/sections/StickyStages';
-// Retirado del home nuevo (migración 2026-06-23). Conservado por si se reutiliza.
-// import { OrbitDiagram } from '@/components/sections/OrbitDiagram';
 import { DoctorsSection } from '@/components/sections/home/DoctorsSection';
 import { InsurancesSection } from '@/components/sections/home/InsurancesSection';
-// import { PriorityCare } from '@/components/sections/PriorityCare';
 import { AppointmentCta } from '@/components/sections/AppointmentCta';
-// Retirado del home nuevo (migración 2026-06-23). Conservado por si se reutiliza.
-// import { ProceduresSection } from '@/components/sections/home/ProceduresSection';
 
 export async function generateMetadata({
   params,
@@ -139,36 +134,6 @@ export default async function HomePage({
         gallery={settings.studiesGallery}
       />
 
-      {/* ─── PROCEDURES — Retirado del home nuevo (migración 2026-06-23). Conservado por si se reutiliza. ─── */}
-      {/* <Suspense fallback={<ProceduresCarouselSkeleton />}>
-        <ProceduresSection locale={locale} backgroundImage={settings.proceduresBgImage} />
-      </Suspense> */}
-
-      {/* ─── CUIDARTE ES NUESTRA PRIORIDAD ─── */}
-      {/* <PriorityCare
-        title={t('priorityCare.title')}
-        subtitle={t('priorityCare.subtitle')}
-        card1Title={t('priorityCare.card1.title')}
-        card1Description={t('priorityCare.card1.description')}
-        card2Title={t('priorityCare.card2.title')}
-        card2Description={t('priorityCare.card2.description')}
-        card3Title={t('priorityCare.card3.title')}
-        card3Description={t('priorityCare.card3.description')}
-        additionalServices={t('priorityCare.additionalServices')}
-      /> */}
-
-      {/* ─── ORBIT — Retirado del home nuevo (migración 2026-06-23). Conservado por si se reutiliza. ─── */}
-      {/* <OrbitDiagram
-        eyebrow={t('orbit.eyebrow')}
-        title={t('orbit.title')}
-        items={[
-          { num: '1', name: t('orbit.items.cercana.name'), description: t('orbit.items.cercana.description') },
-          { num: '2', name: t('orbit.items.precisa.name'), description: t('orbit.items.precisa.description') },
-          { num: '3', name: t('orbit.items.integral.name'), description: t('orbit.items.integral.description') },
-          { num: '4', name: t('orbit.items.humana.name'), description: t('orbit.items.humana.description') },
-        ]}
-      /> */}
-
       {/* ─── SERVICES ─── */}
       <StickyStages
         eyebrow={t('services.eyebrow')}
@@ -210,24 +175,6 @@ export default async function HomePage({
     </>
   );
 }
-
-
-// Retirado del home nuevo (migración 2026-06-23). Conservado por si se reutiliza.
-// function ProceduresCarouselSkeleton() {
-//   return (
-//     <div className="bg-ink py-20 md:py-28 animate-pulse">
-//       <div className="container-onkimia">
-//         <div className="h-3 w-36 bg-white/10 rounded mb-4" />
-//         <div className="h-10 w-72 bg-white/10 rounded" />
-//       </div>
-//       <div className="mt-12 flex gap-5 overflow-hidden px-6">
-//         {Array.from({ length: 4 }).map((_, i) => (
-//           <div key={i} className="w-[300px] h-[400px] flex-shrink-0 rounded-3xl bg-white/5" />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
 
 function DoctorsGridSkeleton() {
   return (

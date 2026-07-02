@@ -609,6 +609,15 @@
           "boutique": "Oncology boutique"
         },
         "tourMessage": "Hello, I would like to schedule a tour of the Integral Wellness unit."
+      },
+      "vocalia": {
+        "name": "Vocalia",
+        "visitWebsite": "Visit website",
+        "items": {
+          "expertise": "Specialized expertise",
+          "technology": "Cutting-edge technology",
+          "personalizedCare": "Personalized approach"
+        }
       }
     },
     "benefits": {

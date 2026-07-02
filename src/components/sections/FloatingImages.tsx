@@ -1,7 +1,8 @@
 'use client';
 
 import { SanityImage as Image } from '@/components/ui/SanityImage';
-import { motion, useReducedMotion } from 'framer-motion';
+import { LazyMotion, m, useReducedMotion } from 'framer-motion';
+import { loadMotionFeatures } from '@/lib/motion';
 
 const FLOAT_CONFIG = [
   { rotate: -4, offsetY: -20 },
@@ -54,41 +55,43 @@ export function FloatingImages({ count, srcs, alts, lqips }: FloatingImagesProps
         so FM's y animation never clobbers those transforms.
         Overlap per pair: image width (200px) - step (15% of max-w-5xl ≈ 154px) ≈ 46px.
       */}
-      <div className="hidden md:block relative h-[280px] mb-16 mx-auto max-w-5xl">
-        {Array.from({ length: count }).map((_, i) => {
-          const cfg     = FLOAT_CONFIG[i % FLOAT_CONFIG.length];
-          const spread  = 60;
-          const leftPct = (50 - spread / 2) + (i / (count - 1)) * spread; // 20%→80%
+      <LazyMotion features={loadMotionFeatures} strict>
+        <div className="hidden md:block relative h-[280px] mb-16 mx-auto max-w-5xl">
+          {Array.from({ length: count }).map((_, i) => {
+            const cfg     = FLOAT_CONFIG[i % FLOAT_CONFIG.length];
+            const spread  = 60;
+            const leftPct = (50 - spread / 2) + (i / (count - 1)) * spread; // 20%→80%
 
-          return (
-            <div
-              key={i}
-              className="absolute w-[180px] lg:w-[200px] aspect-square"
-              style={{
-                left: `${leftPct}%`,
-                top: 0,
-                zIndex: i === 2 ? 2 : 1,
-                transform: `translateX(-50%) translateY(${cfg.offsetY}px) rotate(${cfg.rotate}deg)`,
-              }}
-            >
-              <motion.div
-                className="w-full h-full"
-                initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-                whileInView={reducedMotion ? {} : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.45, delay: i * 0.07, ease: 'easeOut' }}
+            return (
+              <div
+                key={i}
+                className="absolute w-[180px] lg:w-[200px] aspect-square"
+                style={{
+                  left: `${leftPct}%`,
+                  top: 0,
+                  zIndex: i === 2 ? 2 : 1,
+                  transform: `translateX(-50%) translateY(${cfg.offsetY}px) rotate(${cfg.rotate}deg)`,
+                }}
               >
-                <FloatImage
-                  src={srcs[i]}
-                  alt={alts[i]}
-                  placeholder={PLACEHOLDER_GRADIENTS[i]}
+                <m.div
                   className="w-full h-full"
-                />
-              </motion.div>
-            </div>
-          );
-        })}
-      </div>
+                  initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+                  whileInView={reducedMotion ? {} : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.45, delay: i * 0.07, ease: 'easeOut' }}
+                >
+                  <FloatImage
+                    src={srcs[i]}
+                    alt={alts[i]}
+                    placeholder={PLACEHOLDER_GRADIENTS[i]}
+                    className="w-full h-full"
+                  />
+                </m.div>
+              </div>
+            );
+          })}
+        </div>
+      </LazyMotion>
     </>
   );
 }

@@ -168,26 +168,6 @@ export const ABOUT_PAGE_QUERY = groq`
   }
 `;
 
-/** Procedimientos de la unidad Cuidare (submark == "Cuidare"), con imagen LQIP. */
-export const CUIDARE_PROCEDURES_QUERY = groq`
-  *[_type == "procedure" && submark == "Cuidare"] | order(order asc) {
-    _id,
-    order,
-    "name": name[$locale],
-    "shortDescription": shortDescription[$locale],
-    submark,
-    image {
-      asset-> {
-        _id,
-        url,
-        metadata { lqip, dimensions }
-      },
-      hotspot,
-      crop
-    }
-  }
-`;
-
 /** Singleton página Endos — imágenes de sección + FAQ inline. */
 export const ENDOS_PAGE_QUERY = groq`
   *[_type == "endosPage" && _id == "endosPage"][0] {
@@ -200,31 +180,6 @@ export const ENDOS_PAGE_QUERY = groq`
 /** Procedimientos de la unidad Endos (submark == "Endos"), con imagen LQIP. */
 export const ENDOS_PROCEDURES_QUERY = groq`
   *[_type == "procedure" && submark == "Endos"] | order(order asc) {
-    _id,
-    order,
-    "name": name[$locale],
-    "shortDescription": shortDescription[$locale],
-    "highlights": highlights[]{
-      _key,
-      "text": text[$locale]
-    },
-    submark,
-    image {
-      asset-> {
-        _id,
-        url,
-        metadata { lqip, dimensions }
-      },
-      hotspot,
-      crop
-    },
-    "duration": duration[$locale]
-  }
-`;
-
-
-export const allProceduresQuery = groq`
-  *[_type == "procedure"] | order(order asc) {
     _id,
     order,
     "name": name[$locale],

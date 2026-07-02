@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { urlFor } from '@/sanity/image';
-import { getLocalized } from '@/sanity/lib/localization';
+import { getLocalized } from '@/lib/localization';
 import type { FAQ } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
 

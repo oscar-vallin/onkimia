@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { PageTheme } from '@/components/layout/PageTheme';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { TESTIMONIALS_QUERY, ABOUT_PAGE_QUERY } from '@/sanity/queries';
-import { getLocalized } from '@/sanity/lib/localization';
+import { getLocalized } from '@/lib/localization';
 import { MisionSection } from '@/components/sections/MisionSection';
 import { MoreThanMedicine } from '@/components/sections/MoreThanMedicine';
 import { Enfoque360Section } from '@/components/sections/Enfoque360Section';

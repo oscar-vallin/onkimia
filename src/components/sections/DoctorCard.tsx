@@ -1,6 +1,6 @@
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
-import { getLocalized, type Locale } from '@/sanity/lib/localization';
+import { getLocalized, type Locale } from '@/lib/localization';
 import type { Doctor } from '@/sanity/types';
 
 interface DoctorCardProps {

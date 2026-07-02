@@ -4,7 +4,7 @@ import { useCallback, useState, useSyncExternalStore } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import type { Doctor } from '@/sanity/types';
-import type { Locale } from '@/sanity/lib/localization';
+import type { Locale } from '@/lib/localization';
 import { DoctorCard } from './DoctorCard';
 
 interface DoctorsCarouselProps {

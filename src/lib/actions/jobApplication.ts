@@ -12,7 +12,7 @@ import { verifyTurnstile } from '@/lib/turnstile'; // TODO: re-enable with Turns
 import { sendJobApplicationEmail } from '@/lib/email/resend';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { groq } from 'next-sanity';
-import { getLocalized } from '@/sanity/lib/localization';
+import { getLocalized } from '@/lib/localization';
 import type { JobPosting } from '@/sanity/types';
 
 const SINGLE_JOB_QUERY = groq`
