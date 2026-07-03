@@ -2,11 +2,9 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { FAQS_BY_PAGE_QUERY, ENDOS_PAGE_QUERY } from '@/sanity/queries';
-import { urlFor } from '@/sanity/image';
 import { getLocalized } from '@/lib/localization';
 import type { FAQ, EndosPage } from '@/sanity/types';
 import type { Locale } from '@/i18n/routing';
-import { SanityImage as Image } from '@/components/ui/SanityImage';
 import NextImage from 'next/image';
 import { PageHero } from '@/components/sections/PageHero';
 import { Microscope, Search, Activity, FlaskConical, ScanLine, ShieldCheck, UserCheck, Cpu, Zap, Clock, Heart, Check, Syringe, Target, Droplets, Cable } from 'lucide-react';
@@ -265,37 +263,28 @@ export default async function EndosPage({
             </div>
 
             {/* Right — image */}
-            <div className="relative h-full min-h-[420px] lg:min-h-0">
-              <div className="relative w-full h-full rounded-3xl overflow-hidden bg-white/[0.03]">
-                {endosPageData?.safetyImage?.asset ? (
-                  <>
-                    <Image
-                      src={urlFor(endosPageData.safetyImage).width(900).format('webp').quality(85).url()}
-                      alt=""
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover scale-110 blur-xl opacity-30"
-                      aria-hidden="true"
-                    />
-                    <Image
-                      src={urlFor(endosPageData.safetyImage).width(900).format('webp').quality(85).url()}
-                      alt={t('safety.title')}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-contain relative z-10"
-                      placeholder={endosPageData.safetyImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                      blurDataURL={endosPageData.safetyImage?.asset?.metadata?.lqip ?? undefined}
-                    />
-                  </>
-                ) : (
-                  <div className="absolute inset-0 border border-white/[0.08] flex flex-col items-center justify-center gap-2">
-                    <ShieldCheck className="w-10 h-10 text-white/10"/>
-                    <p className="text-white/20 text-xs">endosSafetyImage</p>
-                  </div>
-                )}
+            <div className="relative lg:h-full min-h-[420px] lg:min-h-0">
+              <div className="relative w-full h-[420px] lg:h-full rounded-3xl overflow-hidden bg-white/[0.03]">
+                <NextImage
+                  src="/endos-procedures/safety_trust.jpg"
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover scale-110 blur-xl opacity-30"
+                  aria-hidden="true"
+                />
+                <NextImage
+                  src="/endos-procedures/safety_trust.jpg"
+                  alt={t('safety.title')}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain relative z-10"
+                />
               </div>
-              {/* Floating badge */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 min-w-[220px]">
+              {/* Floating badge — normal flow below the image on mobile (avoids
+                  clipping when the overlap doesn't have room to breathe on
+                  short viewports); floats overlapping the photo from lg: up */}
+              <div className="static mt-4 mx-auto max-w-fit lg:absolute lg:mt-0 lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 min-w-[220px]">
                 <div className="w-8 h-8 rounded-full bg-endos-teal-700/10 flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-4 h-4 text-endos-teal-700" aria-hidden="true"/>
                 </div>
