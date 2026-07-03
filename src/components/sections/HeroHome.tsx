@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { PillButton } from '@/components/ui/PillButton';
@@ -40,17 +39,19 @@ export function HeroHome({
 }: HeroHomeProps) {
   return (
     <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">
-        {/* srcSet with `w` descriptors + sizes="100vw": the browser multiplies
-            viewport width × devicePixelRatio and picks the smallest variant that
-            covers it — retina phones get 1170, retina desktops get 1920.
-            (The old media-query <picture> ignored DPR and upscaled → pixelation.) */}
+        {/* Art direction: phones get a dedicated portrait crop centered on the
+            brand emblem (a 16:9 landscape can never fit a portrait screen —
+            it was clipping the wall sign). Desktop keeps DPR-aware variants:
+            srcSet `w` descriptors + sizes="100vw" let the browser multiply
+            viewport × devicePixelRatio and pick the right file. */}
         <picture className="absolute inset-0">
+          <source media="(max-width: 767px)" srcSet="/heros/hero-main-mobile.webp" />
           <img
             src="/heros/hero-main-1920.webp"
-            srcSet="/heros/hero-main-750.webp 750w, /heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w"
+            srcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w"
             sizes="100vw"
-            alt="Médico oncólogo acompañando a un paciente en Onkimia"
-            className="w-full h-full object-cover [object-position:center_20%] md:[object-position:62%_45%]"
+            alt="Recepción de la clínica Onkimia con el logotipo Evolución Oncológica"
+            className="w-full h-full object-cover object-center md:[object-position:62%_45%]"
             fetchPriority="high"
             decoding="sync"
           />

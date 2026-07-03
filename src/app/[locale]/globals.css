@@ -72,7 +72,7 @@
   /* ─── TIPOGRAFÍA ─── */
   --font-serif:   var(--font-fraunces), Georgia, serif;
   --font-sans:    var(--font-dm-sans), system-ui, -apple-system, sans-serif;
-  --font-mono:    var(--font-mono), 'Source Code Pro', Consolas, monospace;
+  --font-mono:    'Source Code Pro', Consolas, monospace;
 
   /* ─── ESCALA TIPOGRÁFICA ───
      Modular scale 1.25 (Major Third) — equilibrio para sitio médico */

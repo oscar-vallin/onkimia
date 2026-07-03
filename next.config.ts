@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
     formats: ['image/webp'],
   },
   experimental: {
+    // Inline the CSS into the HTML instead of <link> stylesheets — removes the
+    // render-blocking CSS requests from the LCP critical path (~560 ms on slow
+    // 4G per Lighthouse). Our total CSS is ~18 KB, so the HTML-size tradeoff is
+    // favorable. (optimizeCss/critters only applies to the Pages Router.)
+    inlineCss: true,
     optimizePackageImports: [
       'lucide-react',
       'framer-motion',

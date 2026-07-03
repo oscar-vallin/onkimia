@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
-import { fraunces, dmSans, sourceCodePro } from '@/app/fonts';
+import { fraunces, dmSans } from '@/app/fonts';
 import { routing } from '@/i18n/routing';
 import { ClinicProvider } from '@/lib/clinic-context';
 import { Header } from '@/components/layout/Header';
@@ -69,7 +69,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${sourceCodePro.variable} ${fraunces.variable} ${dmSans.variable}`}
+      className={`${fraunces.variable} ${dmSans.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>

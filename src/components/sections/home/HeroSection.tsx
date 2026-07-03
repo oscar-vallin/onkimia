@@ -7,16 +7,25 @@ export async function HeroSection({}: SectionProps) {
 
   return (
     <>
-      {/* Hero image preload — LCP critical path.
+      {/* Hero image preloads — LCP critical path.
           Next.js App Router hoists <link> RSC elements to <head>.
-          imageSrcSet/imageSizes mirror the <img> in HeroHome.tsx exactly, so the
-          browser preloads the same DPR-aware variant it will render. */}
+          Media split mirrors the <picture> in HeroHome.tsx exactly: phones
+          preload the portrait crop, desktop preloads its DPR-aware variant. */}
       <link
         rel="preload"
         as="image"
         type="image/webp"
-        imageSrcSet="/heros/hero-main-750.webp 750w, /heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w"
+        href="/heros/hero-main-mobile.webp"
+        media="(max-width: 767px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        type="image/webp"
+        imageSrcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w"
         imageSizes="100vw"
+        media="(min-width: 768px)"
         fetchPriority="high"
       />
 
