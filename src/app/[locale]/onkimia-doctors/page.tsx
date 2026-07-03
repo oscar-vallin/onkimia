@@ -57,8 +57,8 @@ export default async function OnkimiaDoctorsPage({
 
   return (
     <>
-      <link rel="preload" as="image" href="/heros/doctors-hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchPriority="high" />
-      <link rel="preload" as="image" href="/heros/doctors-hero-mobile.webp"  type="image/webp" media="(max-width: 768px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/doctors-hero-desktop.webp" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/doctors-hero-mobile.webp"  type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
     <div className="doctors-page">
       {/* ─── HERO ─── */}
       <PageHero

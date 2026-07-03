@@ -723,10 +723,10 @@
       "headlinePart1": "Procedimientos de radiología intervencionista",
       "headlinePart2": "con ultrasonido",
       "description": "Realizamos intervenciones de alta precisión guiadas en tiempo real por ultrasonido, minimizando riesgos y maximizando resultados sin necesidad de cirugía abierta.",
-      "stat1Value": "Mínima",
-      "stat1Label": "invasión",
-      "stat2Value": "Tiempo real",
-      "stat2Label": "guiado por imagen",
+      "stat1Value": "Tiempo real",
+      "stat1Label": "guiado por ultrasonido",
+      "stat2Value": "Monitoreo",
+      "stat2Label": "continuo del paciente",
       "items": {
         "abscessDrainage": {
           "name": "Drenaje de abscesos superficiales o profundos guiado por ultrasonido",
@@ -850,7 +850,7 @@
       }
     },
     "benefits": {
-      "title": "Calidad hospitalaria sin hospitalización",
+      "title": "Atención en un mismo día",
       "items": {
         "specializedTeam": "Equipo médico altamente especializado",
         "latestTechnology": "Tecnología de última generación",

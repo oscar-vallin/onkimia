@@ -33,7 +33,6 @@ export interface PageHeroProps {
    *  the component renders two <Image> layers and swaps them via CSS. */
   mobileImageSrc?: string;
   imageAlt?: string;
-  blurDataURL?: string;
   /**
    * Tailwind class for mobile object-position.
    * Default anchors top-center so faces stay visible on portrait crops.
@@ -123,7 +122,6 @@ export function PageHero({
   imageSrc,
   mobileImageSrc,
   imageAlt = '',
-  blurDataURL,
   mobileObjectPosition = 'object-[center_10%]',
   imagePosition = 'md:object-[50%_-20%]',
   accent = 'primary',
@@ -147,16 +145,28 @@ export function PageHero({
   return (
     <section className={`relative w-full ${mobileMinHeight} md:min-h-[70vh] overflow-hidden bg-primary text-white -mt-16 md:-mt-20 flex flex-col`}>
 
-      {/* Hero images are the LCP element. They're pre-optimized per-breakpoint
-          files in /public/heros served as-is (SanityImage's loader passes local
-          paths through), preloaded from each page.tsx with media queries so each
-          viewport downloads only its variant. loading="eager" + fetchPriority
-          (instead of `priority`) keeps them out of lazy loading WITHOUT injecting
-          next/image's unconditional preload, which would ignore those media
-          queries and make every viewport download both variants. */}
+      {/* Hero images are the LCP element (pre-optimized files in /public/heros
+          or fully-resolved Sanity CDN URLs), preloaded from each page.tsx with
+          media queries mirroring the markup below. */}
 
-      {/* Desktop image — hidden on mobile when a mobile variant is provided */}
-      {imageSrc && (
+      {/* Art direction (desktop + mobile crops): <picture> with <source media>
+          fetches ONLY the matched variant. Two <img> tags hidden via CSS would
+          both download eagerly on every viewport — display:none does not
+          prevent the fetch — doubling the high-priority bytes competing with
+          the real LCP image. */}
+      {imageSrc && mobileImageSrc ? (
+        <picture className="absolute inset-0 z-0">
+          <source media="(min-width: 768px)" srcSet={imageSrc} />
+          <img
+            src={mobileImageSrc}
+            alt={imageAlt}
+            fetchPriority="high"
+            className={`w-full h-full object-cover ${mobileObjectPosition} ${imagePosition} origin-center ${imageClassName ?? ''}`}
+            aria-hidden={imageAlt === ''}
+          />
+        </picture>
+      ) : imageSrc ? (
+        /* Single image for all viewports */
         <SanityImage
           src={imageSrc}
           alt={imageAlt}
@@ -165,25 +175,10 @@ export function PageHero({
           fetchPriority="high"
           sizes="100vw"
           quality={82}
-          className={`object-cover ${mobileImageSrc ? 'hidden md:block' : mobileObjectPosition} ${imagePosition} z-0 origin-center ${imageClassName ?? ''}`}
+          className={`object-cover ${mobileObjectPosition} ${imagePosition} z-0 origin-center ${imageClassName ?? ''}`}
           aria-hidden={imageAlt === ''}
         />
-      )}
-
-      {/* Mobile image — portrait crop, only shown below md */}
-      {mobileImageSrc && (
-        <SanityImage
-          src={mobileImageSrc}
-          alt={imageAlt}
-          fill
-          loading="eager"
-          fetchPriority="high"
-          sizes="100vw"
-          quality={82}
-          className={`object-cover md:hidden ${mobileObjectPosition} z-0 origin-center`}
-          aria-hidden={imageAlt === ''}
-        />
-      )}
+      ) : null}
 
       {/* Overlay — desktop: dark band on text side; mobile: dark veil at bottom */}
       {solidLeftBand ? (

@@ -68,8 +68,8 @@ export default async function ServicesPage({
 
   return (
     <>
-      <link rel="preload" as="image" href="/heros/services-hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchPriority="high" />
-      <link rel="preload" as="image" href="/heros/services-hero-mobile.webp"  type="image/webp" media="(max-width: 768px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/services-hero-desktop.webp" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/services-hero-mobile.webp"  type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
     <div className="flex flex-col flex-1">
       {/* ─── HERO ─── */}
       <PageHero

@@ -43,8 +43,8 @@ export default async function ContactPage({
 
   return (
     <>
-      <link rel="preload" as="image" href="/heros/contact-hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchPriority="high" />
-      <link rel="preload" as="image" href="/heros/contact-hero-mobile.webp"  type="image/webp" media="(max-width: 768px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/contact-hero-desktop.webp" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/contact-hero-mobile.webp"  type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
       {/* ─── HERO ─── */}
       <PageHero
         imageSrc="/heros/contact-hero-desktop.webp"
