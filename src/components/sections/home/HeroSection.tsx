@@ -23,7 +23,7 @@ export async function HeroSection({}: SectionProps) {
         rel="preload"
         as="image"
         type="image/webp"
-        imageSrcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w"
+        imageSrcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w, /heros/hero-main-2547.webp 2547w"
         imageSizes="100vw"
         media="(min-width: 768px)"
         fetchPriority="high"

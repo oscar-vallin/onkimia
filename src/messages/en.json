@@ -723,10 +723,10 @@
       "headlinePart1": "Interventional radiology procedures",
       "headlinePart2": "with ultrasound",
       "description": "We perform high-precision interventions guided in real time by ultrasound, minimizing risks and maximizing outcomes without open surgery.",
-      "stat1Value": "Real time",
-      "stat1Label": "ultrasound-guided",
-      "stat2Value": "Monitoring",
-      "stat2Label": "continuous patient care",
+      "stat1Value": "Real-time",
+      "stat1Label": "image-guided",
+      "stat2Value": "Minimally",
+      "stat2Label": "Invasive",
       "items": {
         "abscessDrainage": {
           "name": "Ultrasound-guided superficial or deep abscess drainage",

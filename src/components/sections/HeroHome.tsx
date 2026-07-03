@@ -48,7 +48,7 @@ export function HeroHome({
           <source media="(max-width: 767px)" srcSet="/heros/hero-main-mobile.webp" />
           <img
             src="/heros/hero-main-1920.webp"
-            srcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w"
+            srcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w, /heros/hero-main-2547.webp 2547w"
             sizes="100vw"
             alt="Recepción de la clínica Onkimia con el logotipo Evolución Oncológica"
             className="w-full h-full object-cover object-center md:[object-position:62%_45%]"
