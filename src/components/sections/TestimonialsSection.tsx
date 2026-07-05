@@ -1,5 +1,6 @@
 import type { SanityImageWithLQIP, Testimonial } from '@/sanity/types';
 import { TestimonialCarousel } from '@/components/ui/TestimonialCarousel';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import type { Locale } from '@/i18n/routing';
 
 interface TestimonialsSectionProps {
@@ -24,17 +25,13 @@ export function TestimonialsSection({
     <section className="bg-primary py-20 md:py-28 overflow-hidden">
       <div className="container-onkimia max-w-4xl mx-auto">
 
-        {/* Header */}
-        <div className="text-center mb-14 md:mb-16">
-          {eyebrow && (
-            <p className="font-sans text-[10px] md:text-xs font-medium tracking-[0.22em] uppercase text-white/45 mb-4">
-              {eyebrow}
-            </p>
-          )}
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.25rem] text-white leading-tight tracking-[-0.02em]">
-            {title}
-          </h2>
-        </div>
+        <SectionHeader
+          theme="dark"
+          eyebrow={eyebrow}
+          title={title}
+          titleClassName="mb-0"
+          className="max-w-none"
+        />
 
         {/* Carousel */}
         {testimonials.length > 0 && (

@@ -14,6 +14,10 @@ export async function ClinicInfoSection({ clinic = 'guadalajara', first }: Secti
   const data = clinicConfig[clinic as ClinicSlug] ?? clinicConfig.guadalajara;
   const city = data.city;
 
+  // Solo dueña del h1 cuando abre la página (sin hero antes); a mitad de
+  // página el h1 ya lo puso el hero y aquí debe ser h2 (un h1 por página).
+  const Heading = first ? 'h1' : 'h2';
+
   return (
     <section className={`bg-white py-20 md:py-28 ${first ? 'mt-18' : ''}`}>
       <div className="container-onkimia">
@@ -24,9 +28,9 @@ export async function ClinicInfoSection({ clinic = 'guadalajara', first }: Secti
             <p className="text-xs font-medium tracking-widest uppercase text-primary/50 mb-4">
               {t('contact.eyebrow')}
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
+            <Heading className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
               {parseEmphasis(t('contact.title', { city }))}
-            </h1>
+            </Heading>
             <p className="text-secondary text-lg leading-relaxed">
               {t('contact.description', { city })}
             </p>

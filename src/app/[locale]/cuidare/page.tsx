@@ -22,6 +22,7 @@ import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
 import { FAQCarousel } from '@/components/ui/FAQCarousel';
 import { TreatmentAccordion, type Treatment } from '@/components/ui/TreatmentAccordion';
 import { MedicalProcedureLd, FAQPageLd } from '@/components/seo/JsonLd';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -231,16 +232,16 @@ export default async function CuidarePage({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
             {/* Left */}
             <div>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-white/50 font-medium mb-6">
-                {t('radiology.eyebrow')}
-              </p>
-              <h2 id="cuidare-radiology-title" className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
-                {t('radiology.headlinePart1')}<br/>
-                <em className="not-italic italic">{t('radiology.headlinePart2')}</em>
-              </h2>
-              <p className="text-white/60 text-base md:text-lg leading-relaxed">
-                {t('radiology.description')}
-              </p>
+              <SectionHeader
+                align="left"
+                theme="dark"
+                id="cuidare-radiology-title"
+                eyebrow={t('radiology.eyebrow')}
+                title={<>{t('radiology.headlinePart1')}<br/><em className="not-italic italic">{t('radiology.headlinePart2')}</em></>}
+                titleClassName="lg:text-6xl mb-6"
+                intro={t('radiology.description')}
+                introClassName="text-base md:text-lg text-white/60"
+              />
             </div>
 
             {/* Right — items */}

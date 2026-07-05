@@ -5,6 +5,7 @@ import { PageHero } from '@/components/sections/PageHero';
 import { Activity, HeartPulse, Flower2, Mic2, Target, Users, Sparkles, Shield, Check, ExternalLink } from 'lucide-react';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { MedicalBusinessLd } from '@/components/seo/JsonLd';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export async function generateMetadata({
   params,
@@ -110,13 +111,15 @@ export default async function OnkimiaDoctorsPage({
         <div className="container-onkimia">
           <div className="max-w-3xl mx-auto">
             <div>
-              <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">ONKIMIA DOCTORS</p>
-              <h2 id="od-about-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
-                {t('about.title')}
-              </h2>
-              <p className="text-secondary text-lg leading-relaxed mb-10">
-                {t('about.description')}
-              </p>
+              <SectionHeader
+                align="left"
+                id="od-about-title"
+                eyebrow="ONKIMIA DOCTORS"
+                title={t('about.title')}
+                titleClassName="mb-6"
+                intro={t('about.description')}
+                introClassName="text-lg md:text-lg mb-10"
+              />
               {/* Patient quality bullets */}
               <div className="bg-gray-50 rounded-2xl p-7 border border-doctors-blue/20">
                 <p className="text-xs tracking-[0.2em] uppercase text-secondary font-medium mb-5">
@@ -147,10 +150,15 @@ export default async function OnkimiaDoctorsPage({
       ════════════════════════════════════════ */}
       <section className="bg-doctors-ink py-20 md:py-28" aria-labelledby="od-units-title">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-doctors-blue font-medium mb-5">ECOSISTEMA</p>
-          <h2 id="od-units-title" className="font-serif text-4xl md:text-5xl text-white leading-tight mb-14">
-            {t('units.title')}
-          </h2>
+          <SectionHeader
+            align="left"
+            theme="dark"
+            id="od-units-title"
+            eyebrow="ECOSISTEMA"
+            eyebrowClassName="text-doctors-blue"
+            title={t('units.title')}
+            titleClassName="mb-14"
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {UNITS.map(({ key, icon: Icon, items, whatsappKey, href }) => {
@@ -211,10 +219,13 @@ export default async function OnkimiaDoctorsPage({
         <div className="container-onkimia">
           <div className="grid gap-12 md:gap-16">
             <div>
-              <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">MÉDICOS</p>
-              <h2 id="od-benefits-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-12">
-                {t('benefits.title')}
-              </h2>
+              <SectionHeader
+                align="left"
+                id="od-benefits-title"
+                eyebrow="MÉDICOS"
+                title={t('benefits.title')}
+                titleClassName="mb-12"
+              />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {BENEFIT_CATEGORIES.map(({ key, icon: Icon, items }) => (
                   <article key={key} className="bg-white border border-black/[0.07] rounded-2xl p-6">
@@ -246,13 +257,17 @@ export default async function OnkimiaDoctorsPage({
       ════════════════════════════════════════ */}
       <section className="bg-doctors-ink py-20 md:py-28" aria-labelledby="od-cta-title">
         <div className="container-onkimia max-w-3xl mx-auto text-center">
-          <p className="text-xs tracking-[0.25em] uppercase text-doctors-blue font-medium mb-6">ONKIMIA DOCTORS</p>
-          <h2 id="od-cta-title" className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
-            {t('cta.title')}
-          </h2>
-          <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-            {t('cta.description')}
-          </p>
+          <SectionHeader
+            theme="dark"
+            id="od-cta-title"
+            eyebrow="ONKIMIA DOCTORS"
+            eyebrowClassName="text-doctors-blue"
+            title={t('cta.title')}
+            titleClassName="lg:text-6xl"
+            intro={t('cta.description')}
+            introClassName="text-lg md:text-lg text-white/60 mb-10 max-w-xl mx-auto"
+            className="mb-0 md:mb-0"
+          />
           <a
             href={buildWhatsApp(waCommercial, t('cta.message'))}
             target="_blank"

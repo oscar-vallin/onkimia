@@ -11,6 +11,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { CLINIC_ICONS } from '@/data/clinicIcons';
 import { ServicesClinicsAndUnits } from '@/components/sections/services/ServicesClinicsAndUnits';
 import { CtaBlock } from '@/components/ui/CtaBlock';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export async function generateMetadata({
   params,
@@ -142,12 +143,12 @@ export default async function ServicesPage({
       {/* ─── 4. SOCIOS COMERCIALES ─── */}
       <section className="bg-gray-50 py-20 md:py-28">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
-            {t('partners.eyebrow')}
-          </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-14">
-            {t('partners.title')}
-          </h2>
+          <SectionHeader
+            align="left"
+            eyebrow={t('partners.eyebrow')}
+            title={t('partners.title')}
+            titleClassName="mb-14"
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {commercialPartners.map((partner) => (

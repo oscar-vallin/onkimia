@@ -3,6 +3,7 @@ import type { SanityImageWithLQIP } from '@/sanity/types';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
 import { ClinicBadge } from '@/components/ui/ClinicBadge';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import { ServiceUnitCard } from '@/components/ui/ServiceUnitCard';
 
 export interface ClinicItem {
@@ -55,23 +56,21 @@ export function ServicesClinicsAndUnits({
       {/* Clinics specialty grid */}
       <section className="bg-gray-50 py-20 md:py-28">
         <div className="container-onkimia">
-          <div className="text-center mb-14 md:mb-18">
-            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
-              {clinicsEyebrow}
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-primary leading-tight mb-6">
-              {clinicsTitle}
-            </h2>
-            <p className="text-secondary text-lg leading-relaxed max-w-2xl mx-auto">
-              {clinicsDescription}
-            </p>
+          <SectionHeader
+            eyebrow={clinicsEyebrow}
+            title={clinicsTitle}
+            titleClassName="lg:text-6xl mb-6"
+            intro={clinicsDescription}
+            introClassName="text-lg md:text-lg max-w-2xl mx-auto mb-0"
+            className="max-w-none md:mb-18"
+          >
             {clinicsStat && (
               <div className="flex items-center justify-center gap-2 mt-5">
                 <span className="w-2 h-2 rounded-full bg-secondary/30 flex-shrink-0" aria-hidden="true" />
                 <span className="text-sm text-secondary">{clinicsStat}</span>
               </div>
             )}
-          </div>
+          </SectionHeader>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {clinics.map(({ slug, name, icon }, i) => (

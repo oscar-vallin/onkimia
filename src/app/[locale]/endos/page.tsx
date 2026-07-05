@@ -13,6 +13,7 @@ import { BookingButton } from '@/components/ui/BookingButton';
 import { UnitAvailabilityBanner } from '@/components/ui/UnitAvailabilityBanner';
 import { FAQPageLd, MedicalProcedureLd } from '@/components/seo/JsonLd';
 import { FAQAccordionItem } from '@/components/ui/FAQAccordionItem';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import { FlipCard } from '@/components/ui/FlipCard';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -104,16 +105,15 @@ export default async function EndosPage({
       ════════════════════════════════════════ */}
       <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-procedures-title">
         <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
-            {t('procedures.eyebrow')}
-          </p>
-          <h2 id="endos-procedures-title" className="font-serif text-4xl md:text-5xl lg:text-6xl text-primary leading-tight mb-5">
-            {t('procedures.headlinePart1')}{' '}
-            <em className="not-italic italic text-secondary">{t('procedures.headlinePart2')}</em>
-          </h2>
-          <p className="text-secondary text-lg leading-relaxed max-w-2xl mb-14">
-            {t('procedures.intro')}
-          </p>
+          <SectionHeader
+            align="left"
+            id="endos-procedures-title"
+            eyebrow={t('procedures.eyebrow')}
+            title={<>{t('procedures.headlinePart1')}{' '}<em className="not-italic italic text-secondary">{t('procedures.headlinePart2')}</em></>}
+            titleClassName="lg:text-6xl"
+            intro={t('procedures.intro')}
+            introClassName="text-lg md:text-lg max-w-2xl mb-14"
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             {PROCEDURE_ITEM_KEYS.map((key, i) => {
@@ -166,15 +166,14 @@ export default async function EndosPage({
       <section className="bg-white py-20 md:py-28" aria-labelledby="endos-specialties-title">
         <div className="container-onkimia">
           <div className="max-w-2xl mb-14">
-            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
-              {t('specialties.eyebrow')}
-            </p>
-            <h2 id="endos-specialties-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-5">
-              {t('specialties.title')}
-            </h2>
-            <p className="text-secondary text-lg leading-relaxed">
-              {t('specialties.intro')}
-            </p>
+            <SectionHeader
+              align="left"
+              id="endos-specialties-title"
+              eyebrow={t('specialties.eyebrow')}
+              title={t('specialties.title')}
+              intro={t('specialties.intro')}
+              introClassName="text-lg md:text-lg"
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -203,17 +202,12 @@ export default async function EndosPage({
       ════════════════════════════════════════ */}
       <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-benefits-title">
         <div className="container-onkimia">
-          <div className="text-center mb-14 max-w-2xl mx-auto">
-            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
-              {t('benefits.eyebrow')}
-            </p>
-            <h2 id="endos-benefits-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-5">
-              {t('benefits.title')}
-            </h2>
-            <p className="text-secondary text-base leading-relaxed">
-              {t('benefits.description')}
-            </p>
-          </div>
+          <SectionHeader
+            id="endos-benefits-title"
+            eyebrow={t('benefits.eyebrow')}
+            title={t('benefits.title')}
+            intro={t('benefits.description')}
+          />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {BENEFIT_KEYS.map(({ key, icon: Icon }) => (
               <div key={key} className="bg-white border border-black/[0.07] rounded-2xl p-6 flex flex-col items-center text-center gap-4 hover:shadow-sm hover:border-endos-teal-700/10 transition-all duration-200">
@@ -235,15 +229,16 @@ export default async function EndosPage({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-stretch">
             {/* Left */}
             <div>
-              <p className="text-xs tracking-[0.25em] uppercase text-white/50 font-medium mb-5">
-                {t('safety.eyebrow')}
-              </p>
-              <h2 id="endos-safety-title" className="font-serif text-4xl md:text-5xl text-white leading-tight mb-8">
-                {t('safety.title')}
-              </h2>
-              <p className="text-white/80 text-base leading-relaxed mb-10">
-                {t('safety.description')}
-              </p>
+              <SectionHeader
+                align="left"
+                theme="dark"
+                id="endos-safety-title"
+                eyebrow={t('safety.eyebrow')}
+                title={t('safety.title')}
+                titleClassName="mb-8"
+                intro={t('safety.description')}
+                introClassName="text-base text-white/80 mb-10"
+              />
               <ul className="space-y-7 mb-10">
                 {SAFETY_CHECKLIST.map((key) => (
                   <li key={key} className="flex gap-4">
@@ -316,12 +311,11 @@ export default async function EndosPage({
         return (
           <section className="bg-gray-50 py-20 md:py-28" aria-labelledby="endos-faq-title">
             <div className="container-onkimia">
-              <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5 text-center">
-                {t('faq.eyebrow')}
-              </p>
-              <h2 id="endos-faq-title" className="font-serif text-4xl md:text-5xl text-primary text-center mb-14">
-                {t('faq.title')}
-              </h2>
+              <SectionHeader
+                id="endos-faq-title"
+                eyebrow={t('faq.eyebrow')}
+                title={t('faq.title')}
+              />
               <div className="max-w-3xl mx-auto space-y-3">
                 {inlineFaqs.map((faq) => (
                   <FAQAccordionItem key={faq.id} question={faq.question} answer={faq.answer} accent="endos" />
@@ -338,16 +332,16 @@ export default async function EndosPage({
       ════════════════════════════════════════ */}
       <section className="bg-white py-20 md:py-28" aria-labelledby="endos-cta-title">
         <div className="container-onkimia max-w-3xl mx-auto text-center">
-          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-6">
-            {t('cta.eyebrow')}
-          </p>
-          <h2 id="endos-cta-title" className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
-            {t('cta.title')}
-          </h2>
-          <p className="text-secondary text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-            {t('cta.description')}
-          </p>
-          <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
+          <SectionHeader
+            id="endos-cta-title"
+            eyebrow={t('cta.eyebrow')}
+            title={t('cta.title')}
+            intro={t('cta.description')}
+            introClassName="text-lg md:text-lg max-w-xl mx-auto"
+            className="mb-0 md:mb-0"
+          >
+            <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
+          </SectionHeader>
         </div>
       </section>
     </div>

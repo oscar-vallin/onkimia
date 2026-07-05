@@ -8,6 +8,7 @@ import { ContactForm } from '@/components/forms/ContactForm';
 import { ContactInfo } from '@/components/sections/ContactInfo';
 import { GoogleMapsEmbed } from '@/components/ui/GoogleMapsEmbed';
 import { PageHero } from '@/components/sections/PageHero';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata({
@@ -68,10 +69,11 @@ export default async function ContactPage({
               <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-6">
                 {t('section.eyebrow')}
               </p>
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-ink leading-tight mb-7">
+              {/* h2: el h1 de esta página lo renderiza el PageHero ("Contacto") */}
+              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-ink leading-tight mb-7">
                 {t('section.headlinePart1')}{' '}
                 <em className="not-italic italic text-teal">{t('section.headlinePart2')}</em>
-              </h1>
+              </h2>
               <p className="text-gray-warm text-lg leading-relaxed max-w-md mb-12">
                 {t('section.description')}
               </p>
@@ -96,15 +98,13 @@ export default async function ContactPage({
       {CLINICS && CLINICS.length > 0 && (
         <section className="bg-white py-20 md:py-28">
           <div className="container-onkimia">
-            <div className="text-center mb-14">
-              <p className="text-xs tracking-[0.25em] uppercase text-gray-warm font-medium mb-5">
-                {t('sedes.eyebrow')}
-              </p>
-              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight">
-                {t('sedes.headlinePart1')}{' '}
-                <em className="not-italic italic text-teal">{t('sedes.headlinePart2')}</em>
-              </h2>
-            </div>
+            <SectionHeader
+              eyebrow={t('sedes.eyebrow')}
+              eyebrowClassName="text-gray-warm"
+              title={<>{t('sedes.headlinePart1')}{' '}<em className="not-italic italic text-teal">{t('sedes.headlinePart2')}</em></>}
+              titleClassName="lg:text-6xl text-ink mb-0"
+              className="mb-14 md:mb-14 max-w-none"
+            />
 
             <div className={`grid gap-4 max-w-4xl mx-auto ${
               CLINICS.length === 1 ? 'grid-cols-1 max-w-md' :

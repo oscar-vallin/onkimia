@@ -1,5 +1,6 @@
 import { Car, Smartphone, Sparkles, ShieldCheck, Users, Globe } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export type ServiceIcon = 'car' | 'smartphone' | 'sparkles' | 'shield-check' | 'users' | 'globe';
 
@@ -41,18 +42,14 @@ export function MoreThanMedicine({
     <section className="bg-white py-20 md:py-28">
       <div className="container-onkimia">
 
-        {/* Centered header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-          <p className="text-xs font-medium tracking-[0.25em] uppercase text-secondary mb-5">
-            {eyebrow}
-          </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight mb-6">
-            {titleLine1}{' '}
-            <em className="not-italic text-secondary">{titleUnderlined}</em>
-            {titleSuffix && titleSuffix}
-          </h2>
-          <p className="text-secondary text-lg leading-relaxed">{description}</p>
-        </div>
+        <SectionHeader
+          eyebrow={eyebrow}
+          title={<>{titleLine1}{' '}<em className="not-italic text-secondary">{titleUnderlined}</em>{titleSuffix && titleSuffix}</>}
+          titleClassName="mb-6"
+          intro={description}
+          introClassName="text-lg md:text-lg"
+          className="mb-16 md:mb-20"
+        />
 
         {/* 3×2 service card grid */}
         {services.length > 0 && (

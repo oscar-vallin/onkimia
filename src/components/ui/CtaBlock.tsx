@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { PillButton } from '@/components/ui/PillButton';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface CtaBlockProps {
   eyebrow: string;
@@ -24,15 +25,15 @@ export function CtaBlock({
     <section className={`bg-primary py-20 md:py-28${grow ? ' grow' : ''}`}>
       <div className="container-onkimia">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-xs tracking-[0.25em] uppercase text-white/50 font-medium mb-6">
-            {eyebrow}
-          </p>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
-            {title}
-          </h2>
-          <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-            {description}
-          </p>
+          <SectionHeader
+            align="left"
+            theme="dark"
+            eyebrow={eyebrow}
+            title={title}
+            titleClassName="lg:text-6xl mb-6"
+            intro={description}
+            introClassName="text-lg md:text-lg text-white/60 mb-10 max-w-xl mx-auto"
+          />
 
           {stat && (
             <div className="flex items-center justify-center gap-2 mb-10">

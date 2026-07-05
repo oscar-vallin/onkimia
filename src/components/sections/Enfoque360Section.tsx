@@ -1,5 +1,6 @@
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import type { SanityImageWithLQIP } from '@/sanity/types';
 
 interface ChecklistItem {
@@ -42,20 +43,19 @@ export function Enfoque360Section({
 
           {/* Left column — text */}
           <div>
-            <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
-              {eyebrow}
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl text-primary font-normal leading-tight mb-6">
-              {titleLines.map((line, i) => (
+            <SectionHeader
+              align="left"
+              eyebrow={eyebrow}
+              title={titleLines.map((line, i) => (
                 <span key={i}>
                   {line}
                   {i < titleLines.length - 1 && <br />}
                 </span>
               ))}
-            </h2>
-            <p className="text-secondary text-lg leading-relaxed mb-10 max-w-lg">
-              {description}
-            </p>
+              titleClassName="mb-6"
+              intro={description}
+              introClassName="text-lg md:text-lg mb-10 max-w-lg"
+            />
 
             {/* Checklist */}
             <ul className="space-y-6">

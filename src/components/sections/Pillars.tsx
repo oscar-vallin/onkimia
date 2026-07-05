@@ -1,4 +1,5 @@
 import { PillButton } from '@/components/ui/PillButton';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 interface Pillar {
   title: string;
@@ -53,21 +54,11 @@ export function Pillars({
     <section style={{ backgroundColor: '#0d1117' }} className="py-20 md:py-28">
       <div className="container-onkimia max-w-6xl mx-auto">
 
-        {/* Centred header */}
-        <div className="text-center mb-14 md:mb-16 max-w-2xl mx-auto">
-          <p className="font-sans text-[10px] md:text-xs font-medium tracking-[0.22em] uppercase text-white/45 mb-4">
-            {eyebrow}
-          </p>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.25rem] text-white leading-tight tracking-[-0.02em] mb-5">
-            {title}
-          </h2>
-          <p className="font-sans text-sm md:text-base text-white/65 leading-relaxed mb-8">
-            {intro}
-          </p>
+        <SectionHeader theme="dark" eyebrow={eyebrow} title={title} intro={intro}>
           <PillButton variant="outline-light" href={ctaHref}>
             {cta}
           </PillButton>
-        </div>
+        </SectionHeader>
 
         {/* 4-column grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
