@@ -31,7 +31,7 @@ export function AppointmentCta({
   const steps = { step1, step3 };
 
   return (
-    <section className="relative overflow-hidden bg-primary py-20 md:py-12">
+    <section className="relative overflow-hidden bg-primary py-20 md:py-12 mt-18">
       {backgroundImage?.asset && (
         <Image
           src={urlFor(backgroundImage).width(1920).height(1080).format('webp').quality(80).url()}

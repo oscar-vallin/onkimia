@@ -58,7 +58,7 @@ export function Enfoque360Section({
             />
 
             {/* Checklist */}
-            <ul className="space-y-6">
+            {/* <ul className="space-y-6">
               {items.map((item, i) => (
                 <li key={i} className="flex gap-4">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-0.5" aria-hidden="true">
@@ -72,7 +72,7 @@ export function Enfoque360Section({
                   </div>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
 
           {/* Right column — image with stat badges */}

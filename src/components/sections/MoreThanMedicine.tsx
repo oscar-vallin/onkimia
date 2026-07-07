@@ -1,8 +1,8 @@
-import { Car, Smartphone, Sparkles, ShieldCheck, Users, Globe } from 'lucide-react';
+import { Car, Smartphone, Sparkles, ShieldCheck, Users, Globe, Stethoscope, Clipboard, Hotel, Armchair, Building2, Droplets, Bone } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
-export type ServiceIcon = 'car' | 'smartphone' | 'sparkles' | 'shield-check' | 'users' | 'globe';
+export type ServiceIcon = 'car' | 'smartphone' | 'sparkles' | 'shield-check' | 'users' | 'globe' | 'stethoscope' | 'clipboard' | 'hotel' | 'armchair' | 'building2' | 'droplets' | 'bone';
 
 interface Service {
   icon: ServiceIcon;
@@ -28,6 +28,13 @@ const ICON_MAP: Record<ServiceIcon, LucideIcon> = {
   'shield-check': ShieldCheck,
   users: Users,
   globe: Globe,
+  stethoscope: Stethoscope,
+  clipboard: Clipboard,
+  hotel: Hotel,
+  armchair: Armchair,
+  building2: Building2,
+  droplets: Droplets,
+  bone: Bone,
 };
 
 export function MoreThanMedicine({
@@ -39,7 +46,7 @@ export function MoreThanMedicine({
   services,
 }: MoreThanMedicineProps) {
   return (
-    <section className="bg-white py-20 md:py-28">
+    <section className="bg-white py-20 md:py-40">
       <div className="container-onkimia">
 
         <SectionHeader
@@ -59,7 +66,7 @@ export function MoreThanMedicine({
               return (
                 <div
                   key={i}
-                  className="bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-col gap-6 hover:border-black/[0.14] hover:shadow-sm transition-all duration-200"
+                  className="bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-row items-start gap-4 hover:border-black/[0.14] hover:shadow-sm transition-all duration-200"
                 >
                   {/* Icon badge */}
                   <div className="w-11 h-11 rounded-xl bg-gray-50 border border-black/[0.07] flex items-center justify-center flex-shrink-0 text-primary/50">
@@ -68,12 +75,12 @@ export function MoreThanMedicine({
 
                   {/* Text */}
                   <div>
-                    <h3 className="font-semibold text-primary text-base mb-2 leading-snug">
+                    <h3 className="font-semibold text-primary text-base leading-snug">
                       {service.title}
                     </h3>
-                    <p className="text-secondary text-sm leading-relaxed">
+                    {/* <p className="text-secondary text-sm leading-relaxed">
                       {service.description}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               );

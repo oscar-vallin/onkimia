@@ -105,7 +105,7 @@ export default async function CuidarePage({
         accent="cuidare"
         solidLeftBand
       >
-        <BookingButton section="cuidare" variant="brand" />
+        {/* <BookingButton section="cuidare" variant="brand" /> */}
       </PageHero>
 
       {/* ─── BANNER DISPONIBILIDAD ─── */}

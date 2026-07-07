@@ -1,6 +1,8 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
+// Runtime Node (default) — 'edge' solo existe en Vercel/Cloudflare y rompería
+// el deploy self-hosted del IT de Onkimia. Además permite prerenderizar la
+// imagen OG en build en vez de generarla por request.
 export const alt = 'Onkimia — Evolución Oncológica';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';

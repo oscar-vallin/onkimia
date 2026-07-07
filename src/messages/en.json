@@ -365,8 +365,8 @@
       "eyebrowBase": "PREMIUM ONCOLOGY",
       "eyebrowDefaultCity": "GUADALAJARA",
       "eyebrowColimaCity": "COLIMA",
-      "title": "Your oncological wellbeing *in expert hands*",
-      "description": "At Onkimia we combine cutting-edge diagnostics with profoundly human care. Because behind every study, there is a person.",
+      "title": "Oncological evolution that accompanies you",
+      "description": "At Onkimia, we fuse medical innovation, clinical expertise, and a deeply human approach to provide you with personalized care at every stage of your journey.",
       "cta": {
         "primary": {
           "label": "Book Appointment",
@@ -431,34 +431,44 @@
       "description": "At Onkimia, you are our focus. Our philosophy combines innovative treatments, quality care, and the best specialists.",
       "services": [
         {
+          "icon": "stethoscope",
+          "title": "Oncology Consultation",
+          "description": "Expert medical assessment and personalized treatment planning."
+        },
+        {
+          "icon": "clipboard",
+          "title": "Insurance Concierge",
+          "description": "Dedicated support to navigate your insurance coverage and claims."
+        },
+        {
           "icon": "car",
-          "title": "Valet parking",
-          "description": "Valet parking available at all our locations so you can arrive without worries."
+          "title": "Valet Parking",
+          "description": "Convenient and secure vehicle drop-off service for your comfort."
         },
         {
-          "icon": "smartphone",
-          "title": "Onkimia App",
-          "description": "Access your medical history, schedule appointments, and check results from your phone."
+          "icon": "hotel",
+          "title": "Hospitality",
+          "description": "Premium service designed to ensure your comfort and well-being."
         },
         {
-          "icon": "sparkles",
-          "title": "Premium hospitality",
-          "description": "A luxury waiting room with amenities so your experience is comfortable from the very first moment."
+          "icon": "armchair",
+          "title": "Private Infusion Cabins",
+          "description": "Comfortable, private spaces designed for your infusion treatments."
         },
         {
-          "icon": "shield-check",
-          "title": "Insurance concierge",
-          "description": "We coordinate directly with your insurance provider for authorizations, reimbursements, and coverage — stress-free."
+          "icon": "building2",
+          "title": "Surgery",
+          "description": "Advanced surgical procedures performed by specialized experts."
         },
         {
-          "icon": "users",
-          "title": "Companion welcome",
-          "description": "Your family or companion is always welcome during consultations and procedures."
+          "icon": "droplets",
+          "title": "Hematology",
+          "description": "Specialized care for blood-related conditions and disorders."
         },
         {
-          "icon": "globe",
-          "title": "Bilingual care",
-          "description": "Our team serves you with the same warmth in Spanish and English."
+          "icon": "bone",
+          "title": "Rheumatology",
+          "description": "Comprehensive diagnosis and treatment for rheumatic diseases."
         }
       ]
     },
@@ -470,7 +480,7 @@
     },
     "supportGroup": {
       "title": "Support group",
-      "description": "Be part of our community by sharing experiences and creating bonds that will provide you with tools at every step. You are not alone on this journey.",
+      "description": "Be part of our community by sharing experiences and creating bonds that will provide you with tools at every step.",
       "category": "Community",
       "link": "Join the group"
     },
@@ -566,7 +576,8 @@
     },
     "about": {
       "title": "What is Onkimia Doctors?",
-      "description": "Onkimia is an oncology ecosystem that integrates external specialist physicians to provide comprehensive, continuous, and high-quality patient care, supporting medical practice with infrastructure, processes, and complementary units that elevate the clinical experience."
+      "description": "Onkimia is an oncology ecosystem that integrates external specialist physicians to provide comprehensive, continuous, and high-quality patient care, supporting medical practice with infrastructure, processes, and complementary units that elevate the clinical experience.",
+      "ecosystemDescription": "Onkimia is an oncological ecosystem that integrates external specialist doctors to provide comprehensive, continuous, and high-quality care to patients, supporting medical practice with infrastructure, processes, and complementary units that enhance the clinical experience."
     },
     "improvements": {
       "title": "Improvements for your patient",
@@ -577,7 +588,8 @@
         "coordinated": "Coordinated care across specialties",
         "adherence": "Greater treatment adherence",
         "emotional": "Emotionally supported experience"
-      }
+      },
+      "question": "How does this improve the quality of patient care?"
     },
     "units": {
       "title": "Business units that strengthen your practice",
@@ -673,7 +685,7 @@
       "eyebrow": "Cuidare",
       "headlinePart1": "Hospital quality,",
       "headlinePart2": "without *hospitalization*",
-      "description": "Safe, personalized ambulatory medical procedures to care for your health without hospital admission."
+      "description": "Cuidare is a specialized unit in outpatient medical procedures designed to improve your health and quality of life, without the need to be admitted to a hospital. Our approach combines safety, technology, and personalized care to look after you in every detail."
     },
     "availability": {
       "banner": "is currently unavailable in your location."
@@ -770,7 +782,7 @@
     "hero": {
       "eyebrow": "ENDOS",
       "headline": "Your health, with quality and efficiency",
-      "description": "Non-surgical ambulatory procedures: specialized diagnostics and treatments, without hospitalization.",
+      "description": "Endos is Onkimia's unit for non-surgical outpatient procedures, designed to provide specialized diagnostics and treatments with the highest medical quality, without the need for hospitalization.",
       "headlinePart1": "Your health, with",
       "headlinePart2": "quality and efficiency",
       "quote": "\"Hospital-level quality, without hospitalization.\""
@@ -814,8 +826,8 @@
         }
       },
       "eyebrow": "PROCEDURES",
-      "headlinePart1": "Ambulatory",
-      "headlinePart2": "diagnosis",
+      "headlinePart1": "What do we do at ",
+      "headlinePart2": "Endos?",
       "others": "Other procedures",
       "othersDescription": "We offer a wide catalog of diagnostic and therapeutic procedures tailored to each patient's needs.",
       "othersItems": [

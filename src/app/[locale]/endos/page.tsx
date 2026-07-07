@@ -93,8 +93,8 @@ export default async function EndosPage({
         solidLeftBand
         mobileMinHeight="min-h-[90vh]"
       >
-        <p className="hidden md:block text-white/45 text-sm italic mb-8">{t('hero.quote')}</p>
-        <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
+        {/* <p className="hidden md:block text-white/45 text-sm italic mb-8">{t('hero.quote')}</p> */}
+        {/* <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} /> */}
       </PageHero>
 
       {/* ─── AVAILABILITY BANNER ─── */}
@@ -119,12 +119,12 @@ export default async function EndosPage({
             {PROCEDURE_ITEM_KEYS.map((key, i) => {
               const Icon = PROCEDURE_ICONS[i];
               return (
-                <article key={key} className="bg-white border border-black/[0.07] rounded-2xl p-7 hover:border-endos-teal-700/20 hover:shadow-sm transition-all duration-200">
-                  <div className="w-11 h-11 rounded-xl bg-endos-teal-700/10 flex items-center justify-center mb-5">
+                <article key={key} className="bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-row items-start gap-4 hover:border-endos-teal-700/20 hover:shadow-sm transition-all duration-200">
+                  <div className="w-11 h-11 rounded-xl bg-endos-teal-700/10 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-5 h-5 text-endos-teal-700" aria-hidden="true"/>
                   </div>
-                  <h3 className="font-serif text-xl text-primary mb-2">{t(`procedures.items.${key}.name`)}</h3>
-                  <p className="text-sm text-secondary leading-relaxed">{t(`procedures.items.${key}.shortDescription`)}</p>
+                  <h3 className="font-serif text-xl text-primary">{t(`procedures.items.${key}.name`)}</h3>
+                  {/* <p className="text-sm text-secondary leading-relaxed">{t(`procedures.items.${key}.shortDescription`)}</p> */}
                 </article>
               );
             })}
@@ -224,9 +224,9 @@ export default async function EndosPage({
       {/* ════════════════════════════════════════
           SEGURIDAD Y CONFIANZA
       ════════════════════════════════════════ */}
-      <section className="bg-endos-teal-900 py-20 md:py-28 border-t border-white/[0.06]" aria-labelledby="endos-safety-title">
+      <section className="bg-endos-teal-900 py-12 md:py-16 border-t border-white/[0.06]" aria-labelledby="endos-safety-title">
         <div className="container-onkimia">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             {/* Left */}
             <div>
               <SectionHeader
@@ -239,7 +239,7 @@ export default async function EndosPage({
                 intro={t('safety.description')}
                 introClassName="text-base text-white/80 mb-10"
               />
-              <ul className="space-y-7 mb-10">
+              {/* <ul className="space-y-7 mb-10">
                 {SAFETY_CHECKLIST.map((key) => (
                   <li key={key} className="flex gap-4">
                     <div className="w-6 h-6 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -254,12 +254,12 @@ export default async function EndosPage({
               </ul>
               <blockquote className="border-l-2 border-white/30 pl-5">
                 <p className="text-white/80 text-mx italic leading-relaxed">{t('safety.quote')}</p>
-              </blockquote>
+              </blockquote> */}
             </div>
 
             {/* Right — image */}
             <div className="relative lg:h-full min-h-[420px] lg:min-h-0">
-              <div className="relative w-full h-[420px] lg:h-full rounded-3xl overflow-hidden bg-white/[0.03]">
+              <div className="relative w-full h-[420px] lg:h-[300px] rounded-3xl overflow-hidden bg-white/[0.03]">
                 <NextImage
                   src="/endos-procedures/safety_trust.jpg"
                   alt=""
@@ -279,7 +279,7 @@ export default async function EndosPage({
               {/* Floating badge — normal flow below the image on mobile (avoids
                   clipping when the overlap doesn't have room to breathe on
                   short viewports); floats overlapping the photo from lg: up */}
-              <div className="static mt-4 mx-auto max-w-fit lg:absolute lg:mt-0 lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 min-w-[220px]">
+              {/* <div className="static mt-4 mx-auto max-w-fit lg:absolute lg:mt-0 lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 min-w-[220px]">
                 <div className="w-8 h-8 rounded-full bg-endos-teal-700/10 flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-4 h-4 text-endos-teal-700" aria-hidden="true"/>
                 </div>
@@ -287,9 +287,27 @@ export default async function EndosPage({
                   <p className="font-medium text-primary text-sm leading-none mb-1">{t('safety.badge')}</p>
                   <p className="text-secondary text-xs">{t('safety.badgeSub')}</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
+        </div>
+      </section>
+
+       {/* ════════════════════════════════════════
+          CTA
+      ════════════════════════════════════════ */}
+      <section className="bg-white py-20 md:py-28" aria-labelledby="endos-cta-title">
+        <div className="container-onkimia max-w-3xl mx-auto text-center">
+          <SectionHeader
+            id="endos-cta-title"
+            eyebrow={t('cta.eyebrow')}
+            title={t('cta.title')}
+            intro={t('cta.description')}
+            introClassName="text-lg md:text-lg max-w-xl mx-auto"
+            className="mb-0 md:mb-0"
+          >
+            <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
+          </SectionHeader>
         </div>
       </section>
 
@@ -327,23 +345,6 @@ export default async function EndosPage({
         );
       })()}
 
-      {/* ════════════════════════════════════════
-          CTA
-      ════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28" aria-labelledby="endos-cta-title">
-        <div className="container-onkimia max-w-3xl mx-auto text-center">
-          <SectionHeader
-            id="endos-cta-title"
-            eyebrow={t('cta.eyebrow')}
-            title={t('cta.title')}
-            intro={t('cta.description')}
-            introClassName="text-lg md:text-lg max-w-xl mx-auto"
-            className="mb-0 md:mb-0"
-          >
-            <BookingButton section="endos" variant="primary" customLabel={t('cta.button')} customMessage={t('cta.message')} />
-          </SectionHeader>
-        </div>
-      </section>
     </div>
     </>
   );

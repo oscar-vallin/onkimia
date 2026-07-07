@@ -67,7 +67,7 @@ export function ConveniosEditorial({
                     width={240}
                     height={80}
                     loading="lazy"
-                    className="h-14 md:h-16 w-auto object-contain opacity-60 hover:opacity-90 transition-opacity duration-200"
+                    className="h-14 md:h-16 max-w-xs w-full object-contain opacity-60 hover:opacity-90 transition-opacity duration-200"
                   />
                 </span>
               ))}
@@ -89,7 +89,7 @@ export function ConveniosEditorial({
             width={240}
             height={80}
             loading="lazy"
-            className="h-14 w-auto object-contain opacity-60"
+            className="h-14 max-w-xs w-full object-contain opacity-60"
           />
         ))}
       </div>

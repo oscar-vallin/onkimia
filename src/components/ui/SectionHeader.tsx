@@ -85,7 +85,7 @@ export function SectionHeader({
             introClassName
           )}
         >
-          {intro}
+          {/* {intro} */}
         </p>
       )}
       {children}

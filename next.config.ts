@@ -4,6 +4,11 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
+  // Self-hosting (servidor del IT de Onkimia): empaqueta el server con solo
+  // las deps de producción en .next/standalone — se despliega copiando esa
+  // carpeta + .next/static + public y corriendo `node server.js`.
+  // Vercel lo soporta sin cambios, así que no afecta los deploys actuales.
+  output: 'standalone',
   images: {
     remotePatterns: [
       {

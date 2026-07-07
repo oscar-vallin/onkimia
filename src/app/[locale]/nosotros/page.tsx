@@ -54,11 +54,11 @@ export default async function NosotrosPage({
     <>
       <PageTheme headerTheme="dark" />
       {/* ─── NUESTRA MISIÓN ─── */}
-      <MisionSection
+      {/* <MisionSection
         eyebrow={t('mision.eyebrow')}
         title={t('mision.title')}
         description={t('mision.description')}
-      />
+      /> */}
 
       {/* ─── 1. MÁS QUE MEDICINA ─── */}
       <MoreThanMedicine
@@ -133,16 +133,7 @@ export default async function NosotrosPage({
         reikyImage={aboutPage?.reikyImage}
       />
 
-      {/* ─── 6. FAQ CON FOTO DE DOCTOR ─── */}
-      {aboutPage?.faqItems && aboutPage.faqItems.length > 0 && (
-        <DoctorFAQSection
-          eyebrow={t('faq.eyebrow')}
-          title={t('faq.title')}
-          items={aboutPage.faqItems}
-        />
-      )}
-
-      {/* ─── 7. CONTÁCTANOS ─── */}
+       {/* ─── 7. CONTÁCTANOS ─── */}
       <ContactCTA
         titleUnderlined={t('doubts.headingUnderlined')}
         titleSuffix={t('doubts.headingSuffix')}
@@ -151,6 +142,14 @@ export default async function NosotrosPage({
         buttonHref="/contacto"
       />
 
+      {/* ─── 6. FAQ CON FOTO DE DOCTOR ─── */}
+      {aboutPage?.faqItems && aboutPage.faqItems.length > 0 && (
+        <DoctorFAQSection
+          eyebrow={t('faq.eyebrow')}
+          title={t('faq.title')}
+          items={aboutPage.faqItems}
+        />
+      )}
     </>
   );
 }

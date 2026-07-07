@@ -12,6 +12,7 @@ import { CLINIC_ICONS } from '@/data/clinicIcons';
 import { ServicesClinicsAndUnits } from '@/components/sections/services/ServicesClinicsAndUnits';
 import { CtaBlock } from '@/components/ui/CtaBlock';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { ServicesPremiumIntro } from '@/components/sections/ServicesPremiumIntro';
 
 export async function generateMetadata({
   params,
@@ -83,17 +84,16 @@ export default async function ServicesPage({
         solidLeftBand
       />
 
-      {/* ─── INTRO ─── */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="container-onkimia">
-          <p className="text-xs tracking-[0.25em] uppercase text-secondary font-medium mb-5">
-            {t('main.eyebrow')}
-          </p>
-          <p className="text-secondary text-lg md:text-xl leading-relaxed max-w-2xl">
-            {t('main.lead')}
-          </p>
-        </div>
-      </section>
+      {/* ─── PREMIUM INTRO ─── */}
+      <ServicesPremiumIntro
+        lead={t('main.lead')}
+        feature1Title={t('main.feature1Title')}
+        feature1Stat={t('main.feature1Stat')}
+        feature2Title={t('main.feature2Title')}
+        feature2Stat={t('main.feature2Stat')}
+        feature3Title={t('main.feature3Title')}
+        feature3Stat={t('main.feature3Stat')}
+      />
 
       {/* ─── CLÍNICAS + UNIDADES COMPLEMENTARIAS ─── */}
       <ServicesClinicsAndUnits

@@ -82,10 +82,10 @@ export default async function OnkimiaDoctorsPage({
         }
         solidLeftBand
       >
-        <p className="hidden md:block text-white/75 text-base md:text-lg italic mb-6 max-w-xl leading-relaxed">
+        {/* <p className="hidden md:block text-white/75 text-base md:text-lg italic mb-6 max-w-xl leading-relaxed">
           {t('hero.quote')}
-        </p>
-        <div className="flex flex-wrap gap-3 mt-6 md:mt-0">
+        </p> */}
+        {/* <div className="flex flex-wrap gap-3 mt-6 md:mt-0">
           <a
             href={buildWhatsApp(waCommercial, t('cta.message'))}
             target="_blank"
@@ -101,7 +101,7 @@ export default async function OnkimiaDoctorsPage({
           >
             {t('hero.benefitsButton')}
           </a>
-        </div>
+        </div> */}
       </PageHero>
 
       {/* ════════════════════════════════════════
@@ -120,8 +120,14 @@ export default async function OnkimiaDoctorsPage({
                 intro={t('about.description')}
                 introClassName="text-lg md:text-lg mb-10"
               />
+              <p className="text-base text-secondary leading-relaxed mb-10">
+                {t('about.ecosystemDescription')}
+              </p>
               {/* Patient quality bullets */}
               <div className="bg-gray-50 rounded-2xl p-7 border border-doctors-blue/20">
+                <h3 className="text-base font-semibold text-primary mb-5">
+                  {t('improvements.question')}
+                </h3>
                 <p className="text-xs tracking-[0.2em] uppercase text-secondary font-medium mb-5">
                   {t('improvements.title')}
                 </p>

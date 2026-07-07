@@ -69,13 +69,13 @@ export function StickyStages({
             theme="light"
             align="left"
           >
-            <PillButton
+            {/* <PillButton
               variant="solid-dark"
               href={ctaHref}
               icon={<ArrowRight className="w-4 h-4" aria-hidden="true" />}
             >
               {ctaLabel}
-            </PillButton>
+            </PillButton> */}
           </SectionHeader>
         </div>
 
@@ -96,9 +96,9 @@ export function StickyStages({
                 <h3 className="font-sans font-medium text-base text-primary leading-snug mb-1.5">
                   {item.title}
                 </h3>
-                <p className="font-sans text-sm text-secondary leading-relaxed">
+                {/* <p className="font-sans text-sm text-secondary leading-relaxed">
                   {item.description}
-                </p>
+                </p> */}
               </div>
             </article>
           ))}

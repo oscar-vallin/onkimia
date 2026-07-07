@@ -13,14 +13,14 @@ import type { ClinicSlug } from '@/config/clinicConfig';
 
 export const HOME_SECTIONS: readonly SectionKey[] = [
   'hero',
-  'howItWorks',
-  'pillars',
-  'studies',
   'services',
   'doctors',
   'wellness',
-  'insurances',
+  //'howItWorks',
+  //'pillars',
+  //'studies',
   'appointment',
+  'insurances',
 ];
 
 export const CLINIC_PAGE_SECTIONS: Record<ClinicSlug, readonly SectionKey[]> = {
@@ -31,14 +31,14 @@ export const CLINIC_PAGE_SECTIONS: Record<ClinicSlug, readonly SectionKey[]> = {
   // variant is ever preferred over the full 'services' / 'appointment' sections.
   colima: [
     'hero',
-    'howItWorks',
-    'pillars',
-    'studies',
     'services',
     'doctors',
     'wellness',
-    'insurances',
+    //'howItWorks',
+    //'pillars',
+    //'studies',
     'appointment',
+    'insurances',
     'clinicInfo',
   ],
 };
