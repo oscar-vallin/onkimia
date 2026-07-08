@@ -68,11 +68,25 @@ export function WelcomeModal({ currentLocale }: WelcomeModalProps) {
     setClinic(selectedClinic);
     markAsVisited();
 
+    // Mirrors the Header clinic selector: Colima has its own dedicated route
+    // (with sections like ClinicCtaSection that never render on the generic
+    // Home page composition), so picking it here must navigate there too —
+    // otherwise the modal only sets context and the user stays on a page
+    // that was never composed to include Colima-specific sections.
+    const targetPath =
+      selectedClinic === 'colima'
+        ? '/colima'
+        : pathname.startsWith('/colima')
+        ? '/'
+        : pathname;
+
     close(() => {
       if (selectedLanguage !== currentLocale) {
         // next-intl maneja el prefijo de locale automáticamente.
         // pathname (de next-intl) ya viene SIN prefijo de locale.
-        router.replace(pathname, { locale: selectedLanguage });
+        router.replace(targetPath, { locale: selectedLanguage });
+      } else if (targetPath !== pathname) {
+        router.push(targetPath);
       } else {
         router.refresh();
       }
