@@ -19,6 +19,7 @@ import {
   useContext,
   useState,
   useEffect,
+  useCallback,
   ReactNode,
 } from 'react';
 
@@ -62,11 +63,16 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
     setIsInitialized(true);
   }, []);
 
-  const setClinic = (slug: ClinicSlug) => {
+  // Stable identity: SetClinicOnMount depends on this in its effect array.
+  // If this were redefined every render, that effect would re-fire on every
+  // clinic change (including ones made elsewhere, like the Header selector)
+  // and silently revert the user's choice back to whatever clinic-specific
+  // page happens to be mounted.
+  const setClinic = useCallback((slug: ClinicSlug) => {
     setClinicState(slug);
     // Escribir cookie (lee middleware en próximas requests)
     document.cookie = `${COOKIE_NAME}=${slug}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
-  };
+  }, []);
 
   return (
     <ClinicContext.Provider value={{ clinic, setClinic, isInitialized }}>
