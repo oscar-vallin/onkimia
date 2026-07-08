@@ -1030,7 +1030,7 @@
       "eyebrow": "Encuéntranos",
       "title": "Estamos en *{city}*",
       "description": "Visítanos en nuestras instalaciones o contáctanos por el medio que prefieras. Estamos para acompañarte en cada paso.",
-      "viewMap": "Ver en Google Maps",
+      "viewMap": "Como llegar",
       "addressLabel": "Dirección",
       "phoneLabel": "Teléfono",
       "emailLabel": "Correo electrónico"

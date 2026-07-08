@@ -1029,7 +1029,7 @@
       "eyebrow": "Find us",
       "title": "We are in *{city}*",
       "description": "Visit our facilities or reach us through whichever channel works best for you. We're here to support you every step of the way.",
-      "viewMap": "View on Google Maps",
+      "viewMap": "Get directions",
       "addressLabel": "Address",
       "phoneLabel": "Phone",
       "emailLabel": "Email"
