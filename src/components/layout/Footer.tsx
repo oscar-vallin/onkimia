@@ -21,6 +21,8 @@ export function Footer({}: FooterProps) {
   const { clinic } = useClinic();
 
   const isDoctorsRoute = pathname.startsWith('/onkimia-doctors');
+  const isEndosRoute = pathname.startsWith('/endos');
+  const isCuidareRoute = pathname.startsWith('/cuidare');
 
   // Contact data follows the globally selected clinic, not a fixed
   // "primary" location — see src/config/clinicConfig.ts.
@@ -55,6 +57,26 @@ export function Footer({}: FooterProps) {
                   />
                 </div>
               </>
+            ) : isEndosRoute ? (
+              <div className="relative w-[180px] h-[45px] md:w-[220px] md:h-[55px]">
+                <Image
+                  src="/endos-procedures/endos-logo-tight.webp"
+                  alt="Endos"
+                  fill
+                  sizes="(max-width: 768px) 180px, 220px"
+                  className="object-contain object-left invert brightness-0"
+                />
+              </div>
+            ) : isCuidareRoute ? (
+              <div className="relative w-[180px] h-[45px] md:w-[220px] md:h-[55px]">
+                <Image
+                  src="/cuidare/cuidare-logo-tight.webp"
+                  alt="Cuidare"
+                  fill
+                  sizes="(max-width: 768px) 180px, 220px"
+                  className="object-contain object-left invert brightness-0"
+                />
+              </div>
             ) : (
               <div className="relative w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
                 <Image

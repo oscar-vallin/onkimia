@@ -74,18 +74,7 @@ export default async function EndosPage({
         mobileImageSrc="/heros/endos-hero-mobile.webp"
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[88%_25%]"
-        eyebrow={
-          <div className="inline-flex items-center bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-lg">
-            <NextImage
-              src="/endos-procedures/endos-logo.webp"
-              alt={t('hero.eyebrow')}
-              width={180}
-              height={60}
-              className="h-18  md:h-18 w-auto object-contain"
-              priority
-            />
-          </div>
-        }
+        eyebrow=""
         title={`${t('hero.headlinePart1')}\n*${t('hero.headlinePart2')}*`}
         accent="endos"
         emphasisClassName="italic text-white/85"

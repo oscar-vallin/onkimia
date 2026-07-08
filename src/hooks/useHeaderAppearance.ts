@@ -22,6 +22,8 @@ export interface HeaderAppearance {
   // Main logo (non-doctors routes only — doctors logo has no filter)
   logoFilter: string;
   showDoctorsLogo: boolean;
+  showEndosLogo: boolean;
+  showCuidareLogo: boolean;
   // Desktop nav links + action buttons
   textColor: string;
   hoverColor: string;
@@ -41,6 +43,8 @@ export function useHeaderAppearance({ scrolled, mobileOpen, mounted }: HeaderSta
   const pathname = usePathname();
 
   const isDoctors     = pathname.startsWith('/onkimia-doctors');
+  const isEndos       = pathname.startsWith('/endos');
+  const isCuidare     = pathname.startsWith('/cuidare');
   const isDarkBgRoute = DARK_BG_ROUTES.some((r) => pathname === r);
 
   // ── Header background ─────────────────────────────────────────────
@@ -103,6 +107,8 @@ export function useHeaderAppearance({ scrolled, mobileOpen, mounted }: HeaderSta
     headerBg,
     logoFilter,
     showDoctorsLogo: isDoctors,
+    showEndosLogo: isEndos,
+    showCuidareLogo: isCuidare,
     textColor,
     hoverColor,
     activeLinkUnderline,

@@ -323,7 +323,7 @@
 
   /* ─── INSURANCE CAROUSEL — Marquee infinito ─── */
   .insurance-carousel-track {
-    animation: insurance-marquee 15s linear infinite;
+    animation: insurance-marquee var(--animation-duration, 15s) linear infinite;
   }
 
   .insurance-carousel-fade:hover .insurance-carousel-track {

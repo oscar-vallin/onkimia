@@ -111,7 +111,7 @@ export function HeroHome({
               {description}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <PillButton
                 variant="solid-light"
                 href={primaryCta.href}
@@ -122,18 +122,18 @@ export function HeroHome({
               <PillButton variant="outline-light" href={secondaryCta.href}>
                 {secondaryCta.label}
               </PillButton>
-            </div>
+            </div> */}
           </div>
 
           {/* RIGHT — stats bar (desktop only) */}
-          <div className="hidden md:flex flex-row lg:flex-row items-start lg:items-end gap-0 self-start lg:self-auto shrink-0">
-            {stats.map((stat, i) => (
-              <div key={i} className="flex items-stretch">
+          {/* <div className="hidden md:flex flex-row lg:flex-row items-start lg:items-end gap-0 self-start lg:self-auto shrink-0"> */}
+            {/* {stats.map((stat, i) => ( */}
+              {/* <div key={i} className="flex items-stretch"> */}
                 {/* Divider before every item except the first */}
-                {i > 0 && (
+                {/* {i > 0 && (
                   <div className="w-px self-stretch bg-white/20 mx-5 md:mx-7" aria-hidden="true" />
-                )}
-                <div className="flex flex-col gap-1">
+                )} */}
+                {/* <div className="flex flex-col gap-1">
                   <span className="font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-none">
                     {stat.number}
                   </span>
@@ -141,9 +141,9 @@ export function HeroHome({
                     {stat.label}
                   </span>
                 </div>
-              </div>
-            ))}
-          </div>
+              </div> */}
+            {/* ))} */}
+          {/* </div> */}
 
         </div>
       </div>

@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
 import type { Insurance } from '@/sanity/types';
@@ -19,9 +22,41 @@ export function ConveniosEditorial({
   statLabel,
 }: ConveniosEditorialProps) {
   const count = insurances.length;
+  const trackRef = useRef<HTMLDivElement>(null);
+  const logoSetRef = useRef<HTMLSpanElement>(null);
+  const [duration, setDuration] = useState(15);
 
   // Filter out any entries without an uploadded logo
   const withLogo = insurances.filter((ins) => !!ins.logo?.asset);
+
+  // Calculate animation duration based on ONE SET of logos (not duplicates)
+  // Uses dynamic speed: faster on mobile, smoother on desktop
+  useEffect(() => {
+    const calculateDuration = () => {
+      if (logoSetRef.current) {
+        // Measure only one set of logos
+        const oneSetWidth = logoSetRef.current.scrollWidth;
+
+        // Dynamic speed based on viewport width
+        const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+        const isMobile = viewportWidth < 768;
+        const pixelsPerSecond = isMobile ? 150 : 80;
+
+        const calculatedDuration = Math.max(6, Math.ceil(oneSetWidth / pixelsPerSecond));
+        setDuration(calculatedDuration);
+      }
+    };
+
+    // Use setTimeout to ensure DOM is ready
+    const timeoutId = setTimeout(calculateDuration, 70);
+
+    // Recalculate on window resize
+    window.addEventListener('resize', calculateDuration);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', calculateDuration);
+    };
+  }, [withLogo.length]);
 
   return (
     <section className="bg-gray-50 py-20 md:py-28 overflow-hidden">
@@ -53,13 +88,21 @@ export function ConveniosEditorial({
         aria-hidden="true"
       >
         {/* Track: two identical sets for the seamless -50% loop */}
-        <div className="insurance-carousel-track flex items-center">
+        <div
+          ref={trackRef}
+          className="insurance-carousel-track flex items-center"
+          style={{ '--animation-duration': `${duration}s` } as React.CSSProperties}
+        >
           {[0, 1].map((dupe) => (
-            <span key={dupe} className="flex items-center shrink-0">
+            <span
+              key={dupe}
+              ref={dupe === 0 ? logoSetRef : null}
+              className="flex items-center shrink-0"
+            >
               {withLogo.map((ins) => (
                 <span
                   key={`${dupe}-${ins._id}`}
-                  className="flex items-center justify-center h-20 px-8 md:px-12 shrink-0"
+                  className="flex items-center justify-center  shrink-0"
                 >
                   <Image
                     src={urlFor(ins.logo).height(160).format('webp').url()}
@@ -67,7 +110,7 @@ export function ConveniosEditorial({
                     width={240}
                     height={80}
                     loading="lazy"
-                    className="h-14 md:h-16 max-w-xs w-full object-contain opacity-60 hover:opacity-90 transition-opacity duration-200"
+                    className="h-14 md:h-16 w-[200px]  object-contain opacity-60 hover:opacity-90 transition-opacity duration-200"
                   />
                 </span>
               ))}

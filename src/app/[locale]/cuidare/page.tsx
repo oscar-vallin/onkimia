@@ -92,14 +92,16 @@ export default async function CuidarePage({
 
   return (
     <>
-      <link rel="preload" as="image" href="/heros/cuidare-hero-desktop.webp" type="image/webp" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/cuidare-hero-desktop.webp" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/heros/cuidare-hero-mobile.webp"  type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
     <div className="cuidare-page">
       {/* ─── HERO ─── */}
       <PageHero
         imageSrc="/heros/cuidare-hero-desktop.webp"
+        mobileImageSrc="/heros/cuidare-hero-mobile.webp"
         mobileObjectPosition="object-[center_25%]"
         imagePosition="md:object-[65%_55%]"
-        eyebrow={t('hero.eyebrow')}
+        eyebrow=""
         title={`${t('hero.headlinePart1')}\n${t('hero.headlinePart2')}`}
         description={t('hero.description')}
         accent="cuidare"

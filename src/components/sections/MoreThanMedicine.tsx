@@ -46,7 +46,7 @@ export function MoreThanMedicine({
   services,
 }: MoreThanMedicineProps) {
   return (
-    <section className="bg-white py-20 md:py-40">
+    <section className="bg-white py-20 py-40">
       <div className="container-onkimia">
 
         <SectionHeader

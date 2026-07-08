@@ -164,6 +164,28 @@ export function Header({}: HeaderProps) {
                     />
                   </span>
                 </>
+              ) : appearance.showEndosLogo ? (
+                <span className="relative block w-[180px] h-[45px] md:w-[220px] md:h-[55px]">
+                  <Image
+                    src="/endos-procedures/endos-logo-tight.webp"
+                    alt="Endos"
+                    fill
+                    sizes="(max-width: 768px) 180px, 220px"
+                    priority
+                    className={`object-contain object-left ${appearance.logoFilter}`}
+                  />
+                </span>
+              ) : appearance.showCuidareLogo ? (
+                <span className="relative block w-[180px] h-[45px] md:w-[220px] md:h-[55px]">
+                  <Image
+                    src="/cuidare/cuidare-logo-tight.webp"
+                    alt="Cuidare"
+                    fill
+                    sizes="(max-width: 768px) 180px, 220px"
+                    priority
+                    className={`object-contain object-left ${appearance.logoFilter}`}
+                  />
+                </span>
               ) : (
                 <span className="relative block w-[142px] h-[45px] md:w-[170px] md:h-[55px]">
                   <Image
@@ -312,6 +334,34 @@ export function Header({}: HeaderProps) {
                         fill
                         sizes="64px"
                         className="object-contain object-left"
+                      />
+                    </Link>
+                  ) : appearance.showEndosLogo ? (
+                    <Link
+                      href="/"
+                      onClick={() => setMobileOpen(false)}
+                      className="relative block w-[180px] h-[45px]"
+                    >
+                      <Image
+                        src="/endos-procedures/endos-logo-tight.webp"
+                        alt="Endos"
+                        fill
+                        sizes="180px"
+                        className="object-contain object-left brightness-0 invert"
+                      />
+                    </Link>
+                  ) : appearance.showCuidareLogo ? (
+                    <Link
+                      href="/"
+                      onClick={() => setMobileOpen(false)}
+                      className="relative block w-[180px] h-[45px]"
+                    >
+                      <Image
+                        src="/cuidare/cuidare-logo-tight.webp"
+                        alt="Cuidare"
+                        fill
+                        sizes="180px"
+                        className="object-contain object-left brightness-0 invert"
                       />
                     </Link>
                   ) : (
