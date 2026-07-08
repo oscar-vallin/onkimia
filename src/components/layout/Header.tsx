@@ -18,6 +18,7 @@ import { LazyMotion, m, AnimatePresence, type Variants } from 'framer-motion';
 import { useHeaderAppearance } from '@/hooks/useHeaderAppearance';
 import { getWhatsAppNumber, buildWhatsAppUrl, type Section } from '@/lib/whatsapp';
 import { loadMotionFeatures } from '@/lib/motion';
+import { isNavItemVisible, type NavItemKey } from '@/config/navigationConfig';
 
 interface HeaderProps {}
 
@@ -84,15 +85,16 @@ export function Header({}: HeaderProps) {
   });
   const whatsappUrl = whatsappNumber ? buildWhatsAppUrl(whatsappNumber) : null;
 
-  const navLinks = [
-    { href: '/',                label: tNav('home')     },
-    { href: '/nosotros',        label: tNav('about')    },
-    { href: '/servicios',       label: tNav('services') },
-    { href: '/endos',           label: tNav('endos')    },
-    { href: '/cuidare',         label: tNav('cuidare')  },
-    { href: '/onkimia-doctors', label: tNav('doctors')  },
-    { href: '/contacto',        label: tNav('contact')  },
+  const allNavLinks: { href: string; label: string; key: NavItemKey }[] = [
+    { href: '/',                label: tNav('home'),     key: 'home'     },
+    { href: '/nosotros',        label: tNav('about'),    key: 'about'    },
+    { href: '/servicios',       label: tNav('services'), key: 'services' },
+    { href: '/endos',           label: tNav('endos'),    key: 'endos'    },
+    { href: '/cuidare',         label: tNav('cuidare'),  key: 'cuidare'  },
+    { href: '/onkimia-doctors', label: tNav('doctors'),  key: 'doctors'  },
+    { href: '/contacto',        label: tNav('contact'),  key: 'contact'  },
   ];
+  const navLinks = allNavLinks.filter((link) => isNavItemVisible(clinic, link.key));
 
   const otherLocale  = locale === 'es' ? 'en' : 'es';
   const switchLocale = () => {

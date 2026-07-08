@@ -54,19 +54,14 @@ export default async function NosotrosPage({
     <>
       <PageTheme headerTheme="dark" />
       {/* ─── NUESTRA MISIÓN ─── */}
-      {/* <MisionSection
+      <MisionSection
         eyebrow={t('mision.eyebrow')}
         title={t('mision.title')}
         description={t('mision.description')}
-      /> */}
+      />
 
       {/* ─── 1. MÁS QUE MEDICINA ─── */}
       <MoreThanMedicine
-        eyebrow={t('moreThanMedicine.eyebrow')}
-        titleLine1={t('moreThanMedicine.headingLine1')}
-        titleUnderlined={t('moreThanMedicine.headingUnderlined')}
-        titleSuffix={t('moreThanMedicine.headingSuffix')}
-        description={t('moreThanMedicine.description')}
         services={differentialServices}
       />
 

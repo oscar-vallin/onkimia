@@ -7,6 +7,7 @@ import { InstagramIcon, FacebookIcon } from '@/components/icons/SocialIcons';
 import { MessageCircle } from 'lucide-react';
 import { useClinic } from '@/lib/clinic-context';
 import { getClinicConfig } from '@/config/clinicConfig';
+import { isNavItemVisible, type NavItemKey } from '@/config/navigationConfig';
 import type { Locale } from '@/i18n/routing';
 import Image from 'next/image';
 
@@ -27,6 +28,16 @@ export function Footer({}: FooterProps) {
   // Contact data follows the globally selected clinic, not a fixed
   // "primary" location — see src/config/clinicConfig.ts.
   const clinicData = getClinicConfig(clinic);
+
+  const allMenuLinks: { href: string; label: string; key: NavItemKey }[] = [
+    { href: '/',                label: tNav('home'),     key: 'home'     },
+    { href: '/nosotros',        label: tNav('about'),    key: 'about'    },
+    { href: '/servicios',       label: tNav('services'), key: 'services' },
+    { href: '/endos',           label: tNav('endos'),    key: 'endos'    },
+    { href: '/cuidare',         label: tNav('cuidare'),  key: 'cuidare'  },
+    { href: '/contacto',        label: tNav('contact'),  key: 'contact'  },
+  ];
+  const menuLinks = allMenuLinks.filter((link) => isNavItemVisible(clinic, link.key));
 
   return (
     <footer className={`${isDoctorsRoute ? 'bg-doctors-ink' : 'bg-ink'} text-white/90 mt-section`}>
@@ -96,54 +107,16 @@ export function Footer({}: FooterProps) {
               {tFooter('menu')}
             </h3>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link
-                  href="/"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  {tNav('home')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/nosotros"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  {tNav('about')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/servicios"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  {tNav('services')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/endos"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  {tNav('endos')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cuidare"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  {tNav('cuidare')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contacto"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  {tNav('contact')}
-                </Link>
-              </li>
+              {menuLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-white/60 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

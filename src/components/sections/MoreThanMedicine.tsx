@@ -1,6 +1,5 @@
 import { Car, Smartphone, Sparkles, ShieldCheck, Users, Globe, Stethoscope, Clipboard, Hotel, Armchair, Building2, Droplets, Bone } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export type ServiceIcon = 'car' | 'smartphone' | 'sparkles' | 'shield-check' | 'users' | 'globe' | 'stethoscope' | 'clipboard' | 'hotel' | 'armchair' | 'building2' | 'droplets' | 'bone';
 
@@ -13,11 +12,6 @@ interface Service {
 }
 
 interface MoreThanMedicineProps {
-  eyebrow: string;
-  titleLine1: string;
-  titleUnderlined: string;
-  titleSuffix: string;
-  description: string;
   services: Service[];
 }
 
@@ -38,25 +32,11 @@ const ICON_MAP: Record<ServiceIcon, LucideIcon> = {
 };
 
 export function MoreThanMedicine({
-  eyebrow,
-  titleLine1,
-  titleUnderlined,
-  titleSuffix,
-  description,
   services,
 }: MoreThanMedicineProps) {
   return (
-    <section className="bg-white py-20 py-40">
+    <section className="bg-white py-20 md:py-26">
       <div className="container-onkimia">
-
-        <SectionHeader
-          eyebrow={eyebrow}
-          title={<>{titleLine1}{' '}<em className="not-italic text-secondary">{titleUnderlined}</em>{titleSuffix && titleSuffix}</>}
-          titleClassName="mb-6"
-          intro={description}
-          introClassName="text-lg md:text-lg"
-          className="mb-16 md:mb-20"
-        />
 
         {/* 3×2 service card grid */}
         {services.length > 0 && (

@@ -424,11 +424,6 @@
       "description": "Un equipo multidisciplinario dedicado a transformar la experiencia oncológica a través de la ciencia avanzada y la calidez humana."
     },
     "moreThanMedicine": {
-      "eyebrow": "Nuestra filosofía",
-      "headingLine1": "Más que medicina, un",
-      "headingUnderlined": "compromiso con tu vida",
-      "headingSuffix": "",
-      "description": "En Onkimia nuestro eje eres tú. Nuestra filosofía combina tratamientos innovadores, atención de calidad y los mejores especialistas.",
       "services": [
         {
           "icon": "stethoscope",
@@ -520,9 +515,9 @@
     },
     "downloadHere": "descárgala aquí",
     "mision": {
-      "eyebrow": "Nuestra misión",
-      "title": "Toma el control\nde tu salud hoy",
-      "description": "En Onkimia estamos comprometidos con impulsar avances significativos en la salud y calidad de vida de cada paciente. No solo buscamos que vivas más, sino que cada año sea el mejor que puedas vivir."
+      "eyebrow": "Nuestra filosofía",
+      "title": "Más que medicina, un\ncompromiso con tu vida",
+      "description": "En Onkimia nuestro eje eres tú. Nuestra filosofía combina tratamientos innovadores, atención de calidad y los mejores especialistas."
     },
     "enfoque360": {
       "eyebrow": "ENFOQUE 360°",

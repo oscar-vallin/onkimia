@@ -39,18 +39,19 @@ export function HeroHome({
 }: HeroHomeProps) {
   return (
     <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">
-        {/* Art direction: phones get a dedicated portrait crop centered on the
-            brand emblem (a 16:9 landscape can never fit a portrait screen —
-            it was clipping the wall sign). Desktop keeps DPR-aware variants:
-            srcSet `w` descriptors + sizes="100vw" let the browser multiply
-            viewport × devicePixelRatio and pick the right file. */}
+        {/* Building facade shot (public/temp-heros/FACHADA_ONKIMIA.jpg), cropped to
+            match the ENCUADRE_HERO_HOMEPAGE.jpg reference framing. Phones get a
+            dedicated portrait crop centered on the wall sign (a 16:9 landscape
+            can never fit a portrait screen without clipping it). Desktop keeps
+            DPR-aware variants: srcSet `w` descriptors + sizes="100vw" let the
+            browser multiply viewport × devicePixelRatio and pick the right file. */}
         <picture className="absolute inset-0">
           <source media="(max-width: 767px)" srcSet="/heros/hero-main-mobile.webp" />
           <img
             src="/heros/hero-main-1920.webp"
             srcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w, /heros/hero-main-2547.webp 2547w"
             sizes="100vw"
-            alt="Recepción de la clínica Onkimia con el logotipo Evolución Oncológica"
+            alt="Fachada del edificio Onkimia con el logotipo Evolución Oncológica"
             className="w-full h-full object-cover object-center md:[object-position:62%_45%]"
             fetchPriority="high"
             decoding="sync"
