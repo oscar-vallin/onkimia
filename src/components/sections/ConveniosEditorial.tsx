@@ -110,7 +110,7 @@ export function ConveniosEditorial({
                     width={240}
                     height={80}
                     loading="lazy"
-                    className="h-14 md:h-16 w-[200px]  object-contain opacity-60 hover:opacity-90 transition-opacity duration-200"
+                    className="h-14 md:h-18 w-[200px]  object-contain opacity-60 hover:opacity-90 transition-opacity duration-200"
                   />
                 </span>
               ))}
