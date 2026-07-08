@@ -105,7 +105,7 @@ export default async function CuidarePage({
         title={`${t('hero.headlinePart1')}\n${t('hero.headlinePart2')}`}
         description={t('hero.description')}
         accent="cuidare"
-        solidLeftBand
+        //solidLeftBand
       >
         {/* <BookingButton section="cuidare" variant="brand" /> */}
       </PageHero>
