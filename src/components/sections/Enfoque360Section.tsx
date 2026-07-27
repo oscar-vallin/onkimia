@@ -1,7 +1,5 @@
-import { SanityImage as Image } from '@/components/ui/SanityImage';
-import { urlFor } from '@/sanity/image';
+import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import type { SanityImageWithLQIP } from '@/sanity/types';
 
 interface ChecklistItem {
   title: string;
@@ -17,8 +15,10 @@ interface Enfoque360SectionProps {
   stat1Label: string;
   stat2Value: string;
   stat2Label: string;
-  image?: SanityImageWithLQIP;
 }
+
+// Local asset — not sourced from Sanity.
+const IMAGE_SRC = '/about/tp_1.jpg';
 
 export function Enfoque360Section({
   eyebrow,
@@ -29,11 +29,7 @@ export function Enfoque360Section({
   stat1Label,
   stat2Value,
   stat2Label,
-  image,
 }: Enfoque360SectionProps) {
-  const imgSrc = image
-    ? urlFor(image).width(1200).format('webp').quality(85).url()
-    : null;
   const titleLines = title.split('\n');
 
   return (
@@ -78,31 +74,25 @@ export function Enfoque360Section({
           {/* Right column — image with stat badges */}
           <div className="relative">
             <div className="relative w-full rounded-3xl overflow-hidden bg-gray-100">
-              {imgSrc ? (
-                <>
-                  {/* Layer 1 — blurred absolute fill (behind), gives depth when image has letterbox */}
-                  <Image
-                    src={imgSrc}
-                    alt=""
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover scale-110 blur-xl opacity-50"
-                    aria-hidden="true"
-                  />
-                  {/* Layer 2 — natural dimensions, defines container height, shows full image */}
-                  <Image
-                    src={imgSrc}
-                    alt="Instalaciones Onkimia"
-                    width={1200}
-                    height={900}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                    className="relative z-10"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </>
-              ) : (
-                <div className="min-h-[420px] bg-gradient-to-br from-gray-200 to-gray-400" />
-              )}
+              {/* Layer 1 — blurred absolute fill (behind), gives depth when image has letterbox */}
+              <Image
+                src={IMAGE_SRC}
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover scale-110 blur-xl opacity-50"
+                aria-hidden="true"
+              />
+              {/* Layer 2 — natural dimensions, defines container height, shows full image */}
+              <Image
+                src={IMAGE_SRC}
+                alt="Instalaciones Onkimia"
+                width={1200}
+                height={800}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+                className="relative z-10"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
 
               {/* Stat badge — top right */}
               <div className="absolute top-5 right-5 bg-primary rounded-2xl px-5 py-4 shadow-xl">

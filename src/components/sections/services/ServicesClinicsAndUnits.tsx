@@ -72,9 +72,13 @@ export function ServicesClinicsAndUnits({
             )}
           </SectionHeader>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {/* flex (not grid) so an incomplete last row centers its cards
+              instead of left-aligning under a fixed column track */}
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             {clinics.map(({ slug, name, icon }, i) => (
-              <ClinicBadge key={slug} name={name} icon={icon} index={i} />
+              <div key={slug} className="w-[calc(50%-0.375rem)] md:w-[calc(25%-0.75rem)]">
+                <ClinicBadge name={name} icon={icon} index={i} />
+              </div>
             ))}
           </div>
         </div>

@@ -43,8 +43,10 @@ export interface ServiceItem {
   icon: ServiceIconName | string;
   title: string;
   description: string;
-  /** Local /public path — one photo per service (1:1). */
+  /** Local /public path — portrait crop, shown in the main frame. */
   image: string;
+  /** Local /public path — landscape crop of the same shot, shown in the accent frame. */
+  imageAccent: string;
 }
 
 export interface StickyStagesProps {
@@ -70,8 +72,6 @@ export function StickyStages({
   const pausedRef = useRef(false);
 
   const count = items.length;
-  const nextIndex = (i: number) => (i + 1) % count;
-  const accentIndex = nextIndex(active);
 
   // Auto-advance through every photo when idle; pauses the instant the
   // pointer is anywhere in the list or the visual, resumes on leave.
@@ -199,11 +199,11 @@ export function StickyStages({
             {items.map((item, i) => (
               <Image
                 key={i}
-                src={item.image}
+                src={item.imageAccent}
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 40vw, 20vw"
-                className={`object-cover transition-opacity duration-500 ${i === accentIndex ? 'opacity-100' : 'opacity-0'}`}
+                className={`object-cover transition-opacity duration-500 ${i === active ? 'opacity-100' : 'opacity-0'}`}
                 aria-hidden="true"
               />
             ))}

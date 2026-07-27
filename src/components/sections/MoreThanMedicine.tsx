@@ -38,15 +38,17 @@ export function MoreThanMedicine({
     <section className="bg-white py-20 md:py-26">
       <div className="container-onkimia">
 
-        {/* 3×2 service card grid */}
+        {/* 3×2 service card grid — flex (not grid) so an incomplete last
+            row centers its cards instead of left-aligning under a fixed
+            column track. */}
         {services.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             {services.map((service, i) => {
               const Icon = ICON_MAP[service.icon] ?? Car;
               return (
                 <div
                   key={i}
-                  className="bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-row items-start gap-4 hover:border-black/[0.14] hover:shadow-sm transition-all duration-200"
+                  className="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-row items-start gap-4 hover:border-black/[0.14] hover:shadow-sm transition-all duration-200"
                 >
                   {/* Icon badge */}
                   <div className="w-11 h-11 rounded-xl bg-gray-50 border border-black/[0.07] flex items-center justify-center flex-shrink-0 text-primary/50">

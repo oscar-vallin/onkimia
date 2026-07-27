@@ -82,7 +82,6 @@ export default async function NosotrosPage({
         stat1Label={t('enfoque360.stat1Label')}
         stat2Value={t('enfoque360.stat2Value')}
         stat2Label={t('enfoque360.stat2Label')}
-        image={aboutPage?.enfoque360Image}
         items={[
           { title: t('enfoque360.items.item1Title'), description: t('enfoque360.items.item1Description') },
           { title: t('enfoque360.items.item2Title'), description: t('enfoque360.items.item2Description') },
