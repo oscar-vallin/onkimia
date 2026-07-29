@@ -104,11 +104,17 @@ export default async function EndosPage({
             introClassName="text-lg md:text-lg max-w-2xl mb-14"
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+          {/* flex (no grid): así una última fila incompleta (5 items → 3+2)
+              centra sus cards en vez de quedar alineada a la izquierda bajo
+              un track de columna fijo. Mismo patrón que MoreThanMedicine.tsx. */}
+          <div className="flex flex-wrap justify-center gap-4 mb-4">
             {PROCEDURE_ITEM_KEYS.map((key, i) => {
               const Icon = PROCEDURE_ICONS[i];
               return (
-                <article key={key} className="bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-row items-start gap-4 hover:border-endos-teal-700/20 hover:shadow-sm transition-all duration-200">
+                // items-center: el título es una sola línea (la descripción
+                // está comentada abajo); con items-start el ícono de 44px
+                // queda más alto que el centro visual del texto.
+                <article key={key} className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] bg-white border border-black/[0.07] rounded-2xl p-7 flex flex-row items-center gap-4 hover:border-endos-teal-700/20 hover:shadow-sm transition-all duration-200">
                   <div className="w-11 h-11 rounded-xl bg-endos-teal-700/10 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-5 h-5 text-endos-teal-700" aria-hidden="true"/>
                   </div>
