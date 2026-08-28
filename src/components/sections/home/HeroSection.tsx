@@ -30,6 +30,13 @@ export async function HeroSection({}: SectionProps) {
       />
 
       <HeroHome
+        // Background video — public/heros/hero-main.mp4 is the client's real
+        // facility walkthrough footage (79.8s, no audio), re-encoded from the
+        // original 160 MB source down to 5.8 MB: H.264, 1920×1080, CRF 30,
+        // -preset slow, +faststart, audio stripped (video autoplays muted
+        // regardless). Visually verified against the original at multiple
+        // timestamps — no visible compression artifacts.
+        videoSources={[{ src: '/heros/hero-main.mp4', type: 'video/mp4' }]}
         eyebrowBase={t('homeHero.eyebrowBase')}
         eyebrowDefaultCity={t('homeHero.eyebrowDefaultCity')}
         eyebrowColimaCity={t('homeHero.eyebrowColimaCity')}

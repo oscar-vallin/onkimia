@@ -2,6 +2,13 @@ import type { ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { PillButton } from '@/components/ui/PillButton';
 import { HeroEyebrow } from './HeroEyebrow';
+import { HeroVideoBackground, type HeroVideoSource } from './HeroVideoBackground';
+
+// HeroVideoBackground carries its own 'use client' directive, so importing
+// it here (a Server Component) is enough for Next to create the client
+// boundary at exactly that leaf — no next/dynamic needed. It returns null
+// server-side when videoSources is empty (the default), so there's nothing
+// to hydrate-mismatch against and no SSR cost either way.
 
 interface Stat {
   number: string;
@@ -17,6 +24,10 @@ export interface HeroHomeProps {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   stats: [Stat, Stat, Stat];
+  /** Optional background video, layered over the static image once it's
+   *  actually playing. Omit (or pass []) to keep the static image only —
+   *  see HeroVideoBackground.tsx for why this is safe by default. */
+  videoSources?: HeroVideoSource[];
 }
 
 function parseHeroTitle(text: string): ReactNode[] {
@@ -36,6 +47,7 @@ export function HeroHome({
   primaryCta,
   secondaryCta,
   stats,
+  videoSources = [],
 }: HeroHomeProps) {
   return (
     <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">
@@ -57,6 +69,14 @@ export function HeroHome({
             decoding="sync"
           />
         </picture>
+
+        {/* Background video — pure enhancement layered on top of the poster
+            above. Renders nothing when videoSources is empty (default), so
+            this is a no-op until a compressed clip is wired in from
+            HeroSection.tsx. See HeroVideoBackground.tsx for the full
+            performance contract (deferred load, reduced-motion / save-data
+            opt-out, fade-in only once actually playing). */}
+        <HeroVideoBackground sources={videoSources} poster="/heros/hero-main-1920.webp" />
 
       {/* Overlay: gradient bottom-left → top-right for legibility of bottom-left content */}
       <div
