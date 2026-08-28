@@ -1,4 +1,3 @@
-cat > .gitignore << 'EOF'
 # Dependencies
 node_modules/
 .pnp/
@@ -43,4 +42,10 @@ coverage/
 
 # Misc
 .eslintcache
-EOF
+
+# Hero background video — served raw/uncompressed at the client's request
+# (~160 MB), which is over GitHub's 100 MB per-file push limit. Deployed to
+# the production server as a manual step (see docs/GUIA-INFRAESTRUCTURA-IT.md)
+# instead of via git. Do not remove this line without an alternative in place
+# (Git LFS, or re-compressing) — committing it as-is will block every push.
+public/heros/hero-main.mp4
