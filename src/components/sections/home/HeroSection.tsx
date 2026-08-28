@@ -30,14 +30,14 @@ export async function HeroSection({}: SectionProps) {
       />
 
       <HeroHome
-        // Background video — public/heros/hero-main.mp4 is the client's raw
-        // facility walkthrough footage, UNCOMPRESSED (~160 MB, original
-        // bitrate, 79.8s, audio track present in the container but the tag
-        // is muted regardless). Per explicit client direction, visual
-        // fidelity is the absolute priority here, ahead of load time /
-        // Core Web Vitals — do not re-encode or downscale this file without
-        // checking with them first (see HeroVideoBackground.tsx doc for the
-        // full context and the previously-used 5.8 MB alternative).
+        // Background video — public/heros/hero-main.mp4 is the client's
+        // facility walkthrough footage (79.8s, no audio), re-encoded at
+        // CRF 14 (~70 MB) — the highest quality that still fits safely under
+        // GitHub's 100 MB per-file push limit. Per explicit client
+        // direction, visual fidelity is the priority here ahead of load
+        // time / Core Web Vitals within that constraint. See
+        // HeroVideoBackground.tsx doc for the full size/quality trade-off
+        // table and why this file must never approach 100 MB.
         videoSources={[{ src: '/heros/hero-main.mp4', type: 'video/mp4' }]}
         eyebrowBase={t('homeHero.eyebrowBase')}
         eyebrowDefaultCity={t('homeHero.eyebrowDefaultCity')}

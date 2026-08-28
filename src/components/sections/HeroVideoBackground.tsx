@@ -22,15 +22,17 @@ interface HeroVideoBackgroundProps {
  * Muted looping background video layered over the hero's static poster image.
  *
  * MAX-QUALITY MODE — explicit client direction (2026-08-28): visual fidelity
- * is the absolute priority for this video, even at the cost of Core Web
- * Vitals / load time. `sources` today points at the client's raw, unedited
- * footage (~160 MB, untouched bitrate) — no re-encode, no defer, no
- * connection-based gating. Do not reintroduce compression, resolution
- * downscaling, or load-deferral here without going back to the client first;
- * this file previously served a visually-verified 5.8 MB re-encode of the
- * same footage and was deliberately reverted to the original at their
- * request. See git history for that version if this ever needs to be
- * revisited.
+ * is the priority for this video over Core Web Vitals / load time, no
+ * connection-based gating or load-deferral. `sources` points at a ~70 MB
+ * re-encode (H.264, 1920×1080, CRF 14 — near-lossless, visually verified
+ * against the untouched original frame-by-frame) rather than the raw ~160 MB
+ * source: GitHub hard-blocks any pushed file over 100 MB, so the raw file
+ * cannot live in this repo at all. CRF 14 was chosen as the highest quality
+ * that still leaves a real safety margin under that cap (~30 MB), not as an
+ * arbitrary compromise — see the .gitignore history / PR discussion for the
+ * size table across CRF values that justified it. Don't push this lower
+ * (e.g. CRF 12, ~112 MB) without confirming the resulting file is under
+ * 100 MB — it will block every future `git push` if not.
  *
  * The <picture>/<img> rendered by the caller (HeroHome) stays the LCP
  * element (fetchPriority="high", matching <link rel="preload">, responsive
