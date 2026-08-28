@@ -9,11 +9,11 @@ export interface HeroVideoSource {
 
 interface HeroVideoBackgroundProps {
   sources: HeroVideoSource[];
-  /** Same desktop hero image used by the <picture> behind this component —
-   *  set as the native <video poster> so the frame the browser shows while
-   *  buffering (once the element mounts) still matches the brand's hero
-   *  shot. The caller's own <picture> underneath is what's actually visible
-   *  before that, and remains the real LCP element either way. */
+  /** Native <video poster> — optional. There's no static image behind this
+   *  component anymore (removed per client request, see module doc), so
+   *  leave this unset unless a caller has a specific frame it wants shown
+   *  while the video buffers; it stays invisible either way until `ready`
+   *  flips (see the opacity logic below). */
   poster?: string;
   className?: string;
 }
@@ -34,13 +34,15 @@ interface HeroVideoBackgroundProps {
  * (e.g. CRF 12, ~112 MB) without confirming the resulting file is under
  * 100 MB — it will block every future `git push` if not.
  *
- * The <picture>/<img> rendered by the caller (HeroHome) stays the LCP
- * element (fetchPriority="high", matching <link rel="preload">, responsive
- * art-direction a single <video poster> URL can't express) — this component
- * only paints on top of it. It fades in (700ms) once the browser fires
- * `playing`; with a file this size that can take a while on anything but a
- * fast connection, during which the poster is what's visible — that's
- * expected, not a bug, given the trade-off above.
+ * No static fallback image anymore (removed per client request, 2026-08-28)
+ * — the hero's own bg-primary color fills the gap before the video is ready
+ * instead. This means the LCP element for this section is no longer an
+ * image; expect the LCP metric itself to shift (likely to the h1, or to
+ * nothing meaningful until the video paints) as a direct, accepted
+ * consequence of that request layered on top of the max-quality mandate
+ * above. Fades in (700ms) once the browser fires `playing`; with a file
+ * this size that can take a while on anything but a fast connection, during
+ * which the section is a flat color — that's expected, not a bug.
  *
  * The one guardrail kept on purpose: prefers-reduced-motion. That's not a
  * performance optimization, it's an accessibility requirement (WCAG 2.2.2 —
@@ -68,8 +70,9 @@ export function HeroVideoBackground({ sources, poster, className = '' }: HeroVid
     const video = videoRef.current;
     if (!video) return;
     video.play().catch(() => {
-      // Autoplay blocked by the browser — the static poster stays visible.
-      // Acceptable degrade, nothing to surface to the user.
+      // Autoplay blocked by the browser — the section's flat bg-primary
+      // color stays visible (no static image fallback anymore). Acceptable
+      // degrade, nothing to surface to the user.
     });
   }, [canPlay]);
 

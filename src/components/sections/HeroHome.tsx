@@ -24,9 +24,9 @@ export interface HeroHomeProps {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   stats: [Stat, Stat, Stat];
-  /** Optional background video, layered over the static image once it's
-   *  actually playing. Omit (or pass []) to keep the static image only —
-   *  see HeroVideoBackground.tsx for why this is safe by default. */
+  /** Background video — no static fallback image behind it (removed per
+   *  client request). Omit (or pass []) and the hero falls back to its
+   *  plain bg-primary color; see HeroVideoBackground.tsx for details. */
   videoSources?: HeroVideoSource[];
 }
 
@@ -51,32 +51,13 @@ export function HeroHome({
 }: HeroHomeProps) {
   return (
     <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">
-        {/* Building facade shot (public/temp-heros/FACHADA_ONKIMIA.jpg), cropped to
-            match the ENCUADRE_HERO_HOMEPAGE.jpg reference framing. Phones get a
-            dedicated portrait crop centered on the wall sign (a 16:9 landscape
-            can never fit a portrait screen without clipping it). Desktop keeps
-            DPR-aware variants: srcSet `w` descriptors + sizes="100vw" let the
-            browser multiply viewport × devicePixelRatio and pick the right file. */}
-        <picture className="absolute inset-0">
-          <source media="(max-width: 767px)" srcSet="/heros/hero-main-mobile.webp" />
-          <img
-            src="/heros/hero-main-1920.webp"
-            srcSet="/heros/hero-main-1170.webp 1170w, /heros/hero-main-1920.webp 1920w, /heros/hero-main-2547.webp 2547w"
-            sizes="100vw"
-            alt="Fachada del edificio Onkimia con el logotipo Evolución Oncológica"
-            className="w-full h-full object-cover object-center md:[object-position:62%_45%]"
-            fetchPriority="high"
-            decoding="sync"
-          />
-        </picture>
-
-        {/* Background video — pure enhancement layered on top of the poster
-            above. Renders nothing when videoSources is empty (default), so
-            this is a no-op until a compressed clip is wired in from
-            HeroSection.tsx. See HeroVideoBackground.tsx for the full
-            performance contract (deferred load, reduced-motion / save-data
-            opt-out, fade-in only once actually playing). */}
-        <HeroVideoBackground sources={videoSources} poster="/heros/hero-main-1920.webp" />
+        {/* No static fallback image — removed per client request so nothing
+            shows behind the video before it starts playing (the section's
+            own bg-primary color fills that gap instead). Renders nothing
+            when videoSources is empty (default). See HeroVideoBackground.tsx
+            for the full behavior contract (reduced-motion opt-out, fade-in
+            only once actually playing). */}
+        <HeroVideoBackground sources={videoSources} />
 
       {/* Overlay: gradient bottom-left → top-right for legibility of bottom-left content */}
       <div
