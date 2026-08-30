@@ -985,7 +985,6 @@
       "error": {
         "unexpected": "Ocurrió un error inesperado. Intenta de nuevo.",
         "rateLimit": "Has enviado demasiados mensajes. Intenta de nuevo en una hora.",
-        "turnstile": "No pudimos verificar que eres humano. Recarga la página e intenta de nuevo.",
         "email": "No pudimos enviar el mensaje. Intenta de nuevo en unos momentos.",
         "submit": "No pudimos registrar tu mensaje en este momento. Por favor intenta de nuevo o contáctanos directamente al (33) 4349 0140."
       },
@@ -1212,7 +1211,6 @@
       },
       "error": {
         "rateLimit": "Has enviado demasiadas aplicaciones. Intenta mañana.",
-        "turnstile": "No pudimos verificar que eres humano. Recarga la página.",
         "email": "No pudimos enviar tu aplicación. Intenta de nuevo.",
         "unexpected": "Ocurrió un error inesperado. Intenta de nuevo."
       }

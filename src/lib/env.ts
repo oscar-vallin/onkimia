@@ -13,9 +13,6 @@ const envSchema = z.object({
   ODOO_USERNAME: z.string().min(1, { message: 'ODOO_USERNAME is required' }),
   ODOO_API_KEY:  z.string().min(1, { message: 'ODOO_API_KEY is required' }),
 
-  // ── Turnstile (CAPTCHA) ───────────────────────────────────────────────────────
-  TURNSTILE_SECRET_KEY: z.string().min(1, { message: 'TURNSTILE_SECRET_KEY is required' }),
-
   // ── Bolsa de trabajo ──────────────────────────────────────────────────────────
   JOB_BOARD_EMAIL: z.string().email({ message: 'JOB_BOARD_EMAIL must be a valid email' }),
 
@@ -36,8 +33,6 @@ export const env = envSchema.parse({
   ODOO_DATABASE: process.env.ODOO_DATABASE,
   ODOO_USERNAME: process.env.ODOO_USERNAME,
   ODOO_API_KEY:  process.env.ODOO_API_KEY,
-
-  TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
 
   JOB_BOARD_EMAIL:      process.env.JOB_BOARD_EMAIL,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,

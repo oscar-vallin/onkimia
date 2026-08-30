@@ -1,31 +1,15 @@
-import { NextResponse, type NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
-/**
- * Redirects 301 desde URLs viejas del sitio actual.
- * Cuando hagamos el lanzamiento, esto preserva SEO histórico.
- */
-const REDIRECTS_MAP: Record<string, string> = {
-  // Ejemplo: cuando confirmemos URLs viejas, agregar aquí
-  // '/es/medicos': '/onkimia-doctors',
-  // '/en/consult-colima': '/en/colima',
-};
+// Los redirects 301 de migración (sitio viejo → nuevas rutas) viven en
+// next.config.ts (`redirects()`), no aquí — Next.js los resuelve a nivel de
+// edge/CDN sin pasar por este middleware, lo que es más rápido y más simple
+// de mantener que una tabla en código. Ver next.config.ts para la lista.
 
 export default function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  // ─── 1. REDIRECTS 301 ───
-  if (REDIRECTS_MAP[pathname]) {
-    return NextResponse.redirect(
-      new URL(REDIRECTS_MAP[pathname], request.url),
-      301
-    );
-  }
-
-  // ─── 2. i18n middleware (next-intl) ───
   return intlMiddleware(request);
 }
 

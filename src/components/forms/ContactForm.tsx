@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useTransition, useEffect, useRef } from 'react';
-import Script from 'next/script';
+import { useState, useTransition, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { submitContactForm } from '@/lib/actions/contact';
 import { contactFormSchema } from '@/lib/schemas/contact';
@@ -15,34 +14,8 @@ export function ContactForm() {
   const [state, setState] = useState<ContactFormState | null>(null);
   const [isPending, startTransition] = useTransition();
   const [showModal, setShowModal] = useState(false);
-  const [turnstileReady, setTurnstileReady] = useState(false);
   const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
   const formRef = useRef<HTMLFormElement>(null);
-  const turnstileWidgetId = useRef<string | null>(null);
-
-  useEffect(() => {
-    if (!turnstileReady || !window.turnstile) return;
-
-    const widgetId = window.turnstile.render('#turnstile-widget', {
-      sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '',
-      callback: () => {},
-      'error-callback': () => {
-        console.error('[Turnstile] Widget error');
-      },
-      'expired-callback': () => {
-        console.warn('[Turnstile] Token expired');
-      },
-      theme: 'light',
-    });
-
-    turnstileWidgetId.current = widgetId;
-
-    return () => {
-      if (window.turnstile && widgetId) {
-        window.turnstile.remove(widgetId);
-      }
-    };
-  }, [turnstileReady]);
 
   // Validate a single field on blur and set inline error
   function validateField(name: keyof typeof contactFormSchema.shape, value: string | boolean) {
@@ -122,12 +95,6 @@ export function ContactForm() {
       const result = await submitContactForm(state, formData);
       setState(result);
       setShowModal(true);
-
-      // Reset Turnstile on every submit — success or failure — because the
-      // token is consumed by Cloudflare on the first verification attempt.
-      if (window.turnstile && turnstileWidgetId.current) {
-        window.turnstile.reset(turnstileWidgetId.current);
-      }
 
       if (result.ok) {
         formRef.current?.reset();
@@ -306,11 +273,6 @@ export function ContactForm() {
           </p>
         )}
 
-        {/* Cloudflare Turnstile widget */}
-        <div className="my-2">
-          <div id="turnstile-widget" />
-        </div>
-
         <button
           type="submit"
           disabled={isPending}
@@ -334,12 +296,6 @@ export function ContactForm() {
           onClose={() => setShowModal(false)}
         />
       )}
-
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        strategy="lazyOnload"
-        onLoad={() => setTurnstileReady(true)}
-      />
     </>
   );
 }
@@ -350,7 +306,7 @@ interface ResultModalProps {
   onClose: () => void;
 }
 
-const KNOWN_ERROR_KEYS = ['turnstile', 'rateLimit', 'email', 'unexpected'] as const;
+const KNOWN_ERROR_KEYS = ['rateLimit', 'email', 'unexpected'] as const;
 type KnownErrorKey = typeof KNOWN_ERROR_KEYS[number];
 
 function ResultModal({ ok, errorMessage, onClose }: ResultModalProps) {

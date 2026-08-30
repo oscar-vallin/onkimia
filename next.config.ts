@@ -38,6 +38,47 @@ const nextConfig: NextConfig = {
       '@sanity/image-url',
     ],
   },
+  // Migración SEO desde el sitio anterior (Laravel, estructura /es/* y /en/*
+  // con slugs distintos) hacia las rutas de este sitio (ES sin prefijo, EN
+  // bajo /en/*). Mapeo obtenido crawleando onkimia.com en vivo. www→apex y
+  // http→https son responsabilidad del reverse proxy/DNS del servidor, no de
+  // esta app — ver docs/GUIA-INFRAESTRUCTURA-IT.md, sección 5.
+  //
+  // Tres destinos son suposiciones razonables sin URL vieja equivalente
+  // exacta en el sitio nuevo — confirmar/ajustar si el cliente da otra
+  // instrucción:
+  //  - /es/medicos, /en/doctors  → home (el grid de doctores vive ahí; NO
+  //    usar /onkimia-doctors, que es la página B2B de reclutamiento, no el
+  //    directorio de pacientes que era la intención de la URL vieja)
+  //  - /es/pacientes, /en/patients → /servicios
+  //  - /es/blog/*, /en/blog/* → home (interino; el sitio nuevo no tiene blog)
+  async redirects() {
+    return [
+      // ── Español — renombres específicos (antes del catch-all) ──
+      { source: '/es/equipo',      destination: '/nosotros',  permanent: true },
+      { source: '/es/app-onkimia', destination: '/nosotros',  permanent: true },
+      { source: '/es/medicos',     destination: '/',          permanent: true },
+      { source: '/es/pacientes',   destination: '/servicios', permanent: true },
+      { source: '/es/blog',        destination: '/',          permanent: true },
+      { source: '/es/blog/:slug*', destination: '/',          permanent: true },
+
+      // ── Español — catch-all: /es/* → /* (mismo slug, sin prefijo) ──
+      { source: '/es',        destination: '/',        permanent: true },
+      { source: '/es/:path*', destination: '/:path*',  permanent: true },
+
+      // ── Inglés — renombres de slug (el sitio nuevo no tiene equivalente 1:1) ──
+      { source: '/en/about-us',        destination: '/en/nosotros', permanent: true },
+      { source: '/en/medical-services', destination: '/en/servicios', permanent: true },
+      { source: '/en/contact',         destination: '/en/contacto', permanent: true },
+      { source: '/en/consult-colima',  destination: '/en/colima',   permanent: true },
+      { source: '/en/team',            destination: '/en/nosotros', permanent: true },
+      { source: '/en/app-onkimia',     destination: '/en/nosotros', permanent: true },
+      { source: '/en/doctors',         destination: '/en',          permanent: true },
+      { source: '/en/patients',        destination: '/en/servicios', permanent: true },
+      { source: '/en/blog',            destination: '/en',          permanent: true },
+      { source: '/en/blog/:slug*',     destination: '/en',          permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

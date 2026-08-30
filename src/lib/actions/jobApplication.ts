@@ -7,8 +7,6 @@ import {
   type JobApplicationFormState,
 } from '@/lib/schemas/jobApplication';
 import { jobApplicationRatelimit, getClientIp } from '@/lib/ratelimit';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { verifyTurnstile } from '@/lib/turnstile'; // TODO: re-enable with Turnstile block
 import { sendJobApplicationEmail } from '@/lib/email/resend';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { groq } from 'next-sanity';
@@ -51,8 +49,7 @@ const AREA_LABELS: Record<string, string> = {
  * 1. Validación CV (tipo, tamaño)
  * 2. Validación Zod del form (incluye honeypot)
  * 3. Rate limit por IP (3/día)
- * 4. Verificación Cloudflare Turnstile
- * 5. Envío de email con CV adjunto vía Resend
+ * 4. Envío de email con CV adjunto vía Resend
  *
  * El PDF se procesa en memoria y se descarta — no se persiste en disco (LFPDPPP).
  * TODO Tanda 9b: crear applicant en Odoo HR cuando lleguen credenciales.
@@ -109,17 +106,7 @@ export async function submitJobApplication(
     return { ok: false, message: 'error.rateLimit' };
   }
 
-  // ─── 4. Verificar Turnstile ─────────────────────────
-  // DESHABILITADO TEMPORALMENTE — 2026-06-29
-  // Motivo: pruebas de integración de email (Resend + CV adjunto)
-  // TODO: RE-HABILITAR ANTES DEL GO-LIVE
-  // const turnstileToken = formData.get('cf-turnstile-response')?.toString() ?? '';
-  // const turnstileOk = await verifyTurnstile(turnstileToken, ip);
-  // if (!turnstileOk) {
-  //   return { ok: false, message: 'error.turnstile' };
-  // }
-
-  // ─── 5. Obtener título de vacante ───────────────────
+  // ─── 4. Obtener título de vacante ───────────────────
   let vacancyTitle = 'Aplicación espontánea';
 
   if (parsed.data.vacancyId !== 'spontaneous') {
@@ -135,11 +122,11 @@ export async function submitJobApplication(
     }
   }
 
-  // ─── 6. Convertir CV a Buffer (en memoria, no persiste) ─
+  // ─── 5. Convertir CV a Buffer (en memoria, no persiste) ─
   const cvBytes = await cvFile!.arrayBuffer();
   const cvBuffer = Buffer.from(cvBytes);
 
-  // ─── 7. Enviar email con adjunto ────────────────────
+  // ─── 6. Enviar email con adjunto ────────────────────
   try {
     const result = await sendJobApplicationEmail({
       vacancyTitle,

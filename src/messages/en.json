@@ -984,7 +984,6 @@
       "error": {
         "unexpected": "An unexpected error occurred. Please try again.",
         "rateLimit": "You've sent too many messages. Please try again in an hour.",
-        "turnstile": "We couldn't verify you're human. Refresh the page and try again.",
         "email": "We couldn't send the message. Please try again in a few moments.",
         "submit": "We couldn't register your message at this time. Please try again or contact us directly at (33) 4349 0140."
       },
@@ -1211,7 +1210,6 @@
       },
       "error": {
         "rateLimit": "You've sent too many applications. Please try again tomorrow.",
-        "turnstile": "We couldn't verify you're human. Refresh the page.",
         "email": "We couldn't send your application. Please try again.",
         "unexpected": "An unexpected error occurred. Please try again."
       }

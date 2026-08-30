@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useTransition, useEffect, useRef } from 'react';
-import Script from 'next/script';
 import { useTranslations, useLocale } from 'next-intl';
 import { Loader2, CheckCircle2, AlertCircle, X, Upload, FileText } from 'lucide-react';
 import { submitJobApplication } from '@/lib/actions/jobApplication';
@@ -48,9 +47,7 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
   const [selectedVacancyId, setSelectedVacancyId] = useState('spontaneous');
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
-  const [turnstileReady, setTurnstileReady] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  const turnstileWidgetId = useRef<string | null>(null);
 
   const isSpontaneous = selectedVacancyId === 'spontaneous';
   const selectedVacancy = vacancies.find((v) => v._id === selectedVacancyId);
@@ -63,18 +60,6 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
     if (citySelect) citySelect.value = selectedVacancy.city;
     if (areaSelect) areaSelect.value = selectedVacancy.area;
   }, [selectedVacancy]);
-
-  useEffect(() => {
-    if (!turnstileReady || !window.turnstile) return;
-    const widgetId = window.turnstile.render('#turnstile-widget-jobs', {
-      sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '',
-      theme: 'light',
-    });
-    turnstileWidgetId.current = widgetId;
-    return () => {
-      if (window.turnstile && widgetId) window.turnstile.remove(widgetId);
-    };
-  }, [turnstileReady]);
 
   // Validate a single field inline by running the full schema and extracting the relevant error
   function validateField(name: string, value: unknown) {
@@ -194,12 +179,6 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
       const result = await submitJobApplication(state, formData);
       setState(result);
       setShowModal(true);
-
-      // Reset Turnstile on every submit — success or failure — because the
-      // token is consumed by Cloudflare on the first verification attempt.
-      if (window.turnstile && turnstileWidgetId.current) {
-        window.turnstile.reset(turnstileWidgetId.current);
-      }
 
       if (result.ok) {
         const form = document.getElementById('job-application-form') as HTMLFormElement | null;
@@ -568,11 +547,6 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
           </p>
         )}
 
-        {/* ─── Turnstile ─── */}
-        <div className="my-2">
-          <div id="turnstile-widget-jobs" />
-        </div>
-
         <button
           type="submit"
           disabled={isPending}
@@ -596,17 +570,11 @@ export function JobApplicationForm({ vacancies }: JobApplicationFormProps) {
           onClose={() => setShowModal(false)}
         />
       )}
-
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        strategy="lazyOnload"
-        onLoad={() => setTurnstileReady(true)}
-      />
     </>
   );
 }
 
-const KNOWN_JOB_ERROR_KEYS = ['turnstile', 'rateLimit', 'email', 'unexpected'] as const;
+const KNOWN_JOB_ERROR_KEYS = ['rateLimit', 'email', 'unexpected'] as const;
 type KnownJobErrorKey = typeof KNOWN_JOB_ERROR_KEYS[number];
 
 function JobResultModal({

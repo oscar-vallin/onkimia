@@ -86,12 +86,10 @@ Todas deben existir en el servidor donde se ejecuta `node server.js` (no solo en
 | `SANITY_API_READ_TOKEN` | Token de lectura de Sanity | Secreto — servidor únicamente |
 | `SANITY_REVALIDATE_SECRET` | Firma del webhook de revalidación | Secreto — ver sección 3 |
 | `ODOO_URL`, `ODOO_DATABASE`, `ODOO_USERNAME`, `ODOO_API_KEY` | Credenciales del CRM Odoo (formulario de contacto) | Secretos — servidor únicamente |
-| `TURNSTILE_SECRET_KEY` | Verificación anti-spam Cloudflare Turnstile | Secreto. **Hoy deshabilitado a petición del cliente** — ver nota abajo |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Clave pública del mismo Turnstile | Solo build (público) |
 | `RESEND_API_KEY`, `RESEND_FROM_EMAIL` | Envío de correo (bolsa de trabajo) | Secretos |
 | `JOB_BOARD_EMAIL` | Correo destino de postulaciones | — |
 
-**Nota sobre Turnstile:** el código de verificación existe pero está comentado en `src/lib/actions/contact.ts` y `src/lib/actions/jobApplication.ts` — fue una decisión explícita del cliente (Turnstile no estaba en el alcance original). El formulario ya muestra el widget visualmente; falta solo descomentar 5 líneas y tener `TURNSTILE_SECRET_KEY` cuando el cliente confirme que lo quiere activar antes del go-live.
+**Nota:** Cloudflare Turnstile se evaluó y luego se eliminó por completo del proyecto (código, variables de entorno, dependencias) — no forma parte del alcance actual. La protección anti-spam de ambos formularios es honeypot + rate limiting por IP (ver sección 4). Si en el futuro se decide reactivar un CAPTCHA, es una integración nueva desde cero, no queda nada "listo para descomentar".
 
 Guardar los secretos en un `.env.production` fuera del control de versiones, o en el gestor de secretos que use su infraestructura (Vault, variables de entorno del sistema, etc.). Nunca deben aparecer en el repositorio.
 
@@ -210,6 +208,5 @@ Los redirects 301 (sección 5) son completamente stateless — no dependen de me
 - [ ] Reverse proxy configurado: TLS, `X-Forwarded-For`, redirect `www` → apex
 - [ ] Webhook de Sanity configurado y probado (crear/editar un documento de prueba y confirmar que la página correspondiente se actualiza)
 - [ ] DNS apuntando al nuevo servidor coordinado con el deploy (mismo día)
-- [ ] 3-4 URLs viejas probadas manualmente → confirman 301 correcto
+- [ ] Redirects de migración probados en producción (lista completa en `next.config.ts` → `redirects()`; verificar en especial `/es/medicos`, `/es/pacientes` y `/es/blog/*`, que usan destinos por defecto sin URL vieja exacta — confirmar con el cliente si prefiere otros)
 - [ ] Propiedad de dominio dada de alta en Google Search Console + sitemap enviado
-- [ ] Turnstile: confirmar con el cliente si se activa antes de lanzar (ver nota en sección 2)

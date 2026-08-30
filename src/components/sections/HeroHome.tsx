@@ -2,12 +2,12 @@ import type { ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { PillButton } from '@/components/ui/PillButton';
 import { HeroEyebrow } from './HeroEyebrow';
-import { HeroVideoBackground, type HeroVideoSource } from './HeroVideoBackground';
+import { HeroVideoBackground } from './HeroVideoBackground';
 
 // HeroVideoBackground carries its own 'use client' directive, so importing
 // it here (a Server Component) is enough for Next to create the client
 // boundary at exactly that leaf — no next/dynamic needed. It returns null
-// server-side when videoSources is empty (the default), so there's nothing
+// server-side when videoSegments is empty (the default), so there's nothing
 // to hydrate-mismatch against and no SSR cost either way.
 
 interface Stat {
@@ -24,10 +24,11 @@ export interface HeroHomeProps {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   stats: [Stat, Stat, Stat];
-  /** Background video — no static fallback image behind it (removed per
-   *  client request). Omit (or pass []) and the hero falls back to its
-   *  plain bg-primary color; see HeroVideoBackground.tsx for details. */
-  videoSources?: HeroVideoSource[];
+  /** Background video, chunked into sequential segments played back-to-back
+   *  (see HeroVideoBackground.tsx). No static fallback image behind it
+   *  (removed per client request). Omit (or pass []) and the hero falls
+   *  back to its plain bg-primary color. */
+  videoSegments?: string[];
 }
 
 function parseHeroTitle(text: string): ReactNode[] {
@@ -47,17 +48,17 @@ export function HeroHome({
   primaryCta,
   secondaryCta,
   stats,
-  videoSources = [],
+  videoSegments = [],
 }: HeroHomeProps) {
   return (
     <section className="relative w-full min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] overflow-hidden bg-primary text-white -mt-16 md:-mt-20">
         {/* No static fallback image — removed per client request so nothing
             shows behind the video before it starts playing (the section's
             own bg-primary color fills that gap instead). Renders nothing
-            when videoSources is empty (default). See HeroVideoBackground.tsx
-            for the full behavior contract (reduced-motion opt-out, fade-in
-            only once actually playing). */}
-        <HeroVideoBackground sources={videoSources} />
+            when videoSegments is empty (default). See HeroVideoBackground.tsx
+            for the full behavior contract (sequential chunked playback,
+            reduced-motion opt-out, fade-in only once actually playing). */}
+        <HeroVideoBackground segments={videoSegments} />
 
       {/* Overlay: gradient bottom-left → top-right for legibility of bottom-left content */}
       <div
