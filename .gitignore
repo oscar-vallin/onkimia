@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Environment variables (CRÍTICO — nunca subir)
+.env
+.env*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.turbo/
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Coverage
+coverage/
+
+# Misc
+.eslintcache
+
+# Hero video — legacy progressive-MP4 fallback only (157 MB, over GitHub's
+# 100 MB per-file push limit). This is NOT the primary playback path: it's
+# used only by browsers with neither native HLS nor Media Source Extensions
+# — practically nobody. The real HLS fMP4 assets (public/heros/hls/*.m4s,
+# init.mp4, hero.m3u8) ARE tracked in git — every individual file there is
+# comfortably under the limit, so `git clone` gets a fully working site.
+# This one file must be deployed to production as a manual step alongside
+# the rest (see docs/GUIA-INFRAESTRUCTURA-IT.md) instead of via git.
+public/heros/hls/hero.mp4

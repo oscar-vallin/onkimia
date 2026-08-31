@@ -1,0 +1,419 @@
+@import "tailwindcss";
+@source inline("bg-endos-teal-900 hover:bg-endos-teal-900 bg-endos-teal-700 hover:bg-endos-teal-700 bg-endos-teal-700/10 bg-endos-tint-50 bg-endos-mint-500 text-endos-teal-700 text-endos-mint-500 border-endos-teal-700 border-endos-mint-500 hover:border-endos-mint-500 hover:border-endos-teal-700/20 hover:border-endos-teal-700/10 open:border-l-endos-teal-700 group-open:bg-endos-teal-700 group-open:border-endos-teal-700 from-endos-teal-900/85 via-endos-teal-900/60");
+@source inline("bg-cuidare-blue-900 hover:bg-cuidare-blue-900 bg-cuidare-blue-700 hover:bg-cuidare-blue-700 bg-cuidare-blue-300 bg-cuidare-blue-100 text-cuidare-blue-700 text-cuidare-blue-300 border-cuidare-blue-700 hover:border-cuidare-blue-700/10 hover:border-cuidare-blue-700/20 from-cuidare-blue-700 from-cuidare-blue-900/85 via-cuidare-blue-900/60");
+@source inline("bg-doctors-blue text-doctors-blue border-doctors-blue hover:bg-doctors-blue hover:bg-doctors-ink bg-doctors-surface text-doctors-surface bg-doctors-ink text-doctors-ink border-doctors-blue/20");
+@source inline("hover:bg-primary/85 hover:bg-doctors-blue/85 hover:shadow-primary/20 hover:shadow-endos-teal-700/20 hover:shadow-cuidare-blue-700/20 hover:shadow-doctors-blue/20 focus-visible:ring-offset-primary focus-visible:ring-offset-endos-teal-700 focus-visible:ring-offset-cuidare-blue-700 focus-visible:ring-offset-doctors-blue");
+
+
+/* ============================================
+   ONKIMIA DESIGN SYSTEM — Tailwind v4
+   ============================================ */
+
+@theme {
+  /* ─── Paleta v3 ─── */
+  --color-ink:        #1a1a1f;  /* fondo oscuro principal */
+  --color-ink-2:      #232329;  /* superficie oscura elevada */
+  --color-ink-3:      #2d2d35;  /* borde sobre oscuro */
+  --color-teal:       #1A7A6E;  /* acento principal (único color de acción) */
+  --color-teal-soft:  #2a9d8c;  /* acento hover */
+  --color-teal-light: #5DCAA5;  /* acento claro (badges, detalles) */
+  --color-cream:      #f6f4ef;  /* fondo claro cálido */
+  --color-cream-2:    #ece9e1;
+  --color-gray-warm:  #525258;  /* texto secundario — AA contrast on cream+white */
+  --color-gray-soft:  #9b9ba3;
+  --color-line:       #e6e3db;  /* bordes sobre fondo claro */
+
+  /* ─── SEMÁNTICOS ───
+     Para feedback de forms y estados de UI */
+  --color-success-50:  #ecfdf5;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+
+  --color-warning-50:  #fffbeb;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+
+  --color-error-50:    #fef2f2;
+  --color-error-500:   #ef4444;
+  --color-error-600:   #dc2626;
+  --color-error-700:   #b91c1c;
+
+  --color-info-50:     #eff6ff;
+  --color-info-500:    #3b82f6;
+  --color-info-600:    #2563eb;
+
+  /* ─── ENDOS (teal + mint) ─── */
+  --color-endos-teal-900: #334e4e;
+  --color-endos-teal-700: #457373;
+  --color-endos-mint-500: #69cfaf;
+  --color-endos-tint-50:  #e7f2f9;
+
+  /* ─── ONKIMIA DOCTORS ─── */
+  --color-doctors-blue:    #5d81f0;   /* acento principal — interactivos, destaques */
+  --color-doctors-surface: #e7e1e6;   /* superficie clara neutra — fondos limpios */
+  /* doctors-ink: derivado aprox. de CMYK 75/68/67/90 — confirmar hex oficial */
+  --color-doctors-ink:     #0a0e12;   /* contraste oscuro — texto/fondos profundos */
+
+  /* ─── CUIDARE (azules) ─── */
+  --color-cuidare-blue-900: #00263a;
+  --color-cuidare-blue-700: #00365f;
+  --color-cuidare-blue-300: #86c1d2;
+  --color-cuidare-blue-100: #c9e8fb;
+
+  /* ─── PALETA ONKIMIA v4 (monocromático) ─── */
+  --color-primary:    #27272c;   /* carbón — texto y fondos oscuros */
+  --color-secondary:  #686873;   /* gris — texto secundario */
+  --color-light:      #ffffff;
+  --color-deep:       #0d1117;   /* sección Pilares */
+  --color-card-from:  #1e1e22;   /* gradiente tarjetas oscuras (inicio) */
+  --color-card-to:    #27272c;   /* gradiente tarjetas oscuras (fin) */
+
+  /* ─── TIPOGRAFÍA ─── */
+  --font-serif:   var(--font-fraunces), Georgia, serif;
+  --font-sans:    var(--font-dm-sans), system-ui, -apple-system, sans-serif;
+  --font-mono:    'Source Code Pro', Consolas, monospace;
+
+  /* ─── ESCALA TIPOGRÁFICA ───
+     Modular scale 1.25 (Major Third) — equilibrio para sitio médico */
+  --text-xs:   0.75rem;     /* 12px — Labels, captions */
+  --text-sm:   0.875rem;    /* 14px — Texto pequeño */
+  --text-base: 1rem;        /* 16px — Body default */
+  --text-lg:   1.125rem;    /* 18px — Body destacado */
+  --text-xl:   1.25rem;     /* 20px — Subheadings */
+  --text-2xl:  1.5rem;      /* 24px — H4 */
+  --text-3xl:  1.875rem;    /* 30px — H3 */
+  --text-4xl:  2.25rem;     /* 36px — H2 */
+  --text-5xl:  3rem;        /* 48px — H1 móvil */
+  --text-6xl:  3.75rem;     /* 60px — Hero móvil/tablet */
+  --text-7xl:  4.5rem;      /* 72px — Hero desktop */
+
+  /* ─── ESPACIADO CUSTOM ─── */
+  --spacing-section:    6rem;      /* 96px — Gap entre secciones */
+  --spacing-section-sm: 4rem;      /* 64px — Gap móvil */
+  --spacing-container:  1.5rem;    /* 24px — Padding lateral */
+
+  /* ─── BREAKPOINTS ───
+     Mobile-first. Prioridad: móvil 4G México (LCP target) */
+  --breakpoint-sm:  640px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-2xl: 1440px;  /* Reduced from default 1536 — Onkimia design max */
+
+  /* ─── BORDES ─── */
+  --radius-sm:   0.25rem;    /* 4px  — Inputs pequeños */
+  --radius-md:   0.5rem;     /* 8px  — Cards, modales */
+  --radius-lg:   0.75rem;    /* 12px — Botones grandes */
+  --radius-xl:   1rem;       /* 16px — Hero cards */
+  --radius-2xl:  1.5rem;     /* 24px — Featured sections */
+  --radius-full: 9999px;     /* Pill / circular */
+
+  /* ─── SOMBRAS ───
+     Sutiles. Sitio médico = serio, no agresivo */
+  --shadow-xs:   0 1px 2px 0 rgb(7 7 7 / 0.04);
+  --shadow-sm:   0 1px 3px 0 rgb(7 7 7 / 0.06), 0 1px 2px -1px rgb(7 7 7 / 0.04);
+  --shadow-md:   0 4px 6px -1px rgb(7 7 7 / 0.07), 0 2px 4px -2px rgb(7 7 7 / 0.05);
+  --shadow-lg:   0 10px 15px -3px rgb(7 7 7 / 0.08), 0 4px 6px -4px rgb(7 7 7 / 0.05);
+  --shadow-xl:   0 20px 25px -5px rgb(7 7 7 / 0.08), 0 8px 10px -6px rgb(7 7 7 / 0.05);
+  --shadow-2xl:  0 25px 50px -12px rgb(7 7 7 / 0.15);
+
+  /* ─── ANIMACIONES ─── */
+  --animate-fade-in:    fadeIn 0.4s ease-out;
+  --animate-slide-up:   slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Variables con alpha (no son clases Tailwind; se usan en CSS custom
+   de los componentes nuevos: bordes sobre oscuro, fondos translúcidos) ─── */
+:root {
+  --teal-dim:  rgba(26, 122, 110, 0.12);
+  --line-dark: rgba(255, 255, 255, 0.08);
+}
+
+/* Keyframes referenced by --animate-* variables above */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   ESTILOS BASE
+   ============================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.5vw + 0.5rem, 1.125rem);
+    color: var(--color-ink);
+    background-color: white;
+    line-height: 1.6;
+  }
+
+  /* text-wrap: balance — Chrome 114+, Firefox 121+, Safari 17.4+ (degrades gracefully on older) */
+  /* text-wrap: pretty  — Chrome 117+, no Safari support yet (degrades gracefully — no orphan prevention on Safari/Firefox) */
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.2rem + 4vw, 3.75rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  h4, h5, h6 {
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.3;
+  }
+
+  p {
+    font-weight: 400;
+  }
+
+  /* Selección de texto */
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
+    color: var(--color-primary);
+  }
+
+  /* Focus visible (WCAG 2.1 AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* ─── Endos — acento de sub-marca en estados interactivos ─── */
+  .endos-page :focus-visible {
+    outline-color: var(--color-endos-teal-900);
+  }
+
+  .endos-page ::selection {
+    background-color: color-mix(in srgb, var(--color-endos-teal-900) 18%, transparent);
+    /* color: inherit — texto conserva su color; evita riesgos de contraste */
+  }
+
+  /* ─── Cuidare — acento de sub-marca en estados interactivos ─── */
+  .cuidare-page :focus-visible {
+    outline-color: var(--color-cuidare-blue-700);
+  }
+
+  .cuidare-page ::selection {
+    background-color: color-mix(in srgb, var(--color-cuidare-blue-700) 18%, transparent);
+    /* color: inherit — texto conserva su color; blue-300/100 nunca son texto */
+  }
+
+  /* ─── Onkimia Doctors — acento de sub-marca en estados interactivos ─── */
+  .doctors-page :focus-visible {
+    outline-color: var(--color-doctors-blue);
+  }
+
+  .doctors-page ::selection {
+    background-color: color-mix(in srgb, var(--color-doctors-blue) 18%, transparent);
+    color: var(--color-doctors-ink);
+  }
+
+  /* ── Header initial background — CSS-first, no JS required ──────────────
+     Applies bg-primary to .site-header immediately when the browser parses
+     data-header-theme="dark" on <body>, before any JavaScript runs.
+     The [data-scrolled="true"] exclusion lets the scroll-driven Tailwind
+     classes take over once the user scrolls. */
+  body[data-header-theme="dark"] header.site-header:not([data-scrolled="true"]) {
+    background-color: var(--color-primary);
+  }
+
+  /* Reduce motion para accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Inputs y botones heredan tipografía */
+  button, input, optgroup, select, textarea {
+    font-family: inherit;
+  }
+}
+
+/* ============================================
+   UTILIDADES CUSTOM
+   ============================================ */
+
+@layer utilities {
+  /* Container con max-width y padding consistente */
+  .container-onkimia {
+    width: 100%;
+    max-width: var(--breakpoint-2xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-container);
+  }
+
+  /* Aspect ratios comunes del Figma */
+  .aspect-hero {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 768px) {
+    .aspect-hero {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  /* Text balance para titulares (evita líneas viudas) */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Pretty text para body (mejora wrapping en párrafos) */
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* ─── PROCEDURE MOBILE CAROUSEL — scroll nativo sin scrollbar ─── */
+  .procedure-mobile-track {
+    scrollbar-width: none;        /* Firefox */
+  }
+  .procedure-mobile-track::-webkit-scrollbar {
+    display: none;                /* Chrome / Safari */
+  }
+
+  /* ─── INSURANCE CAROUSEL — Marquee infinito ─── */
+  .insurance-carousel-track {
+    animation: insurance-marquee var(--animation-duration, 15s) linear infinite;
+  }
+
+  .insurance-carousel-fade:hover .insurance-carousel-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .insurance-carousel-track {
+      animation: none;
+    }
+  }
+
+  .insurance-carousel-fade {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 80px,
+      black calc(100% - 80px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 80px,
+      black calc(100% - 80px),
+      transparent 100%
+    );
+  }
+}
+
+@keyframes insurance-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none !important; }
+}
+
+@keyframes kenBurns {
+  0%   { transform: scale(1.0); }
+  50%  { transform: scale(1.02); }
+  100% { transform: scale(1.0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-ken-burns {
+    animation: kenBurns 25s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+/* ─── Mision section — wave reveal + drift ─── */
+@keyframes wave-drift {
+  0%, 100% { transform: translateX(0px); }
+  50%       { transform: translateX(-18px); }
+}
+
+/* Left-to-right reveal: clip-path shrinks the right mask from 100% → 0% */
+@keyframes wave-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+.waves-container {
+  /* Start fully clipped; revealed via animation */
+  clip-path: inset(0 100% 0 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .waves-container {
+    animation: wave-reveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+  .wave-1 { animation: wave-drift 9s  ease-in-out infinite 1.4s;    }
+  .wave-2 { animation: wave-drift 11s ease-in-out infinite 2.9s;  }
+  .wave-3 { animation: wave-drift 13s ease-in-out infinite 4.2s;    }
+  .wave-4 { animation: wave-drift 10s ease-in-out infinite 2.15s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No animation but still show the waves */
+  .waves-container { clip-path: none; }
+}
