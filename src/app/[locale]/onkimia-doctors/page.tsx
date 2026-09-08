@@ -82,26 +82,6 @@ export default async function OnkimiaDoctorsPage({
         }
         solidLeftBand
       >
-        {/* <p className="hidden md:block text-white/75 text-base md:text-lg italic mb-6 max-w-xl leading-relaxed">
-          {t('hero.quote')}
-        </p> */}
-        {/* <div className="flex flex-wrap gap-3 mt-6 md:mt-0">
-          <a
-            href={buildWhatsApp(waCommercial, t('cta.message'))}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-white text-ink font-medium px-7 py-3.5 rounded-xl hover:bg-white/90 transition-colors text-sm"
-          >
-            {t('hero.joinButton')}
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
-          <a
-            href="#beneficios"
-            className="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-7 py-3.5 rounded-xl hover:bg-white/10 transition-colors text-sm"
-          >
-            {t('hero.benefitsButton')}
-          </a>
-        </div> */}
       </PageHero>
 
       {/* ════════════════════════════════════════
