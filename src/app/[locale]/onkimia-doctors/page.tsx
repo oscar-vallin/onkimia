@@ -19,7 +19,6 @@ export async function generateMetadata({
   return buildMetadata({ title: t('title'), description: t('description'), locale, pathname: '/onkimia-doctors' });
 }
 
-/* ─── Static data ─── */
 const IMPROVEMENT_KEYS = ['waitTime', 'fragmentation', 'coordinated', 'adherence', 'emotional'] as const;
 
 const UNITS = [
