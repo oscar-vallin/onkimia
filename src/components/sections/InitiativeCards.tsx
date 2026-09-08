@@ -1,3 +1,4 @@
+import NextImage from 'next/image';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
 import type { SanityImageWithLQIP } from '@/sanity/types';
@@ -48,9 +49,11 @@ interface CardProps {
   category: string;
   icon: React.ReactNode;
   image?: SanityImageWithLQIP;
+  /** Local /public path — shown as a glass badge over the top-left corner of the photo. */
+  logoSrc?: string;
 }
 
-function InitiativeCard({ title, description, category, icon, image }: CardProps) {
+function InitiativeCard({ title, description, category, icon, image, logoSrc }: CardProps) {
   const imgSrc = image
     ? urlFor(image).width(760).height(480).format('webp').quality(82).url()
     : null;
@@ -67,6 +70,19 @@ function InitiativeCard({ title, description, category, icon, image }: CardProps
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" />
+        )}
+        {logoSrc && (
+          <div className="absolute top-4 left-4 w-40 h-14 bg-white/55 backdrop-blur-md border border-white/60 rounded-xl shadow-lg">
+            <div className="relative w-full h-full">
+              <NextImage
+                src={logoSrc}
+                alt="Onkimia Aware"
+                fill
+                sizes="160px"
+                className="object-contain"
+              />
+            </div>
+          </div>
         )}
       </div>
 
@@ -121,6 +137,7 @@ export function InitiativeCards({
             category={awareCategory}
             icon={<PreventionIcon />}
             image={awareImage}
+            logoSrc="/aware/aware-logo-color-trimmed.png"
           />
         </div>
       </div>

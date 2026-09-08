@@ -3,6 +3,8 @@
  * Previously sourced from Sanity; now hardcoded here.
  */
 
+import { WHATSAPP_ENDOS, WHATSAPP_CUIDARE } from '@/config/whatsappNumbers';
+
 // ─── Display config (used by Footer, ContactInfo, Header phone/WhatsApp links) ───
 
 export const clinicConfig = {
@@ -85,8 +87,8 @@ export const CLINICS: StaticClinic[] = [
     geo: { lat: 20.68096446197789, lng: -103.39180420428036 },
     phone: '+52(33) 4349 0140',
     whatsapp: '5213320331257',
-    whatsappEndos: '5213320331257',
-    whatsappCuidare: '5213320331257',
+    whatsappEndos: WHATSAPP_ENDOS,
+    whatsappCuidare: WHATSAPP_CUIDARE,
     email: 'contacto@onkimia.com',
     isPrimary: true,
   },

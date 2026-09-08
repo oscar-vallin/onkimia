@@ -116,7 +116,6 @@ export default async function ServicesPage({
         clinicsEyebrow={t('clinics.eyebrow')}
         clinicsTitle={t('clinics.title')}
         clinicsDescription={t('clinics.description')}
-        clinicsStat={t('main.feature1Stat')}
         clinicsSectionImage={services?.clinicsSectionImage}
         clinicsImageAlt={t('clinics.title')}
         tabLabels={tabLabels}

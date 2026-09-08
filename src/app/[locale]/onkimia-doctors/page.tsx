@@ -8,6 +8,7 @@ import { MedicalBusinessLd, BreadcrumbListJsonLd } from '@/components/seo/JsonLd
 import { HeroPreload } from '@/components/seo/HeroPreload';
 import { ROUTES } from '@/config/routes';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { WHATSAPP_DOCTORS } from '@/config/whatsappNumbers';
 
 export async function generateMetadata({
   params,
@@ -54,10 +55,13 @@ export default async function OnkimiaDoctorsPage({
     getTranslations({ locale, namespace: 'navigation' }),
   ]);
 
-  const waCommercial = '5213320331257';
+  // Single WhatsApp number for every action on this page (join + all
+  // "Agendar recorrido" tour buttons, regardless of unit) — see
+  // config/whatsappNumbers.ts.
+  const waCommercial = WHATSAPP_DOCTORS;
   const waEndos = waCommercial;
   const waCuidare = waCommercial;
-  const waJoin = '5213328209676';
+  const waJoin = waCommercial;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onkimia.com';
 

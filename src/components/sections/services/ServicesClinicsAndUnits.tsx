@@ -28,7 +28,6 @@ interface ServicesClinicsAndUnitsProps {
   clinicsEyebrow: string;
   clinicsTitle: string;
   clinicsDescription: string;
-  clinicsStat?: string;
   clinicsSectionImage?: SanityImageWithLQIP;
   clinicsImageAlt: string;
   tabLabels: Record<TabId, string>;
@@ -49,7 +48,6 @@ export function ServicesClinicsAndUnits({
   clinicsEyebrow,
   clinicsTitle,
   clinicsDescription,
-  clinicsStat,
   clinicsSectionImage,
   clinicsImageAlt,
   tabLabels,
@@ -86,12 +84,6 @@ export function ServicesClinicsAndUnits({
             introClassName="text-lg md:text-lg max-w-2xl mx-auto mb-0"
             className="max-w-none md:mb-18"
           >
-            {clinicsStat && (
-              <div className="flex items-center justify-center gap-2 mt-5">
-                <span className="w-2 h-2 rounded-full bg-secondary/30 flex-shrink-0" aria-hidden="true" />
-                <span className="text-sm text-secondary">{clinicsStat}</span>
-              </div>
-            )}
           </SectionHeader>
 
           {/* Category toggle */}

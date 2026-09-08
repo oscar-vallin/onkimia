@@ -12,6 +12,7 @@
  */
 
 import type { StaticClinic } from '@/config/clinicConfig';
+import { WHATSAPP_DOCTORS } from '@/config/whatsappNumbers';
 
 export type Section =
   | 'home'
@@ -37,7 +38,7 @@ export function getWhatsAppNumber({
 }: GetWhatsAppNumberOptions): string | null {
   // Onkimia Doctors always uses the global commercial number
   if (section === 'onkimia-doctors') {
-    return '5213320331257';
+    return WHATSAPP_DOCTORS;
   }
 
   // Fallback: selected clinic → primary → first
