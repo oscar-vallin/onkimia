@@ -151,14 +151,6 @@ export default async function ServicesPage({
         </div>
       )}
 
-      {/* ─── TECNOLOGÍA AVANZADA ─── */}
-      {/* <CtaBlock
-        eyebrow={t('main.eyebrow')}
-        title={t('main.feature3Title')}
-        description={t('main.feature3Description')}
-        stat={t('main.feature3Stat')}
-      /> */}
-
       {/* ─── 4. SOCIOS COMERCIALES ─── */}
       <section className="bg-gray-50 py-20 md:py-28">
         <div className="container-onkimia">
