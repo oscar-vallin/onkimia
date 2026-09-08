@@ -35,7 +35,7 @@ export async function generateMetadata({
 const CLINIC_SLUGS = [
   'breast', 'lung', 'prostate', 'cns', 'headNeck', 'thoracic',
   'hepatic', 'renal', 'gastric', 'gynecological', 'urinary',
-  'digestive', 'skin', 'gastrointestinal',
+  'digestive', 'skin',
 ] as const;
 
 export default async function ServicesPage({

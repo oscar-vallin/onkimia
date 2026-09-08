@@ -47,10 +47,4 @@ export const CLINIC_ICONS: Record<string, ReactNode> = {
   skin: (
     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   ),
-  gastrointestinal: (
-    <>
-      <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M3 9h18M9 21V9" stroke="currentColor" strokeWidth="1.5" />
-    </>
-  ),
 };
