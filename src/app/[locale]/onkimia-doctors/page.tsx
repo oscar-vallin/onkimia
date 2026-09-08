@@ -72,7 +72,7 @@ export default async function OnkimiaDoctorsPage({
         ]}
       />
     <div className="doctors-page">
-      {/* ─── Hero ─── */}
+      {/* ─── HERO ─── */}
       <PageHero
         imageSrc="/heros/doctors-hero-desktop.webp"
         mobileImageSrc="/heros/doctors-hero-mobile.webp"
