@@ -467,9 +467,9 @@
       "title": "Why Onkimia?",
       "services": [
         {
-          "icon": "stethoscope",
-          "title": "Oncology Consultation",
-          "description": "Expert medical assessment and personalized treatment planning."
+          "icon": "car",
+          "title": "Valet Parking",
+          "description": "Convenient and secure vehicle drop-off service for your comfort."
         },
         {
           "icon": "clipboard",
@@ -477,34 +477,34 @@
           "description": "Dedicated support to navigate your insurance coverage and claims."
         },
         {
-          "icon": "car",
-          "title": "Valet Parking",
-          "description": "Convenient and secure vehicle drop-off service for your comfort."
-        },
-        {
-          "icon": "hotel",
-          "title": "Hospitality",
-          "description": "Premium service designed to ensure your comfort and well-being."
-        },
-        {
           "icon": "armchair",
-          "title": "Private Infusion Cabins",
-          "description": "Comfortable, private spaces designed for your infusion treatments."
+          "title": "VIP Infusion Room",
+          "description": "A comfortable, private space designed for your infusion treatments."
         },
         {
-          "icon": "building2",
-          "title": "Surgery",
-          "description": "Advanced surgical procedures performed by specialized experts."
+          "icon": "coffee",
+          "title": "Breakfast and Lunch",
+          "description": "Fresh, healthy meal options throughout your stay."
         },
         {
-          "icon": "droplets",
-          "title": "Hematology",
-          "description": "Specialized care for blood-related conditions and disorders."
+          "icon": "apple",
+          "title": "Initial Nutritional Assessment",
+          "description": "A personalized evaluation to design a meal plan aligned with your treatment."
         },
         {
-          "icon": "bone",
-          "title": "Rheumatology",
-          "description": "Comprehensive diagnosis and treatment for rheumatic diseases."
+          "icon": "users",
+          "title": "Support Group",
+          "description": "A space for support and connection alongside other patients and families."
+        },
+        {
+          "icon": "sparkles",
+          "title": "Complementary Therapies",
+          "description": "Psychology, physiotherapy, and other therapies integrated into your care plan."
+        },
+        {
+          "icon": "smartphone",
+          "title": "Onkimia App",
+          "description": "Track your treatment and stay connected with your medical team."
         }
       ]
     },

@@ -1,8 +1,8 @@
-import { Car, Smartphone, Sparkles, ShieldCheck, Users, Globe, Stethoscope, Clipboard, Hotel, Armchair, Building2, Droplets, Bone } from 'lucide-react';
+import { Car, Smartphone, Sparkles, ShieldCheck, Users, Globe, Stethoscope, Clipboard, Hotel, Armchair, Building2, Droplets, Bone, Coffee, Apple } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
-export type ServiceIcon = 'car' | 'smartphone' | 'sparkles' | 'shield-check' | 'users' | 'globe' | 'stethoscope' | 'clipboard' | 'hotel' | 'armchair' | 'building2' | 'droplets' | 'bone';
+export type ServiceIcon = 'car' | 'smartphone' | 'sparkles' | 'shield-check' | 'users' | 'globe' | 'stethoscope' | 'clipboard' | 'hotel' | 'armchair' | 'building2' | 'droplets' | 'bone' | 'coffee' | 'apple';
 
 interface Service {
   icon: ServiceIcon;
@@ -31,6 +31,8 @@ const ICON_MAP: Record<ServiceIcon, LucideIcon> = {
   building2: Building2,
   droplets: Droplets,
   bone: Bone,
+  coffee: Coffee,
+  apple: Apple,
 };
 
 export function MoreThanMedicine({

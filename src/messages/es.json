@@ -467,44 +467,44 @@
       "title": "¿Por qué Onkimia?",
       "services": [
         {
-          "icon": "stethoscope",
-          "title": "Consulta de oncología",
-          "description": "Evaluación médica experta y planificación de tratamiento personalizado."
-        },
-        {
-          "icon": "clipboard",
-          "title": "Concierge de seguros",
-          "description": "Apoyo dedicado para navegar tu cobertura de seguros y reclamaciones."
-        },
-        {
           "icon": "car",
           "title": "Valet parking",
           "description": "Servicio conveniente y seguro de estacionamiento para tu comodidad."
         },
         {
-          "icon": "hotel",
-          "title": "Hospitalidad",
-          "description": "Servicio premium diseñado para garantizar tu comodidad y bienestar."
+          "icon": "clipboard",
+          "title": "Concierge de aseguranza",
+          "description": "Apoyo dedicado para navegar tu cobertura de seguros y reclamaciones."
         },
         {
           "icon": "armchair",
-          "title": "Cabinas de infusión privadas",
-          "description": "Espacios privados y cómodos diseñados para tus tratamientos de infusión."
+          "title": "Sala de infusión VIP",
+          "description": "Espacio privado y cómodo diseñado para tus tratamientos de infusión."
         },
         {
-          "icon": "building2",
-          "title": "Cirugía",
-          "description": "Procedimientos quirúrgicos avanzados realizados por especialistas calificados."
+          "icon": "coffee",
+          "title": "Desayuno y Lunch",
+          "description": "Opciones de alimentos frescos y saludables durante tu estancia."
         },
         {
-          "icon": "droplets",
-          "title": "Hematología",
-          "description": "Atención especializada para condiciones y trastornos relacionados con la sangre."
+          "icon": "apple",
+          "title": "Evaluación nutricional inicial",
+          "description": "Valoración personalizada para diseñar un plan alimenticio acorde a tu tratamiento."
         },
         {
-          "icon": "bone",
-          "title": "Reumatología",
-          "description": "Diagnóstico y tratamiento integral de enfermedades reumáticas."
+          "icon": "users",
+          "title": "Grupo de apoyo",
+          "description": "Espacio de acompañamiento y contención junto a otros pacientes y familias."
+        },
+        {
+          "icon": "sparkles",
+          "title": "Terapias complementarias",
+          "description": "Psicología, fisioterapia y otras terapias integradas a tu plan de atención."
+        },
+        {
+          "icon": "smartphone",
+          "title": "App Onkimia",
+          "description": "Da seguimiento a tu tratamiento y mantente conectado con tu equipo médico."
         }
       ]
     },
