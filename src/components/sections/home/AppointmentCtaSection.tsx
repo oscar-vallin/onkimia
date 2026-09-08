@@ -15,9 +15,6 @@ export async function AppointmentCtaSection({}: SectionProps) {
   return (
     <AppointmentCta
       title={t('appointment.title')}
-      step1={t('appointment.step1')}
-      step3={t('appointment.step3')}
-      tagline={t('appointment.tagline')}
       cta={t('appointment.cta')}
       ctaHref={ROUTES.contactForm}
       backgroundImage={settings.appointmentCtaBgImage}

@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { PillButton } from '@/components/ui/PillButton';
-import { HeroEyebrow } from './HeroEyebrow';
 import { HeroVideoBackground } from './HeroVideoBackground';
 
 // HeroVideoBackground carries its own 'use client' directive, so importing
@@ -17,9 +16,6 @@ interface Stat {
 }
 
 export interface HeroHomeProps {
-  eyebrowBase: string;
-  eyebrowDefaultCity: string;
-  eyebrowColimaCity: string;
   title: string;
   description: string;
   primaryCta: { label: string; href: string };
@@ -41,9 +37,6 @@ function parseHeroTitle(text: string): ReactNode[] {
 }
 
 export function HeroHome({
-  eyebrowBase,
-  eyebrowDefaultCity,
-  eyebrowColimaCity,
   title,
   description,
   primaryCta,
@@ -96,15 +89,6 @@ export function HeroHome({
 
       {/* Content wrapper */}
       <div className="relative z-10 container-onkimia min-h-[calc(100svh+4rem)] md:min-h-[calc(100svh+5rem)] flex flex-col pb-12 md:pb-16">
-
-        {/* Eyebrow — top-anchored, updates when user picks a clinic */}
-        <div className="pt-36 md:pt-44">
-          <HeroEyebrow
-            base={eyebrowBase}
-            defaultCity={eyebrowDefaultCity}
-            colimaCity={eyebrowColimaCity}
-          />
-        </div>
 
         {/* Spacer */}
         <div className="flex-1" />

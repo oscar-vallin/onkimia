@@ -19,9 +19,6 @@ export async function HeroSection({}: SectionProps) {
       <HeroHome
         videoHlsSrc={HERO_VIDEO_HLS_SRC}
         videoFallbackSrc={HERO_VIDEO_FALLBACK_SRC}
-        eyebrowBase={t('homeHero.eyebrowBase')}
-        eyebrowDefaultCity={t('homeHero.eyebrowDefaultCity')}
-        eyebrowColimaCity={t('homeHero.eyebrowColimaCity')}
         title={t('homeHero.title')}
         description={t('homeHero.description')}
         primaryCta={{ label: t('homeHero.cta.primary.label'), href: t('homeHero.cta.primary.href') }}

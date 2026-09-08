@@ -9,7 +9,7 @@
   },
   "navigation": {
     "home": "Home",
-    "about": "About",
+    "about": "Why Onkimia?",
     "services": "Services",
     "endos": "Endos",
     "cuidare": "Cuidare",
@@ -76,11 +76,22 @@
       "feature2Stat": "4 in-house complementary units",
       "feature3Title": "Advanced technology",
       "feature3Description": "Latest-generation MRI, genomic sequencing panels, molecular imaging, and precision diagnostic equipment for the most reliable results.",
-      "feature3Stat": "30+ studies in a single day"
+      "feature3Stat": "30+ studies in a single day",
+      "coreServices": [
+        "Consultations",
+        "Chemotherapy",
+        "Radiotherapy",
+        "Surgeries",
+        "Genetic testing",
+        "Nutrition",
+        "Psycho-oncology",
+        "Obesity and metabolism"
+      ],
+      "geneticTestingStatement": "We offer genetic testing to identify hereditary conditions"
     },
     "clinics": {
       "eyebrow": "SPECIALTIES",
-      "title": "Oncology Care Clinics",
+      "title": "Specialized medical units",
       "description": "At Onkimia, we provide a range of specialized services through our medical-surgical clinics and functional units:",
       "breast": "Breast",
       "lung": "Lung",
@@ -95,7 +106,45 @@
       "urinary": "Urinary",
       "digestive": "Digestive",
       "skin": "Skin",
-      "gastrointestinal": "Gastrointestinal tumors"
+      "gastrointestinal": "Gastrointestinal tumors",
+      "tabs": {
+        "specialties": "Medical Specialties",
+        "units": "Functional Units",
+        "treatments": "Treatments",
+        "support": "Comprehensive Support"
+      },
+      "specialtiesList": [
+        "Medical Oncology",
+        "Surgical Oncology",
+        "Internal Medicine",
+        "Hematology",
+        "Radiology",
+        "Otolaryngology",
+        "Gynecology",
+        "Geriatrics",
+        "Urology",
+        "Nephrology",
+        "Endocrinology",
+        "Obesity and Metabolism",
+        "Gastroenterology",
+        "Pulmonology",
+        "Dermatology",
+        "Algology and Pain Medicine"
+      ],
+      "treatmentsList": [
+        "Specialty Consultation",
+        "Chemotherapy",
+        "Radiotherapy",
+        "Immunotherapy",
+        "Surgery"
+      ],
+      "supportList": [
+        "Psychology",
+        "Nutrition",
+        "Physiotherapy",
+        "Reiki",
+        "Support Group"
+      ]
     },
     "complementary": {
       "eyebrow": "OWN ECOSYSTEM",
@@ -207,11 +256,7 @@
       "intro": "More than a medical center, we are a space of support, balance, and quality of life."
     },
     "appointment": {
-      "title": "Schedule your appointment",
-      "description": "Three simple steps to start your treatment",
-      "step1": "Describe what you need",
-      "step3": "Schedule your visit at Onkimia",
-      "tagline": "Live healthier, for longer.",
+      "title": "How can we help you?",
       "cta": "Schedule appointment"
     },
     "insurances": {
@@ -361,12 +406,8 @@
       }
     },
     "homeHero": {
-      "eyebrow": "PREMIUM ONCOLOGY · MEXICO CITY",
-      "eyebrowBase": "PREMIUM ONCOLOGY",
-      "eyebrowDefaultCity": "GUADALAJARA",
-      "eyebrowColimaCity": "COLIMA",
-      "title": "Oncological evolution that accompanies you",
-      "description": "At Onkimia, we fuse medical innovation, clinical expertise, and a deeply human approach to provide you with personalized care at every stage of your journey.",
+      "title": "Excellence that cares, medicine that transforms",
+      "description": "At Onkimia, we fuse medical innovation, clinical expertise, and a deeply human approach to provide you with holistic, personalized care at every stage of your journey.",
       "cta": {
         "primary": {
           "label": "Book Appointment",
@@ -424,6 +465,7 @@
       "description": "A multidisciplinary team dedicated to transforming the oncological experience through advanced science and human warmth."
     },
     "moreThanMedicine": {
+      "title": "Why Onkimia?",
       "services": [
         {
           "icon": "stethoscope",
@@ -494,8 +536,8 @@
       "subtitle": "Real stories from people who trusted us"
     },
     "doubts": {
-      "headingUnderlined": "Have",
-      "headingSuffix": "questions?",
+      "headingUnderlined": "Visit us",
+      "headingSuffix": "",
       "description": "Visit our facilities and meet the team that will make a difference in your life."
     },
     "faq": {
@@ -516,13 +558,13 @@
     "downloadHere": "download here",
     "mision": {
       "eyebrow": "Our philosophy",
-      "title": "More than medicine, a\ncommitment to your life",
-      "description": "At Onkimia, you are our focus. Our philosophy combines innovative treatments, quality care, and the best specialists."
+      "title": "More than just treatment,\ncomprehensive care",
+      "description": "At Onkimia, we understand that every patient needs much more than just treatment. That is why we offer comprehensive cancer care that combines medical expertise, technology, various specialties, and close guidance through every stage of the process. Our care model ensures that every decision is centered around the individual's needs, coordinating diagnosis, treatment, and complementary services to provide a clearer, more human, and personalized experience. At Onkimia, you will find a team prepared to support you with professionalism, empathy, and medical excellence, all in one place and with a holistic vision of your well-being."
     },
     "enfoque360": {
-      "eyebrow": "360° APPROACH",
-      "title": "Body, mind\nand integral care",
-      "description": "We believe oncology goes beyond treatment. We integrate the physical, emotional and spiritual wellbeing of each patient to deliver care that transforms lives.",
+      "eyebrow": "OUR CORE FOCUS",
+      "title": "It will always be you",
+      "description": "At Onkimia, cancer care goes beyond treatments and medications. We place the patient at the core of our care, with a special focus on the details surrounding their case, personalizing their treatment with the highest quality and constant support throughout their entire journey, as an extension of our mission to provide the best care to our patients.",
       "stat1Value": "15+",
       "stat1Label": "Years of experience",
       "stat2Value": "98%",
@@ -538,6 +580,7 @@
     }
   },
   "footer": {
+    "tagline": "Oncology Evolution",
     "menu": "Menu",
     "followUs": "Follow us",
     "downloadApp": "Download our app",
@@ -551,10 +594,8 @@
       "description": "Collaboration model for specialist physicians. Infrastructure, processes, and complementary units to elevate clinical practice."
     },
     "hero": {
-      "eyebrow": "ONKIMIA DOCTORS · B2B",
       "headline": "Become part of the Onkimia medical network",
       "description": "A collaboration model designed so the physician can focus on what matters most: the patient.",
-      "badge": "ONKIMIA MEDICAL NETWORK",
       "quote": "\"We believe in a medicine where clinical excellence and institutional backing move forward together — so your calling has the ecosystem it deserves.\"",
       "headlinePart1": "Be part of the",
       "headlinePart2": "Onkimia medical network",

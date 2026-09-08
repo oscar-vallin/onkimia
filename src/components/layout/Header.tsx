@@ -150,6 +150,7 @@ export function Header({}: HeaderProps) {
                       alt="Onkimia Doctors"
                       fill
                       sizes="40px"
+                      unoptimized
                       className="object-contain object-left"
                     />
                   </span>
@@ -321,6 +322,7 @@ export function Header({}: HeaderProps) {
                         alt="Onkimia Doctors"
                         fill
                         sizes="64px"
+                        unoptimized
                         className="object-contain object-left"
                       />
                     </Link>

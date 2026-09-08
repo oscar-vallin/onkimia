@@ -1,10 +1,13 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useState, type ReactNode } from 'react';
 import type { SanityImageWithLQIP } from '@/sanity/types';
 import { SanityImage as Image } from '@/components/ui/SanityImage';
 import { urlFor } from '@/sanity/image';
-import { ClinicBadge } from '@/components/ui/ClinicBadge';
+import { ServicePillBadge } from '@/components/ui/ServicePillBadge';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { ServiceUnitCard } from '@/components/ui/ServiceUnitCard';
+import { SPECIALTY_ICONS, TREATMENT_ICONS, SUPPORT_ICONS } from '@/data/serviceIcons';
 
 export interface ClinicItem {
   slug: string;
@@ -18,6 +21,8 @@ export interface ComplementaryUnit {
   link: string;
 }
 
+type TabId = 'specialties' | 'units' | 'treatments' | 'support';
+
 interface ServicesClinicsAndUnitsProps {
   clinics: ClinicItem[];
   clinicsEyebrow: string;
@@ -26,6 +31,10 @@ interface ServicesClinicsAndUnitsProps {
   clinicsStat?: string;
   clinicsSectionImage?: SanityImageWithLQIP;
   clinicsImageAlt: string;
+  tabLabels: Record<TabId, string>;
+  specialties: string[];
+  treatments: string[];
+  support: string[];
   complementaryUnits: ComplementaryUnit[];
   complementaryEyebrow: string;
   complementaryTitle: string;
@@ -43,6 +52,10 @@ export function ServicesClinicsAndUnits({
   clinicsStat,
   clinicsSectionImage,
   clinicsImageAlt,
+  tabLabels,
+  specialties,
+  treatments,
+  support,
   complementaryUnits,
   complementaryEyebrow,
   complementaryTitle,
@@ -51,6 +64,15 @@ export function ServicesClinicsAndUnits({
   complementaryLinkLabel,
   complementaryStat,
 }: ServicesClinicsAndUnitsProps) {
+  const [activeTab, setActiveTab] = useState<TabId>('specialties');
+
+  const pillItems: Record<TabId, ClinicItem[]> = {
+    specialties: specialties.map((name, i) => ({ slug: `specialty-${i}`, name, icon: SPECIALTY_ICONS[i] })),
+    units: clinics,
+    treatments: treatments.map((name, i) => ({ slug: `treatment-${i}`, name, icon: TREATMENT_ICONS[i] })),
+    support: support.map((name, i) => ({ slug: `support-${i}`, name, icon: SUPPORT_ICONS[i] })),
+  };
+
   return (
     <>
       {/* Clinics specialty grid */}
@@ -72,13 +94,28 @@ export function ServicesClinicsAndUnits({
             )}
           </SectionHeader>
 
-          {/* flex (not grid) so an incomplete last row centers its cards
-              instead of left-aligning under a fixed column track */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-            {clinics.map(({ slug, name, icon }, i) => (
-              <div key={slug} className="w-[calc(50%-0.375rem)] md:w-[calc(25%-0.75rem)]">
-                <ClinicBadge name={name} icon={icon} index={i} />
-              </div>
+          {/* Category toggle */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14">
+            {(Object.keys(tabLabels) as TabId[]).map((id) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setActiveTab(id)}
+                aria-pressed={activeTab === id}
+                className={`cursor-pointer rounded-full px-6 py-3 text-sm font-medium transition-colors border ${
+                  activeTab === id
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-secondary border-black/[0.08] hover:border-primary/30 hover:text-primary'
+                }`}
+              >
+                {tabLabels[id]}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {pillItems[activeTab].map(({ slug, name, icon }) => (
+              <ServicePillBadge key={slug} name={name} icon={icon} />
             ))}
           </div>
         </div>

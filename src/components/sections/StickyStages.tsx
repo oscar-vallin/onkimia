@@ -143,25 +143,11 @@ export function StickyStages({
                       />
                     </span>
                   </span>
-                  <ArrowRight
-                    className={`w-4 h-4 shrink-0 text-teal transition-all duration-300 ${
-                      isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0'
-                    }`}
-                    aria-hidden="true"
-                  />
                 </button>
               );
             })}
           </div>
 
-          {/* <PillButton
-            variant="solid-dark"
-            href={ctaHref}
-            icon={<ArrowRight className="w-4 h-4" aria-hidden="true" />}
-            className="mt-9"
-          >
-            {ctaLabel}
-          </PillButton> */}
         </div>
 
         {/* RIGHT — layered photo composition, synced to the active service */}
@@ -197,15 +183,16 @@ export function StickyStages({
 
           <div className="absolute z-[2] right-8 bottom-14 w-[52%] rounded-[18px] overflow-hidden aspect-[4/3] border-[6px] border-white shadow-[0_24px_46px_-16px_rgba(20,20,25,0.4)] -rotate-[2.2deg] bg-white">
             {items.map((item, i) => (
-              <Image
+              <div
                 key={i}
-                src={item.imageAccent}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 40vw, 20vw"
-                className={`object-cover transition-opacity duration-500 ${i === active ? 'opacity-100' : 'opacity-0'}`}
-                aria-hidden="true"
-              />
+                className={`absolute inset-0 flex items-center p-4 transition-opacity duration-500 ${
+                  i === active ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <p className="font-sans text-[11px] md:text-[18px] leading-relaxed text-secondary">
+                  {item.description}
+                </p>
+              </div>
             ))}
           </div>
 

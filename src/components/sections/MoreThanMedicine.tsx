@@ -1,5 +1,6 @@
 import { Car, Smartphone, Sparkles, ShieldCheck, Users, Globe, Stethoscope, Clipboard, Hotel, Armchair, Building2, Droplets, Bone } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export type ServiceIcon = 'car' | 'smartphone' | 'sparkles' | 'shield-check' | 'users' | 'globe' | 'stethoscope' | 'clipboard' | 'hotel' | 'armchair' | 'building2' | 'droplets' | 'bone';
 
@@ -12,6 +13,7 @@ interface Service {
 }
 
 interface MoreThanMedicineProps {
+  title?: string;
   services: Service[];
 }
 
@@ -32,11 +34,14 @@ const ICON_MAP: Record<ServiceIcon, LucideIcon> = {
 };
 
 export function MoreThanMedicine({
+  title,
   services,
 }: MoreThanMedicineProps) {
   return (
     <section className="bg-white py-20 md:py-26">
       <div className="container-onkimia">
+
+        {title && <SectionHeader title={title} />}
 
         {/* 3×2 service card grid — flex (not grid) so an incomplete last
             row centers its cards instead of left-aligning under a fixed

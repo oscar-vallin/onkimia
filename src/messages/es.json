@@ -9,7 +9,7 @@
   },
   "navigation": {
     "home": "Inicio",
-    "about": "Nosotros",
+    "about": "¿Por qué Onkimia?",
     "services": "Servicios",
     "endos": "Endos",
     "cuidare": "Cuidare",
@@ -76,11 +76,22 @@
       "feature2Stat": "4 unidades complementarias propias",
       "feature3Title": "Tecnología avanzada",
       "feature3Description": "IRM de última generación, paneles de secuenciación genómica, imagen molecular y equipos diagnósticos de precisión para los resultados más confiables.",
-      "feature3Stat": "30+ estudios en un solo día"
+      "feature3Stat": "30+ estudios en un solo día",
+      "coreServices": [
+        "Consultas",
+        "Quimioterapias",
+        "Radioterapias",
+        "Cirugías",
+        "Pruebas genéticas",
+        "Nutrición",
+        "Psicooncología",
+        "Obesidad y metabolismo"
+      ],
+      "geneticTestingStatement": "Contamos con estudios genéticos para determinar problemas hereditarios"
     },
     "clinics": {
       "eyebrow": "ESPECIALIDADES",
-      "title": "Clínicas de Atención Oncológica",
+      "title": "Unidades médicas especializadas",
       "description": "En Onkimia, brindamos una gama de servicios especializados a través de nuestras clínicas médico-quirúrgicas y unidades funcionales:",
       "breast": "Mama",
       "lung": "Pulmón",
@@ -95,7 +106,45 @@
       "urinary": "Urinaria",
       "digestive": "Digestiva",
       "skin": "Piel",
-      "gastrointestinal": "Tumores gastrointestinales"
+      "gastrointestinal": "Tumores gastrointestinales",
+      "tabs": {
+        "specialties": "Especialidades médicas",
+        "units": "Unidades funcionales",
+        "treatments": "Tratamientos",
+        "support": "Apoyo integral"
+      },
+      "specialtiesList": [
+        "Oncología médica",
+        "Oncología quirúrgica",
+        "Medicina interna",
+        "Hematología",
+        "Radiología",
+        "Otorrinolaringología",
+        "Ginecología",
+        "Geriatría",
+        "Urología",
+        "Nefrología",
+        "Endocrinología",
+        "Obesidad y metabolismo",
+        "Gastroenterología",
+        "Neumología",
+        "Dermatología",
+        "Algología y Medicina del dolor"
+      ],
+      "treatmentsList": [
+        "Consulta de especialidad",
+        "Quimioterapia",
+        "Radioterapia",
+        "Inmunoterapia",
+        "Cirugía"
+      ],
+      "supportList": [
+        "Psicología",
+        "Nutrición",
+        "Fisioterapia",
+        "Reiki",
+        "Grupo de Apoyo"
+      ]
     },
     "complementary": {
       "eyebrow": "ECOSISTEMA PROPIO",
@@ -207,11 +256,7 @@
       "intro": "Más que un centro médico, somos un espacio de contención, equilibrio y calidad de vida."
     },
     "appointment": {
-      "title": "Agenda tu cita",
-      "description": "Tres simples pasos para comenzar tu tratamiento",
-      "step1": "Describe lo que necesitas",
-      "step3": "Agenda tu cita en Onkimia",
-      "tagline": "Vive más sano, por más tiempo.",
+      "title": "¿Cómo podemos ayudarte?",
       "cta": "Agenda tu cita"
     },
     "insurances": {
@@ -361,12 +406,8 @@
       }
     },
     "homeHero": {
-      "eyebrow": "ONCOLOGÍA PREMIUM · CIUDAD DE MÉXICO",
-      "eyebrowBase": "ONCOLOGÍA PREMIUM",
-      "eyebrowDefaultCity": "GUADALAJARA",
-      "eyebrowColimaCity": "COLIMA",
-      "title": "La evolución oncológica que te acompaña",
-      "description": "En Onkimia fusionamos innovación médica, experiencia clínica y un enfoque profundamente humano para brindarte atención personalizada en cada etapa de tu camino.",
+      "title": "Excelencia que cuida, medicina que transforma",
+      "description": "En Onkimia fusionamos innovación médica, experiencia clínica y un enfoque profundamente humano para brindarte atención holística y personalizada en cada etapa de tu camino. ",
       "cta": {
         "primary": {
           "label": "Agendar Cita",
@@ -424,6 +465,7 @@
       "description": "Un equipo multidisciplinario dedicado a transformar la experiencia oncológica a través de la ciencia avanzada y la calidez humana."
     },
     "moreThanMedicine": {
+      "title": "¿Por qué Onkimia?",
       "services": [
         {
           "icon": "stethoscope",
@@ -494,8 +536,8 @@
       "subtitle": "Historias reales de personas que confiaron en nosotros"
     },
     "doubts": {
-      "headingUnderlined": "¿Tienes",
-      "headingSuffix": "dudas?",
+      "headingUnderlined": "Visítanos",
+      "headingSuffix": "",
       "description": "Conoce nuestras instalaciones y al equipo que hará la diferencia en tu vida."
     },
     "faq": {
@@ -516,13 +558,13 @@
     "downloadHere": "descárgala aquí",
     "mision": {
       "eyebrow": "Nuestra filosofía",
-      "title": "Más que medicina, un\ncompromiso con tu vida",
-      "description": "En Onkimia nuestro eje eres tú. Nuestra filosofía combina tratamientos innovadores, atención de calidad y los mejores especialistas."
+      "title": "Más que tratamiento,\natención integral",
+      "description": "En Onkimia entendemos que cada paciente necesita mucho más que solo un tratamiento. Por eso ofrecemos una atención oncológica integral que combina experiencia médica, tecnología, distintas especialidades y un acompañamiento cercano en cada etapa del proceso. Nuestro modelo de atención garantiza que cada decisión esté centrada en las necesidades de la persona, coordinando el diagnóstico, el tratamiento y los servicios complementarios para brindar una experiencia más clara, más humana y personalizada. En Onkimia encontrarás un equipo preparado para acompañarte con profesionalismo, empatía y excelencia médica, todo en un mismo lugar y con una visión integral de tu bienestar."
     },
     "enfoque360": {
-      "eyebrow": "ENFOQUE 360°",
-      "title": "Cuerpo, mente\ny cuidado integral",
-      "description": "Creemos que la oncología va más allá del tratamiento. Integramos el bienestar físico, emocional y espiritual de cada paciente para ofrecer una atención que transforma vidas.",
+      "eyebrow": "NUESTRO EJE CENTRAL",
+      "title": "Siempre serás tú",
+      "description": "En Onkimia, el cuidado oncológico va más allá de tratamientos y medicamentos. Situamos al paciente en el núcleo de nuestra atención, con particular enfoque en los detalles alrededor de su caso, personalizando su tratamiento con la más alta calidad y apoyo constante a través de todo su proceso, como extensión de nuestra misión por proporcionar la mejor atención a nuestros pacientes.",
       "stat1Value": "15+",
       "stat1Label": "Años de experiencia",
       "stat2Value": "98%",
@@ -538,6 +580,7 @@
     }
   },
   "footer": {
+    "tagline": "Evolución Oncológica",
     "menu": "Menú",
     "followUs": "Síguenos",
     "downloadApp": "Descarga nuestra app",
@@ -551,10 +594,8 @@
       "description": "Modelo de colaboración para médicos especialistas. Infraestructura, procesos y unidades complementarias para elevar la práctica clínica."
     },
     "hero": {
-      "eyebrow": "ONKIMIA DOCTORS · B2B",
       "headline": "Sé parte de la red médica Onkimia",
       "description": "Un modelo de colaboración diseñado para que el médico se enfoque en lo más importante: el paciente.",
-      "badge": "RED MÉDICA ONKIMIA",
       "quote": "\"Creemos en una medicina donde la excelencia clínica y el respaldo institucional avanzan juntos — para que tu vocación tenga el ecosistema que merece.\"",
       "headlinePart1": "Sé parte de la red",
       "headlinePart2": "médica Onkimia",

@@ -71,6 +71,7 @@ export default async function NosotrosPage({
 
       {/* ─── 1. MÁS QUE MEDICINA ─── */}
       <MoreThanMedicine
+        title={t('moreThanMedicine.title')}
         services={differentialServices}
       />
 

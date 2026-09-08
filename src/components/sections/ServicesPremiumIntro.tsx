@@ -1,73 +1,66 @@
-import { Building2, Sparkles, Zap } from 'lucide-react';
+import { Stethoscope, Syringe, Radiation, Scissors, Dna, Apple, Brain, Scale } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
-interface ServicesPremiumIntroProps {
-  lead: string;
-  feature1Title: string;
-  feature1Stat: string;
-  feature2Title: string;
-  feature2Stat: string;
-  feature3Title: string;
-  feature3Stat: string;
+interface CoreService {
+  icon: LucideIcon;
+  title: string;
 }
 
+interface ServicesPremiumIntroProps {
+  coreServices: string[];
+  geneticTestingStatement: string;
+}
+
+// Fixed order matching the `coreServices` translation array in
+// messages/{en,es}.json → services.main.coreServices.
+const CORE_SERVICE_ICONS: LucideIcon[] = [
+  Stethoscope, // Consultas
+  Syringe,     // Quimioterapias
+  Radiation,   // Radioterapias
+  Scissors,    // Cirugías
+  Dna,         // Pruebas genéticas
+  Apple,       // Nutrición
+  Brain,       // Psicooncología
+  Scale,       // Obesidad y metabolismo
+];
+
 export function ServicesPremiumIntro({
-  lead,
-  feature1Title,
-  feature1Stat,
-  feature2Title,
-  feature2Stat,
-  feature3Title,
-  feature3Stat,
+  coreServices,
+  geneticTestingStatement,
 }: ServicesPremiumIntroProps) {
-  const features = [
-    {
-      icon: Building2,
-      title: feature1Title,
-      stat: feature1Stat,
-    },
-    {
-      icon: Sparkles,
-      title: feature2Title,
-      stat: feature2Stat,
-    },
-    {
-      icon: Zap,
-      title: feature3Title,
-      stat: feature3Stat,
-    },
-  ];
+  const services: CoreService[] = coreServices.map((title, i) => ({
+    icon: CORE_SERVICE_ICONS[i] ?? Stethoscope,
+    title,
+  }));
 
   return (
     <section className="bg-white py-20 md:py-28">
       <div className="container-onkimia">
-        {/* Prevention message */}
-        <div className="mb-16 md:mb-24 max-w-3xl">
-          <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6 leading-tight">
-            Prevenir también es parte del tratamiento.
-          </h2>
-          <p className="text-lg md:text-xl text-secondary leading-relaxed">
-            {lead}
-          </p>
-        </div>
-
-        {/* Three features grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-          {features.map((feature) => {
-            const Icon = feature.icon;
+        {/* Core services grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          {services.map((service) => {
+            const Icon = service.icon;
             return (
-              <div key={feature.title} className="flex flex-row items-start gap-4">
-                {/* Icon */}
+              <div key={service.title} className="flex flex-row items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} aria-hidden="true" />
                 </div>
-
-                {/* Title */}
-                <h3 className="font-semibold text-lg md:text-xl text-primary leading-snug">
-                  {feature.title}
+                <h3 className="font-semibold text-base md:text-lg text-primary leading-snug pt-2">
+                  {service.title}
                 </h3>
               </div>
             );
           })}
+        </div>
+
+        {/* Genetic testing statement */}
+        <div className="mt-14 md:mt-16 flex items-center gap-4 bg-primary/5 border border-primary/10 rounded-2xl p-6 md:p-7">
+          <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Dna className="w-5 h-5 text-primary" strokeWidth={1.5} aria-hidden="true" />
+          </div>
+          <p className="font-serif text-lg md:text-xl text-primary leading-snug">
+            {geneticTestingStatement}
+          </p>
         </div>
       </div>
     </section>

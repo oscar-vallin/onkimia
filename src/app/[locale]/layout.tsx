@@ -79,12 +79,6 @@ export default async function LocaleLayout({
         <WebSiteJsonLd />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col bg-white">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium"
-        >
-          Saltar al contenido principal
-        </a>
         <NextIntlClientProvider>
           <ScrollToTop />
           <ClinicProvider>

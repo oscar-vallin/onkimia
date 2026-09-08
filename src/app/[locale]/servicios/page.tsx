@@ -57,6 +57,16 @@ export default async function ServicesPage({
     name: t(`clinics.${slug}` as Parameters<typeof t>[0]),
   }));
 
+  const tabLabels = {
+    specialties: t('clinics.tabs.specialties'),
+    units: t('clinics.tabs.units'),
+    treatments: t('clinics.tabs.treatments'),
+    support: t('clinics.tabs.support'),
+  };
+  const specialtiesList = t.raw('clinics.specialtiesList') as string[];
+  const treatmentsList = t.raw('clinics.treatmentsList') as string[];
+  const supportList = t.raw('clinics.supportList') as string[];
+
   const complementaryUnits = [
     { name: t('complementary.endos.name'), description: t('complementary.endos.description'), link: t('complementary.endos.link') },
     { name: t('complementary.cuidare.name'), description: t('complementary.cuidare.description'), link: t('complementary.cuidare.link') },
@@ -96,13 +106,8 @@ export default async function ServicesPage({
 
       {/* ─── PREMIUM INTRO ─── */}
       <ServicesPremiumIntro
-        lead={t('main.lead')}
-        feature1Title={t('main.feature1Title')}
-        feature1Stat={t('main.feature1Stat')}
-        feature2Title={t('main.feature2Title')}
-        feature2Stat={t('main.feature2Stat')}
-        feature3Title={t('main.feature3Title')}
-        feature3Stat={t('main.feature3Stat')}
+        coreServices={t.raw('main.coreServices') as string[]}
+        geneticTestingStatement={t('main.geneticTestingStatement')}
       />
 
       {/* ─── CLÍNICAS + UNIDADES COMPLEMENTARIAS ─── */}
@@ -114,6 +119,10 @@ export default async function ServicesPage({
         clinicsStat={t('main.feature1Stat')}
         clinicsSectionImage={services?.clinicsSectionImage}
         clinicsImageAlt={t('clinics.title')}
+        tabLabels={tabLabels}
+        specialties={specialtiesList}
+        treatments={treatmentsList}
+        support={supportList}
         complementaryUnits={complementaryUnits}
         complementaryEyebrow={t('complementary.eyebrow')}
         complementaryTitle={t('complementary.title')}
