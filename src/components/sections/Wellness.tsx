@@ -34,7 +34,7 @@ export function Wellness({ eyebrow, title, intro, items, backgroundImage }: Well
         <>
           <Image
             src={bgSrc}
-            alt=""
+            alt="100"
             fill
             sizes="100vw"
             className="object-cover"
